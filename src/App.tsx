@@ -1,0 +1,9 @@
+function App() {
+  return (
+    <>
+      <h1 className="bg-amber-500">Dias de Fiesta</h1>
+    </>
+  );
+}
+
+export default App;
