@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router";
+import { useEffect } from "react";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Services from "./Pages/Services";
@@ -8,6 +9,29 @@ import PageNotFound from "./Pages/PageNotFound";
 import Navbar from "./Components/Navbar";
 
 function App() {
+  const url: string = import.meta.env.VITE_SERVER;
+  useEffect(() => {
+
+    const fetchData = async () => {
+      try {
+        console.log("fetching from", url);
+        const response = await fetch(`${url}/api`);
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+        } else {
+          console.error("Fetching data has failed.", response.status);
+        }
+      } catch (error) {
+        console.error("Error fetching the data.", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   return (
     <>
       <Navbar />
@@ -24,8 +48,6 @@ function App() {
 }
 
 export default App;
-
-
 
 //duhs
 
