@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router";
-import { useEffect } from "react";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Services from "./Pages/Services";
@@ -9,33 +8,6 @@ import PageNotFound from "./Pages/PageNotFound";
 import Navbar from "./Components/Navbar";
 
 function App() {
-  const url: string | undefined = import.meta.env.VITE_SERVER;
-
-  const fetchData = async () => {
-    if (!url) {
-      console.error("VITE_SERVER is not defined.");
-      return;
-    }
-
-    try {
-      // console.log("fetching from", url);
-      const response = await fetch(`${url}/api`);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error("Error fetching the data.", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <>
       <Navbar />
