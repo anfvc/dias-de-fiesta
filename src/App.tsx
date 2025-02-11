@@ -9,28 +9,32 @@ import PageNotFound from "./Pages/PageNotFound";
 import Navbar from "./Components/Navbar";
 
 function App() {
-  const url: string = import.meta.env.VITE_SERVER;
-  useEffect(() => {
+  const url: string | undefined = import.meta.env.VITE_SERVER;
 
-    const fetchData = async () => {
-      try {
-        console.log("fetching from", url);
-        const response = await fetch(`${url}/api`);
+  const fetchData = async () => {
+    if (!url) {
+      console.error("VITE_SERVER is not defined.");
+      return;
+    }
 
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-        } else {
-          console.error("Fetching data has failed.", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching the data.", error);
+    try {
+      // console.log("fetching from", url);
+      const response = await fetch(`${url}/api`);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
-    };
 
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching the data.", error);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
-
 
   return (
     <>
@@ -48,7 +52,3 @@ function App() {
 }
 
 export default App;
-
-//duhs
-
-//neu anmelden agentur, rechtlichen beistand anfragen (document to fill out- free lawyer)
