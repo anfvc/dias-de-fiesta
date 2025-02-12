@@ -4,7 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import apiRoute from "./Routes/apiRouter.js";
-import contactRouter from "./Middleware/mailer.js";
+import contactRouter from "./Routes/contactRouter.js"
 
 dotenv.config();
 
