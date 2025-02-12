@@ -1,7 +1,7 @@
 import contactEmail from "../Middleware/setupMailer.js";
 
 const sendingEmail = (req, res) => {
-  const { email, message, phone } = req.body;
+  const { fullName, email, message, phone, reason } = req.body;
 
   const mail = {
     from: {
@@ -10,10 +10,13 @@ const sendingEmail = (req, res) => {
     },
     to: ["anfvcdev@gmail.com"],
     subject: "Contact Form Submission - Test",
-    //`<p> Name: ${name} </p>
-    html: `<p> Email: ${email} </p>
+    html: `
+      <h2> ${fullName} </h2>
+      <p> Reason: ${reason}</p>
+      <p> Email: ${email} </p>
       <p> Phone: ${phone} </p>
-      <p> Message: ${message} </p>`,
+      <p> Message: ${message} </p>
+      <p> Reason: ${reason}</p>`,
   };
 
   contactEmail.sendMail(mail, (error) => {

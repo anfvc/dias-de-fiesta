@@ -11,7 +11,7 @@ const Contact = () => {
 
     try {
       // console.log("fetching from", url);
-      const response = await fetch(`${url}/api`);
+      const response = await fetch(`${url}/api/contact`);
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -28,7 +28,11 @@ const Contact = () => {
     fetchData();
   }, [url]);
 
-  return <div>Here goes the "Contáctanos" section.</div>;
+  return (
+    <section id="contact">
+      <div></div>
+    </section>
+  );
 };
 
 export default Contact;
