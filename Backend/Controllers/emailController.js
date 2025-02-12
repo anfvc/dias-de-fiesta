@@ -1,4 +1,4 @@
-import contactEmail from "../Middleware/mailer.js";
+import contactEmail from "../Middleware/setupMailer.js";
 
 const sendingEmail = (req, res) => {
   const { email, message, phone } = req.body;
@@ -18,7 +18,6 @@ const sendingEmail = (req, res) => {
 
   contactEmail.sendMail(mail, (error) => {
     if (error) {
-      res.json(error);
       res
         .status(500)
         .json({ error: "Email couldn't be sent. Try again later." });
