@@ -132,12 +132,12 @@ const Contact = () => {
             <option value="" disabled>
               --Seleeciona una opción--
             </option>
-            <option value="Weddings">Bodas</option>
-            <option value="Graduations">Graduaciones</option>
-            <option value="Birthdays">Cumpleaños</option>
-            <option value="Children's parties">Fiestas Infantiles</option>
-            <option value="Conferences">Conferencias</option>
-            <option value="Baptisms">Bautizos</option>
+            <option value="Bodas">Bodas</option>
+            <option value="Graduaciones">Graduaciones</option>
+            <option value="Cumpleaños">Cumpleaños</option>
+            <option value="Fiestas Infantiles">Fiestas Infantiles</option>
+            <option value="Conferencias">Conferencias</option>
+            <option value="Bautizos">Bautizos</option>
           </select>
           <textarea
             name="message"
