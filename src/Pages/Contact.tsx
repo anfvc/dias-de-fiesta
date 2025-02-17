@@ -93,14 +93,36 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="w-full h-dvh">
-      <div className="w-full h-full  flex justify-center items-center border">
-        <form className="w-lg flex flex-col gap-4" onSubmit={handleSendEmail}>
+    <section id="contact" className="w-full h-full">
+      <div className="w-full h-full flex flex-col justify-start gap-8 mx-auto items-center border-4 border-red-500 px-4">
+        <div className="w-full">
+          <h2>Contact</h2>
+        </div>
+        <div className="w-full border">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla,
+          repellat! Eius laboriosam modi est laborum, sit accusamus mollitia.
+          Consectetur ad nemo officiis distinctio beatae optio atque asperiores
+          itaque, voluptas modi? Quam ipsum deleniti laborum, quia odio quos
+          voluptatum quibusdam quis consequuntur nulla officia doloremque
+          aspernatur architecto tenetur ratione dignissimos ab quod nihil eum
+          deserunt fugit ut similique perspiciatis? Quibusdam, adipisci?
+          Blanditiis, tenetur. Quidem cumque veritatis, tempore porro fugit,
+          dolorum expedita ea quas atque minus sapiente repellat perferendis
+          vero repellendus velit id excepturi labore tempora ipsum debitis, non
+          possimus delectus neque. Similique voluptas sunt ratione consequatur?
+          Incidunt consequatur perferendis, possimus, quia inventore enim
+          praesentium, quaerat vitae dolorum obcaecati quas. In ipsam voluptatem
+          harum! Voluptates
+        </div>
+        <form
+          className="w-full flex flex-col gap-4 border"
+          onSubmit={handleSendEmail}
+        >
           <input
             type="text"
             name="fullName"
             placeholder="Escribe tu nombre completo..."
-            className="border p-2"
+            className="w-full border p-2"
             value={formData.fullName}
             onChange={handleChange}
           />

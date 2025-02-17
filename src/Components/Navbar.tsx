@@ -10,7 +10,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="border">
+    <header className="w-full border bg-white">
       <nav className="flex items-center justify-between">
         <div className="logo-container">
           <img src={logo} alt="Logo de Dias de Fiesta" className="w-40" />
