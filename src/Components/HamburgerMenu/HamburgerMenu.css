@@ -1,0 +1,61 @@
+section {
+  width: 3rem;
+  height: 2rem;
+}
+
+.burger-wrapper {
+  cursor: pointer;
+}
+#sidebar {
+  background: #aa9945;
+  /* width of the sidebar, change if necessary */
+  width: 50%;
+  height: 100dvh;
+  position: fixed;
+  left: 0;
+  transition-timing-function: cubic-bezier(10, 2, 3, 1);
+  transform: translateX(-100%);
+  top: 0;
+  transition: 0.5s;
+}
+#menyAvPaa {
+  display: none;
+}
+
+#menyAvPaa:checked ~ #sidebar {
+  transform: translateX(0rem);
+}
+
+#burger {
+  position: absolute;
+  cursor: pointer;
+  width: 3rem;
+  height: 2rem;
+  /* right: 1rem; */
+  /* top: 1rem; */
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+#burger > div {
+  height: 0.35rem;
+  border-radius: 1rem;
+  background-color: #000;
+  transition: 0.5s;
+  z-index: 999;
+}
+
+#menyAvPaa:checked ~ #burger > div {
+  background-color: black;
+}
+
+#menyAvPaa:checked ~ #burger > div:nth-child(1) {
+  transform: translateY(12px) rotate(45deg);
+}
+#menyAvPaa:checked ~ #burger > div:nth-child(2) {
+  opacity: 0;
+}
+#menyAvPaa:checked ~ #burger > div:nth-child(3) {
+  transform: translateY(-14px) rotate(-45deg);
+}
