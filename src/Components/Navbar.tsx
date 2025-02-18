@@ -12,16 +12,16 @@ const Navbar = () => {
 
   return (
     <header className="w-full border bg-white sticky top-0">
-      <nav className="flex items-center justify-between">
+      <nav className="flex items-center justify-between mx-3">
         <div className="logo-container">
           <Link to="/">
-            <img src={logo} alt="Logo de Dias de Fiesta" className="w-25" />
+            <img src={logo} alt="Logo de Dias de Fiesta" className="w-25 md:w-35" />
           </Link>
         </div>
 
         <HamburgerMenu toggleMenu={handleMenuOpenOrClose} isOpen={isOpen} />
 
-        <ul className="hidden md:flex gap-4 border mr-2">
+        <ul className="hidden md:flex gap-4 border mr-2 text-xl">
           <li>
             <Link to="/about">Nosotros</Link>
           </li>
