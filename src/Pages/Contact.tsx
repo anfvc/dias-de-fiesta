@@ -93,12 +93,12 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="w-full h-full my-10 border-4 border-blue-600">
+    <section id="contact" className="w-full min-h-screen my-10 border-4 border-blue-600">
       <div className="w-full h-full flex flex-col justify-start gap-8 mx-auto items-center px-4">
         <div className="w-full text-center">
           <h2>Contact</h2>
         </div>
-        <div className="w-full border">
+        <div className="w-fit border">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla,
           repellat! Eius laboriosam modi est laborum, sit accusamus mollitia.
           Consectetur ad nemo officiis distinctio beatae optio atque asperiores
@@ -115,7 +115,7 @@ const Contact = () => {
           harum! Voluptates
         </div>
         <form
-          className="w-full flex flex-col gap-4 border"
+          className="w-5/6 flex flex-col gap-4 border"
           onSubmit={handleSendEmail}
         >
           <input

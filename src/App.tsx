@@ -6,6 +6,7 @@ import Portfolio from "./Pages/Portfolio";
 import Contact from "./Pages/Contact";
 import PageNotFound from "./Pages/PageNotFound";
 import Navbar from "./Components/Navbar";
+import "./index.css"
 
 function App() {
   return (
