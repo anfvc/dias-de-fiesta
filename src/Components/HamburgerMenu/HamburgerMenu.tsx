@@ -9,7 +9,7 @@ type Props = {
 
 const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
   return (
-    <section id="hamburgerMenu" onClick={toggleMenu} className="md:hidden mr-3">
+    <section id="hamburgerMenuMobile" onClick={toggleMenu} className="flex justify-center items-center md:hidden">
       <div id="burger" onClick={toggleMenu} className={isOpen ? "open" : ""}>
         <div></div>
         <div></div>
@@ -17,7 +17,7 @@ const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
       </div>
       <nav id="sidebar" className={isOpen ? "open" : ""}>
         <Link to="/">
-          <img src={logo} alt="Logo de Dias de Fiesta" className="w-40" />
+          <img src={logo} alt="Logo de Dias de Fiesta" className="w-25" />
         </Link>
         <div className="w-full h-full border flex">
           <ul className="w-full h-full flex flex-col justify-start mt-30 gap-20 ml-4 text-xl">
