@@ -93,9 +93,9 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="w-full h-full">
-      <div className="w-full h-full flex flex-col justify-start gap-8 mx-auto items-center border-4 border-red-500 px-4">
-        <div className="w-full">
+    <section id="contact" className="w-full h-full my-10 border-4 border-blue-600">
+      <div className="w-full h-full flex flex-col justify-start gap-8 mx-auto items-center px-4">
+        <div className="w-full text-center">
           <h2>Contact</h2>
         </div>
         <div className="w-full border">
