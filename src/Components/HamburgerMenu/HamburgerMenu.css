@@ -15,7 +15,7 @@
 }
 
 #burger > div {
-  height: 0.4rem;
+  height: 0.5rem;
   border-radius: 1rem;
   background-color: #000;
   transition: 0.5s;
@@ -26,17 +26,16 @@
 }
 
 #burger.open > div:nth-child(1) {
-  transform: translateY(10px) rotate(45deg);
+  transform: translateY(12px) rotate(45deg);
 }
 #burger.open > div:nth-child(2) {
   opacity: 0;
 }
 #burger.open > div:nth-child(3) {
-  transform: translateY(-12px) rotate(-45deg);
+  transform: translateY(-11px) rotate(-45deg);
 }
 
 #sidebar {
-  /* background: #BFB688; */
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #aa9a45;
   /* Background colour made a bit brighter, instead of 0.3, 0.2 */
   width: 50%;

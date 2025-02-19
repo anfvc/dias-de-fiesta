@@ -30,7 +30,7 @@ const Home = () => {
             href="/contact"
             className="w-5/6 sm:w-3/5 block text-center py-3 text-2xl rounded-full font-bold  md:py-8 md:text-4xl 2xl:text-6xl bg-[#AA9A45] "
           >
-            <button>Cotiza tu Evento</button>
+            <button className="cursor-pointer">Cotiza tu Evento</button>
           </motion.a>
         </div>
       </div>

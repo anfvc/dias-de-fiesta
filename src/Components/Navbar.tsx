@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logo from "../assets/dias-de-fiesta-logo-black.svg";
+import logo from "../assets/logo.svg";
 // import secondary from "../assets/logo-secondary.svg"
 import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
 import { Link } from "react-router";
@@ -12,11 +12,11 @@ const Navbar = () => {
   };
 
   return (
-    <header className="w-full border bg-white sticky top-0 z-40">
-      <nav className="w-full flex items-center justify-between px-6 md:px-10 max-w-[1300px] mx-auto">
-        <div className="h-full logo-container">
+    <header className="w-full sticky top-0 z-40">
+      <nav className="w-full flex items-center justify-between px-4 py-3 md:px-10 max-w-[1300px] mx-auto">
+        <div className="w-full flex logo-container">
           <Link to="/">
-            <img src={logo} alt="Logo de Dias de Fiesta" className="w-40" />
+            <img src={logo} alt="Logo de Dias de Fiesta" className="w-40 sm:w-50" />
           </Link>
         </div>
 
