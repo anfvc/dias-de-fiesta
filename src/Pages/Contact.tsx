@@ -123,6 +123,7 @@ const Contact = () => {
             name="fullName"
             placeholder="Escribe tu nombre completo..."
             className="w-full border p-2"
+            autoComplete="name"
             value={formData.fullName}
             onChange={handleChange}
           />
@@ -131,6 +132,7 @@ const Contact = () => {
             name="email"
             placeholder="Tu email va aquí..."
             className="border p-2"
+            autoComplete="email"
             value={formData.email}
             onChange={handleChange}
           />
@@ -139,6 +141,7 @@ const Contact = () => {
             name="phone"
             placeholder="Danos tu teléfono..."
             className="border p-2"
+            autoComplete="tel"
             value={formData.phone}
             onChange={handleChange}
           />

@@ -16,3 +16,11 @@ body {
   font-size: 1.6rem;
   overflow: hidden;
 }
+
+/* Hero image on Home Section */
+#heroImage {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/home-img.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <header className="w-full border bg-white sticky top-0 z-40">
-      <nav className="flex items-center justify-between px-12">
+      <nav className="flex items-center justify-between px-6 md:px-10">
         <div className="logo-container">
           <Link to="/">
             <img src={logo} alt="Logo de Dias de Fiesta" className="w-50" />
