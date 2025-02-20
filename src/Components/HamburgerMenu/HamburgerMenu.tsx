@@ -1,5 +1,6 @@
 import "./HamburgerMenu.css";
-import logo from "../../assets/logo.svg";
+// import logo from "../../assets/logo.svg";
+import logoW from "../../assets/logoWhite.svg";
 import { Link } from "react-router";
 
 type Props = {
@@ -19,40 +20,53 @@ const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
         <div></div>
         <div></div>
       </div>
-      <nav id="sidebar" className={isOpen ? "open text-black z-40" : ""}>
-        <div>
+      <nav
+        id="sidebar"
+        className={
+          isOpen
+            ? "open text-white"
+            : "text-white"
+        }
+      >
+        <div className="w-full px-4">
           <Link to="/">
             <img
-              src={logo}
+              src={logoW}
               alt="Logo de Dias de Fiesta"
-              className="w-40 py-3 ml-10"
+              className="w-40 sm:w-50 py-4"
             />
           </Link>
         </div>
-        <div className="w-full h-full flex">
-          <ul className="w-full h-full flex flex-col text-3xl font-semibold justify-start mt-30 gap-20 ml-10">
-            <li>
-              <Link to="/about" target="_self" onClick={toggleMenu}>
-                Nosotros
-              </Link>
-            </li>
-            <li>
-              <Link to="/services" target="_self" onClick={toggleMenu}>
-                Servicios
-              </Link>
-            </li>
-            <li>
-              <Link to="/portfolio" target="_self" onClick={toggleMenu}>
-                Portafolio
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" target="_self" onClick={toggleMenu}>
-                Contáctanos
-              </Link>
-            </li>
-          </ul>
-        </div>
+        <ul className="w-full h-full flex flex-col text-3xl font-semibold underline justify-start mt-20 gap-20 px-6">
+          <li>
+            <Link to="/about" target="_self" onClick={toggleMenu}>
+              Nosotros
+            </Link>
+          </li>
+          <li>
+            <Link to="/services" target="_self" onClick={toggleMenu}>
+              Servicios
+            </Link>
+          </li>
+          <li>
+            <Link to="/portfolio" target="_self" onClick={toggleMenu}>
+              Portafolio
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" target="_self" onClick={toggleMenu}>
+              Contáctanos
+            </Link>
+          </li>
+          <Link to="/contact">
+            <button
+              className="border-2 px-6 py-4 rounded-full"
+              onClick={toggleMenu}
+            >
+              Escríbenos
+            </button>
+          </Link>
+        </ul>
       </nav>
     </section>
   );
