@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <main className="w-full h-dvh">
+      <main className="w-full">
         <Routes>
           <Route index element={<Home />} />
           <Route path="/about" element={<About />} />

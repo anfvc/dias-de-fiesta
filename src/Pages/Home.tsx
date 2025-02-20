@@ -1,9 +1,10 @@
 import { easeInOut, motion } from "framer-motion";
+import "../Components/Home.css"
 
 const Home = () => {
   return (
-    <section className="w-full h-screen" id="heroImage">
-      <div className="w-full h-full flex flex-col justify-center items-center text-white max-w-[1300px] mx-auto">
+    <section className="home w-full h-screen bg-no-repeat bg-cover bg-center overflow-hidden bg-fixed" id="heroImageContainer">
+      <div className="w-full h-full flex flex-col justify-center items-center text-white max-w-[1300px] mx-auto ">
         <div className="w-full flex flex-col gap-8 px-6 md:px-14 items-center md:gap-15">
           <motion.h1
             initial={{ y: 0, opacity: 0 }}

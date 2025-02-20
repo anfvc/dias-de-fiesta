@@ -12,7 +12,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="w-full sticky shadow-gray-600 shadow-sm top-0 z-40">
+    <header className="w-full sticky bg-white shadow-gray-600 shadow-sm top-0 z-40">
       <nav className="w-full flex items-center justify-between px-4 py-3 md:px-10 max-w-[1300px] mx-auto">
         <div className="w-full flex items-center justify-between logo-container">
           <Link to="/">

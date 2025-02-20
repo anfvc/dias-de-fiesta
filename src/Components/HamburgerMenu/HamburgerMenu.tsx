@@ -19,7 +19,7 @@ const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
         <div></div>
         <div></div>
       </div>
-      <nav id="sidebar" className={isOpen ? "open text-black z-40 sticky top-0  " : ""}>
+      <nav id="sidebar" className={isOpen ? "open text-black z-40" : ""}>
         <div>
           <Link to="/">
             <img
