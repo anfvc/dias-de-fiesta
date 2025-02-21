@@ -1,11 +1,25 @@
-import { useState } from "react";
-// import logo from "../assets/logo.svg";
-import logoW from "../assets/logoWhite.svg"
+import { useState, useEffect } from "react";
+import logoB from "../assets/logo.svg";
+import logoW from "../assets/logoWhite.svg";
+
 import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const location = useLocation(); //useLocation - location is an object
+  const [textColor, setTextColor] = useState<string>("text-white");
+  const [logo, setLogo] = useState<string>(logoW);
+
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      setTextColor("text-black");
+      setLogo(logoB);
+    } else {
+      setTextColor("text-white");
+      setLogo(logoW);
+    }
+  }, [location.pathname]);
 
   const handleMenuOpenOrClose = () => {
     setIsOpen(!isOpen);
@@ -17,12 +31,14 @@ const Navbar = () => {
         <div className="w-full flex items-center justify-between logo-container">
           <Link to="/">
             <img
-              src={logoW}
+              src={logo}
               alt="Logo de Dias de Fiesta"
-              className="w-40 sm:w-50"
+              className={`w-40 ${textColor} sm:w-50`}
             />
           </Link>
-          <ul className="hidden gap-7 text-white sm:flex sm:text-3xl lg:text-4xl font-semibold">
+          <ul
+            className={`hidden gap-7 ${textColor} sm:flex sm:text-3xl lg:text-4xl font-semibold`}
+          >
             <li>
               <Link to="/about">Nosotros</Link>
             </li>

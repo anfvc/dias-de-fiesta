@@ -1,7 +1,8 @@
 import "./HamburgerMenu.css";
-// import logo from "../../assets/logo.svg";
 import logoW from "../../assets/logoWhite.svg";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
+import { useEffect, useState } from "react";
+// import { Dispatch, SetStateAction } from "react";
 
 type Props = {
   isOpen: boolean;
@@ -9,25 +10,29 @@ type Props = {
 };
 
 const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
+  const [hamburger, setHamburger] = useState<string>("bg-white");
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      setHamburger("bg-black");
+    } else {
+      setHamburger("bg-white");
+    }
+  }, [location.pathname]);
+
   return (
     <section
       id="hamburgerMenuMobile"
       onClick={toggleMenu}
       className="flex justify-center items-center mr-4 sm:hidden"
     >
-      <div id="burger" onClick={toggleMenu} className={isOpen ? "open" : ""}>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div id="burger" onClick={toggleMenu} className={isOpen ? `open` : ""}>
+        <div className={hamburger}></div>
+        <div className={hamburger}></div>
+        <div className={hamburger}></div>
       </div>
-      <nav
-        id="sidebar"
-        className={
-          isOpen
-            ? "open text-white"
-            : "text-white"
-        }
-      >
+      <nav id="sidebar" className={isOpen ? "open text-white" : "text-white"}>
         <div className="w-full px-4">
           <Link to="/">
             <img
