@@ -6,10 +6,7 @@ const Contact = () => {
   // console.log(formData.message);
 
   return (
-    <section
-      id="contact"
-      className="w-full h-full my-10"
-    >
+    <section id="contact" className="w-full h-full my-10">
       <div className="w-full h-full flex flex-col justify-start gap-8 mx-auto items-center px-4">
         <div className="w-full text-center">
           <h2>Contact</h2>

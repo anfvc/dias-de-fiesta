@@ -13,6 +13,14 @@ const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
   const [hamburger, setHamburger] = useState<string>("bg-white");
   const location = useLocation();
 
+  const handleClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+
+    if (target.closest("#burger") || target.closest("#sidebar ul li")) {
+      toggleMenu();
+    }
+  };
+
   useEffect(() => {
     if (location.pathname !== "/") {
       setHamburger("bg-black");
@@ -24,7 +32,7 @@ const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
   return (
     <section
       id="hamburgerMenuMobile"
-      onClick={toggleMenu}
+      onClick={handleClick}
       className="flex justify-center items-center mr-4 sm:hidden"
     >
       <div id="burger" onClick={toggleMenu} className={isOpen ? `open` : ""}>
@@ -42,7 +50,7 @@ const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
             />
           </Link>
         </div>
-        <ul className="w-full h-full flex flex-col text-3xl font-semibold underline justify-start mt-20 gap-20 px-6">
+        <ul className="w-1/2 flex flex-col text-3xl font-semibold underline justify-start mt-20 gap-20 px-6 py-6">
           <li>
             <Link to="/about" target="_self" onClick={toggleMenu}>
               Nosotros
