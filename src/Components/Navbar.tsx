@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import logoB from "../assets/logo.svg";
 import logoW from "../assets/logoWhite.svg";
-
 import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
 import { Link, useLocation } from "react-router";
 

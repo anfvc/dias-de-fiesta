@@ -4,7 +4,7 @@
 }
 
 #burger {
-  position: absolute;
+  /* position: absolute; removed 24.02 */
   cursor: pointer;
   width: 3.5rem;
   /* height: 1.5rem; */
@@ -37,8 +37,8 @@
 #sidebar {
   /* background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #aa9a45; fondo amarillo */
   background-image: url("/sidebarImg.png");
-  width: 60%;
-  height: 100dvh;
+  width: 80%;
+  height: 100lvh;
   position: fixed;
   left: 0;
   top: 0;
