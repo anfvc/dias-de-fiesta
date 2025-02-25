@@ -1,17 +1,18 @@
 import "./HamburgerMenu.css";
 import logoW from "../../assets/logoWhite.svg";
 import { Link, useLocation } from "react-router";
-import { useEffect, useState } from "react";
 // import { Dispatch, SetStateAction } from "react";
 
 type Props = {
   isOpen: boolean;
   toggleMenu: () => void;
+  textColor: string;
 };
 
-const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
-  const [hamburger, setHamburger] = useState<string>("bg-white");
+const HamburgerMenu = ({ toggleMenu, isOpen, textColor }: Props) => {
   const location = useLocation();
+  const isHome = location.pathname === "/";
+  const background = isHome ? "bg-white" : "bg-black";
 
   const handleClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -21,14 +22,6 @@ const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
     }
   };
 
-  useEffect(() => {
-    if (location.pathname !== "/") {
-      setHamburger("bg-black");
-    } else {
-      setHamburger("bg-white");
-    }
-  }, [location.pathname]);
-
   return (
     <section
       id="hamburgerMenuMobile"
@@ -36,11 +29,11 @@ const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
       className="flex justify-center items-center sm:hidden"
     >
       <div id="burger" onClick={toggleMenu} className={isOpen ? `open` : ""}>
-        <div className={hamburger}></div>
-        <div className={hamburger}></div>
-        <div className={hamburger}></div>
+        <div className={background}></div>
+        <div className={background}></div>
+        <div className={background}></div>
       </div>
-      <nav id="sidebar" className={isOpen ? "open text-white" : "text-white"}>
+      <nav id="sidebar" className={isOpen ? `open` : ""}>
         <div className="w-full px-4 flex justify-between">
           <Link to="/">
             <img
@@ -49,16 +42,20 @@ const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
               className="w-40 sm:w-50 py-4"
             />
           </Link>
-          <div
-            className={`burgerContainer ${isOpen ? "open" : ""}`}
-            id="burger" onClick={toggleMenu}
+          {/* Hamburger menu for SIDEBAR */}
+          {/* <div
+            className={`burgerContainer ${isOpen ? `open` : ""}`}
+            id="burger"
+            onClick={toggleMenu}
           >
-            <div className={hamburger}></div>
-            <div className={hamburger}></div>
-            <div className={hamburger}></div>
-          </div>
+            <div className={background}></div>
+            <div className={background}></div>
+            <div className={background}></div>
+          </div> */}
         </div>
-        <ul className="w-1/2 flex flex-col text-3xl font-semibold underline justify-start mt-20 gap-20 px-6 py-6">
+        <ul
+          className={`${textColor} w-1/2 flex flex-col text-3xl font-semibold underline justify-start mt-20 gap-20 px-6 py-6`}
+        >
           <li>
             <Link to="/about" target="_self" onClick={toggleMenu}>
               Nosotros

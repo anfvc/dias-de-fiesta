@@ -39,7 +39,7 @@
 #sidebar {
   /* background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #aa9a45; fondo amarillo */
   background: url("/home-img.jpg") no-repeat center/cover;
-  width: 100%;
+  width: 75%; /* if the sidebar takes up the full width, consider adding a hamburger menu to close it */
   height: 100vh;
   position: fixed;
   left: 0;

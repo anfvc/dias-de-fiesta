@@ -1,24 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import logoB from "../assets/logo.svg";
 import logoW from "../assets/logoWhite.svg";
 import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
 import { Link, useLocation } from "react-router";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const location = useLocation(); //useLocation - location is an object
-  const [textColor, setTextColor] = useState<string>("text-white");
-  const [logo, setLogo] = useState<string>(logoW);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  // const [textColor, setTextColor] = useState<string>("text-white");
+  // const [logo, setLogo] = useState<string>(logoW);
 
-  useEffect(() => {
-    if (location.pathname !== "/") {
-      setTextColor("text-black");
-      setLogo(logoB);
-    } else {
-      setTextColor("text-white");
-      setLogo(logoW);
-    }
-  }, [location.pathname]);
+  const isHome = location.pathname === "/";
+  const textColor = isHome ? "text-white" : "text-black";
+  const logo = isHome ? logoW : logoB;
 
   const handleMenuOpenOrClose = () => {
     setIsOpen(!isOpen);
@@ -32,7 +26,7 @@ const Navbar = () => {
             <img
               src={logo}
               alt="Logo de Dias de Fiesta"
-              className={`w-40 ${textColor} sm:w-50`}
+              className={`w-40 ${textColor} sm:w-45`}
             />
           </Link>
           <ul
@@ -53,7 +47,11 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <HamburgerMenu toggleMenu={handleMenuOpenOrClose} isOpen={isOpen} />
+        <HamburgerMenu
+          toggleMenu={handleMenuOpenOrClose}
+          isOpen={isOpen}
+          textColor={textColor}
+        />
       </nav>
     </header>
   );
