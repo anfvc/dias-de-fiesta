@@ -30,7 +30,11 @@ const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
   }, [location.pathname]);
 
   return (
-    <>
+    <section
+      id="hamburgerMenuMobile"
+      onClick={handleClick}
+      className="flex justify-center items-center sm:hidden"
+    >
       <div id="burger" onClick={toggleMenu} className={isOpen ? `open` : ""}>
         <div className={hamburger}></div>
         <div className={hamburger}></div>
@@ -45,11 +49,14 @@ const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
               className="w-40 sm:w-50 py-4"
             />
           </Link>
-        <div className="burgerContainer" id="burger">
-          <div className={hamburger}></div>
-          <div className={hamburger}></div>
-          <div className={hamburger}></div>
-        </div>
+          <div
+            className={`burgerContainer ${isOpen ? "open" : ""}`}
+            id="burger" onClick={toggleMenu}
+          >
+            <div className={hamburger}></div>
+            <div className={hamburger}></div>
+            <div className={hamburger}></div>
+          </div>
         </div>
         <ul className="w-1/2 flex flex-col text-3xl font-semibold underline justify-start mt-20 gap-20 px-6 py-6">
           <li>
@@ -82,13 +89,7 @@ const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
           </Link>
         </ul>
       </nav>
-    </>
-    // <section
-    //   id="hamburgerMenuMobile"
-    //   onClick={handleClick}
-    //   className="flex justify-center items-center sm:hidden"
-    // >
-    // </section>
+    </section>
   );
 };
 

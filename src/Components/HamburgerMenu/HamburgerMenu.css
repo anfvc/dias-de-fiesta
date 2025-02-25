@@ -4,13 +4,11 @@
 }
 
 #burger {
-  /* position: absolute; removed 24.02 */
   cursor: pointer;
   width: 3.5rem;
-  /* height: 1.5rem; */
   gap: 0.7rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: column;
 }
 
@@ -34,11 +32,15 @@
   transform: translateY(-11px) rotate(-45deg);
 }
 
+#burger > div:nth-child(2) {
+  height: 0.4rem;
+}
+
 #sidebar {
   /* background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #aa9a45; fondo amarillo */
-  background-image: url("/sidebarImg.png");
-  width: 80%;
-  height: 100lvh;
+  background: url("/home-img.jpg") no-repeat center/cover;
+  width: 100%;
+  height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
@@ -52,11 +54,8 @@
 #sidebar::before {
   content: "";
   position: absolute;
-  background-color: rgba(132, 132, 132, 0.098);
-  backdrop-filter: blur(80px);
-  background-size: cover;
-  background-position: left;
-  background-repeat: repeat;
+  background-color: rgba(61, 61, 61, 0.606);
+  backdrop-filter: blur(60px);
   width: 100%;
   height: 100%;
   inset: 0;

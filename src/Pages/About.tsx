@@ -1,7 +1,7 @@
 
 const About = () => {
   return (
-    <div>Here goes the "Nosotros" section</div>
+    <section className="pt-[100.23px]">Here goes the "Nosotros" section</section>
   )
 }
 

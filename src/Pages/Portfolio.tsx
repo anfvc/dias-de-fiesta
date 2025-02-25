@@ -1,7 +1,7 @@
 
 const Portfolio = () => {
   return (
-    <div>Here goes the "Portafolio" section.</div>
+    <section className="pt-[100.23px]">Here goes the "Portafolio" section.</section>
   )
 }
 
