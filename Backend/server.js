@@ -1,12 +1,8 @@
 import express from "express";
-import path from "path";
 import cors from "cors";
-import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import apiRoute from "./Routes/apiRouter.js";
-import contactRouter from "./Routes/contactRouter.js"
-
-dotenv.config();
+import contactRouter from "./Routes/contactRouter.js";
 
 const app = express();
 
