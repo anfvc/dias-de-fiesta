@@ -1,6 +1,6 @@
 import { easeInOut, motion } from "framer-motion";
 import HomeButton from "../Components/HomeButton";
-import "../Components/Home.css";
+import "../Styles/Home.css";
 
 const Home = () => {
   return (

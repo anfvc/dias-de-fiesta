@@ -6,13 +6,17 @@ import Portfolio from "./Pages/Portfolio";
 import Contact from "./Pages/Contact";
 import PageNotFound from "./Pages/PageNotFound";
 import Navbar from "./Components/Navbar";
-import "./index.css"
+import Footer from "./Components/Footer";
+import "./index.css";
+import { useLocation } from "react-router";
 
 function App() {
+  const location = useLocation();
+
   return (
     <>
       <Navbar />
-      <main className="w-full h-full">
+      <main className="w-full min-h-screen">
         <Routes>
           <Route index element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -22,6 +26,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>
+      {location.pathname !== "/" && <Footer />}
     </>
   );
 }
