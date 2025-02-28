@@ -22,6 +22,7 @@ const Footer = () => {
             commodi totam vel sed minima magni dolore placeat temporibus
             consequatur tempora.
           </p>
+
         </div>
     </section>
   );
