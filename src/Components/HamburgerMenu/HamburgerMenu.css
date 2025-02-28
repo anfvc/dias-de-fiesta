@@ -37,8 +37,6 @@
 }
 
 #sidebar {
-  /* background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #aa9a45; fondo amarillo */
-  background: url("/home-img.jpg") no-repeat center/cover;
   width: 75%; /* if the sidebar takes up the full width, consider adding a hamburger menu to close it */
   height: 100vh;
   position: fixed;
@@ -51,11 +49,22 @@
   z-index: 999;
 }
 
+.bg-home {
+  background: url("/home-img.jpg") no-repeat center/cover;
+}
+
+.bg-home::before {
+  backdrop-filter: blur(60px);
+  background-color: rgba(68, 68, 68, 0.647);
+}
+
+.bg-other {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #aa9a45;
+}
+
 #sidebar::before {
   content: "";
   position: absolute;
-  background-color: rgba(61, 61, 61, 0.606);
-  backdrop-filter: blur(60px);
   width: 100%;
   height: 100%;
   inset: 0;

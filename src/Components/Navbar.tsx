@@ -7,9 +7,6 @@ import { Link, useLocation } from "react-router";
 const Navbar = () => {
   const location = useLocation(); //useLocation - location is an object
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  // const [textColor, setTextColor] = useState<string>("text-white");
-  // const [logo, setLogo] = useState<string>(logoW);
-
   const isHome = location.pathname === "/";
   const textColor = isHome ? "text-white" : "text-black";
   const logo = isHome ? logoW : logoB;

@@ -12,7 +12,9 @@ type Props = {
 const HamburgerMenu = ({ toggleMenu, isOpen, textColor }: Props) => {
   const location = useLocation();
   const isHome = location.pathname === "/";
-  const background = isHome ? "bg-white" : "bg-black";
+  const color = isHome ? "bg-white" : "bg-black"; //if location.pathname !== "/" hamb menu should be black
+  const dynamicTextColor = isHome ? textColor : "text-white"; //if location.pathname !== "/" sidebar text color should be white
+  const background = isHome ? `bg-home` : "bg-other";
 
   const handleClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -28,12 +30,12 @@ const HamburgerMenu = ({ toggleMenu, isOpen, textColor }: Props) => {
       onClick={handleClick}
       className="flex justify-center items-center sm:hidden"
     >
-      <div id="burger" onClick={toggleMenu} className={isOpen ? `open` : ""}>
-        <div className={background}></div>
-        <div className={background}></div>
-        <div className={background}></div>
+      <div id="burger" onClick={toggleMenu} className={isOpen ? "open" : ""}>
+        <div className={color}></div>
+        <div className={color}></div>
+        <div className={color}></div>
       </div>
-      <nav id="sidebar" className={isOpen ? `open` : ""}>
+      <nav id="sidebar" className={`${isOpen ? "open" : ""} ${background}`}>
         <div className="w-full px-4 flex justify-between">
           <Link to="/">
             <img
@@ -54,7 +56,7 @@ const HamburgerMenu = ({ toggleMenu, isOpen, textColor }: Props) => {
           </div> */}
         </div>
         <ul
-          className={`${textColor} w-1/2 flex flex-col text-3xl font-semibold underline justify-start mt-20 gap-20 px-6 py-6`}
+          className={`${dynamicTextColor} w-2/3 flex flex-col text-3xl font-semibold underline justify-start mt-20 gap-20 px-6 py-6`}
         >
           <li>
             <Link to="/about" target="_self" onClick={toggleMenu}>
