@@ -8,7 +8,7 @@ const Testimonials = () => {
       <h2 className="text-5xl pt-6">
         Lo que nuestros clientes dicen de nosotros
       </h2>
-      <div className="carrousel flex flex-col md:flex-row justify-center gap-8 mt-15">
+      <div className="carrousel flex flex-col md:flex-row justify-center gap-8 my-15">
         {testimonials.map((testimonial, index) => (
           <Testimony
             key={index}
