@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <header className="w-full fixed backdrop-blur-xl bg-white/10 top-0 z-40">
-      <nav className="w-full flex items-center justify-between px-4 py-4 md:px-10 max-w-[1300px] mx-auto">
+      <nav className="w-full flex items-center justify-between px-4 py-4 md:px-10 max-w-[1500px] mx-auto">
         <div className="w-full flex items-center justify-between logo-container">
           <Link to="/">
             <img

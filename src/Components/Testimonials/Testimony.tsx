@@ -1,0 +1,32 @@
+interface TestimonialProps {
+  name: string;
+  message: string;
+  rating: number;
+  date: string;
+}
+
+const Testimony = ({ name, message, rating, date }: TestimonialProps) => {
+  const generateStartsForRating = (rating: number) => {
+    const totalStars = Math.round(rating);
+    return (
+      <div>
+        {Array(totalStars)
+          .fill("⭐")
+          .map((star, index) => (
+            <span key={index} className="gap-2">{star}</span>
+          ))}
+      </div>
+    );
+  };
+
+  return (
+      <div className="w-full flex flex-col justify-between gap-6 shadow-2xl px-8 py-4">
+        {generateStartsForRating(rating)}
+        <h2 className="text-4xl font-semibold">{name}</h2>
+        <p>{message}</p>
+        <p className="text-3xl">{date}</p>
+      </div>
+  );
+};
+
+export default Testimony;

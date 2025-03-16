@@ -14,19 +14,19 @@ const Footer = () => {
       className="w-full bg-[#AA9A45] relative border-black py-30 px-10"
     >
       <div className="absolute bg-black/30 inset-0"></div>
-      <div className="w-full flex flex-col gap-10 md:flex-row  md:gap-16 max-w-[1300px] mx-auto">
-        <div className="w-full flex flex-col gap-7 z-10 relative text-white">
+      <div className="w-full flex flex-col gap-10 md:flex-row  md:gap-16 max-w-[1500px] mx-auto">
+        <div className="w-full flex flex-col gap-8 z-10 relative text-white">
           <div>
             <img
               src={logoWhite}
               alt="Dias de Fiesta logo white"
-              className="w-50"
+              className="w-60"
             />
           </div>
-          <h2 className="w-full text-4xl font-bold text-balance">
+          <h2 className="w-full text-5xl font-bold text-pretty">
             Convierte tus celebraciones en experiencias inigualables
           </h2>
-          <p className="w-full text-pretty">
+          <p className="w-full text-pretty text-3xl">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
             commodi totam vel sed minima magni dolore placeat temporibus
             consequatur tempora.
@@ -35,13 +35,13 @@ const Footer = () => {
             Organiza tu evento
           </button>
         </div>
-        <div className="w-1/3 flex flex-col justify-center text-3xl gap-6 relative text-white">
-          <div className="flex flex-col">
+        <div className="w-1/3 flex flex-col justify-center text-3xl gap-10 relative text-white">
+          <div className="w-full flex flex-col">
             <h4>Teléfonos</h4>
             <p>{telephone}</p>
           </div>
-          <div className="flex flex-col text-white">
-            <h4>Correos</h4>
+          <div className="w-full flex flex-col text-white text-3xl">
+            <h4 className="text-balance">Correos</h4>
             <p>{companyEmail}</p>
           </div>
           <div className="flex gap-10 text-5xl">
@@ -51,7 +51,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="w-1/3 flex flex-col justify-center relative text-white">
-          <ul className="flex flex-col gap-6 text-3xl">
+          <ul className="flex flex-col gap-8 text-3xl">
             <li>
               <Link to="/about" target="_self">
                 Nosotros
@@ -73,6 +73,12 @@ const Footer = () => {
               </Link>
             </li>
           </ul>
+        </div>
+      </div>
+      <div className="w-full mt-20 border-t-2 border-white max-w-[1500px] mx-auto relative md:text-4xl">
+        <div className="flex flex-col md:flex-row justify-center md:justify-between pt-10 text-white">
+          <p> &copy; {new Date().getFullYear()} Días de Fiesta</p>
+          <p>Diseñado y desarrollado con ❤️ por <span className="underline"><a href="https://linkedin.com/in/avillay " target="_blank">Andrés Villay</a></span></p>
         </div>
       </div>
     </section>
