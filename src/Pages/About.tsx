@@ -1,4 +1,4 @@
-import Testimonials from "../Components/Testimonials/Testimonials.tsx";
+import Testimonials from "../components/Testimonials/Testimonials.tsx";
 
 const About = () => {
   return (

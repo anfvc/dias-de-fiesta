@@ -24,7 +24,7 @@ const Testimony = ({ name, message, rating, date }: TestimonialProps) => {
         {generateStartsForRating(rating)}
         <h2 className="text-4xl font-semibold">{name}</h2>
         <p>{message}</p>
-        <p className="text-3xl">{date}</p>
+        <p className="text-2xl text-gray-400">{date}</p>
       </div>
   );
 };

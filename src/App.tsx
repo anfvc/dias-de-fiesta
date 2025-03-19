@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router";
-import Home from "./Pages/Home";
-import About from "./Pages/About";
-import Services from "./Pages/Services";
-import Portfolio from "./Pages/Portfolio";
-import Contact from "./Pages/Contact";
-import PageNotFound from "./Pages/PageNotFound";
-import Navbar from "./Components/Navbar";
-import Footer from "./Components/Footer";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Services from "./pages/Services";
+import Portfolio from "./pages/Portfolio";
+import Contact from "./pages/Contact";
+import PageNotFound from "./pages/PageNotFound";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import "./index.css";
 import { useLocation } from "react-router";
 

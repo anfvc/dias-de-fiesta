@@ -1,4 +1,4 @@
-import logoWhite from "../assets/logoWhite.svg";
+import logoWhite from "../../src/assets/svg/logoWhite.svg"
 import { IoLogoInstagram } from "react-icons/io5";
 import { IoLogoFacebook } from "react-icons/io5";
 import { IoLogoWhatsapp } from "react-icons/io5";
