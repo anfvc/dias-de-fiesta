@@ -50,7 +50,7 @@
 }
 
 .bg-home {
-  background: url("/home-img.jpg") no-repeat center/cover;
+  background: url("/images/home-img.jpg") no-repeat center/cover;
 }
 
 .bg-home::before {

@@ -1,5 +1,5 @@
 import "./HamburgerMenu.css";
-import logoW from "@assets/svg/logoWhite.svg"
+import logoW from "@/assets/svg/logoWhite.svg"
 import { Link, useLocation } from "react-router";
 
 type Props = {

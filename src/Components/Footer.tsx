@@ -1,4 +1,4 @@
-import logoWhite from "@assets/svg/logoWhite.svg";
+import logoWhite from "@/assets/svg/logoWhite.svg";
 import { IoLogoInstagram } from "react-icons/io5";
 import { IoLogoFacebook } from "react-icons/io5";
 import { IoLogoWhatsapp } from "react-icons/io5";
@@ -15,7 +15,7 @@ const Footer = () => {
         <img src={logoWhite} alt="Dias de Fiesta logo white" className="w-70" />
       </div>
       <div className="w-full flex flex-col gap-8 md:flex-row md:gap-10 max-w-[1500px] mx-auto relative z-10 text-white">
-        <div className="w-full flex flex-col justify-between gap-10 z-10 relative max-w-[800px]">
+        <div className="w-full flex flex-col justify-between gap-8 z-10 relative max-w-[800px]">
           <h2 className="text-4xl md:text-5xl font-bold text-pretty">
             Convierte tus celebraciones en experiencias inigualables
           </h2>
@@ -28,11 +28,11 @@ const Footer = () => {
         </div>
         <div className="w-full md:w-1/3 flex flex-col justify-start gap-10 text-3xl md:text-4xl mt-8 md:mt-0">
           <h3 className="font-bold">CONTACTO</h3>
-          <div>
+          <div className="w-full">
             <h4>Teléfonos</h4>
             <p>{telephone}</p>
           </div>
-          <div>
+          <div className="w-full">
             <h4>Correos</h4>
             <p>{companyEmail}</p>
           </div>
@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
         <div className="w-full md:w-1/3 flex flex-col justify-start mt-8 md:mt-0">
           <ul className="flex flex-col gap-7 text-3xl md:text-4xl">
-            <h3 className="font-bold text-4xl">PAGINAS</h3>
+            <h3 className="font-bold text-4xl">PÁGINAS</h3>
             <li>
               <Link to="/">Inicio</Link>
             </li>
@@ -63,7 +63,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="w-full mt-20 border-t-2 border-white max-w-[1500px] mx-auto relative">
+      <div className="w-full mt-20 border-t border-white max-w-[1500px] mx-auto relative">
         <div className="flex flex-col items-center md:flex-row md:justify-between pt-8 text-white">
           <p>&copy; {new Date().getFullYear()} Días de Fiesta</p>
           <p>

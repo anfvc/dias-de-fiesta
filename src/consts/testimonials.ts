@@ -1,4 +1,4 @@
-import type { Testimonial } from "../types/testimonials";
+import type { Testimonial } from "@/types/testimonials";
 import { v4 as uuidv4 } from "uuid";
 
 export const TESTIMONIALS: Testimonial[] = [

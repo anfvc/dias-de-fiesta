@@ -9,11 +9,11 @@ const Testimony = ({ name, message, rating, date }: TestimonialProps) => {
   const generateStartsForRating = (rating: number) => {
     const totalStars = Math.round(rating);
     return (
-      <div>
+      <div className="flex gap-1.5">
         {Array(totalStars)
           .fill("⭐")
           .map((star, index) => (
-            <span key={index} className="gap-2">{star}</span>
+            <span key={index}>{star}</span>
           ))}
       </div>
     );

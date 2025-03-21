@@ -1,10 +1,10 @@
-import { TESTIMONIALS } from "@consts/testimonials.ts";
-import Testimony from "@components/Testimonials/Testimony"
+import { TESTIMONIALS } from "@/consts/testimonials.ts";
+import Testimony from "@/components/Testimonials/Testimony";
 
 const Testimonials = () => {
   return (
     <div className=" border mt-20">
-      <h3 className="text-3xl underline">Testimonios</h3>
+      <h3 className="text-4xl underline text-[#AA9A45] font-bold">Testimonios</h3>
       <h2 className="text-5xl pt-6 font-bold">
         Lo que nuestros clientes dicen de nosotros
       </h2>
