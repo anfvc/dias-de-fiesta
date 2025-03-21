@@ -1,4 +1,4 @@
-import logoWhite from "../../src/assets/svg/logoWhite.svg"
+import logoWhite from "@assets/svg/logoWhite.svg"
 import { IoLogoInstagram } from "react-icons/io5";
 import { IoLogoFacebook } from "react-icons/io5";
 import { IoLogoWhatsapp } from "react-icons/io5";
@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <section
       id="footer"
-      className="w-full bg-[#AA9A45] relative border-black py-30 px-10"
+      className="w-full bg-[#AA9A45] relative border-black py-40 px-10"
     >
       <div className="absolute bg-black/30 inset-0"></div>
       <div className="w-full flex flex-col gap-10 md:flex-row  md:gap-16 max-w-[1500px] mx-auto">
@@ -20,7 +20,7 @@ const Footer = () => {
             <img
               src={logoWhite}
               alt="Dias de Fiesta logo white"
-              className="w-60"
+              className="w-70"
             />
           </div>
           <h2 className="w-full text-5xl font-bold text-pretty">

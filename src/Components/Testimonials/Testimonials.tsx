@@ -1,5 +1,5 @@
-import { TESTIMONIALS } from "../../consts/testimonials.ts";
-import Testimony from "./Testimony.tsx";
+import { TESTIMONIALS } from "@consts/testimonials.ts";
+import Testimony from "@components/Testimonials/Testimony"
 
 const Testimonials = () => {
   return (

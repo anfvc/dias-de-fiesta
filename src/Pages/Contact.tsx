@@ -1,4 +1,4 @@
-import Form from "../components/Form";
+import Form from "@components/Form";
 
 const Contact = () => {
   //? To reset my successMessage after some time:

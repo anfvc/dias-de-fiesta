@@ -1,7 +1,6 @@
 import "./HamburgerMenu.css";
-import logoW from "../../assets/svg/logoWhite.svg";
+import logoW from "@assets/svg/logoWhite.svg"
 import { Link, useLocation } from "react-router";
-// import { Dispatch, SetStateAction } from "react";
 
 type Props = {
   isOpen: boolean;

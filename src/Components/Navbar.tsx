@@ -1,7 +1,7 @@
 import { useState } from "react";
-import logoB from "../assets/svg/logo.svg";
-import logoW from "../assets/svg/logoWhite.svg";
-import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
+import logoB from "@assets/svg/logo.svg";
+import logoW from "@assets/svg/logoWhite.svg";
+import HamburgerMenu from "@components/HamburgerMenu/HamburgerMenu";
 import { Link, useLocation } from "react-router";
 
 const Navbar = () => {
