@@ -10,13 +10,14 @@ const Navbar = () => {
   const isHome = location.pathname === "/";
   const textColor = isHome ? "text-white" : "text-black";
   const logo = isHome ? logoW : logoB;
+  const navbarColor = isHome ? "backdrop-blur-xl bg-white/10" : `bg-white shadow-md`;
 
   const handleMenuOpenOrClose = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <header className="w-full fixed backdrop-blur-xl bg-white/10 top-0 z-40">
+    <header className={`w-full fixed ${navbarColor} top-0 z-40`}>
       <nav className="w-full flex items-center justify-between px-4 py-4 md:px-10 max-w-[1500px] mx-auto">
         <div className="w-full flex items-center justify-between logo-container">
           <Link to="/">

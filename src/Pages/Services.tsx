@@ -1,7 +1,7 @@
 
 const Services = () => {
   return (
-    <section className="pt-[100.23px]">Here goes the "Servicios" section.</section>
+    <section className="pt-[84.16px]  md:pt-[92.19px]">Here goes the "Servicios" section.</section>
   )
 }
 
