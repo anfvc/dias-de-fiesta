@@ -1,10 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 @import "tailwindcss";
 
-/* @theme {
-  --color-bg-gold: #aa9a45;
-  --color-text-gold: #c6b870;
-} */
+@layer components {
+  .card-shadow {
+    box-shadow: -2px -2px 14px 5px rgba(0, 0, 0, 0.18);
+  }
+}
+
+@theme {
+  --color-gold-text: #c6b870;
+  --color-gold-section: #aa9a45;
+  /* --color-secondary: #b38524 */
+}
 
 * {
   box-sizing: border-box;

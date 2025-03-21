@@ -13,7 +13,7 @@ const About = () => {
           className="w-full h-full flex flex-col gap-6 text-5xl sm:text-6xl absolute justify-center items-center font-extrabold md:text-8xl "
         >
           <h3 className="text-white">BIENVENIDOS A</h3>
-          <h3 className="text-7xl sm:text-8xl md:text-9xl text-[#C6B870]">
+          <h3 className="text-7xl sm:text-8xl md:text-9xl text-gold-text">
             DÍAS DE FIESTA
           </h3>
           <button className="font-semibold mt-5 text-white text-3xl md:text-4xl px-10 py-5 md:px-20 md:py-8 rounded-full bg-[#AA9A45] cursor-pointer">
@@ -22,10 +22,10 @@ const About = () => {
         </motion.div>
       </div>
       <div className="w-full my-15 px-6 md:px-4">
-        <h2 className="text-6xl font-semibold">
+        <h2 className="text-6xl font-semibold text-gold-section">
           <span className="underline">Quiénes</span> somos?
         </h2>
-        <p className="text-4xl my-10">
+        <p className="text-3xl md:text-4xl my-10">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quod
           earum maiores, inventore reprehenderit, molestiae quia odit incidunt,
           eos enim nostrum iste vero assumenda numquam tempora? Officiis

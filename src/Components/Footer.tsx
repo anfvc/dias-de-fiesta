@@ -3,14 +3,18 @@ import { IoLogoInstagram } from "react-icons/io5";
 import { IoLogoFacebook } from "react-icons/io5";
 import { IoLogoWhatsapp } from "react-icons/io5";
 import { Link } from "react-router";
+import "../App.css";
 
 const Footer = () => {
   const telephone: string = import.meta.env.VITE_TELEPHONE;
   const companyEmail: string = import.meta.env.VITE_COMPANY_EMAIL;
 
   return (
-    <section id="footer" className="w-full bg-[#AA9A45] relative py-20 px-8">
-      <div className="absolute inset-0 bg-black/30 z-0"></div>
+    <section
+      id="footer"
+      className="w-full relative py-20 px-8 bg-[url(/images/dark-bag3.jpg)] bg-cover bg-no-repeat bg-center"
+    >
+      <div className="absolute inset-0 bg-black/50 z-0"></div>
       <div className="w-full flex relative justify-start max-w-[1500px] mx-auto mb-10">
         <img src={logoWhite} alt="Dias de Fiesta logo white" className="w-70" />
       </div>
@@ -20,7 +24,10 @@ const Footer = () => {
             Convierte tus celebraciones en experiencias inigualables
           </h2>
           <p className="text-balance text-3xl md:text-4xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos laborum ipsa deserunt impedit ipsam ex molestias exercitationem, cum dolor similique, earum.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum
+            dolor sit amet consectetur adipisicing elit. Quos laborum ipsa
+            deserunt impedit ipsam ex molestias exercitationem, cum dolor
+            similique, earum.
           </p>
           <button className="w-xs p-4 bg-white text-black font-semibold rounded-full cursor-pointer">
             Organiza tu evento

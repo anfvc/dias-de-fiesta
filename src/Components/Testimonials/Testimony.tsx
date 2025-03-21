@@ -24,11 +24,11 @@ const Testimony = ({ name, message, rating, date }: TestimonialProps) => {
   };
 
   return (
-    <div className="w-full flex flex-col justify-between gap-6 shadow-2xl px-8 py-4">
+    <div className="w-full h-auto md:h-[30rem] flex flex-col justify-between gap-15 card-shadow px-8 py-4">
       {generateStartsForRating(rating)}
       <h2 className="text-4xl font-semibold">{name}</h2>
-      <p>{message}</p>
-      <p className="text-2xl text-gray-400">{date}</p>
+      <p className="text-3xl line-clamp-3">{message}</p>
+      <p className="text-xl text-gray-400">{date}</p>
     </div>
   );
 };
