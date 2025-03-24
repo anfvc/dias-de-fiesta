@@ -1,13 +1,12 @@
 import Form from "@/components/Form";
 
 const Contact = () => {
-  //? To reset my successMessage after some time:
-
-  // console.log(formData.message);
-
   return (
-    <section id="contact" className="w-full my-10 pt-[84.16px] md:pt-[92.19px]">
-      <div className="w-full h-full flex flex-col justify-start gap-8 mx-auto items-center px-4">
+    <section
+      id="contact"
+      className="w-full my-10 pt-[84.16px] md:pt-[92.19px] max-w-[1500px] mx-auto"
+    >
+      <div className="w-full h-full flex flex-col justify-start gap-8 items-center px-4">
         <div className="w-full text-center">
           <h2>Contact</h2>
         </div>

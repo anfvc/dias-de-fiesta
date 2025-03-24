@@ -1,11 +1,12 @@
 import Testimonials from "@/components/Testimonials/Testimonials";
+import ServicesShort from "@/components/ServicesShort";
 import { easeInOut, motion } from "framer-motion";
 import { Link } from "react-router";
 import missionImg from "/images/ny.jpg";
 
 const About = () => {
   return (
-    <section className="w-full pt-[84.16px]  md:pt-[92.19px] max-w-[1500px] mx-auto">
+    <section className="w-full pt-[84.16px]  md:pt-[92.19px] max-w-[1500px] mx-auto ">
       <div className="w-full bg-cover bg-[url(/images/about-top.webp)] h-[800px] bg-center bg-no-repeat relative">
         <div className="absolute inset-0 bg-black/40"></div>
         <motion.div
@@ -35,7 +36,8 @@ const About = () => {
           doloribus alias veritatis magnam ad? Vel, veniam repudiandae?
           Assumenda facere voluptate praesentium.
         </p>
-        <div className="mission-container w-full my-20 flex flex-col gap-10 items-center md:gap-15 lg:gap-20 md:flex-row-reverse">
+        <div className="w-full my-20 flex flex-col gap-10 items-center md:gap-15 lg:gap-20 md:flex-row-reverse">
+          {/* <div className="skewed"></div> */}
           <div className="w-full md:w-1/2 flex flex-col justify-center gap-5">
             <h3 className="text-4xl text-gold-section font-bold underline">
               Nuestra Misión
@@ -52,10 +54,15 @@ const About = () => {
             </p>
           </div>
           <div className="w-full md:w-1/2">
-            <img src={missionImg} alt="Image dedicated to the missiong of the company" className="w-full" />
+            <img
+              src={missionImg}
+              alt="Image dedicated to the missiong of the company"
+              className="w-full"
+            />
           </div>
         </div>
       </div>
+      <ServicesShort />
       <Testimonials />
     </section>
   );
