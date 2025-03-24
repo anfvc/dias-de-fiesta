@@ -1,3 +1,5 @@
+import { SERVICES } from "@/consts/services";
+
 const ServicesShort = () => {
   return (
     <div className="w-full max-w-[1500px] mx-auto px-6 md:px-4">

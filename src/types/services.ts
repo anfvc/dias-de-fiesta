@@ -19,4 +19,5 @@ export interface Services {
   name: ServiceName;
   description: string;
   price: string;
+  image: any;
 }
