@@ -7,16 +7,16 @@ const SwiperButtons = () => {
   return (
     <div className="flex justify-start gap-6 mt-20">
       <button
-        className="border rounded-full p-6 cursor-pointer active:scale-90 active:transition"
+        className="border-3 rounded-full p-6 cursor-pointer active:scale-90 active:transition"
         onClick={() => swiper.slideNext()}
       >
-        <FaArrowLeft />
+        <FaArrowLeft className="text-3xl" />
       </button>
       <button
-        className="border rounded-full p-6 cursor-pointer active:scale-90 active:transition"
+        className="border-3 rounded-full p-6 cursor-pointer active:scale-90 active:transition"
         onClick={() => swiper.slidePrev()}
       >
-        <FaArrowRight />
+        <FaArrowRight className="text-3xl" />
       </button>
     </div>
   );

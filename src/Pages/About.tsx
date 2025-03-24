@@ -1,6 +1,7 @@
 import Testimonials from "@/components/Testimonials/Testimonials";
 import { easeInOut, motion } from "framer-motion";
 import { Link } from "react-router";
+import missionImg from "/images/ny.jpg";
 
 const About = () => {
   return (
@@ -22,11 +23,11 @@ const About = () => {
           </button>
         </motion.div>
       </div>
-      <div className="w-full my-15 px-6 md:px-4">
-        <h2 className="text-6xl font-semibold text-gold-section">
+      <div className="w-full mt-20 px-6 md:px-4">
+        <h2 className="text-6xl font-semibold text-gold-section text-pretty">
           <span className="underline">Quiénes</span> somos?
         </h2>
-        <p className="text-3xl md:text-4xl my-10">
+        <p className="text-3xl lg:text-4xl my-10 text-balance">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quod
           earum maiores, inventore reprehenderit, molestiae quia odit incidunt,
           eos enim nostrum iste vero assumenda numquam tempora? Officiis
@@ -34,6 +35,26 @@ const About = () => {
           doloribus alias veritatis magnam ad? Vel, veniam repudiandae?
           Assumenda facere voluptate praesentium.
         </p>
+        <div className="mission-container w-full my-20 flex flex-col gap-10 items-center md:gap-15 lg:gap-20 md:flex-row-reverse">
+          <div className="w-full md:w-1/2 flex flex-col justify-center gap-5">
+            <h3 className="text-4xl text-gold-section font-bold underline">
+              Nuestra Misión
+            </h3>
+            <h2 className="text-5xl pt-2 font-bold text-pretty">
+              Haz parte de momentos inolvidables
+            </h2>
+            <p className="text-3xl lg:text-4xl py-6 text-balance">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Perferendis rem aliquid incidunt repudiandae animi cumque
+              consectetur recusandae adipisci inventore dolore? Illo laborum,
+              quae quo autem nemo fuga iure iusto nostrum minus est doloribus
+              sit rerum praesentium natus commodi quia accusantium?
+            </p>
+          </div>
+          <div className="w-full md:w-1/2">
+            <img src={missionImg} alt="Image dedicated to the missiong of the company" className="w-full" />
+          </div>
+        </div>
       </div>
       <Testimonials />
     </section>

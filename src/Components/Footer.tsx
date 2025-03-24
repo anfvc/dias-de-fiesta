@@ -29,7 +29,7 @@ const Footer = () => {
             deserunt impedit ipsam ex molestias exercitationem, cum dolor
             similique, earum.
           </p>
-          <button className="w-xs p-4 bg-white text-black font-semibold rounded-full cursor-pointer">
+          <button className="w-xs p-6 bg-white text-black font-semibold rounded-full cursor-pointer">
             Organiza tu evento
           </button>
         </div>
