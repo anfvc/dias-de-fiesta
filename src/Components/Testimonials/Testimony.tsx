@@ -24,7 +24,7 @@ const Testimony = ({ name, message, rating, date }: TestimonialProps) => {
   };
 
   return (
-    <div className="w-full h-auto md:h-[30rem] flex flex-col justify-between gap-15 card-shadow px-8 py-4">
+    <div className="flex flex-col gap-5 justify-between card-shadow px-8 py-10 min-h-[300px]">
       {generateStartsForRating(rating)}
       <h2 className="text-4xl font-semibold">{name}</h2>
       <p className="text-3xl line-clamp-3">{message}</p>

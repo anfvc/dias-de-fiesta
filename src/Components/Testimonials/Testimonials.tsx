@@ -1,27 +1,49 @@
 import { TESTIMONIALS } from "@/consts/testimonials.ts";
 import Testimony from "@/components/Testimonials/Testimony";
+import { SwiperSlide, Swiper } from "swiper/react";
+import "swiper/swiper-bundle.css";
+import SwiperButtons from "../SwiperButtons";
 
 const Testimonials = () => {
   return (
     <div className="w-full px-6">
-      <div className="my-20">
+      <div className="my-40">
         <h3 className="text-4xl underline text-gold-section font-bold">
           Testimonios
         </h3>
         <h2 className="text-5xl pt-6 font-bold">
           Lo que nuestros clientes dicen de nosotros
         </h2>
-        <div className="carrousel flex flex-col md:flex-row justify-center gap-8 my-15 border border-red-500">
+        <Swiper
+          className="w-full my-15"
+          spaceBetween={15}
+          breakpoints={{
+            640: {
+              slidesPerView: 1,
+            },
+            768: {
+              slidesPerView: 2,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+            1280: {
+              slidesPerView: 4,
+            },
+          }}
+        >
           {TESTIMONIALS.map((testimonial, id) => (
-            <Testimony
-              key={id}
-              name={testimonial.name}
-              message={testimonial.message}
-              rating={testimonial.rating}
-              date={testimonial.date}
-            />
+            <SwiperSlide key={id} className="p-2">
+              <Testimony
+                name={testimonial.name}
+                message={testimonial.message}
+                rating={testimonial.rating}
+                date={testimonial.date}
+              />
+            </SwiperSlide>
           ))}
-        </div>
+          <SwiperButtons />
+        </Swiper>
       </div>
     </div>
   );

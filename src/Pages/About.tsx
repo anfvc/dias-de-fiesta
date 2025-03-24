@@ -1,5 +1,6 @@
 import Testimonials from "@/components/Testimonials/Testimonials";
 import { easeInOut, motion } from "framer-motion";
+import { Link } from "react-router";
 
 const About = () => {
   return (
@@ -17,7 +18,7 @@ const About = () => {
             DÍAS DE FIESTA
           </h3>
           <button className="font-semibold mt-5 text-white text-3xl md:text-4xl px-10 py-5 md:px-20 md:py-8 rounded-full bg-[#AA9A45] cursor-pointer">
-            Organiza tu Evento
+            <Link to="/contact">Organiza tu Evento</Link>
           </button>
         </motion.div>
       </div>
