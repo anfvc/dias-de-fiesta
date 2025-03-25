@@ -15,13 +15,17 @@ const About = () => {
           transition={{ duration: 0.5, ease: easeInOut }}
           className="w-full h-full flex flex-col gap-6 text-5xl sm:text-6xl absolute justify-center items-center font-extrabold md:text-8xl "
         >
-          <h3 className="text-white">BIENVENIDOS A</h3>
-          <h3 className="text-7xl sm:text-8xl md:text-9xl text-gold-text">
-            DÍAS DE FIESTA
-          </h3>
-          <button className="font-semibold mt-5 text-white text-3xl md:text-4xl px-10 py-5 md:px-20 md:py-8 rounded-full bg-[#AA9A45] cursor-pointer">
-            <Link to="/contact">Organiza tu Evento</Link>
-          </button>
+          <div className="flex flex-col items-center gap-4">
+            <h3 className="text-white">BIENVENIDOS A</h3>
+            <h3 className="text-7xl sm:text-8xl md:text-9xl text-gold-text text-pretty text-center">
+              DÍAS DE FIESTA
+            </h3>
+          </div>
+          <Link to="/contact" className="inline-flex rounded-full mt-6">
+            <button className="font-semibold text-white text-3xl md:text-4xl bg-gold-section cursor-pointer active:scale-95 active:transform transition-all rounded-full py-6 px-10 md:px-15 md:py-8">
+              Organiza tu Evento
+            </button>
+          </Link>
         </motion.div>
       </div>
       <div className="w-full mt-20 px-6 md:px-4">

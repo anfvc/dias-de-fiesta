@@ -3,7 +3,13 @@
 
 @layer components {
   .card-shadow {
-    box-shadow: -2px -1px 15px 4px rgba(0, 0, 0, 0.18);
+    box-shadow: -4px 0px 10px 4px rgba(0, 0, 0, 0.18);
+  }
+
+  .service-shadow {
+    -webkit-box-shadow: -14px -7px 25px -1px rgba(0, 0, 0, 0.37);
+    -moz-box-shadow: -14px -7px 25px -1px rgba(0, 0, 0, 0.37);
+    box-shadow: -4px 0px 10px 4px rgba(0, 0, 0, 0.37);
   }
 }
 

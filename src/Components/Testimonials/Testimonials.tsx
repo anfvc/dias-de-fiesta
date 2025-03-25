@@ -7,7 +7,7 @@ import SwiperButtons from "../SwiperButtons";
 const Testimonials = () => {
   return (
     <div className="w-full px-6">
-      <div className="my-40">
+      <div className="my-30">
         <h3 className="text-4xl underline text-gold-section font-bold">
           Testimonios
         </h3>
