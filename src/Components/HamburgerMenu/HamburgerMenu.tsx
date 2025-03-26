@@ -1,6 +1,7 @@
 import "./HamburgerMenu.css";
-import logoW from "@/assets/svg/logoWhite.svg"
+import logoW from "@/assets/svg/logoWhite.svg";
 import { Link, useLocation } from "react-router";
+// import { RiCloseLargeLine } from "react-icons/ri";
 
 type Props = {
   isOpen: boolean;
@@ -34,25 +35,20 @@ const HamburgerMenu = ({ toggleMenu, isOpen, textColor }: Props) => {
         <div className={color}></div>
         <div className={color}></div>
       </div>
+      <div
+        className={`overlay ${isOpen ? "open" : ""}`}
+        onClick={toggleMenu}
+      ></div>
       <nav id="sidebar" className={`${isOpen ? "open" : ""} ${background}`}>
-        <div className="w-full px-4 flex justify-between">
-          <Link to="/">
+        <div className="w-full px-4 flex justify-between items-center">
+          <Link to="/" onClick={toggleMenu}>
             <img
               src={logoW}
               alt="Logo de Dias de Fiesta"
               className="w-40 sm:w-50 py-4"
             />
           </Link>
-          {/* Hamburger menu for SIDEBAR */}
-          {/* <div
-            className={`burgerContainer ${isOpen ? `open` : ""}`}
-            id="burger"
-            onClick={toggleMenu}
-          >
-            <div className={background}></div>
-            <div className={background}></div>
-            <div className={background}></div>
-          </div> */}
+          {/* <RiCloseLargeLine className="text-6xl text-white fill font-extrabold cursor-pointer" onClick={toggleMenu}/> */}
         </div>
         <ul
           className={`${dynamicTextColor} w-2/3 flex flex-col text-3xl font-semibold underline justify-start mt-20 gap-20 px-6 py-6`}

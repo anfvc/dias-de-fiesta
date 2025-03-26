@@ -3,12 +3,18 @@ import Testimony from "@/components/Testimonials/Testimony";
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import SwiperButtons from "../SwiperButtons";
+import { motion } from "framer-motion";
 
 const Testimonials = () => {
   return (
-    <div className="w-full px-6">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1, transition: { duration: 2 } }}
+      viewport={{ once: true }}
+      className="w-full px-6"
+    >
       <div className="my-30">
-        <h3 className="text-4xl underline text-gold-section font-bold">
+        <h3 className="text-3xl underline text-gold-section font-bold">
           Testimonios
         </h3>
         <h2 className="text-5xl pt-6 font-bold">
@@ -45,7 +51,7 @@ const Testimonials = () => {
           <SwiperButtons />
         </Swiper>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

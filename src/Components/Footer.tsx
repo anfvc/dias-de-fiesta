@@ -23,7 +23,7 @@ const Footer = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-pretty">
             Convierte tus celebraciones en experiencias inigualables
           </h2>
-          <p className="text-balance text-3xl md:text-4xl">
+          <p className="text-balance text-2xl lg:text-3xl">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum
             dolor sit amet consectetur adipisicing elit. Quos laborum ipsa
             deserunt impedit ipsam ex molestias exercitationem, cum dolor
@@ -33,7 +33,7 @@ const Footer = () => {
             Organiza tu evento
           </button>
         </div>
-        <div className="w-full md:w-1/3 flex flex-col justify-start gap-10 text-3xl md:text-4xl mt-8 md:mt-0">
+        <div className="w-full md:w-1/3 flex flex-col justify-start gap-10 text-2xl md:text-3xl mt-8 md:mt-0">
           <h3 className="font-bold">CONTACTO</h3>
           <div className="w-full">
             <h4>Teléfonos</h4>
@@ -50,8 +50,8 @@ const Footer = () => {
           </div>
         </div>
         <div className="w-full md:w-1/3 flex flex-col justify-start mt-8 md:mt-0">
-          <ul className="flex flex-col gap-7 text-3xl md:text-4xl">
-            <h3 className="font-bold text-4xl">PÁGINAS</h3>
+          <ul className="flex flex-col gap-7 text-2xl md:text-3xl">
+            <h3 className="font-bold">PÁGINAS</h3>
             <li>
               <Link to="/">Inicio</Link>
             </li>
@@ -73,7 +73,7 @@ const Footer = () => {
       <div className="w-full mt-20 border-t border-white max-w-[1500px] mx-auto relative">
         <div className="flex flex-col items-center md:flex-row md:justify-between pt-8 text-white">
           <p>&copy; {new Date().getFullYear()} Días de Fiesta</p>
-          <p>
+          <p className="text-lg md:text-2xl">
             Diseñado y desarrollado con ❤️ por{" "}
             <span className="underline">
               <a href="https://linkedin.com/in/avillay" target="_blank">

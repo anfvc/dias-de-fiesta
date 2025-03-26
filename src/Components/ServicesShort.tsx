@@ -1,14 +1,20 @@
 import { SERVICES } from "@/consts/services";
 import { Link } from "react-router";
+import { motion } from "framer-motion";
 
 const ServicesShort = () => {
   //Showing only the three first services for this page:
-  const threeServices = SERVICES.slice(0, 3);
+  const firstThree = SERVICES.slice(0, 3);
 
   return (
-    <div className="w-full max-w-[1500px] mx-auto px-6 md:px-4">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1, transition: { duration: 2 } }}
+      viewport={{ once: true }}
+      className="w-full max-w-[1500px] mx-auto px-6 md:px-4"
+    >
       <div>
-        <h3 className="text-4xl text-gold-section font-bold underline">
+        <h3 className="text34xl text-gold-section font-bold underline">
           Servicio de Calidad
         </h3>
         <h2 className="text-5xl pt-2 font-bold text-pretty">
@@ -22,32 +28,30 @@ const ServicesShort = () => {
           quia accusantium?
         </p>
       </div>
-      <div className="w-full grid my-20 gap-6 md:gap-8 lg:gap-10 md:grid-cols-3">
-        {threeServices.map((service, index) => (
+      <div className="w-full grid my-15 gap-6 md:gap-8 lg:gap-10 md:grid-cols-3">
+        {firstThree.map((service, id) => (
           <div
-            key={index}
-            className="w-full flex-col justify-center gap-5 relative"
+            key={id}
+            className="w-full flex-col justify-center gap-5 relative service-shadow"
           >
-            <div className="flex justify-center items-center relative service-shadow">
+            <div className="flex justify-center items-center relative ">
               <div className="absolute w-full h-full inset-0 bg-black/25"></div>
               <img
                 src={service.image}
                 alt={service.description}
-                className="aspect-square object-cover"
+                className="w-full aspect-square object-cover md:min-w-xs"
               />
               <h3 className="text-5xl text-white font-bold absolute bottom-4 left-4">
                 {service.name}
               </h3>
               <div className="w-full absolute flex justify-end items-center top-4 right-4">
-                <h2 className="text-5xl p-2 bg-gold-section text-black font-bold text-pretty ">
+                <h2 className="text-3xl p-2 bg-gold-section text-black font-bold text-pretty ">
                   {service.price}
                 </h2>
               </div>
             </div>
-            <div className="mt-3">
-              <p className="text-3xl  py-6 text-balance">
-                {service.description}
-              </p>
+            <div className="mt-3 p-4">
+              <p className="text-2xl text-gray-500">{service.description}</p>
             </div>
           </div>
         ))}
@@ -59,7 +63,7 @@ const ServicesShort = () => {
           </button>
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

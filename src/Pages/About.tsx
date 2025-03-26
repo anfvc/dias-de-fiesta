@@ -43,7 +43,7 @@ const About = () => {
         <div className="w-full my-20 flex flex-col gap-10 items-center md:gap-15 lg:gap-20 md:flex-row-reverse">
           {/* <div className="skewed"></div> */}
           <div className="w-full md:w-1/2 flex flex-col justify-center gap-5">
-            <h3 className="text-4xl text-gold-section font-bold underline">
+            <h3 className="text-3xl text-gold-section font-bold underline">
               Nuestra Misión
             </h3>
             <h2 className="text-5xl pt-2 font-bold text-pretty">

@@ -18,6 +18,7 @@
   transition: 0.5s;
 }
 
+/* When using a dynamic hamburger, uncomment the below: */
 #burger > div:nth-child(2) {
   height: 0.4rem;
 }
@@ -37,7 +38,7 @@
 }
 
 #sidebar {
-  width: 75%; /* if the sidebar takes up the full width, consider adding a hamburger menu to close it */
+  width: 70%; /* if the sidebar takes up the full width, consider adding a hamburger menu to close it */
   height: 100vh;
   position: fixed;
   left: 0;
@@ -62,11 +63,6 @@
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #aa9a45;
 }
 
-/*
-.bg-other::before {
-  backdrop-filter: blur(5px);
-} */
-
 #sidebar::before {
   content: "";
   position: absolute;
@@ -78,4 +74,22 @@
 
 #sidebar.open {
   transform: translateX(0);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 998; /* Just below the sidebar */
+  transition: opacity ease-in-out 0.5s, visibility 0.5s ease-out;
+}
+
+.overlay.open {
+  opacity: 1;
+  visibility: visible;
 }

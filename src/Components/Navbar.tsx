@@ -10,7 +10,9 @@ const Navbar = () => {
   const isHome = location.pathname === "/";
   const textColor = isHome ? "text-white" : "text-black";
   const logo = isHome ? logoW : logoB;
-  const navbarColor = isHome ? "backdrop-blur-xl bg-white/10" : `bg-white shadow-md`;
+  const navbarColor = isHome
+    ? "backdrop-blur-xl bg-white/10"
+    : `bg-white shadow-md`;
 
   const handleMenuOpenOrClose = () => {
     setIsOpen(!isOpen);
@@ -20,7 +22,7 @@ const Navbar = () => {
     <header className={`w-full fixed ${navbarColor} top-0 z-40`}>
       <nav className="w-full flex items-center justify-between px-4 py-4 md:px-10 2xl:px-0 max-w-[1500px] mx-auto">
         <div className="w-full flex items-center justify-between logo-container">
-          <Link to="/">
+          <Link to="/" target="_self">
             <img
               src={logo}
               alt="Logo de Dias de Fiesta"
