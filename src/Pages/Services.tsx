@@ -17,6 +17,7 @@ const Services = () => {
               transition={{ duration: 1, ease: easeInOut, delay: id * 0.2 }}
               className="bg-white p-4 rounded-lg shadow-lg"
             >
+              {/* <div className="absolute w-full h-full inset-0 bg-black/25"></div> */}
               <img
                 src={service.image}
                 alt={service.name}

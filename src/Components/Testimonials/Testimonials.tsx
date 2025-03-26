@@ -3,16 +3,11 @@ import Testimony from "@/components/Testimonials/Testimony";
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import SwiperButtons from "../SwiperButtons";
-import { motion } from "framer-motion";
+import { motion, easeInOut } from "framer-motion";
 
 const Testimonials = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1, transition: { duration: 2 } }}
-      viewport={{ once: true }}
-      className="w-full px-6"
-    >
+    <div className="w-full px-6">
       <div className="my-30">
         <h3 className="text-3xl underline text-gold-section font-bold">
           Testimonios
@@ -40,18 +35,26 @@ const Testimonials = () => {
         >
           {TESTIMONIALS.map((testimonial, id) => (
             <SwiperSlide key={id} className="p-2">
-              <Testimony
-                name={testimonial.name}
-                message={testimonial.message}
-                rating={testimonial.rating}
-                date={testimonial.date}
-              />
+              <motion.div
+                initial={{ y: 25, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, ease: easeInOut, delay: id * 0.2 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.5 }}
+              >
+                <Testimony
+                  name={testimonial.name}
+                  message={testimonial.message}
+                  rating={testimonial.rating}
+                  date={testimonial.date}
+                />
+              </motion.div>
             </SwiperSlide>
           ))}
           <SwiperButtons />
         </Swiper>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

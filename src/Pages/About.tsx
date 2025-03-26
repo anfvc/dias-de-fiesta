@@ -32,7 +32,7 @@ const About = () => {
         <h2 className="text-6xl font-semibold text-gold-section text-pretty">
           <span className="underline">Quiénes</span> somos?
         </h2>
-        <p className="text-3xl lg:text-4xl my-10 text-balance">
+        <p className="text-3xl my-10">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quod
           earum maiores, inventore reprehenderit, molestiae quia odit incidunt,
           eos enim nostrum iste vero assumenda numquam tempora? Officiis
@@ -49,7 +49,7 @@ const About = () => {
             <h2 className="text-5xl pt-2 font-bold text-pretty">
               Haz parte de momentos inolvidables
             </h2>
-            <p className="text-3xl lg:text-4xl py-6 text-balance">
+            <p className="text-3xl py-6 text-balance">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Perferendis rem aliquid incidunt repudiandae animi cumque
               consectetur recusandae adipisci inventore dolore? Illo laborum,
