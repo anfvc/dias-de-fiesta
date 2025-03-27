@@ -13,7 +13,7 @@ export const SERVICES: Services[] = [
     name: "Graduaciones",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis rem aliquid incidunt repudiandae animi cumque consectetur recusandae adipisci inventore dolore",
-    price: "XXXX",
+    price: 867,
     image: graduation,
   },
   {
@@ -21,7 +21,7 @@ export const SERVICES: Services[] = [
     name: "Cumpleaños",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis rem aliquid incidunt repudiandae animi cumque consectetur recusandae adipisci inventore dolore",
-    price: "XXXX",
+    price: 777,
     image: birthday,
   },
   {
@@ -29,7 +29,7 @@ export const SERVICES: Services[] = [
     name: "Bodas",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis rem aliquid incidunt repudiandae animi cumque consectetur recusandae adipisci inventore dolore",
-    price: "XXXX",
+    price: 990,
     image: wedding,
   },
   {
@@ -37,7 +37,7 @@ export const SERVICES: Services[] = [
     name: "Bautizos",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis rem aliquid incidunt repudiandae animi cumque consectetur recusandae adipisci inventore dolore",
-    price: "XXXX",
+    price: 6756,
     image: baptism,
   },
   {
@@ -45,7 +45,7 @@ export const SERVICES: Services[] = [
     name: "Conferencias",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis rem aliquid incidunt repudiandae animi cumque consectetur recusandae adipisci inventore dolore",
-    price: "XXXX",
+    price: 838,
     image: conference,
   },
   {
@@ -53,7 +53,7 @@ export const SERVICES: Services[] = [
     name: "Fiestas Infantiles",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis rem aliquid incidunt repudiandae animi cumque consectetur recusandae adipisci inventore dolore",
-    price: "XXXX",
+    price: 262,
     image: kidsBirthday,
   },
 ];

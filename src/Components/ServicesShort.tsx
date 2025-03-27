@@ -7,12 +7,7 @@ const ServicesShort = () => {
   const firstThree = SERVICES.slice(0, 3);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1, transition: { duration: 2 } }}
-      viewport={{ once: true }}
-      className="w-full max-w-[1500px] mx-auto px-6 md:px-4"
-    >
+    <div className="w-full max-w-[1500px] mx-auto px-6 md:px-4">
       <div>
         <h3 className="text34xl text-gold-section font-bold underline">
           Servicio de Calidad
@@ -51,7 +46,12 @@ const ServicesShort = () => {
               </h3>
               <div className="w-full absolute flex justify-end items-center top-4 right-4">
                 <h2 className="text-3xl p-2 bg-gold-section text-black font-bold text-pretty ">
-                  {service.price}
+                  {service.price.toLocaleString("co-CO", {
+                    style: "currency",
+                    currency: "COP",
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  })}
                 </h2>
               </div>
             </div>
@@ -68,7 +68,7 @@ const ServicesShort = () => {
           </button>
         </Link>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

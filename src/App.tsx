@@ -9,9 +9,15 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "./index.css";
 import { useLocation } from "react-router";
+import { useLayoutEffect } from "react";
 
 function App() {
   const location = useLocation();
+
+  // When the location changes, scroll to the top of the page:
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [location.pathname]);
 
   return (
     <>

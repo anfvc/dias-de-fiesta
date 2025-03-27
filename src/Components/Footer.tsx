@@ -16,7 +16,7 @@ const Footer = () => {
     >
       <div className="absolute inset-0 bg-black/50 z-0"></div>
       <div className="w-full flex relative justify-start max-w-[1500px] mx-auto mb-10">
-        <img src={logoWhite} alt="Dias de Fiesta logo white" className="w-70" />
+        <img src={logoWhite} alt="Dias de Fiesta logo white" className="w-50" />
       </div>
       <div className="w-full flex flex-col gap-8 md:flex-row md:gap-10 max-w-[1500px] mx-auto relative z-10 text-white">
         <div className="w-full flex flex-col justify-between gap-8 z-10 relative max-w-[800px]">

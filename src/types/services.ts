@@ -18,6 +18,6 @@ export interface Services {
   id: ServiceId;
   name: ServiceName;
   description: string;
-  price: string;
+  price: number;
   image: any;
 }
