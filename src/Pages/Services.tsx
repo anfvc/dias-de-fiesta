@@ -1,5 +1,6 @@
 import { SERVICES } from "@/consts/services";
 import { motion, easeInOut } from "framer-motion";
+import serviceHeadingImg from "@/assets/services/serviceHeadImg.jpg";
 
 const Services = () => {
   return (
@@ -7,10 +8,15 @@ const Services = () => {
       className="w-full pt-[84.16px] md:pt-[92.19px] max-w-[1500px] mx-auto"
       id="services"
     >
+      <div className="mt-10 px-6 lg:px-0">
+        <div className="w-full flex flex-col gap-10 bg-gold-section">
+          <div className="h-full flex justify-center items-center mt-10">
+            <img src={serviceHeadingImg} alt="service heading image" className="w-1/2" />
+          </div>
+          <h2>Nuestros Servicios</h2>
+        </div>
+      </div>
       <div className="my-20 px-4 lg:px-0">
-        <h2 className="text-4xl text-center font-bold mb-8">
-          Nuestros servicios
-        </h2>
         <div className="grid grid-cols-2 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 lg:gap-10  lg:grid-cols-3">
           {SERVICES.map((service, id) => (
             <motion.div
@@ -27,16 +33,21 @@ const Services = () => {
                   alt={service.description}
                   className="w-full aspect-square object-cover md:min-w-xs"
                 />
-                <h3 className="text-3xl md:text-4xl text-white font-bold absolute bottom-4 left-4">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl text-white font-bold absolute bottom-4 left-4 text-pretty">
                   {service.name}
                 </h3>
-                <div className="w-full absolute flex justify-end items-center top-4 right-4">
-                  <h2 className="text-3xl p-2 bg-gold-section text-black font-bold text-pretty ">
-                    {service.price}
+                <div className="w-full absolute flex justify-end items-center top-2 right-2 md:top-4 md:right-4">
+                  <h2 className="text-xl p-1 sm:text-2xl sm:p-2 md:text-3xl bg-gold-section text-black font-bold text-pretty ">
+                    {service.price.toLocaleString("co-CO", {
+                      style: "currency",
+                      currency: "COP",
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    })}
                   </h2>
                 </div>
               </div>
-              <div className="mt-3 p-4">
+              <div className="mt-3 p-1 sm:p-2">
                 <p className="text-xl md:text-3xl text-gray-500 text-clip">
                   {service.description.slice(0, 80)}.
                 </p>
