@@ -1,11 +1,11 @@
 import type { Services } from "@/types/services";
 
-import graduation from "@/assets/services/graduation.jpeg";
-import birthday from "@/assets/services/birthday.jpg";
+import graduation from "@/assets/services/graduation.webp";
+import birthday from "@/assets/services/birthday.webp";
 import wedding from "@/assets/services/matri.webp";
-import baptism from "@/assets/services/bapti.jpeg";
+import baptism from "@/assets/services/bapti.webp";
 import conference from "@/assets/services/conf.webp";
-import kidsBirthday from "@/assets/services/kidbday.jpg";
+import kidsBirthday from "@/assets/services/kidbday.webp";
 
 export const SERVICES: Services[] = [
   {

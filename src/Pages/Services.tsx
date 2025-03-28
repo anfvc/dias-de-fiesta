@@ -1,6 +1,6 @@
 import { SERVICES } from "@/consts/services";
 import { motion, easeInOut } from "framer-motion";
-import serviceHeadingImg from "@/assets/services/serviceHeadImg.jpg";
+import serviceHeadingImg from "@/assets/services/serviceHeadImg.webp";
 
 const Services = () => {
   return (
@@ -8,7 +8,7 @@ const Services = () => {
       className="w-full pt-[84.16px] md:pt-[92.19px] max-w-[1500px] mx-auto"
       id="services"
     >
-      <div className="mt-10 px-6 lg:px-0">
+      <div className="mt-10 px-6 xl:px-0">
         <div className="w-full flex flex-col gap-10 bg-gold-section">
           <div className="h-full flex justify-center items-center mt-10">
             <img src={serviceHeadingImg} alt="service heading image" className="w-1/2" />
