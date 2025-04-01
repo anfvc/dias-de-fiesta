@@ -4,9 +4,6 @@ import serviceHeadingImg from "@/assets/services/serviceHeadImg.webp";
 import { Link } from "react-router";
 
 const Services = () => {
-
-
-  console.log(SERVICES);
   return (
     <section
       className="w-full pt-[84.16px] md:pt-[92.19px] max-w-[1500px] mx-auto"

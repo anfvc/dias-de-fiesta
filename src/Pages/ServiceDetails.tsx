@@ -1,10 +1,15 @@
-import { useParams } from "react-router"
+import { SERVICES } from "@/consts/services";
+import { useParams } from "react-router";
 
 const ServiceDetails = () => {
+  const { id } = useParams<{ id: string }>();
 
-  const { id } = useParams()
+  const service = SERVICES.find((service) => service.id === id);
 
-  console.log(id);
+  const { name, description, image, price } = service;
+
+  console.log(description);
+
   // Fetch the service details using the id
   // const service = SERVICES.find((service) => service.id === id)
   // if (!service) {
@@ -16,10 +21,7 @@ const ServiceDetails = () => {
   //   currency: "COP",
   //   minimumFractionDigits: 0,
 
+  return <div>ServiceDetails</div>;
+};
 
-  return (
-    <div>ServiceDetails</div>
-  )
-}
-
-export default ServiceDetails
+export default ServiceDetails;
