@@ -4,6 +4,7 @@ import { useSwiper } from "swiper/react";
 
 const SwiperButtons = () => {
   const swiper = useSwiper();
+
   return (
     <div className="flex justify-start gap-6 mt-20">
       <button

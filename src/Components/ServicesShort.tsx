@@ -9,7 +9,7 @@ const ServicesShort = () => {
   return (
     <div className="w-full max-w-[1500px] mx-auto px-6 md:px-4">
       <div>
-        <h3 className="text34xl text-gold-section font-bold underline">
+        <h3 className="text-3xl text-gold-section font-bold underline">
           Servicio de Calidad
         </h3>
         <h2 className="text-5xl pt-2 font-bold text-pretty">

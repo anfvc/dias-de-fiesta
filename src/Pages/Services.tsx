@@ -9,7 +9,7 @@ const Services = () => {
       className="w-full pt-[84.16px] md:pt-[92.19px] max-w-[1500px] mx-auto"
       id="services"
     >
-      <div className=" mx-auto mt-10 px-8 2xl:px-0 mb-30">
+      <div className=" mx-auto my-30 px-8 2xl:px-0">
         <div className="w-full flex flex-col lg:flex-row-reverse md:items-center gap-10 bg-gold-section rounded-4xl mx-auto p-15 md:p-20 xl:pb-0">
           <div className="w-full lg:w-1/2 flex justify-center items-center mt-10">
             <img
@@ -18,7 +18,7 @@ const Services = () => {
               className="aspect-auto object-cover rounded-3xl xl:rounded-bl-none xl:rounded-br-none w-full md:w-[400px] lg:w-[500px] xl:w-[600px] 2xl:w-[700px]"
             />
           </div>
-          <div className="w-full h-auto lg:w-1/2 flex flex-col text-white mt-6 xl:0">
+          <div className="w-full h-auto lg:w-1/2 flex flex-col items-start text-white mt-6 xl:mt-0">
             <h2 className="text-start text-5xl md:text-5xl lg:text-7xl font-bold mb-6">
               Nuestros Servicios
             </h2>
@@ -27,14 +27,13 @@ const Services = () => {
               obcaecati quae voluptatem perferendis corrupti laudantium quod
               placeat debitis molestias nemo!
             </p>
-            <button className="w-md sm:w-lg border-3 md:border-3 text-3xl border-white rounded-full p-6 mb-10 md:p-7 md:text-4xl">
-              <Link to="/contact" className="inline-flex">
+            <Link to="/contact" className="w-md sm:w-lg mb-10">
+              <button className="w-md sm:w-lg border-3 md:border-3 text-3xl border-white rounded-full p-8  md:p-7 md:text-4xl cursor-pointer">
                 Escríbenos
-              </Link>
-            </button>
-            <blockquote className="block border-4 border-t-0 border-b-0 border-r-0 pl-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime,
-              hic!
+              </button>
+            </Link>
+            <blockquote className="md:text-4xl block border-4 border-t-0 border-b-0 border-r-0 pl-6 py-4">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore perferendis consequuntur quis laborum libero, totam, in vel doloribus.
             </blockquote>
           </div>
         </div>
