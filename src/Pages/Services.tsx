@@ -1,6 +1,7 @@
 import { SERVICES } from "@/consts/services";
 import { motion, easeInOut } from "framer-motion";
 import serviceHeadingImg from "@/assets/services/serviceHeadImg.webp";
+import { Link } from "react-router";
 
 const Services = () => {
   return (
@@ -8,19 +9,37 @@ const Services = () => {
       className="w-full pt-[84.16px] md:pt-[92.19px] max-w-[1500px] mx-auto"
       id="services"
     >
-      <div className="mt-10 px-6">
-        <div className="w-full gap-10 bg-gold-section rounded-4xl px-4">
-          <div className="flex">
+      <div className=" mx-auto mt-10 px-8 2xl:px-0 mb-30">
+        <div className="w-full flex flex-col lg:flex-row-reverse md:items-center gap-10 bg-gold-section rounded-4xl mx-auto p-15 md:p-20 xl:pb-0">
+          <div className="w-full lg:w-1/2 flex justify-center items-center mt-10">
             <img
               src={serviceHeadingImg}
               alt="service heading image"
-              className="object-cover rounded-4xl"
+              className="aspect-auto object-cover rounded-3xl xl:rounded-bl-none xl:rounded-br-none w-full md:w-[400px] lg:w-[500px] xl:w-[600px] 2xl:w-[700px]"
             />
           </div>
-          <h2>Nuestros Servicios</h2>
+          <div className="w-full h-auto lg:w-1/2 flex flex-col text-white mt-6 xl:0">
+            <h2 className="text-start text-5xl md:text-5xl lg:text-7xl font-bold mb-6">
+              Nuestros Servicios
+            </h2>
+            <p className="mb-10 md:text-4xl">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
+              obcaecati quae voluptatem perferendis corrupti laudantium quod
+              placeat debitis molestias nemo!
+            </p>
+            <button className="w-md sm:w-lg border-3 md:border-3 text-3xl border-white rounded-full p-6 mb-10 md:p-7 md:text-4xl">
+              <Link to="/contact" className="inline-flex">
+                Escríbenos
+              </Link>
+            </button>
+            <blockquote className="block border-4 border-t-0 border-b-0 border-r-0 pl-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime,
+              hic!
+            </blockquote>
+          </div>
         </div>
       </div>
-      <div className="my-20 px-4 lg:px-0">
+      <div className="mb-40 px-4 lg:px-0">
         <div className="grid grid-cols-2 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 lg:gap-10  lg:grid-cols-3">
           {SERVICES.map((service, id) => (
             <motion.div
