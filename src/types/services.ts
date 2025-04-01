@@ -1,10 +1,10 @@
 type ServiceId =
-  | "graduaciones"
-  | "bodas"
-  | "cumpleaños"
-  | "bautizos"
-  | "conferencias"
-  | "fiestas infantiles";
+  | "graduations"
+  | "weddings"
+  | "birthdays"
+  | "baptisms"
+  | "conferences"
+  | "children's parties";
 
 type ServiceName =
   | "Graduaciones"

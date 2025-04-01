@@ -4,6 +4,9 @@ import serviceHeadingImg from "@/assets/services/serviceHeadImg.webp";
 import { Link } from "react-router";
 
 const Services = () => {
+
+
+  console.log(SERVICES);
   return (
     <section
       className="w-full pt-[84.16px] md:pt-[92.19px] max-w-[1500px] mx-auto"
@@ -18,7 +21,7 @@ const Services = () => {
               className="aspect-auto object-cover rounded-3xl xl:rounded-bl-none xl:rounded-br-none w-full md:w-[400px] lg:w-[500px] xl:w-[600px] 2xl:w-[700px]"
             />
           </div>
-          <div className="w-full h-auto lg:w-1/2 flex flex-col items-start text-white mt-6 xl:mt-0">
+          <div className="w-full h-auto lg:w-1/2 flex flex-col items-start gap-4 text-white mt-6 xl:mt-0 text-balance">
             <h2 className="text-start text-5xl md:text-5xl lg:text-7xl font-bold mb-6">
               Nuestros Servicios
             </h2>
@@ -33,7 +36,9 @@ const Services = () => {
               </button>
             </Link>
             <blockquote className="md:text-4xl block border-4 border-t-0 border-b-0 border-r-0 pl-6 py-4">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore perferendis consequuntur quis laborum libero, totam, in vel doloribus.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore
+              perferendis consequuntur quis laborum libero, totam, in vel
+              doloribus.
             </blockquote>
           </div>
         </div>
@@ -41,40 +46,41 @@ const Services = () => {
       <div className="mb-40 px-4 lg:px-0">
         <div className="grid grid-cols-2 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 lg:gap-10  lg:grid-cols-3">
           {SERVICES.map((service, id) => (
-            <motion.div
-              key={id}
-              initial={{ y: 25, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, ease: easeInOut, delay: id * 0.2 }}
-              className="p-4 rounded-lg service-shadow"
-            >
-              <div className="flex justify-center items-center relative">
-                <div className="absolute w-full h-full inset-0 bg-black/25"></div>
-                <img
-                  src={service.image}
-                  alt={service.description}
-                  className="w-full aspect-square object-cover md:min-w-xs"
-                />
-                <h3 className="text-2xl sm:text-3xl md:text-4xl text-white font-bold absolute bottom-4 left-4 text-pretty">
-                  {service.name}
-                </h3>
-                <div className="w-full absolute flex justify-end items-center top-2 right-2 md:top-4 md:right-4">
-                  <h2 className="text-xl p-1 sm:text-2xl sm:p-2 md:text-3xl bg-gold-section text-black font-bold text-pretty ">
-                    {service.price.toLocaleString("co-CO", {
-                      style: "currency",
-                      currency: "COP",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 0,
-                    })}
-                  </h2>
+            <Link to={`/services/${service.id}`} key={id}>
+              <motion.div
+                initial={{ y: 25, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, ease: easeInOut, delay: id * 0.2 }}
+                className="p-4 rounded-lg service-shadow"
+              >
+                <div className="flex justify-center items-center relative">
+                  <div className="absolute w-full h-full inset-0 bg-black/25"></div>
+                  <img
+                    src={service.image}
+                    alt={service.description}
+                    className="w-full aspect-square object-cover md:min-w-xs"
+                  />
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl text-white font-bold absolute bottom-4 left-4 text-pretty">
+                    {service.name}
+                  </h3>
+                  <div className="w-full absolute flex justify-end items-center top-2 right-2 md:top-4 md:right-4">
+                    <h2 className="text-xl p-1 sm:text-2xl sm:p-2 md:text-3xl bg-gold-section text-black font-bold text-pretty ">
+                      {service.price.toLocaleString("co-CO", {
+                        style: "currency",
+                        currency: "COP",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      })}
+                    </h2>
+                  </div>
                 </div>
-              </div>
-              <div className="mt-3 p-1 sm:p-2">
-                <p className="text-xl md:text-3xl text-gray-500 text-clip">
-                  {service.description.slice(0, 80)}.
-                </p>
-              </div>
-            </motion.div>
+                <div className="mt-3 p-1 sm:p-2">
+                  <p className="text-xl md:text-3xl text-gray-500 text-clip">
+                    {service.description.slice(0, 80)}.
+                  </p>
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>

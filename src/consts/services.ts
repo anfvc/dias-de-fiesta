@@ -9,7 +9,7 @@ import kidsBirthday from "@/assets/services/kidbday.webp";
 
 export const SERVICES: Services[] = [
   {
-    id: "graduaciones",
+    id: "graduations",
     name: "Graduaciones",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis rem aliquid incidunt repudiandae animi cumque consectetur recusandae adipisci inventore dolore",
@@ -17,7 +17,7 @@ export const SERVICES: Services[] = [
     image: graduation,
   },
   {
-    id: "cumpleaños",
+    id: "birthdays",
     name: "Cumpleaños",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis rem aliquid incidunt repudiandae animi cumque consectetur recusandae adipisci inventore dolore",
@@ -25,7 +25,7 @@ export const SERVICES: Services[] = [
     image: birthday,
   },
   {
-    id: "bodas",
+    id: "weddings",
     name: "Bodas",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis rem aliquid incidunt repudiandae animi cumque consectetur recusandae adipisci inventore dolore",
@@ -33,7 +33,7 @@ export const SERVICES: Services[] = [
     image: wedding,
   },
   {
-    id: "bautizos",
+    id: "baptisms",
     name: "Bautizos",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis rem aliquid incidunt repudiandae animi cumque consectetur recusandae adipisci inventore dolore",
@@ -41,7 +41,7 @@ export const SERVICES: Services[] = [
     image: baptism,
   },
   {
-    id: "conferencias",
+    id: "conferences",
     name: "Conferencias",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis rem aliquid incidunt repudiandae animi cumque consectetur recusandae adipisci inventore dolore",
@@ -49,7 +49,7 @@ export const SERVICES: Services[] = [
     image: conference,
   },
   {
-    id: "fiestas infantiles",
+    id: "children's parties",
     name: "Fiestas Infantiles",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis rem aliquid incidunt repudiandae animi cumque consectetur recusandae adipisci inventore dolore",
