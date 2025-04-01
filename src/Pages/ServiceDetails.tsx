@@ -8,7 +8,7 @@ const ServiceDetails = () => {
 
   const { name, description, image, price } = service;
 
-  console.log(description);
+  console.log(service);
 
   // Fetch the service details using the id
   // const service = SERVICES.find((service) => service.id === id)
