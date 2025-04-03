@@ -1,20 +1,12 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router";
-import logoB from "@/assets/svg/logo.svg";
-import logoW from "@/assets/svg/logoWhite.svg";
+import { Link } from "react-router";
 import HamburgerMenu from "@/components/HamburgerMenu/HamburgerMenu";
+import useNavbarConfig from "@/hooks/useNavbarConfig.ts";
 
 const Navbar = () => {
-  const location = useLocation(); //useLocation - location is an object
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const isHome = location.pathname === "/";
-  const textColor = isHome ? "text-white" : "text-black";
-  const logo = isHome ? logoW : logoB;
-  const navbarColor = isHome
-    ? "backdrop-blur-xl bg-white/10"
-    : `bg-white shadow-md`;
-  const isServicePage = /^\/services\/\w+/.test(location.pathname);
-  const dynamicNavbarColor = isServicePage ? `bg-none` : navbarColor;
+
+  const { textColor, dynamicNavbarColor, logo } = useNavbarConfig();
 
   const handleMenuOpenOrClose = () => {
     setIsOpen(!isOpen);
