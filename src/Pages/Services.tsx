@@ -18,8 +18,13 @@ const Services = () => {
               className="aspect-auto object-cover rounded-3xl xl:rounded-bl-none xl:rounded-br-none w-full md:w-[400px] lg:w-[500px] xl:w-[600px] 2xl:w-[700px]"
             />
           </div>
-          <div className="w-full h-auto lg:w-1/2 flex flex-col items-start gap-4 text-white mt-6 xl:mt-0 text-balance">
-            <h2 className="text-start text-5xl md:text-5xl lg:text-7xl font-bold mb-6">
+          <motion.div
+            initial={{ y: 25, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, type: "tween", ease: easeInOut }}
+            className="w-full h-auto lg:w-1/2 flex flex-col items-start gap-4 text-white mt-6 xl:mt-0 text-balance"
+          >
+            <h2 className="text-start text-5xl md:text-5xl lg:text-7xl xl:text-8xl font-bold mb-6">
               Nuestros Servicios
             </h2>
             <p className="mb-10 md:text-4xl">
@@ -32,12 +37,12 @@ const Services = () => {
                 Escríbenos
               </button>
             </Link>
-            <blockquote className="md:text-4xl block border-4 border-t-0 border-b-0 border-r-0 pl-6 py-4">
+            <blockquote className="md:text-4xl block border-4 border-t-0 border-b-0 border-r-0 pl-10 py-4">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore
               perferendis consequuntur quis laborum libero, totam, in vel
               doloribus.
             </blockquote>
-          </div>
+          </motion.div>
         </div>
       </div>
       <div className="mb-40 px-4 lg:px-0">

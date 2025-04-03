@@ -1,11 +1,11 @@
 import type { Services } from "@/types/services";
 
-import graduation from "@/assets/services/graduation.webp";
-import birthday from "@/assets/services/birthday.webp";
-import wedding from "@/assets/services/matri.webp";
-import baptism from "@/assets/services/bapti.webp";
-import conference from "@/assets/services/conf.webp";
-import kidsBirthday from "@/assets/services/kidbday.webp";
+import graduations from "@/assets/services/graduations.webp";
+import birthday from "@/assets/services/birthdays.webp";
+import wedding from "@/assets/services/weddings.webp";
+import baptism from "@/assets/services/baptisms.webp";
+import conference from "@/assets/services/conferences.webp";
+import kidsBirthday from "@/assets/services/infants.webp";
 
 export const SERVICES: Services[] = [
   {
@@ -14,7 +14,7 @@ export const SERVICES: Services[] = [
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis rem aliquid incidunt repudiandae animi cumque consectetur recusandae adipisci inventore dolore",
     price: 867,
-    image: graduation,
+    image: graduations,
   },
   {
     id: "birthdays",

@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { Link, useLocation } from "react-router";
 import logoB from "@/assets/svg/logo.svg";
 import logoW from "@/assets/svg/logoWhite.svg";
 import HamburgerMenu from "@/components/HamburgerMenu/HamburgerMenu";
-import { Link, useLocation } from "react-router";
 
 const Navbar = () => {
   const location = useLocation(); //useLocation - location is an object
@@ -13,13 +13,15 @@ const Navbar = () => {
   const navbarColor = isHome
     ? "backdrop-blur-xl bg-white/10"
     : `bg-white shadow-md`;
+  const isServicePage = /^\/services\/\w+/.test(location.pathname);
+  const dynamicNavbarColor = isServicePage ? `bg-none` : navbarColor;
 
   const handleMenuOpenOrClose = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <header className={`w-full fixed ${navbarColor} top-0 z-40`}>
+    <header className={`w-full fixed ${dynamicNavbarColor} top-0 z-40`}>
       <nav className="w-full flex items-center justify-between px-4 py-4 md:px-10 2xl:px-0 max-w-[1500px] mx-auto">
         <div className="w-full flex items-center justify-between logo-container">
           <Link to="/" target="_self">

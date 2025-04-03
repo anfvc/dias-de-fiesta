@@ -6,7 +6,7 @@ import missionImg from "/images/ny.jpg";
 
 const About = () => {
   return (
-    <section className="w-full pt-[84.16px]  md:pt-[92.19px] max-w-[1500px] mx-auto ">
+    <section className="w-full pt-[84.16px] md:pt-[92.19px] max-w-[1500px] mx-auto ">
       <div className="w-full bg-cover bg-[url(/images/about-top.webp)] h-[800px] bg-center bg-no-repeat relative">
         <div className="absolute inset-0 bg-black/40"></div>
         <motion.div
