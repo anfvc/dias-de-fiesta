@@ -1,8 +1,13 @@
 import { easeInOut, motion } from "framer-motion";
+import WhatsApp from "@/components/WhatsApp";
 import HomeButton from "@/components/HomeButton";
-import "@/styles/Home.css"
+import "@/styles/Home.css";
 
-const Home = () => {
+type HomeProps = {
+  whatsapp: string;
+};
+
+const Home: React.FC<HomeProps> = ({ whatsapp }) => {
   return (
     <section
       className="home w-full h-screen bg-no-repeat bg-cover bg-center overflow-hidden bg-fixed"
@@ -26,6 +31,7 @@ const Home = () => {
           <HomeButton />
         </motion.div>
       </div>
+      <WhatsApp whatsapp={whatsapp} />
     </section>
   );
 };

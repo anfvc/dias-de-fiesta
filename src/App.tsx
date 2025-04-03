@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router";
+import { useLocation } from "react-router";
+import { useLayoutEffect } from "react";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
@@ -9,11 +11,10 @@ import PageNotFound from "@/pages/PageNotFound";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "./index.css";
-import { useLocation } from "react-router";
-import { useLayoutEffect } from "react";
 
 function App() {
   const location = useLocation();
+  const whatsappNumber: string = import.meta.env.VITE_WHATSAPP;
 
   // When the location changes, scroll to the top of the page:
   useLayoutEffect(() => {
@@ -25,7 +26,7 @@ function App() {
       <Navbar />
       <main className="w-full min-h-screen">
         <Routes>
-          <Route index element={<Home />} />
+          <Route index element={<Home whatsapp={whatsappNumber} />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:id" element={<ServiceDetails />} />

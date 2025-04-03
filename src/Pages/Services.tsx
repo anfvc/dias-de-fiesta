@@ -48,6 +48,8 @@ const Services = () => {
                 initial={{ y: 25, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1, ease: easeInOut, delay: id * 0.2 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.5 }}
                 className="p-4 rounded-lg service-shadow"
               >
                 <div className="flex justify-center items-center relative">
@@ -72,8 +74,8 @@ const Services = () => {
                   </div>
                 </div>
                 <div className="mt-3 p-1 sm:p-2">
-                  <p className="text-xl md:text-3xl text-gray-500 text-clip">
-                    {service.description.slice(0, 80)}.
+                  <p className="text-xl md:text-2xl text-gray-500 text-clip">
+                    {service.description}.
                   </p>
                 </div>
               </motion.div>
