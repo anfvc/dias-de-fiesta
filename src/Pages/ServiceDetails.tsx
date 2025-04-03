@@ -13,18 +13,25 @@ const ServiceDetails = () => {
 
   const image = service.image;
 
-  console.log(image);
+  // console.log(image);
 
   return (
     <div
-      className={`w-full h-[700px] bg-cover  bg-center bg-no-repeat`}
+      className={`w-full h-[700px] bg-cover  bg-center bg-no-repeat relative`}
       style={{ backgroundImage: `url(${image})` }}
     >
+      <div className="absolute inset-0 bg-black/40"></div>
       <div
-        className={`w-full pt-[84.16px]  md:pt-[92.19px]  max-w-[1500px] mx-auto`}
+        className={`w-full h-full pt-[84.16px]  md:pt-[92.19px] max-w-[1500px] mx-auto relative`}
       >
-        {service.name}
-        {service.description}
+        <div className="w-full h-full flex flex-col gap-10 justify-center items-center absolute md:bottom-0 text-white">
+          <h2 className="text-7xl font-bold">{service.name}</h2>
+          <ul className="flex flex-col items-center border-4 border-white">
+            <li>{service.description}</li>
+            <li>{service.price}</li>
+            <li></li>
+          </ul>
+        </div>
       </div>
     </div>
   );
