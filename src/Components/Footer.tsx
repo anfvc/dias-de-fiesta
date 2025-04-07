@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <section
       id="footer"
-      className="w-full relative py-20 px-8 bg-[url(/images/dark-bag3.jpg)] bg-cover bg-no-repeat bg-center"
+      className="w-full relative py-30 px-8 bg-[url(/images/dark-bag3.jpg)] bg-cover bg-no-repeat bg-center"
     >
       <div className="absolute inset-0 bg-black/50 z-0"></div>
       <div className="w-full flex relative justify-start max-w-[1500px] mx-auto mb-10">

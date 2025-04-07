@@ -28,7 +28,7 @@ const ServiceDetails = () => {
           <h2 className="text-7xl font-bold">{service.name}</h2>
           <ul className="flex flex-col items-center border-4 border-white">
             <li>{service.description}</li>
-            <li>{service.price}</li>
+            <li>Precio: {service.price}</li>
             <li></li>
           </ul>
         </div>

@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import apiRoute from "./Routes/apiRouter.js";
+import wwhatsappRouter from "./Routes/whatsppRouter.js";
 import contactRouter from "./Routes/contactRouter.js";
 
 const app = express();
@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use("/api", apiRoute);
+app.use("/", wwhatsappRouter);
 app.use("/api", contactRouter);
 
 const port = process.env.PORT || 5100;

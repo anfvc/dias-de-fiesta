@@ -4,10 +4,10 @@ import HomeButton from "@/components/HomeButton";
 import "@/styles/Home.css";
 
 type HomeProps = {
-  whatsapp: string;
+  url: string;
 };
 
-const Home: React.FC<HomeProps> = ({ whatsapp }) => {
+const Home: React.FC<HomeProps> = ({ url }) => {
   return (
     <section
       className="home w-full h-screen bg-no-repeat bg-cover bg-center overflow-hidden bg-fixed"
@@ -31,7 +31,7 @@ const Home: React.FC<HomeProps> = ({ whatsapp }) => {
           <HomeButton />
         </motion.div>
       </div>
-      <WhatsApp whatsapp={whatsapp} />
+      <WhatsApp url={url} />
     </section>
   );
 };

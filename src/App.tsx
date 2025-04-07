@@ -4,7 +4,7 @@ import { useLayoutEffect } from "react";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
-import ServiceDetails from "@/pages/ServiceDetails";
+import ServiceDetails from "@/pages/ServicePage";
 import Portfolio from "@/pages/Portfolio";
 import Contact from "@/pages/Contact";
 import PageNotFound from "@/pages/PageNotFound";
@@ -14,7 +14,7 @@ import "./index.css";
 
 function App() {
   const location = useLocation();
-  const whatsappNumber: string = import.meta.env.VITE_WHATSAPP;
+  const url: string = import.meta.env.VITE_SERVER;
 
   // When the location changes, scroll to the top of the page:
   useLayoutEffect(() => {
@@ -26,7 +26,7 @@ function App() {
       <Navbar />
       <main className="w-full min-h-screen">
         <Routes>
-          <Route index element={<Home whatsapp={whatsappNumber} />} />
+          <Route index element={<Home url={url} />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:id" element={<ServiceDetails />} />
