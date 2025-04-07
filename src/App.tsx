@@ -1,6 +1,8 @@
 import { Routes, Route } from "react-router";
 import { useLocation } from "react-router";
 import { useLayoutEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import PageWrapper from "@/components/PageWrapper";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
@@ -26,7 +28,14 @@ function App() {
       <Navbar />
       <main className="w-full min-h-screen">
         <Routes>
-          <Route index element={<Home url={url} />} />
+          <Route
+            index
+            element={
+              <PageWrapper>
+                <Home url={url} />
+              </PageWrapper>
+            }
+          />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:id" element={<ServiceDetails />} />
