@@ -3,8 +3,6 @@ import { useParams } from "react-router";
 
 const ServiceDetails = () => {
   const { id } = useParams<{ id: string }>();
-  // const location = useLocation();
-
   const service = SERVICES.find((service) => service.id === id);
 
   if (!service) {
@@ -13,20 +11,23 @@ const ServiceDetails = () => {
 
   const image = service.image;
 
-  // console.log(image);
-
   return (
     <div
-      className={`w-full h-[700px] bg-cover  bg-center bg-no-repeat relative`}
-      style={{ backgroundImage: `url(${image})` }}
+      className={`w-full h-[500px] relative`}
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
-      <div className="absolute inset-0 bg-black/40"></div>
+      <div className="absolute inset-0 bg-black/50"></div>
       <div
         className={`w-full h-full pt-[84.16px]  md:pt-[92.19px] max-w-[1500px] mx-auto relative`}
       >
         <div className="w-full h-full flex flex-col gap-10 justify-center items-center absolute md:bottom-0 text-white">
           <h2 className="text-7xl font-bold">{service.name}</h2>
-          <ul className="flex flex-col items-center border-4 border-white">
+          <ul className="flex flex-col items-center justify-center">
             <li>{service.description}</li>
             <li>Precio: {service.price}</li>
             <li></li>

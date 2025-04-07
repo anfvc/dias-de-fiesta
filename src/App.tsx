@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router";
 import { useLocation } from "react-router";
 import { useLayoutEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import PageWrapper from "@/components/PageWrapper";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
@@ -28,20 +27,55 @@ function App() {
       <Navbar />
       <main className="w-full min-h-screen">
         <Routes>
+          <Route index element={<Home url={url} />} />
           <Route
-            index
+            path="/about"
             element={
               <PageWrapper>
-                <Home url={url} />
+                <About />
               </PageWrapper>
             }
           />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/services/:id" element={<ServiceDetails />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route
+            path="/services"
+            element={
+              <PageWrapper>
+                <Services />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/services/:id"
+            element={
+              <PageWrapper>
+                <ServiceDetails />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/portfolio"
+            element={
+              <PageWrapper>
+                <Portfolio />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <PageWrapper>
+                <Contact />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <PageWrapper>
+                <PageNotFound />
+              </PageWrapper>
+            }
+          />
         </Routes>
       </main>
       {location.pathname !== "/" && <Footer />}

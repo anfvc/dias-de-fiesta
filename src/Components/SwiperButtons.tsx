@@ -9,13 +9,13 @@ const SwiperButtons = () => {
     <div className="flex justify-start gap-6 mt-20">
       <button
         className="border-3 rounded-full p-6 cursor-pointer active:scale-90 active:transition"
-        onClick={() => swiper.slideNext()}
+        onClick={() => swiper.slidePrev()}
       >
         <FaArrowLeft className="text-3xl" />
       </button>
       <button
         className="border-3 rounded-full p-6 cursor-pointer active:scale-90 active:transition"
-        onClick={() => swiper.slidePrev()}
+        onClick={() => swiper.slideNext()}
       >
         <FaArrowRight className="text-3xl" />
       </button>

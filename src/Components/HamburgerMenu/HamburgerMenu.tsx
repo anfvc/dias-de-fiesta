@@ -1,7 +1,7 @@
-import "./HamburgerMenu.css";
+import useHamburgerConfig from "@/hooks/useHamburgerConfig";
 import logoW from "@/assets/svg/logoWhite.svg";
-import { Link, useLocation } from "react-router";
-// import { RiCloseLargeLine } from "react-icons/ri";
+import { Link } from "react-router";
+import "./HamburgerMenu.css";
 
 type Props = {
   isOpen: boolean;
@@ -10,11 +10,7 @@ type Props = {
 };
 
 const HamburgerMenu = ({ toggleMenu, isOpen, textColor }: Props) => {
-  const location = useLocation();
-  const isHome = location.pathname === "/";
-  const color = isHome ? "bg-white" : "bg-black"; //if location.pathname !== "/" hamb menu should be black
-  const dynamicTextColor = isHome ? textColor : "text-white"; //if location.pathname !== "/" sidebar text color should be white
-  const background = isHome ? `bg-home` : "bg-other";
+  const { color, background, dynamicTextColor } = useHamburgerConfig(textColor);
 
   const handleClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
