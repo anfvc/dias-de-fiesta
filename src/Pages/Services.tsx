@@ -2,7 +2,7 @@ import { SERVICES } from "@/consts/services";
 import { motion, easeInOut } from "framer-motion";
 import serviceHeadingImg from "@/assets/services/serviceHeadImg.webp";
 import { Link } from "react-router";
-import FAQ from "@/components/FaQ";
+import FAQ from "@/components/FAQ";
 
 const Services = () => {
   return (
@@ -58,18 +58,18 @@ const Services = () => {
                 viewport={{ once: true, amount: 0.5 }}
                 className="p-4 rounded-lg service-shadow"
               >
-                <div className="flex justify-center items-center relative">
-                  <div className="absolute w-full h-full inset-0 bg-black/25"></div>
+                <div className="flex justify-center items-center relative overflow-hidden ">
+                  <div className="absolute w-full h-full inset-0 bg-black/25 pointer-events-none transform duration-600 ease-in-out hover:scale-110 z-10"></div>
                   <img
                     src={service.image}
                     alt={service.description}
-                    className="w-full aspect-square object-cover md:min-w-xs"
+                    className="w-full aspect-square object-cover md:min-w-xs transform duration-600 ease hover:scale-105 "
                   />
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl text-white font-bold absolute bottom-4 left-4 text-pretty">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl text-white font-bold absolute bottom-4 left-4 text-pretty z-20">
                     {service.name}
                   </h3>
                   <div className="w-full absolute flex justify-end items-center top-2 right-2 md:top-4 md:right-4">
-                    <h2 className="text-xl p-1 sm:text-2xl sm:p-2 md:text-3xl bg-gold-section text-black font-bold text-pretty ">
+                    <h2 className="text-xl p-1 sm:text-2xl sm:p-2 md:text-3xl bg-gold-section text-black font-bold text-pretty z-20 ">
                       {service.price.toLocaleString("co-CO", {
                         style: "currency",
                         currency: "COP",
