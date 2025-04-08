@@ -4,7 +4,7 @@ import Accordion from "@/components/Accordion";
 const FAQ = () => {
   return (
     <div className="my-30 p-4">
-      <div className="mb-15">
+      <div className="mb-20">
         <h3 className="my-5 text-3xl text-gold-section font-bold underline">
           FAQ
         </h3>

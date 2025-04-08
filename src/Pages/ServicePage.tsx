@@ -13,32 +13,34 @@ const ServiceDetails = () => {
   const image = service.image;
 
   return (
-    <div
-      className={`w-full h-[500px] relative md:h-[700px] lg:h-[800px] bg-gold-section`}
-      style={{
-        backgroundImage: `url(${image})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      <div className="absolute inset-0 bg-black/50"></div>
+    <section>
       <div
-        className={`w-full h-full pt-[84.16px]  md:pt-[92.19px] max-w-[1500px] mx-auto relative`}
+        className={`w-full h-[500px] relative md:h-[700px] lg:h-[800px] bg-gold-section`}
+        style={{
+          backgroundImage: `url(${image})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
       >
-        <div className="w-full h-full flex flex-col gap-10 justify-center items-center absolute md:bottom-0 text-white">
-          <h2 className="text-7xl font-bold">{service.name}</h2>
-          <ul className="flex flex-col items-center justify-center">
-            <li>{service.description}</li>
-            <li>Desde: {service.price} COP</li>
-            <li></li>
-          </ul>
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div
+          className={`w-full h-full pt-[84.16px]  md:pt-[92.19px] max-w-[1500px] mx-auto relative`}
+        >
+          <div className="w-full h-full flex flex-col gap-10 justify-center items-center absolute md:bottom-0 text-white">
+            <h2 className="text-7xl font-bold">{service.name}</h2>
+            <ul className="flex flex-col items-center justify-center p-10">
+              <li>{service.description}</li>
+              <li className="txt-5xl">Desde: {service.price} COP</li>
+              <li></li>
+            </ul>
+          </div>
         </div>
       </div>
-      <div className=" max-w-[1500px] mx-auto">
+      <div className=" max-w-[1500px] mx-auto py-20">
         <FAQ />
       </div>
-    </div>
+    </section>
   );
 };
 
