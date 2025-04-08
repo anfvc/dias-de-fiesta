@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router";
 import { useLocation } from "react-router";
 import { useLayoutEffect } from "react";
+import { AnimatePresence } from "framer-motion";
 import PageWrapper from "@/components/PageWrapper";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
@@ -26,57 +27,59 @@ function App() {
     <>
       <Navbar />
       <main className="w-full min-h-screen">
-        <Routes>
-          <Route index element={<Home url={url} />} />
-          <Route
-            path="/about"
-            element={
-              <PageWrapper>
-                <About />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/services"
-            element={
-              <PageWrapper>
-                <Services />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/services/:id"
-            element={
-              <PageWrapper>
-                <ServiceDetails />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/portfolio"
-            element={
-              <PageWrapper>
-                <Portfolio />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <PageWrapper>
-                <Contact />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <PageWrapper>
-                <PageNotFound />
-              </PageWrapper>
-            }
-          />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route index element={<Home url={url} />} />
+            <Route
+              path="/about"
+              element={
+                <PageWrapper>
+                  <About />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/services"
+              element={
+                <PageWrapper>
+                  <Services />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/services/:id"
+              element={
+                <PageWrapper>
+                  <ServiceDetails />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/portfolio"
+              element={
+                <PageWrapper>
+                  <Portfolio />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <PageWrapper>
+                  <Contact />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <PageWrapper>
+                  <PageNotFound />
+                </PageWrapper>
+              }
+            />
+          </Routes>
+        </AnimatePresence>
       </main>
       {location.pathname !== "/" && <Footer />}
     </>

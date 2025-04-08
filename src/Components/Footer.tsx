@@ -3,7 +3,6 @@ import { IoLogoInstagram } from "react-icons/io5";
 import { IoLogoFacebook } from "react-icons/io5";
 import { IoLogoWhatsapp } from "react-icons/io5";
 import { Link } from "react-router";
-import "../App.css";
 
 const Footer = () => {
   const telephone: string = import.meta.env.VITE_TELEPHONE;

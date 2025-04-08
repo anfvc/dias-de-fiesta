@@ -63,7 +63,7 @@ const ServicesShort = () => {
       </div>
       <div className="w-full flex justify-center items-center">
         <Link to="/services" className="inline-flex rounded-full">
-          <button className="rounded-full text-3xl py-4 px-10 md:py-6 md:px-15 bg-gold-section font-semibold text-white button-shadow cursor-pointer">
+          <button className="rounded-full text-3xl py-4 px-10 md:py-6 md:px-15 bg-gold-section font-semibold text-white button-shadow cursor-pointer hover:bg-white hover:text-black transition-all duration-200 border-2">
             Ver Todos
           </button>
         </Link>

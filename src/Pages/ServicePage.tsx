@@ -1,5 +1,6 @@
 import { SERVICES } from "@/consts/services";
 import { useParams } from "react-router";
+import FAQ from "@/components/FaQ";
 
 const ServiceDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -13,7 +14,7 @@ const ServiceDetails = () => {
 
   return (
     <div
-      className={`w-full h-[500px] relative`}
+      className={`w-full h-[500px] relative md:h-[700px] lg:h-[800px] bg-gold-section`}
       style={{
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
@@ -29,10 +30,13 @@ const ServiceDetails = () => {
           <h2 className="text-7xl font-bold">{service.name}</h2>
           <ul className="flex flex-col items-center justify-center">
             <li>{service.description}</li>
-            <li>Precio: {service.price}</li>
+            <li>Desde: {service.price} COP</li>
             <li></li>
           </ul>
         </div>
+      </div>
+      <div className=" max-w-[1500px] mx-auto">
+        <FAQ />
       </div>
     </div>
   );

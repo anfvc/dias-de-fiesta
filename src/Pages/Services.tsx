@@ -2,6 +2,7 @@ import { SERVICES } from "@/consts/services";
 import { motion, easeInOut } from "framer-motion";
 import serviceHeadingImg from "@/assets/services/serviceHeadImg.webp";
 import { Link } from "react-router";
+import FAQ from "@/components/FaQ";
 
 const Services = () => {
   return (
@@ -32,8 +33,8 @@ const Services = () => {
               obcaecati quae voluptatem perferendis corrupti laudantium quod
               placeat debitis molestias nemo!
             </p>
-            <Link to="/contact" className="w-md sm:w-lg mb-10">
-              <button className="w-md sm:w-lg border-3 md:border-3 text-3xl border-white rounded-full p-8  md:p-7 md:text-4xl cursor-pointer">
+            <Link to="/contact" className="w-xs sm:w-sm md:w-md lg:w-lg mb-10">
+              <button className="w-xs sm:w-sm md:w-md lg:w-lg border-3 md:border-3 text-3xl border-white rounded-full p-8  md:p-7 md:text-4xl cursor-pointer button-shadow hover:bg-white hover:text-black transition-all duration-200">
                 Escríbenos
               </button>
             </Link>
@@ -45,7 +46,7 @@ const Services = () => {
           </motion.div>
         </div>
       </div>
-      <div className="mb-40 px-4 lg:px-0">
+      <div className="mt-40 px-4 lg:px-0">
         <div className="grid grid-cols-2 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 lg:gap-10  lg:grid-cols-3">
           {SERVICES.map((service, id) => (
             <Link to={`/services/${service.id}`} key={id}>
@@ -88,6 +89,7 @@ const Services = () => {
           ))}
         </div>
       </div>
+      <FAQ />
     </section>
   );
 };
