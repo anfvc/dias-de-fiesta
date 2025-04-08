@@ -28,7 +28,7 @@ function App() {
       <Navbar />
       <main className="w-full min-h-screen">
         <AnimatePresence mode="wait">
-          <Routes>
+          <Routes location={location} key={location.pathname}>
             <Route index element={<Home url={url} />} />
             <Route
               path="/about"

@@ -4,10 +4,9 @@ type HomeProps = {
   url: string;
 };
 
-const WhatsApp: React.FC<HomeProps> = ({ url }) => {
+const WhatsApp = ({ url }: HomeProps) => {
   // console.log(url);
   return (
-
     <a
       href={`${url}/whatsapp`}
       target="_blank"

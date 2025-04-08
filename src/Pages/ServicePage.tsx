@@ -15,7 +15,7 @@ const ServiceDetails = () => {
   return (
     <section>
       <div
-        className={`w-full h-[500px] relative md:h-[700px] lg:h-[800px] bg-gold-section`}
+        className={`w-full h-[650px] relative md:h-[700px] lg:h-[800px] bg-gold-section`}
         style={{
           backgroundImage: `url(${image})`,
           backgroundSize: "cover",
@@ -29,9 +29,9 @@ const ServiceDetails = () => {
         >
           <div className="w-full h-full flex flex-col gap-10 justify-center items-center absolute md:bottom-0 text-white">
             <h2 className="text-7xl font-bold">{service.name}</h2>
-            <ul className="flex flex-col items-center justify-center p-10">
+            <ul className="flex flex-col items-center justify-center p-10 gap-10">
               <li>{service.description}</li>
-              <li className="txt-5xl">Desde: {service.price} COP</li>
+              <li className="font-bold text-4xl">Desde {service.price} COP</li>
               <li></li>
             </ul>
           </div>
