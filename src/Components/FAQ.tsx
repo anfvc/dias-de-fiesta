@@ -22,7 +22,7 @@ const FAQ = () => {
           </h2>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-2">
           {FAQs.map((faq, id) => (
             <Accordion key={id} question={faq.question} answer={faq.answer} />
           ))}
