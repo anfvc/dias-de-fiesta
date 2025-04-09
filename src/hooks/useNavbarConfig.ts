@@ -29,8 +29,8 @@ const useNavbarConfig = () => {
   const dynamicNavbarColor = isServicePage ? `bg-none` : navbarColor;
 
   const navbarItem = differentNavbar
-    ? "p-4 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-white after:transition-all after:scale-x-0 after:duration-500 hover:after:scale-x-100 "
-    : "p-4 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-black after:transition-all after:scale-x-0 after:duration-500 hover:after:scale-x-100 ";
+    ? "p-4 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[1px] after:bg-white after:transition-all after:scale-x-0 after:duration-500 hover:after:scale-x-100 "
+    : "p-4 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[1px] after:bg-black after:transition-all after:scale-x-0 after:duration-500 hover:after:scale-x-100 ";
 
   return {
     textColor,

@@ -1,8 +1,6 @@
-import logoWhite from "@/assets/svg/logoWhite.svg";
-import { IoLogoInstagram } from "react-icons/io5";
-import { IoLogoFacebook } from "react-icons/io5";
-import { IoLogoWhatsapp } from "react-icons/io5";
 import { Link } from "react-router";
+import Socials from "@/components/Socials";
+import logoWhite from "@/assets/svg/logoWhite.svg";
 
 const Footer = () => {
   const telephone: string = import.meta.env.VITE_TELEPHONE;
@@ -42,11 +40,7 @@ const Footer = () => {
             <h4>Correos</h4>
             <p>{companyEmail}</p>
           </div>
-          <div className="flex gap-6">
-            <IoLogoInstagram />
-            <IoLogoFacebook />
-            <IoLogoWhatsapp />
-          </div>
+          <Socials color="text-white" />
         </div>
         <div className="w-full md:w-1/3 flex flex-col justify-start mt-8 md:mt-0">
           <ul className="flex flex-col gap-7 text-2xl md:text-3xl">

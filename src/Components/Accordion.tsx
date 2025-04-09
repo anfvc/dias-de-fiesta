@@ -14,11 +14,13 @@ const Accordion = ({ question, answer }: AccordionProps) => {
         className="w-full flex justify-between items-center cursor-pointer"
         onClick={() => setAccordionOpen(!accordionOpen)}
       >
-        <span className="text-4xl lg:text-5xl text-start font-semibold">{question}</span>
+        <span className="text-4xl lg:text-6xl text-start font-semibold">
+          {question}
+        </span>
         <AccordionButton accordionOpen={accordionOpen} />
       </button>
       <div
-        className={`grid overflow-hidden transition-all duration-600 ease-in-out text-slate-600 ${
+        className={`grid overflow-hidden transition-all duration-600 ease-in-out text-gray-600 ${
           accordionOpen
             ? "grid-rows-[1fr] opacity-100"
             : "grid-rows-[0fr] opacity-0"

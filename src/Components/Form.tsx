@@ -89,14 +89,14 @@ const Form = () => {
 
   return (
     <form
-      className="w-5/6 flex flex-col gap-4 border"
+      className="w-full flex flex-col gap-6 text-2xl md:text-3xl"
       onSubmit={handleSendEmail}
     >
       <input
         type="text"
         name="fullName"
-        placeholder="Escribe tu nombre completo..."
-        className="w-full border p-2"
+        placeholder="Tu nombre completo"
+        className="w-full border p-6 border-r-0 border-l-0 border-t-0 outline-gold-section"
         autoComplete="name"
         value={formData.fullName}
         onChange={handleChange}
@@ -104,8 +104,8 @@ const Form = () => {
       <input
         type="email"
         name="email"
-        placeholder="Tu email va aquí..."
-        className="border p-2"
+        placeholder="Tu email"
+        className="border p-6 border-r-0 border-l-0 border-t-0 outline-gold-section"
         autoComplete="email"
         value={formData.email}
         onChange={handleChange}
@@ -113,8 +113,8 @@ const Form = () => {
       <input
         type="tel"
         name="phone"
-        placeholder="Danos tu teléfono..."
-        className="border p-2"
+        placeholder="Tu teléfono..."
+        className="border border-r-0 border-l-0 border-t-0 p-6 outline-gold-section"
         autoComplete="tel"
         value={formData.phone}
         onChange={handleChange}
@@ -122,14 +122,14 @@ const Form = () => {
       <select
         name="subject"
         id="subject"
-        className="p-3 border"
+        className="p-6 border border-r-0 border-l-0 border-t-0 outline-gold-section"
         onChange={(e: ChangeEvent<HTMLSelectElement>) =>
           setFormData({ ...formData, subject: e.target.value })
         }
         value={formData.subject}
       >
         <option value="" disabled>
-          --Seleeciona una opción--
+          --Selecciona una opción--
         </option>
         <option value="Bodas">Bodas</option>
         <option value="Graduaciones">Graduaciones</option>
@@ -141,14 +141,16 @@ const Form = () => {
       <textarea
         name="message"
         id="message"
-        placeholder="Cuéntanos en qué te podemos ayudar..."
-        className="border p-2"
+        placeholder="Tu mensage"
+        className="border p-6 border-r-0 border-l-0 border-t-0 outline-gold-section"
         rows={8}
         value={formData.message}
         onChange={handleChange}
       ></textarea>
-      <div className="button-container">
-        <button className="w-full border p-2">Enviar</button>
+      <div className="button-container mt-10 flex justify-center text-4xl text-white">
+        <button className="w-xs sm:w-sm md:w-md p-6 rounded-full bg-gold-section font-semibold">
+          Enviar
+        </button>
       </div>
       {successMessage && (
         <p className="text-green-800">
