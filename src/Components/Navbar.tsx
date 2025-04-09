@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import HamburgerMenu from "@/components/HamburgerMenu/HamburgerMenu";
+import HamburgerMenu from "@/components/HamburgerMenu";
 import useNavbarConfig from "@/hooks/useNavbarConfig.ts";
 
 const Navbar = () => {

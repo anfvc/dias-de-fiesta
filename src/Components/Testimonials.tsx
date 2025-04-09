@@ -1,8 +1,8 @@
 import { TESTIMONIALS } from "@/consts/testimonials.ts";
-import Testimony from "@/components/Testimonials/Testimony";
+import Testimony from "@/components/Testimony";
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/swiper-bundle.css";
-import SwiperButtons from "../SwiperButtons";
+import SwiperButtons from "@/components/SwiperButtons";
 import { motion, easeInOut } from "framer-motion";
 
 const Testimonials = () => {

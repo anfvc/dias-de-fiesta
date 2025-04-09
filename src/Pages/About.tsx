@@ -1,4 +1,4 @@
-import Testimonials from "@/components/Testimonials/Testimonials";
+import Testimonials from "@/components/Testimonials";
 import ServicesShort from "@/components/ServicesShort";
 import { easeInOut, motion } from "framer-motion";
 import { Link } from "react-router";

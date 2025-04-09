@@ -1,7 +1,7 @@
 import useHamburgerConfig from "@/hooks/useHamburgerConfig";
 import logoW from "@/assets/svg/logoWhite.svg";
 import { Link } from "react-router";
-import "./HamburgerMenu.css";
+import "@/styles/HamburgerMenu.css";
 
 type Props = {
   isOpen: boolean;

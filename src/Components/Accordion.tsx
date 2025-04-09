@@ -9,7 +9,7 @@ type AccordionProps = {
 const Accordion = ({ question, answer }: AccordionProps) => {
   const [accordionOpen, setAccordionOpen] = useState(false);
   return (
-    <div className="">
+    <div className="w-full">
       <button
         className="w-full flex justify-between items-center cursor-pointer"
         onClick={() => setAccordionOpen(!accordionOpen)}

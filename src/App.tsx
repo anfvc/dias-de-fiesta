@@ -12,7 +12,7 @@ import Contact from "@/pages/Contact";
 import PageNotFound from "@/pages/PageNotFound";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import "./index.css";
+import "@/styles/index.css";
 
 function App() {
   const location = useLocation();
