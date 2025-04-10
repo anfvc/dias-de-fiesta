@@ -1,4 +1,6 @@
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import { AnimatePresence, easeInOut, motion } from "framer-motion";
+import Confetti from "@/components/Confetti";
 
 type FormData = {
   fullName: string;
@@ -19,6 +21,7 @@ const Form = () => {
 
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [warning, setWarning] = useState<string>("");
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const url: string | undefined = import.meta.env.VITE_SERVER;
 
   const handleChange = (
@@ -89,7 +92,7 @@ const Form = () => {
 
   return (
     <form
-      className="w-full flex flex-col gap-6 text-2xl md:text-3xl"
+      className="w-full flex flex-col gap-6 text-2xl md:text-3xl relative"
       onSubmit={handleSendEmail}
     >
       <input
@@ -147,8 +150,12 @@ const Form = () => {
         value={formData.message}
         onChange={handleChange}
       ></textarea>
+      {isVisible && <Confetti />}
       <div className="button-container mt-10 flex justify-center text-4xl text-white">
-        <button className="w-xs sm:w-sm md:w-md p-6 rounded-full bg-gold-section font-semibold">
+        <button
+          className="w-xs sm:w-sm md:w-md p-6 rounded-full bg-gold-section font-semibold"
+          onClick={() => setIsVisible(true)}
+        >
           Enviar
         </button>
       </div>
@@ -157,11 +164,21 @@ const Form = () => {
           <strong>{successMessage}</strong>
         </p>
       )}
-      {warning && (
-        <p className="text-red-700">
-          <strong>{warning}</strong>
-        </p>
-      )}
+      <AnimatePresence>
+        {warning && (
+          <motion.p
+            key="warning"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.5, ease: easeInOut }}
+            className="text-red-700 mt-10 text-center"
+          >
+            <span>⚠️</span>
+            <strong>{warning}</strong>
+          </motion.p>
+        )}
+      </AnimatePresence>
     </form>
   );
 };
