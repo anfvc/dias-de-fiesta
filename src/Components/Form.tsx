@@ -78,6 +78,9 @@ const Form = ({ setIsVisible }: VisibleProps) => {
         const data = await response.json();
         setSuccess(data.message);
         setIsVisible(true); //showing confetti on submission
+        setTimeout(() => {
+          setIsVisible(false);
+        }, 1000);
       }
     } catch (error) {
       console.error("Error fetching the data.", error);
