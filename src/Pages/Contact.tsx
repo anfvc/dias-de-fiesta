@@ -12,10 +12,9 @@ const Contact = () => {
       id="contact"
       className="w-full pt-[84.16px] md:pt-[92.19px] max-w-[1500px] mx-auto relative"
     >
-      {isVisible && <Confetti />}
-      <div className="w-full h-full flex flex-col md:flex-row gap-15 items-center px-4 my-30 ">
+      <div className="w-full h-full flex flex-col md:flex-row gap-15 items-center px-4 my-30  ">
         <div className="w-full flex flex-col text-left gap-20 ">
-          <div>
+          <div className="">
             <h2 className="text-3xl text-gold-section font-bold underline">
               Contáctanos
             </h2>
@@ -38,6 +37,7 @@ const Contact = () => {
         </div>
         <Form setIsVisible={setIsVisible} />
       </div>
+      <div>{isVisible && <Confetti />}</div>
       <FAQ />
     </section>
   );

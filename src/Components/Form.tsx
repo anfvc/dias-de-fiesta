@@ -77,6 +77,7 @@ const Form = ({ setIsVisible }: VisibleProps) => {
       } else {
         const data = await response.json();
         setSuccess(data.message);
+        setIsVisible(true); //showing confetti on submission
       }
     } catch (error) {
       console.error("Error fetching the data.", error);
@@ -166,8 +167,8 @@ const Form = ({ setIsVisible }: VisibleProps) => {
         ></textarea>
         <div className="button-container mt-10 flex justify-center text-4xl text-white">
           <button
-            className="w-xs sm:w-sm md:w-md p-6 rounded-full bg-gold-section font-semibold"
-            onClick={() => setIsVisible(true)}
+            className="w-xs sm:w-sm md:w-md p-6 rounded-full bg-transparent border-3 border-gold-section text-black font-semibold hover:bg-gold-section hover:text-white hover:transition-all hover:duration-400 cursor-pointer"
+            // onClick={() => setIsVisible(true)}
           >
             Enviar
           </button>
