@@ -8,7 +8,7 @@ type SocialsProps = {
 const Socials = ({ color = "text-gray-900" }: SocialsProps) => {
   return (
     <div className="flex gap-6 text-5xl md:text-6xl">
-      <a href="">
+      <a href="https://www.tiktok.com/@diasdefiestaco" target="_blank">
         <IoLogoTiktok className={color} />
       </a>
       <a
