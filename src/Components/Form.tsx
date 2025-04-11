@@ -1,6 +1,5 @@
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { AnimatePresence, easeInOut, motion } from "framer-motion";
-import Confetti from "@/components/Confetti";
 
 type FormData = {
   fullName: string;
@@ -10,7 +9,16 @@ type FormData = {
   message: string;
 };
 
-const Form = () => {
+// type NotificationData = {
+//   success: string;
+//   warning: string;
+// }
+
+type VisibleProps = {
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const Form = ({ setIsVisible }: VisibleProps) => {
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
@@ -19,9 +27,13 @@ const Form = () => {
     message: "",
   });
 
-  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
   const [warning, setWarning] = useState<string>("");
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  // const [notification, setNotification] = useState<NotificationData>({
+  //   success: "";
+  //   warning: ""
+  // })
   const url: string | undefined = import.meta.env.VITE_SERVER;
 
   const handleChange = (
@@ -64,7 +76,7 @@ const Form = () => {
         console.log(errorMsg.error);
       } else {
         const data = await response.json();
-        setSuccessMessage(data.message);
+        setSuccess(data.message);
       }
     } catch (error) {
       console.error("Error fetching the data.", error);
@@ -81,89 +93,93 @@ const Form = () => {
   };
 
   useEffect(() => {
-    if (successMessage) {
+    if (success || warning) {
       const timer = setTimeout(() => {
-        setSuccessMessage("");
+        setSuccess("");
+        setWarning("");
       }, 5000);
 
       return () => clearTimeout(timer);
     }
-  }, [successMessage]);
+  }, [success, warning]);
 
   return (
-    <form
-      className="w-full flex flex-col gap-6 text-2xl md:text-3xl relative"
-      onSubmit={handleSendEmail}
-    >
-      <input
-        type="text"
-        name="fullName"
-        placeholder="Tu nombre completo"
-        className="w-full border p-6 border-r-0 border-l-0 border-t-0 outline-gold-section"
-        autoComplete="name"
-        value={formData.fullName}
-        onChange={handleChange}
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Tu email"
-        className="border p-6 border-r-0 border-l-0 border-t-0 outline-gold-section"
-        autoComplete="email"
-        value={formData.email}
-        onChange={handleChange}
-      />
-      <input
-        type="tel"
-        name="phone"
-        placeholder="Tu teléfono..."
-        className="border border-r-0 border-l-0 border-t-0 p-6 outline-gold-section"
-        autoComplete="tel"
-        value={formData.phone}
-        onChange={handleChange}
-      />
-      <select
-        name="subject"
-        id="subject"
-        className="p-6 border border-r-0 border-l-0 border-t-0 outline-gold-section"
-        onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-          setFormData({ ...formData, subject: e.target.value })
-        }
-        value={formData.subject}
+    <div className="w-full">
+      <form
+        className="w-full flex flex-col gap-6 text-2xl md:text-3xl"
+        onSubmit={handleSendEmail}
       >
-        <option value="" disabled>
-          --Selecciona una opción--
-        </option>
-        <option value="Bodas">Bodas</option>
-        <option value="Graduaciones">Graduaciones</option>
-        <option value="Cumpleaños">Cumpleaños</option>
-        <option value="Fiestas Infantiles">Fiestas Infantiles</option>
-        <option value="Conferencias">Conferencias</option>
-        <option value="Bautizos">Bautizos</option>
-      </select>
-      <textarea
-        name="message"
-        id="message"
-        placeholder="Tu mensage"
-        className="border p-6 border-r-0 border-l-0 border-t-0 outline-gold-section"
-        rows={8}
-        value={formData.message}
-        onChange={handleChange}
-      ></textarea>
-      {isVisible && <Confetti />}
-      <div className="button-container mt-10 flex justify-center text-4xl text-white">
-        <button
-          className="w-xs sm:w-sm md:w-md p-6 rounded-full bg-gold-section font-semibold"
-          onClick={() => setIsVisible(true)}
+        <input
+          type="text"
+          name="fullName"
+          placeholder="Tu nombre completo"
+          className="w-full border p-6 border-r-0 border-l-0 border-t-0 outline-gold-section"
+          autoComplete="name"
+          value={formData.fullName}
+          onChange={handleChange}
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Tu email"
+          className="border p-6 border-r-0 border-l-0 border-t-0 outline-gold-section"
+          autoComplete="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Tu teléfono..."
+          className="border border-r-0 border-l-0 border-t-0 p-6 outline-gold-section"
+          autoComplete="tel"
+          value={formData.phone}
+          onChange={handleChange}
+        />
+        <select
+          name="subject"
+          id="subject"
+          className="p-6 border border-r-0 border-l-0 border-t-0 outline-gold-section"
+          onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+            setFormData({ ...formData, subject: e.target.value })
+          }
+          value={formData.subject}
         >
-          Enviar
-        </button>
-      </div>
-      {successMessage && (
+          <option value="" disabled>
+            --Selecciona una opción--
+          </option>
+          <option value="Bodas">Bodas</option>
+          <option value="Graduaciones">Graduaciones</option>
+          <option value="Cumpleaños">Cumpleaños</option>
+          <option value="Fiestas Infantiles">Fiestas Infantiles</option>
+          <option value="Conferencias">Conferencias</option>
+          <option value="Bautizos">Bautizos</option>
+        </select>
+        <textarea
+          name="message"
+          id="message"
+          placeholder="Tu mensage"
+          className="border p-6 border-r-0 border-l-0 border-t-0 outline-gold-section"
+          rows={8}
+          value={formData.message}
+          onChange={handleChange}
+        ></textarea>
+        <div className="button-container mt-10 flex justify-center text-4xl text-white">
+          <button
+            className="w-xs sm:w-sm md:w-md p-6 rounded-full bg-gold-section font-semibold"
+            onClick={() => setIsVisible(true)}
+          >
+            Enviar
+          </button>
+        </div>
+      </form>
+
+      {success && (
         <p className="text-green-800">
-          <strong>{successMessage}</strong>
+          <strong>{success}</strong>
         </p>
       )}
+
       <AnimatePresence>
         {warning && (
           <motion.p
@@ -179,7 +195,7 @@ const Form = () => {
           </motion.p>
         )}
       </AnimatePresence>
-    </form>
+    </div>
   );
 };
 

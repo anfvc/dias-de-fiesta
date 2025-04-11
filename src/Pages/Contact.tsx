@@ -1,15 +1,20 @@
 import Socials from "@/components/Socials";
 import Form from "@/components/Form";
 import FAQ from "@/components/FAQ";
+import Confetti from "@/components/Confetti";
+import { useState } from "react";
 
 const Contact = () => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+
   return (
     <section
       id="contact"
-      className="w-full my-10 pt-[84.16px] md:pt-[92.19px] max-w-[1500px] mx-auto"
+      className="w-full pt-[84.16px] md:pt-[92.19px] max-w-[1500px] mx-auto relative"
     >
-      <div className="w-full h-full flex flex-col md:flex-row gap-15 items-center px-4 my-20">
-        <div className="w-full flex flex-col text-left gap-20">
+      {isVisible && <Confetti />}
+      <div className="w-full h-full flex flex-col md:flex-row gap-15 items-center px-4 my-30 ">
+        <div className="w-full flex flex-col text-left gap-20 ">
           <div>
             <h2 className="text-3xl text-gold-section font-bold underline">
               Contáctanos
@@ -31,7 +36,7 @@ const Contact = () => {
             <Socials />
           </div>
         </div>
-        <Form />
+        <Form setIsVisible={setIsVisible} />
       </div>
       <FAQ />
     </section>

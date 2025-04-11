@@ -5,8 +5,15 @@ const Confetti = () => {
   return (
     <>
       <Realistic
-        autorun={{ speed: 0.2, duration: 2 }}
-        style={{ position: "fixed", top: 0, left: 0, zIndex: 9999 }}
+        autorun={{ speed: 0.7, duration: 2 }}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          zIndex: 9999,
+          width: "100%",
+          height: "100%",
+        }}
       />
     </>
   );
