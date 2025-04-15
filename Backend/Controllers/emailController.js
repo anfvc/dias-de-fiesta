@@ -10,8 +10,10 @@ const sendingEmail = (req, res) => {
     },
     to: [process.env.TARGET_EMAIL],
     replyTo: email,
-    subject: "🎉 ¡Nueva Solicitud de Cotización desde tu Página Web! 🎉",
+    subject: "¡Nueva Solicitud de Cotización desde tu Página Web!",
+    text: `Nueva Solicitud de Cotización de ${fullName}`,
     html: `
+    <html>
       <h3>📌 Datos del Cliente:</h3>
       <ul style="border-bottom: 1px solid #ddd; padding-bottom: 20px;">
       <li><u><b>Nombre:</b></u> ${fullName}</li>
@@ -25,6 +27,7 @@ const sendingEmail = (req, res) => {
         <p>🔔 No pierdas esta oportunidad! Responde cuanto antes para asegurar este cliente. 🚀</p>
         <p><i>📩 Este mensaje fue enviado automáticamente desde tu página web.</i></p>
       </div>
+      </html>
       `,
   };
 

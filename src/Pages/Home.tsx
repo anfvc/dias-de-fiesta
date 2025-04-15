@@ -7,7 +7,7 @@ type HomeProps = {
   url: string;
 };
 
-const Home: React.FC<HomeProps> = ({ url }) => {
+const Home = ({ url }: HomeProps) => {
   return (
     <section
       className="home w-full h-screen bg-no-repeat bg-cover bg-center overflow-hidden bg-fixed"

@@ -1,6 +1,6 @@
 import { SERVICES } from "@/consts/services";
 import { useParams } from "react-router";
-import FAQ from "@/components/FaQ";
+import FAQ from "@/components/FAQ";
 
 const ServiceDetails = () => {
   const { id } = useParams<{ id: string }>();
