@@ -1,0 +1,155 @@
+import type { portfolioPhotos } from "@/types/portfolio";
+import { v4 as uuidv4 } from "uuid";
+
+export const PHOTOS: portfolioPhotos[] = [
+  {
+    id: uuidv4(),
+    image: "",
+    category: "children's parties",
+    layout: "col-span-2 row-span-2",
+  },
+  {
+    image: "",
+    id: uuidv4(),
+    category: "children's parties",
+    layout: "col-span-2 row-span-2",
+  },
+  {
+    image: "",
+    id: uuidv4(),
+    category: "children's parties",
+    layout: "col-span-2 row-span-2",
+  },
+  {
+    image: "",
+    id: uuidv4(),
+    category: "children's parties",
+    layout: "col-span-3 row-span-2",
+  },
+  {
+    image: "",
+    id: uuidv4(),
+    category: "children's parties",
+    layout: "col-span-3 row-span-5",
+  },
+  {
+    id: uuidv4(),
+    image: "",
+    category: "children's parties",
+    layout: "col-span-3 row-span-3",
+  },
+  {
+    image: "",
+    id: uuidv4(),
+    layout: "col-span-2 row-span-4",
+    category: "birthdays",
+  },
+  {
+    id: uuidv4(),
+    image: "",
+    layout: "col-span-2 row-span-4",
+    category: "birthdays",
+  },
+  {
+    id: uuidv4(),
+    image: "",
+    layout: "col-span-2 row-span-4",
+    category: "birthdays",
+  },
+  {
+    id: uuidv4(),
+    image: "",
+    layout: "col-span-2 row-span-4",
+    category: "birthdays",
+  },
+  {
+    id: uuidv4(),
+    image: "",
+    layout: "col-span-2 row-span-4",
+    category: "birthdays",
+  },
+  {
+    id: uuidv4(),
+    image: "",
+    layout: "col-span-2 row-span-4",
+    category: "birthdays",
+  },
+  {
+    id: uuidv4(),
+    layout: "col-span-4 row-span-2",
+    image: "",
+    category: "weddings",
+  },
+  {
+    id: uuidv4(),
+    image: "",
+    layout: "",
+    category: "conferences",
+  },
+  {
+    id: uuidv4(),
+    image: "",
+    layout: "",
+    category: "graduations",
+  },
+  {
+    id: uuidv4(),
+    image: "",
+    layout: "",
+    category: "baptisms",
+  },
+  {
+    id: uuidv4(),
+    image: "",
+    layout: "",
+    category: "conferences",
+  },
+  {
+    id: uuidv4(),
+    image: "",
+    layout: "",
+    category: "baptisms",
+  },
+  {
+    id: uuidv4(),
+    image: "",
+    layout: "",
+    category: "baptisms",
+  },
+  {
+    id: uuidv4(),
+    layout: "col-span-2 row-span-2",
+    image: "",
+    category: "weddings",
+  },
+  {
+    id: uuidv4(),
+    image: "",
+    layout: "",
+    category: "baptisms",
+  },
+  {
+    id: uuidv4(),
+    layout: "col-span-2 row-span-2",
+    image: "",
+    category: "weddings",
+  },
+  {
+    id: uuidv4(),
+    layout: "col-span-2 row-span-4",
+    image: "",
+    category: "weddings",
+  },
+  {
+    id: uuidv4(),
+    layout: "col-span-2 row-span-4",
+    image: "",
+    category: "weddings",
+  },
+  {
+    id: uuidv4(),
+    layout: "col-span-2 row-span-2",
+    image: "",
+    category: "weddings",
+  },
+];
