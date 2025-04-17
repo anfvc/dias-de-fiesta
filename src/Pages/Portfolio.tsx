@@ -28,7 +28,7 @@ const Portfolio = () => {
         />
       </div>
       <div className="min-h-screen w-full border-2 my-20">
-        <div className="grid auto-rows-[150px] grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4 p-2">
+        <div className="grid auto-rows-[200px] grid-cols-6 gap-4 p-2">
           {filteredPhotos.map((photo, id) => (
             <div
               className={`${photo.layout} bg-indigo-200 flex place-content-center rounded-4xl`}
