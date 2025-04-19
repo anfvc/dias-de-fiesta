@@ -1,7 +1,6 @@
 type FilterButtonProps = {
   filterDisplayedCategory: (category: string) => void;
   resetFilter: () => void;
-  shufflePhotosArray: () => void;
 };
 
 const FilterButtons = ({
