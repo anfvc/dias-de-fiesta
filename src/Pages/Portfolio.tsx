@@ -17,7 +17,7 @@ const Portfolio = () => {
   };
 
   return (
-    <section className="pt-[84.16px] sm:pt-[92.19px] max-w-[1500px] mx-auto">
+    <section className="px-4 pt-[84.16px] sm:pt-[92.19px] max-w-[1500px] mx-auto">
       <div className="w-full flex place-content-center my-20 gap-6">
         <FilterButtons
           filterDisplayedCategory={filterDisplayedCategory}
