@@ -19,7 +19,7 @@ const Contact = () => {
               Contáctanos
             </h2>
             <h3 className="text-5xl md:text-6xl xl:text-8xl pt-2 font-bold text-pretty">
-              Trabajemos Juntos!
+              Queremos ser parte de tu celebración!
             </h3>
           </div>
           <div className="w-fit text-2xl md:text-4xl my-5 leading-12">

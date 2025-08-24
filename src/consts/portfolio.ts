@@ -1,221 +1,215 @@
 import type { portfolioPhotos } from "@/types/portfolio";
 import { v4 as uuidv4 } from "uuid";
+import weddings1 from "@/assets/weddings1.jpg";
+import weddings2 from "@/assets/weddings2.jpg";
+import birthday1 from "@/assets/birthday1.webp";
+import birthday2 from "@/assets/birthday2.jpg";
 
 export const PHOTOS: portfolioPhotos[] = [
   {
     id: uuidv4(),
     image: "",
     category: "children's parties",
-    layout: "",
   },
   {
     image: "",
     id: uuidv4(),
     category: "children's parties",
-    layout: "",
   },
   {
     image: "",
     id: uuidv4(),
     category: "children's parties",
-    layout: "",
   },
   {
     image: "",
     id: uuidv4(),
     category: "children's parties",
-    layout: "",
   },
   {
     image: "",
     id: uuidv4(),
     category: "children's parties",
-    layout: "",
   },
   {
     id: uuidv4(),
     image: "",
     category: "children's parties",
-    layout: "",
   },
   {
     image: "",
     id: uuidv4(),
-    layout: "",
+    category: "birthdays",
+  },
+  {
+    id: uuidv4(),
+    image: birthday1,
+    category: "birthdays",
+  },
+  {
+    id: uuidv4(),
+    image: birthday2,
     category: "birthdays",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
     category: "birthdays",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "birthdays",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "birthdays",
   },
   {
     id: uuidv4(),
-    image: "",
-    layout: "",
-    category: "birthdays",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-    layout: "",
-    category: "birthdays",
-  },
-  {
-    id: uuidv4(),
-    layout: "",
+
     image: "",
     category: "weddings",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "conferences",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "conferences",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "conferences",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "conferences",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "conferences",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "graduations",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "graduations",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "graduations",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "graduations",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "graduations",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "graduations",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "baptisms",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "conferences",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "baptisms",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "baptisms",
   },
   {
     id: uuidv4(),
-    layout: "",
+
     image: "",
     category: "weddings",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "baptisms",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "baptisms",
   },
   {
     id: uuidv4(),
     image: "",
-    layout: "",
+
     category: "baptisms",
   },
   {
     id: uuidv4(),
-    layout: "",
+
     image: "",
     category: "weddings",
   },
   {
     id: uuidv4(),
-    layout: "",
+
     image: "",
     category: "weddings",
   },
   {
     id: uuidv4(),
-    layout: "",
-    image: "",
+
+    image: weddings1,
     category: "weddings",
   },
   {
     id: uuidv4(),
-    layout: "",
-    image: "",
+
+    image: weddings2,
     category: "weddings",
   },
 ];
