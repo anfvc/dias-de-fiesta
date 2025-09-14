@@ -10,6 +10,9 @@ import ServiceDetails from "@/pages/ServicePage";
 import Portfolio from "@/pages/Portfolio";
 import Contact from "@/pages/Contact";
 import PageNotFound from "@/pages/PageNotFound";
+import AdminDashboard from "@/pages/AdminDashboard";
+import AdminLogin from "@/pages/AdminLogin";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "@/styles/index.css";
@@ -23,9 +26,11 @@ function App() {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [location.pathname]);
 
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
   return (
     <>
-      <Navbar />
+      {!isAdminRoute && <Navbar />}
       <main className="w-full min-h-screen">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
@@ -70,6 +75,17 @@ function App() {
                 </PageWrapper>
               }
             />
+
+            {/* ADMIN ROUTES */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="*"
               element={
@@ -81,7 +97,7 @@ function App() {
           </Routes>
         </AnimatePresence>
       </main>
-      {location.pathname !== "/" && <Footer />}
+      {!isAdminRoute && location.pathname !== "/" && <Footer />}
     </>
   );
 }
