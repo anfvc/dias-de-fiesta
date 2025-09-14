@@ -26,12 +26,33 @@ export const registerUser = async (req, res) => {
     await newUser.save();
     res.status(201).json({ message: "User has been registered successfully." });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        error: "Something went wrong. Please try again later or reach support.",
-      });
+    res.status(500).json({
+      error: "Something went wrong. Please try again later or reach support.",
+    });
   }
 };
 
-export const loginUser = async (req, res) => {};
+export const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    //? Finding the user:
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ message: "This user does not exist. Please register." });
+    }
+
+    const isMatch = compare(password, user.password);
+
+    if (!isMatch) {
+      return res
+        .status(400)
+        .json({ message: "Email or password are invalid." });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Server Error, please try again later." });
+  }
+};
