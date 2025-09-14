@@ -5,7 +5,6 @@ type HomeProps = {
 };
 
 const WhatsApp = ({ url }: HomeProps) => {
-  // console.log(url);
   return (
     <a
       href={`${url}/whatsapp`}

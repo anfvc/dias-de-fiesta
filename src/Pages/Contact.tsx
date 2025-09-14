@@ -4,7 +4,11 @@ import FAQ from "@/components/FAQ";
 import Confetti from "@/components/Confetti";
 import { useState } from "react";
 
-const Contact = () => {
+type urlProps = {
+  url: string;
+};
+
+const Contact = ({ url }: urlProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   return (
@@ -32,7 +36,7 @@ const Contact = () => {
           </div>
           <div className="w-full flex flex-col gap-5 text-4xl ">
             <h4 className="text-4xl text-gold-section font-bold">Síguenos</h4>
-            <Socials />
+            <Socials url={url} />
           </div>
         </div>
         <Form setIsVisible={setIsVisible} />

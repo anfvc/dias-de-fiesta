@@ -71,7 +71,7 @@ function App() {
               path="/contact"
               element={
                 <PageWrapper>
-                  <Contact />
+                  <Contact url={url} />
                 </PageWrapper>
               }
             />
@@ -97,7 +97,7 @@ function App() {
           </Routes>
         </AnimatePresence>
       </main>
-      {!isAdminRoute && location.pathname !== "/" && <Footer />}
+      {!isAdminRoute && location.pathname !== "/" && <Footer url={url} />}
     </>
   );
 }

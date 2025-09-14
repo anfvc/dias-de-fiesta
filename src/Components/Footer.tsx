@@ -2,7 +2,11 @@ import { Link } from "react-router";
 import Socials from "@/components/Socials";
 import logoWhite from "@/assets/svg/logoWhite.svg";
 
-const Footer = () => {
+type urlProps = {
+  url: string;
+};
+
+const Footer = ({ url }: urlProps) => {
   const telephone: string = import.meta.env.VITE_TELEPHONE;
   const companyEmail: string = import.meta.env.VITE_COMPANY_EMAIL;
   const devLinkedin: string = import.meta.env.VITE_DEV_LINKEDIN;
@@ -41,7 +45,7 @@ const Footer = () => {
             <h4>Correos</h4>
             <p>{companyEmail}</p>
           </div>
-          <Socials color="text-white" />
+          <Socials color="text-white" url={url} />
         </div>
         <div className="w-full md:w-1/3 flex flex-col justify-start mt-8 md:mt-0">
           <ul className="flex flex-col gap-7 text-2xl md:text-3xl">
