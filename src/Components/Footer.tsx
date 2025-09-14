@@ -5,6 +5,7 @@ import logoWhite from "@/assets/svg/logoWhite.svg";
 const Footer = () => {
   const telephone: string = import.meta.env.VITE_TELEPHONE;
   const companyEmail: string = import.meta.env.VITE_COMPANY_EMAIL;
+  const devLinkedin: string = import.meta.env.VITE_DEV_LINKEDIN;
 
   return (
     <section
@@ -69,7 +70,7 @@ const Footer = () => {
           <p className="text-lg md:text-2xl">
             Diseñado y desarrollado con ❤️ por{" "}
             <span className="underline">
-              <a href="https://linkedin.com/in/avillay" target="_blank">
+              <a href={devLinkedin} target="_blank">
                 Andrés Villay
               </a>
             </span>
