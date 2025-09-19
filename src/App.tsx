@@ -12,6 +12,7 @@ import Contact from "@/pages/Contact";
 import PageNotFound from "@/pages/PageNotFound";
 import AdminDashboard from "@/pages/AdminDashboard";
 import AdminLogin from "@/pages/AdminLogin";
+import AdminRegister from "./components/AdminRegister";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -79,7 +80,12 @@ function App() {
             {/* ADMIN ROUTES */}
             <Route path="/admin/login" element={<AdminLogin url={url} />} />
             <Route
-              path="/admin"
+              path="/admin/register"
+              element={<AdminRegister url={url} />}
+            />
+
+            <Route
+              path="/admin/dashboard"
               element={
                 <ProtectedRoute>
                   <AdminDashboard />

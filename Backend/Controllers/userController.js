@@ -82,6 +82,7 @@ export const loginUser = async (req, res) => {
         role: user.role,
       },
     });
+
   } catch (error) {
     res.status(500).json({ error: "Server Error, please try again later." });
   }

@@ -1,4 +1,3 @@
-// src/pages/admin/AdminLogin.tsx
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 
@@ -7,39 +6,40 @@ type urlProp = {
 };
 
 type FormData = {
+  fullName: string;
   email: string;
   password: string;
 };
 
-export default function AdminLogin({ url }: urlProp) {
+export default function AdminRegister({ url }: urlProp) {
   const [data, setData] = useState<FormData>({
+    fullName: "",
     email: "",
     password: "",
   });
 
   const navigate = useNavigate();
 
-  async function handleLogin(e: React.FormEvent) {
+  async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
 
-    if (!data.email || !data.password) {
-      alert("Please provide credentials!!!");
+    if (!data.fullName || !data.email || !data.password) {
+      alert("Please fill in all fields!");
       return;
     }
 
-    const response = await fetch(`${url}/api/admin/login`, {
+    const response = await fetch(`${url}/api/admin/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
 
     if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem("token", data.token); // store JWT
-      console.log(data.message);
-      navigate("/admin"); // redirect to dashboard
+      alert("Account created successfully. Please log in.");
+      navigate("/admin/login");
     } else {
-      alert("Invalid login");
+      const err = await response.json();
+      alert(err.message || "Failed to register");
     }
   }
 
@@ -47,10 +47,17 @@ export default function AdminLogin({ url }: urlProp) {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <h1 className="text-3xl font-semibold mb-8">Backoffice</h1>
       <form
-        onSubmit={handleLogin}
+        onSubmit={handleRegister}
         className="bg-white p-10 rounded-lg shadow-md w-xl border flex flex-col gap-4 items-center"
       >
-        <h2 className="text-center text-3xl mb-3 font-semibold">Log In</h2>
+        <h2 className="text-center text-3xl mb-3 font-semibold">Register</h2>
+        <input
+          type="text"
+          placeholder="Full Name"
+          className="w-full p-2 mb-3 border rounded"
+          value={data.fullName}
+          onChange={(e) => setData({ ...data, fullName: e.target.value })}
+        />
         <input
           type="email"
           placeholder="Email"
@@ -69,11 +76,14 @@ export default function AdminLogin({ url }: urlProp) {
           type="submit"
           className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-800 transition-colors duration-100 mb-8 cursor-pointer"
         >
-          Login
+          Register
         </button>
 
         <p>
-          Don't have an account? <span className="font-semibold"><Link to={"/admin/register"} className="font-bold text-blue-600">Register</Link></span>
+          Already have an account?{" "}
+          <span className="font-semibold">
+            <Link to="/admin/login" className="text-blue-600 font-bold">Login</Link>
+          </span>
         </p>
       </form>
     </div>
