@@ -6,14 +6,14 @@ type urlProp = {
 };
 
 type FormData = {
-  fullName: string;
+  name: string;
   email: string;
   password: string;
 };
 
 export default function AdminRegister({ url }: urlProp) {
   const [data, setData] = useState<FormData>({
-    fullName: "",
+    name: "",
     email: "",
     password: "",
   });
@@ -23,7 +23,7 @@ export default function AdminRegister({ url }: urlProp) {
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
 
-    if (!data.fullName || !data.email || !data.password) {
+    if (!data.name || !data.email || !data.password) {
       alert("Please fill in all fields!");
       return;
     }
@@ -55,8 +55,8 @@ export default function AdminRegister({ url }: urlProp) {
           type="text"
           placeholder="Full Name"
           className="w-full p-2 mb-3 border rounded"
-          value={data.fullName}
-          onChange={(e) => setData({ ...data, fullName: e.target.value })}
+          value={data.name}
+          onChange={(e) => setData({ ...data, name: e.target.value })}
         />
         <input
           type="email"
@@ -82,7 +82,9 @@ export default function AdminRegister({ url }: urlProp) {
         <p>
           Already have an account?{" "}
           <span className="font-semibold">
-            <Link to="/admin/login" className="text-blue-600 font-bold">Login</Link>
+            <Link to="/admin/login" className="text-blue-600 font-bold">
+              Login
+            </Link>
           </span>
         </p>
       </form>

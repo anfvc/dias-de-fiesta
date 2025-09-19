@@ -33,7 +33,7 @@ export const registerUser = async (req, res) => {
     console.log(token);
 
     await newUser.save();
-    res.status(201).json({ message: "User has been registered successfully." });
+    res.status(201).json({ message: `${newUser.email} has been successfully registered.` });
   } catch (error) {
     console.error(error);
     res.status(500).json({

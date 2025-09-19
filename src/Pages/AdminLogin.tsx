@@ -37,7 +37,7 @@ export default function AdminLogin({ url }: urlProp) {
       const data = await response.json();
       localStorage.setItem("token", data.token); // store JWT
       console.log(data.message);
-      navigate("/admin"); // redirect to dashboard
+      navigate("/admin/dashboard"); // redirect to dashboard
     } else {
       alert("Invalid login");
     }
