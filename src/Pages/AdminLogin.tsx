@@ -1,6 +1,8 @@
-// src/pages/admin/AdminLogin.tsx
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
+import { BsEye } from "react-icons/bs";
+import { BsEyeSlash } from "react-icons/bs";
+import { useTogglePassword } from "@/hooks/useTogglePassword";
 
 type urlProp = {
   url: string;
@@ -16,6 +18,8 @@ export default function AdminLogin({ url }: urlProp) {
     email: "",
     password: "",
   });
+
+  const { type, visible, toggle } = useTogglePassword();
 
   const navigate = useNavigate();
 
@@ -58,13 +62,27 @@ export default function AdminLogin({ url }: urlProp) {
           value={data.email}
           onChange={(e) => setData({ ...data, email: e.target.value })}
         />
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 mb-3 border rounded"
-          value={data.password}
-          onChange={(e) => setData({ ...data, password: e.target.value })}
-        />
+        <div className="w-full flex items-center gap-3 relative">
+          <input
+            type={type}
+            placeholder="Password"
+            id="registerPassword"
+            className="w-full p-2 mb-3 border rounded"
+            value={data.password}
+            onChange={(e) => setData({ ...data, password: e.target.value })}
+          />
+          {!visible ? (
+            <BsEye
+              className="cursor-pointer absolute right-3 top-4"
+              onClick={toggle}
+            />
+          ) : (
+            <BsEyeSlash
+              className="cursor-pointer absolute right-3 top-4"
+              onClick={toggle}
+            />
+          )}
+        </div>
         <button
           type="submit"
           className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-800 transition-colors duration-100 mb-8 cursor-pointer"
@@ -73,7 +91,12 @@ export default function AdminLogin({ url }: urlProp) {
         </button>
 
         <p>
-          Don't have an account? <span className="font-semibold"><Link to={"/admin/register"} className="font-bold text-blue-600">Register</Link></span>
+          Don't have an account?{" "}
+          <span className="font-semibold">
+            <Link to={"/admin/register"} className="font-bold text-blue-600">
+              Register
+            </Link>
+          </span>
         </p>
       </form>
     </div>
