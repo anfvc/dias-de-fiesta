@@ -1,5 +1,5 @@
 const handleSendWhatsApp = async (req, res) => {
-  console.log("HandleSendWhatsApp function called----:");
+  console.log("HandleSendWhatsApp function fired: ");
   const whatsappNumber = process.env.WHATSAPP_NUMBER;
 
   const message = "Hola, me interesa más información sobre sus servicios.";
@@ -8,7 +8,7 @@ const handleSendWhatsApp = async (req, res) => {
 
   const url = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
 
-  console.log(`URL: ${url}`);
+  console.log(`Customer has been redirected to Dias de Fiesta Whatsapp!!`);
   // Redirect to the WhatsApp URL
 
   res.redirect(url);

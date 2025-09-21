@@ -17,6 +17,10 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "@/styles/index.css";
+import AdminEvents from "@/pages/AdminEvents";
+import AdminSettings from "@/pages/AdminSettings";
+import AdminUsers from "@/pages/AdminUsers";
+import AdminPhotoUploads from "@/pages/AdminPhotoUploads";
 
 function App() {
   const location = useLocation();
@@ -84,14 +88,19 @@ function App() {
               element={<AdminRegister url={url} />}
             />
 
+            <Route element={<ProtectedRoute />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/admin-panel-events" element={<AdminEvents />} />
             <Route
-              path="/admin/dashboard"
-              element={
-                <ProtectedRoute>
-                  <AdminDashboard />
-                </ProtectedRoute>
-              }
+              path="/admin/admin-panel-settings"
+              element={<AdminSettings />}
             />
+            <Route path="/admin/admin-panel-users" element={<AdminUsers url={url} />} />
+            <Route
+              path="/admin/admin-panel-photo-uploads"
+              element={<AdminPhotoUploads />}
+            />
+
             <Route
               path="*"
               element={

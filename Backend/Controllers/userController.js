@@ -33,7 +33,9 @@ export const registerUser = async (req, res) => {
     console.log(token);
 
     await newUser.save();
-    res.status(201).json({ message: `${newUser.email} has been successfully registered.` });
+    res
+      .status(201)
+      .json({ message: `${newUser.email} has been successfully registered.` });
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -82,8 +84,17 @@ export const loginUser = async (req, res) => {
         role: user.role,
       },
     });
-
   } catch (error) {
     res.status(500).json({ error: "Server Error, please try again later." });
+  }
+};
+
+export const fetchAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({});
+    // console.log(users);
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({error: "We could not fetch any user. Please check."})
   }
 };
