@@ -21,6 +21,7 @@ import AdminEvents from "@/pages/AdminEvents";
 import AdminSettings from "@/pages/AdminSettings";
 import AdminUsers from "@/pages/AdminUsers";
 import AdminPhotoUploads from "@/pages/AdminPhotoUploads";
+import AdminLayout from "@/layouts/AdminLayout";
 
 function App() {
   const location = useLocation();
@@ -88,19 +89,20 @@ function App() {
               element={<AdminRegister url={url} />}
             />
 
-            <Route element={<ProtectedRoute />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="/admin/admin-panel-events" element={<AdminEvents />} />
             <Route
-              path="/admin/admin-panel-settings"
-              element={<AdminSettings />}
-            />
-            <Route path="/admin/admin-panel-users" element={<AdminUsers url={url} />} />
-            <Route
-              path="/admin/admin-panel-photo-uploads"
-              element={<AdminPhotoUploads />}
-            />
-
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="events" element={<AdminEvents />} />
+              <Route path="settings" element={<AdminSettings />} />
+              <Route path="users" element={<AdminUsers url={url} />} />
+              <Route path="uploads" element={<AdminPhotoUploads />} />
+            </Route>
             <Route
               path="*"
               element={
