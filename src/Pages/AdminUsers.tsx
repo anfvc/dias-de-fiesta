@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { X } from "lucide-react";
 
 type urlProps = {
   url: string;
@@ -29,19 +30,22 @@ const AdminUsers = ({ url }: urlProps) => {
       }
     };
 
-   getUsers();
+    getUsers();
   }, []);
 
   return (
-    <div className="p-4 space-y-2">
+    <div className="grid sm:grid-cols-1 gap-2">
       {users.length === 0 ? (
         <p>No users found.</p>
       ) : (
         users.map((user) => (
           <div
             key={user._id}
-            className="border p-3 rounded-md shadow-sm bg-white"
+            className="p-3 rounded-md shadow-md bg-white w-md relative"
           >
+            <button className="absolute right-2 hover:text-red-500 transition-colors duration-150">
+              <X />
+            </button>
             <p className="font-semibold">{user.name}</p>
             <p className="text-gray-600">{user.email}</p>
             {user.role && <p className="text-sm">Role: {user.role}</p>}
