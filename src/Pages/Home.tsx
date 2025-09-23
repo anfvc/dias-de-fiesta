@@ -3,7 +3,7 @@ import WhatsApp from "@/components/WhatsApp";
 import HomeButton from "@/components/HomeButton";
 import "@/styles/Home.css";
 
-type HomeProps = {
+export type HomeProps = {
   url: string;
 };
 

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { X } from "lucide-react";
+import AdminUserCard from "@/components/AdminUserCard";
 
 type urlProps = {
   url: string;
 };
 
-type User = {
+export type User = {
   _id: string;
   name: string;
   email: string;
@@ -14,6 +14,7 @@ type User = {
 
 const AdminUsers = ({ url }: urlProps) => {
   const [users, setUsers] = useState<User[]>([]);
+  console.log(users);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -33,24 +34,16 @@ const AdminUsers = ({ url }: urlProps) => {
     getUsers();
   }, []);
 
+  const handleUserDeleted = (userId: string) => {
+    setUsers(users.filter(user => user._id !== userId))
+  }
+
   return (
     <div className="grid sm:grid-cols-1 gap-2">
       {users.length === 0 ? (
         <p>No users found.</p>
       ) : (
-        users.map((user) => (
-          <div
-            key={user._id}
-            className="p-3 rounded-md shadow-md bg-white w-md relative"
-          >
-            <button className="absolute right-2 hover:text-red-500 transition-colors duration-150">
-              <X />
-            </button>
-            <p className="font-semibold">{user.name}</p>
-            <p className="text-gray-600">{user.email}</p>
-            {user.role && <p className="text-sm">Role: {user.role}</p>}
-          </div>
-        ))
+        users.map((user) => <AdminUserCard user={user} key={user._id} url={url} onUserDeleted={handleUserDeleted}  />)
       )}
     </div>
   );
