@@ -71,7 +71,7 @@ export const loginUser = async (req, res) => {
         role: user.role,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "5m" }
+      { expiresIn: "1h" }
     );
 
     res.status(200).json({
@@ -112,6 +112,46 @@ export const deleteUser = async (req, res) => {
     }
 
     res.status(200).json({ message: "User has been deleted successfully." });
+  } catch (error) {
+    res.status(500).json({ message: "Server Error." });
+  }
+};
+
+export const updateUserRole = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { role } = req.body;
+
+    if (!role) {
+      return res.status(400).json({ error: `Please select a role.` });
+    }
+
+    const foundUser = await User.findById(id);
+
+    if (!foundUser) {
+      return res.status(404).json({ error: "This user does not exist." });
+    }
+
+    const udpatedUser = await User.findByIdAndUpdate(
+      id,
+      { role },
+      { new: true }
+    );
+
+    if (udpatedUser.role === "admin") {
+      // console.log(
+      //   `${udpatedUser.name} has already ${udpatedUser.role} rights.`
+      // );
+      return res.status(409).json({
+        message: `${udpatedUser.name} has already ${udpatedUser.role} rights.`,
+      });
+    }
+
+    // console.log(`${udpatedUser.name} has now ${udpatedUser.role} rights.`);
+
+    res.status(200).json({
+      message: `${udpatedUser.name} has now ${udpatedUser.role} rights.`,
+    });
   } catch (error) {
     res.status(500).json({ message: "Server Error." });
   }
