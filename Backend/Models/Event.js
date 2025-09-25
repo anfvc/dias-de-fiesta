@@ -25,3 +25,7 @@ const eventSchema = new Schema(
   },
   { versionKey: false, timestamps: true }
 );
+
+const Event = model("Event", eventSchema);
+
+export default Event;
