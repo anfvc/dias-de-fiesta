@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Menu, Bell, LogOut, X } from "lucide-react";
 
@@ -8,12 +8,25 @@ type prop = {
 };
 
 const AdminNavbar = ({ setSidebarOpen, sidebarOpen }: prop) => {
+  const [loggedInName, setLoggedInName] = useState<string>("");
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/admin/login");
+    if (confirm(`${loggedInName.split(" ")[0]}, are you sure you want to be logged out?`)) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      navigate("/admin/login");
+    }
   };
+
+  useEffect(() => {
+    const loggedInuser = localStorage.getItem("user");
+    if (loggedInuser) {
+      const foundUser = JSON.parse(loggedInuser);
+      setLoggedInName(foundUser.name);
+    }
+  }, []);
+
   return (
     <header>
       {/* Top bar */}
@@ -42,6 +55,7 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }: prop) => {
           >
             <LogOut className="w-4 h-4" /> Logout
           </button>
+          {loggedInName && <span>Hola, {loggedInName.split(" ")[0]}</span>}
         </div>
       </nav>
     </header>

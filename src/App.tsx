@@ -93,7 +93,7 @@ function App() {
               path="/admin"
               element={
                 <ProtectedRoute>
-                  <AdminLayout />
+                  <AdminLayout url={url} />
                 </ProtectedRoute>
               }
             >

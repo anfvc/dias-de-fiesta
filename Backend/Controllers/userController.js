@@ -19,18 +19,21 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await hash(password, 10);
 
     const newUser = new User({
-      name: name[0].toUpperCase() + name.slice(1),
+      name: name
+        .split(" ")
+        .map((name) => name[0].toUpperCase() + name.slice(1))
+        .join(" "),
       email: email.toLowerCase(),
       password: hashedPassword,
     });
 
-    const token = jwt.sign(
-      { id: newUser._id, email: newUser.email },
+    /* const token = jwt.sign(
+      { id: newUser._id, email: newUser.email, role: newUser.role },
       process.env.JWT_SECRET,
       { expiresIn: "5m" }
     );
 
-    console.log(token);
+    console.log(token); */
 
     await newUser.save();
     res
@@ -57,12 +60,10 @@ export const loginUser = async (req, res) => {
         .json({ message: "This user does not exist. Please register." });
     }
 
-    const isMatch = compare(password, user.password);
+    const isMatch = await compare(password, user.password);
 
     if (!isMatch) {
-      return res
-        .status(400)
-        .json({ message: "Email or password are invalid." });
+      return res.status(400).json({ error: "Email or password are invalid." });
     }
 
     const token = jwt.sign(
@@ -132,22 +133,19 @@ export const updateUserRole = async (req, res) => {
       return res.status(404).json({ error: "This user does not exist." });
     }
 
+    if (foundUser.role === "admin") {
+      return res.status(409).json({
+        message: `${foundUser.name} has already ${foundUser.role} rights.`,
+      });
+    }
+
     const udpatedUser = await User.findByIdAndUpdate(
       id,
       { role },
       { new: true }
     );
 
-    if (udpatedUser.role === "admin") {
-      // console.log(
-      //   `${udpatedUser.name} has already ${udpatedUser.role} rights.`
-      // );
-      return res.status(409).json({
-        message: `${udpatedUser.name} has already ${udpatedUser.role} rights.`,
-      });
-    }
-
-    // console.log(`${udpatedUser.name} has now ${udpatedUser.role} rights.`);
+    console.log(`${udpatedUser.name} has now ${udpatedUser.role} rights.`);
 
     res.status(200).json({
       message: `${udpatedUser.name} has now ${udpatedUser.role} rights.`,

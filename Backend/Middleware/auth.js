@@ -3,15 +3,17 @@ import User from "../Models/User.js";
 
 export const verifyAdminRole = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1]; // -> ["Bearer", "token"]
+    const auth = req.headers.authorization;
 
-    console.log(req.headers.authorization);
-
-    if (!token) {
-      return res.status(401).json({
-        error: `Permission denied. We haven't received a token from the server.`,
-      });
+    if (!auth || !auth.startsWith("Bearer ")) {
+      return res
+        .status(401)
+        .json({ error: "Access denied. No token provided." });
     }
+
+    const token = auth.split(" ")[1]; // -> ["Bearer", "token"]
+
+    // console.log(req.headers.authorization);
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const currentUser = await User.findById(decoded.id);
@@ -25,10 +27,11 @@ export const verifyAdminRole = async (req, res, next) => {
         .status(403)
         .json({ error: `Permission denied. You don't have admin rights.` });
     }
-
-    console.log(req.user);
+    console.log(decoded);
+    console.log(currentUser);
 
     req.user = currentUser; //If all the checks are correct, we attach the user to the request object and call
+    console.log(req.user);
     next();
   } catch (error) {
     res

@@ -3,7 +3,11 @@ import { Outlet } from "react-router";
 import { useState } from "react";
 import AdminNavbar from "@/components/AdminNavbar";
 
-const AdminLayout = () => {
+type urlProps = {
+  url: string;
+};
+
+const AdminLayout = ({ url }: urlProps) => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
   return (

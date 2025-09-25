@@ -39,11 +39,15 @@ export default function AdminLogin({ url }: urlProp) {
 
     if (response.ok) {
       const data = await response.json();
+      console.log(data);
       localStorage.setItem("token", data.token); // store JWT
+      localStorage.setItem("user", JSON.stringify(data.user));
       console.log(data.message);
       navigate("/admin/dashboard"); // redirect to dashboard
     } else {
-      alert("Invalid login");
+      const { error } = await response.json();
+      console.error(error);
+      alert(error);
     }
   }
 

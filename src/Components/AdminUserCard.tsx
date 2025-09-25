@@ -41,8 +41,9 @@ const AdminUserCard = ({ user, url, onUserDeleted }: AdminUserCardProps) => {
           <X />
         </button>
         <p className="font-semibold">{user.name}</p>
-        <p className="text-gray-600">{user.email}</p>
-        {user.role && <p className="text-sm">Role: {user.role}</p>}
+        <p className="text-gray-600"><span className="font-semibold">Email:</span> {user.email}</p>
+        {user.role && <p className="text-xl"><span className="font-semibold">Role: </span>{user.role}</p>}
+        {user._id && <p className="text-sm text-gray-600"><span className="font-semibold">id:</span> {user._id}</p>}
       </div>
     </div>
   );
