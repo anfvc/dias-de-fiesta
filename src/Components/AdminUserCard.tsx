@@ -1,13 +1,15 @@
+import { AdminContext } from "@/context/AdminContextProvider";
 import { X } from "lucide-react";
-import { User } from "@/pages/AdminUsers";
+import { useContext } from "react";
 
 type AdminUserCardProps = {
   user: User;
-  url: string;
+  // url: string;
   onUserDeleted: (id: string) => void;
 };
 
-const AdminUserCard = ({ user, url, onUserDeleted }: AdminUserCardProps) => {
+const AdminUserCard = ({ user, onUserDeleted }: AdminUserCardProps) => {
+  const { url } = useContext(AdminContext);
   const deleteUser = async (userId: string) => {
     try {
       const response = await fetch(`${url}/api/admin/${userId}`, {
@@ -41,9 +43,20 @@ const AdminUserCard = ({ user, url, onUserDeleted }: AdminUserCardProps) => {
           <X />
         </button>
         <p className="font-semibold">{user.name}</p>
-        <p className="text-gray-600"><span className="font-semibold">Email:</span> {user.email}</p>
-        {user.role && <p className="text-xl"><span className="font-semibold">Role: </span>{user.role}</p>}
-        {user._id && <p className="text-sm text-gray-600"><span className="font-semibold">id:</span> {user._id}</p>}
+        <p className="text-gray-600">
+          <span className="font-semibold">Email:</span> {user.email}
+        </p>
+        {user.role && (
+          <p className="text-xl">
+            <span className="font-semibold">Role: </span>
+            {user.role}
+          </p>
+        )}
+        {user._id && (
+          <p className="text-sm text-gray-600">
+            <span className="font-semibold">id:</span> {user._id}
+          </p>
+        )}
       </div>
     </div>
   );

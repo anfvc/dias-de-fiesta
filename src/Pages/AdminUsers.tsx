@@ -1,49 +1,25 @@
-import { useState, useEffect } from "react";
 import AdminUserCard from "@/components/AdminUserCard";
+import { AdminContext, User } from "@/context/AdminContextProvider";
+import { useContext } from "react";
 
-type urlProps = {
-  url: string;
-};
-
-export type User = {
-  _id: string;
-  name: string;
-  email: string;
-  role: string;
-};
-
-const AdminUsers = ({ url }: urlProps) => {
-  const [users, setUsers] = useState<User[]>([]);
-  console.log(users);
-
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const response = await fetch(`${url}/api/admin/users`);
-
-        if (response.ok) {
-          const result: User[] = await response.json();
-          // console.log(result);
-          setUsers(result);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getUsers();
-  }, []);
-
+const AdminUsers = () => {
+  const { users, url, setUsers } = useContext(AdminContext);
   const handleUserDeleted = (userId: string) => {
-    setUsers(users.filter(user => user._id !== userId))
-  }
+    setUsers(users.filter((user: User) => user._id !== userId));
+  };
 
   return (
     <div className="grid sm:grid-cols-1 gap-2">
       {users.length === 0 ? (
         <p>No users found.</p>
       ) : (
-        users.map((user) => <AdminUserCard user={user} key={user._id} url={url} onUserDeleted={handleUserDeleted}  />)
+        users.map((user: User) => (
+          <AdminUserCard
+            key={user._id}
+            user={user}
+            onUserDeleted={handleUserDeleted}
+          />
+        ))
       )}
     </div>
   );
