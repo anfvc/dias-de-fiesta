@@ -68,8 +68,7 @@ export const loginUser = async (req, res) => {
 
     const token = jwt.sign(
       {
-        id: user._id,
-        role: user.role,
+        user,
       },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
@@ -133,7 +132,7 @@ export const updateUserRole = async (req, res) => {
       return res.status(404).json({ error: "This user does not exist." });
     }
 
-    if (foundUser.role === "admin") {
+    if (foundUser.role === "admin" || foundUser.role === "owner") {
       return res.status(409).json({
         message: `${foundUser.name} has already ${foundUser.role} rights.`,
       });

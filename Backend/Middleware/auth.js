@@ -22,7 +22,7 @@ export const verifyAdminRole = async (req, res, next) => {
       return res.status(401).json({ error: `This user does not exist.` });
     }
 
-    if (currentUser.role !== "admin") {
+    if (currentUser.role !== "admin" || currentUser.role !== "owner") {
       return res
         .status(403)
         .json({ error: `Permission denied. You don't have admin rights.` });
