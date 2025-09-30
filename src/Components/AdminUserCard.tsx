@@ -1,4 +1,5 @@
-import { AdminContext } from "@/context/AdminContextProvider";
+import AdminContext from "@/context/AdminContext";
+import { User } from "@/context/AdminContext";
 import { X } from "lucide-react";
 import { useContext } from "react";
 

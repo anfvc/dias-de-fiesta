@@ -1,55 +1,13 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { useContext } from "react";
+import { Link } from "react-router";
 import { BsEye } from "react-icons/bs";
 import { BsEyeSlash } from "react-icons/bs";
 import { useTogglePassword } from "@/hooks/useTogglePassword";
+import AdminContext from "@/context/AdminContext";
 
-type urlProp = {
-  url: string;
-};
-
-type FormData = {
-  email: string;
-  password: string;
-};
-
-export default function AdminLogin({ url }: urlProp) {
-  const [data, setData] = useState<FormData>({
-    email: "",
-    password: "",
-  });
-
+export default function AdminLogin() {
+  const { data, setData, handleLogin } = useContext(AdminContext);
   const { type, visible, toggle } = useTogglePassword();
-
-  const navigate = useNavigate();
-
-  async function handleLogin(e: React.FormEvent) {
-    e.preventDefault();
-
-    if (!data.email || !data.password) {
-      alert("Please provide credentials!!!");
-      return;
-    }
-
-    const response = await fetch(`${url}/api/admin/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      localStorage.setItem("token", data.token); // store JWT
-      localStorage.setItem("user", JSON.stringify(data.user));
-      console.log(data.message);
-      navigate("/admin/dashboard"); // redirect to dashboard
-    } else {
-      const { error } = await response.json();
-      console.error(error);
-      alert(error);
-    }
-  }
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
@@ -65,6 +23,7 @@ export default function AdminLogin({ url }: urlProp) {
           className="w-full p-2 mb-3 border rounded"
           value={data.email}
           onChange={(e) => setData({ ...data, email: e.target.value })}
+          autoFocus
         />
         <div className="w-full flex items-center gap-3 relative">
           <input
@@ -74,6 +33,7 @@ export default function AdminLogin({ url }: urlProp) {
             className="w-full p-2 mb-3 border rounded"
             value={data.password}
             onChange={(e) => setData({ ...data, password: e.target.value })}
+            autoFocus
           />
           {!visible ? (
             <BsEye

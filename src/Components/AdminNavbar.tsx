@@ -1,31 +1,21 @@
-import React, { useState, useEffect } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { Menu, Bell, LogOut, X } from "lucide-react";
+import AdminContext from "@/context/AdminContext";
 
-type prop = {
-  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  sidebarOpen: boolean;
-};
-
-const AdminNavbar = ({ setSidebarOpen, sidebarOpen }: prop) => {
-  const [loggedInName, setLoggedInName] = useState<string>("");
+const AdminNavbar = () => {
+  // const [loggedInName, setLoggedInName] = useState<string>("");
   const navigate = useNavigate();
+  const { sidebarOpen, setSidebarOpen } = useContext(AdminContext);
 
   const handleLogout = () => {
-    if (confirm(`${loggedInName.split(" ")[0]}, are you sure you want to be logged out?`)) {
+    if (confirm(`are you sure you want to be logged out?`)) {
       localStorage.removeItem("token");
-      localStorage.removeItem("user");
+
       navigate("/admin/login");
     }
   };
 
-  useEffect(() => {
-    const loggedInuser = localStorage.getItem("user");
-    if (loggedInuser) {
-      const foundUser = JSON.parse(loggedInuser);
-      setLoggedInName(foundUser.name);
-    }
-  }, []);
 
   return (
     <header>
@@ -55,7 +45,7 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }: prop) => {
           >
             <LogOut className="w-4 h-4" /> Logout
           </button>
-          {loggedInName && <span>Hola, {loggedInName.split(" ")[0]}</span>}
+          {/* {loggedInName && <span>Hola, {loggedInName.split(" ")[0]}</span>} */}
         </div>
       </nav>
     </header>

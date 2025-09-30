@@ -1,52 +1,14 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { useContext } from "react";
+import { Link } from "react-router";
 import { useTogglePassword } from "@/hooks/useTogglePassword";
 import { BsEye } from "react-icons/bs";
 import { BsEyeSlash } from "react-icons/bs";
+import AdminContext from "@/context/AdminContext";
 
-type urlProp = {
-  url: string;
-};
-
-type FormData = {
-  name: string;
-  email: string;
-  password: string;
-};
-
-export default function AdminRegister({ url }: urlProp) {
-  const [data, setData] = useState<FormData>({
-    name: "",
-    email: "",
-    password: "",
-  });
+export default function AdminRegister() {
+  const { handleRegister, formData, setFormData } = useContext(AdminContext);
 
   const { type, visible, toggle } = useTogglePassword();
-
-  const navigate = useNavigate();
-
-  async function handleRegister(e: React.FormEvent) {
-    e.preventDefault();
-
-    if (!data.name || !data.email || !data.password) {
-      alert("Please fill in all fields!");
-      return;
-    }
-
-    const response = await fetch(`${url}/api/admin/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      alert("Account created successfully. Please log in.");
-      navigate("/admin/login");
-    } else {
-      const err = await response.json();
-      alert(err.message || "Failed to register");
-    }
-  }
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
@@ -60,23 +22,25 @@ export default function AdminRegister({ url }: urlProp) {
           type="text"
           placeholder="Full Name"
           className="w-full p-2 mb-3 border rounded"
-          value={data.name}
-          onChange={(e) => setData({ ...data, name: e.target.value })}
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
         <input
           type="email"
           placeholder="Email"
           className="w-full p-2 mb-3 border rounded"
-          value={data.email}
-          onChange={(e) => setData({ ...data, email: e.target.value })}
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
         <div className="w-full flex items-center relative">
           <input
             type={type}
             placeholder="Password"
             className="w-full p-2 mb-3 border rounded"
-            value={data.password}
-            onChange={(e) => setData({ ...data, password: e.target.value })}
+            value={formData.password}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
           />
           {!visible ? (
             <BsEye

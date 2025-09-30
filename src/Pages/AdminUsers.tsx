@@ -1,9 +1,11 @@
 import AdminUserCard from "@/components/AdminUserCard";
-import { AdminContext, User } from "@/context/AdminContextProvider";
+// import { AdminContext, User } from "@/context/AdminContextProvider";
+import AdminContext from "@/context/AdminContext";
+import { User } from "@/context/AdminContext";
 import { useContext } from "react";
 
 const AdminUsers = () => {
-  const { users, url, setUsers } = useContext(AdminContext);
+  const { users, setUsers } = useContext(AdminContext);
   const handleUserDeleted = (userId: string) => {
     setUsers(users.filter((user: User) => user._id !== userId));
   };
