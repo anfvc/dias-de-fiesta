@@ -101,6 +101,21 @@ export const fetchAllUsers = async (req, res) => {
   }
 };
 
+export const fetchCurrentUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    console.log(user);
+    res.status(200).json(user);
+
+    // req.json(req.user);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "We could not fetch the user. Please try again later." });
+  }
+};
+
 export const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;

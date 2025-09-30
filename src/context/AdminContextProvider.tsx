@@ -10,6 +10,7 @@ interface AdminContextProviderProps {
 const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const url: string = import.meta.env.VITE_SERVER;
   const [users, setUsers] = useState<User[]>([]);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [data, setData] = useState<FormData>({
     email: "",
@@ -40,9 +41,11 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       localStorage.setItem("token", data.token); // store JWT
-      console.log(data.message);
+      setCurrentUser(data.user); //? storing the logged in user info coming from the login route into the state variable "loggedinUser"
+      console.log("Logged in and current user:", data.user);
+      // console.log(data.message);
       navigate("/admin/dashboard"); // redirect to dashboard
     } else {
       const { error } = await response.json();
@@ -90,7 +93,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     };
 
     getUsers();
-  }, []);
+  }, [url]);
 
   return (
     <AdminContext.Provider
@@ -106,6 +109,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         handleRegister,
         setFormData,
         formData,
+        currentUser,
+        setCurrentUser,
       }}
     >
       {children}

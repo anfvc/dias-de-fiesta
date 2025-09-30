@@ -30,6 +30,8 @@ export type AdminContextType = {
   handleRegister: (e: React.FormEvent) => Promise<void>;
   formData: RegisterFormData;
   setFormData: React.Dispatch<React.SetStateAction<RegisterFormData>>;
+  currentUser: User | null;
+  setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
 };
 
 const AdminContext = createContext<AdminContextType>({} as AdminContextType);

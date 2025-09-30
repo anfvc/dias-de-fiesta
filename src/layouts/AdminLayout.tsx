@@ -16,10 +16,7 @@ const AdminLayout = () => {
       <AdminSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
       <div className="flex flex-1 flex-col">
-        <AdminNavbar
-          sidebarOpen={sidebarOpen}
-          setSidebarOpen={setSidebarOpen}
-        />
+        <AdminNavbar />
 
         {/* Page content */}
         <main className="flex-1 p-6 overflow-y-auto">

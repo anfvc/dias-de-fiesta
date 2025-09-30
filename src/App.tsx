@@ -83,24 +83,21 @@ function App() {
             />
 
             {/* ADMIN ROUTES */}
-            <Route path="/admin/login" element={<AdminLogin url={url} />} />
-            <Route
-              path="/admin/register"
-              element={<AdminRegister url={url} />}
-            />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/register" element={<AdminRegister />} />
 
             <Route
               path="/admin"
               element={
                 <ProtectedRoute>
-                  <AdminLayout url={url} />
+                  <AdminLayout />
                 </ProtectedRoute>
               }
             >
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="events" element={<AdminEvents />} />
               <Route path="settings" element={<AdminSettings />} />
-              <Route path="users" element={<AdminUsers url={url} />} />
+              <Route path="users" element={<AdminUsers />} />
               <Route path="uploads" element={<AdminPhotoUploads />} />
             </Route>
             <Route
