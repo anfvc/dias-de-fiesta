@@ -16,9 +16,11 @@ export const verifyToken = async (req, res, next) => {
     // console.log(req.headers.authorization);
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const currentUser = await User.findById(decoded.id).select("-password");
-    // console.log(decoded);
-    // console.log(currentUser);
+    const currentUser = await User.findById(decoded.id).select(
+      "id name email role"
+    ); //? telling DB to only return these fields
+    console.log("decoded:", decoded);
+    console.log("currentUser:", currentUser);
 
     if (!currentUser) {
       return res.status(401).json({ error: `This user does not exist.` });

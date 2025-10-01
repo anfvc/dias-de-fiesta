@@ -33,7 +33,6 @@ export default function AdminLogin() {
             className="w-full p-2 mb-3 border rounded"
             value={data.password}
             onChange={(e) => setData({ ...data, password: e.target.value })}
-            autoFocus
           />
           {!visible ? (
             <BsEye

@@ -44,7 +44,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       // console.log(data);
       localStorage.setItem("token", data.token); // store JWT
       setCurrentUser(data.user); //? storing the logged in user info coming from the login route into the state variable "loggedinUser"
-      console.log("Logged in and current user:", data.user);
+      // console.log("Logged in and current user:", data.user);
       // console.log(data.message);
       navigate("/admin/dashboard"); // redirect to dashboard
     } else {
@@ -93,6 +93,39 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     };
 
     getUsers();
+  }, [url]);
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          return;
+        }
+
+        const response = await fetch(`${url}/api/admin/me`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          localStorage.removeItem("token");
+          setCurrentUser(null);
+          console.warn("Session has expired. Please log in again.");
+          navigate("/admin/login");
+          return;
+        }
+
+        const me = await response.json();
+        setCurrentUser(me);
+        // console.log(me);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getCurrentUser();
   }, [url]);
 
   return (

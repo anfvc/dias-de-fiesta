@@ -1,13 +1,13 @@
-import { useContext, useEffect } from "react";
+import { useContext} from "react";
 import { useNavigate } from "react-router";
 import { Menu, Bell, LogOut, X } from "lucide-react";
 import AdminContext from "@/context/AdminContext";
 
 const AdminNavbar = () => {
   const navigate = useNavigate();
-  const { sidebarOpen, setSidebarOpen, currentUser, url, setCurrentUser } =
+  const { sidebarOpen, setSidebarOpen, currentUser } =
     useContext(AdminContext);
-  console.log(currentUser);
+  // console.log(currentUser);
 
   const handleLogout = () => {
     if (confirm(`are you sure you want to be logged out?`)) {
@@ -17,30 +17,7 @@ const AdminNavbar = () => {
     }
   };
 
-  useEffect(() => {
-    const getCurrentUser = async () => {
-      try {
-        const token = localStorage.getItem("token");
 
-        if (!token) {
-          return;
-        }
-
-        const response = await fetch(`${url}/api/admin/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const me = await response.json();
-        setCurrentUser(me);
-        console.log(me);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getCurrentUser();
-  }, [url, setCurrentUser]);
 
   return (
     <header>
@@ -71,7 +48,7 @@ const AdminNavbar = () => {
             <LogOut className="w-4 h-4" /> Logout
           </button>
 
-          {/* {currentUser && <span>Hola, {currentUser.name.split(" ")[0]}</span>} */}
+          {currentUser && <span>Hola, {currentUser.name.split(" ")[0]}</span>}
         </div>
       </nav>
     </header>

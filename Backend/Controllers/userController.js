@@ -68,11 +68,14 @@ export const loginUser = async (req, res) => {
 
     const token = jwt.sign(
       {
-        user,
+        // user,
+        id: user._id,
       },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
+
+    console.log(token);
 
     res.status(200).json({
       message: `${user.name} has sucessfully logged in!`,
@@ -103,10 +106,20 @@ export const fetchAllUsers = async (req, res) => {
 
 export const fetchCurrentUser = async (req, res) => {
   try {
-    const { id } = req.params;
-    const user = await User.findById(id);
-    console.log(user);
-    res.status(200).json(user);
+    // const { id } = req.params;
+    // const user = await User.findById(id);
+
+    const currentUser = req.user;
+
+    if (!currentUser) {
+      return res
+        .status(404)
+        .json({
+          error: "We could not find this user. Are you sure it exists?",
+        });
+    }
+    console.log(currentUser);
+    res.status(200).json(currentUser);
 
     // req.json(req.user);
   } catch (error) {
