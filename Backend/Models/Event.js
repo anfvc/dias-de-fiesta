@@ -3,24 +3,28 @@ import { Schema, model } from "mongoose";
 const eventSchema = new Schema(
   {
     eventTitle: {
-      type: string,
+      type: String,
       required: true,
     },
     eventSubtitle: {
-      type: string,
+      type: String,
       required: true,
     },
     eventDescription: {
-      type: string,
+      type: String,
       required: true,
     },
     image: {
       required: true,
-      type: string,
+      type: String,
     },
     price: {
       type: Number,
       required: true,
+    },
+    category: {
+      required: true,
+      type: String,
     },
   },
   { versionKey: false, timestamps: true }
