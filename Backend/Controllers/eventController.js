@@ -5,7 +5,7 @@ export const createEvent = (req, res) => {
     eventTitle,
     eventSubtitle,
     eventDescription,
-    image,
+    // image,
     price,
     category,
   } = req.body;
@@ -16,7 +16,7 @@ export const createEvent = (req, res) => {
       eventDescription,
       eventSubtitle,
       category,
-      image,
+      // image,
       price,
     });
 

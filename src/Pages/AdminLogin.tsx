@@ -14,13 +14,13 @@ export default function AdminLogin() {
       <h1 className="text-3xl font-semibold mb-8">Backoffice</h1>
       <form
         onSubmit={handleLogin}
-        className="bg-white p-10 rounded-lg shadow-md w-xl border flex flex-col gap-4 items-center"
+        className="bg-white p-10 rounded-lg  shadow-xl w-xl  flex flex-col gap-4 items-center"
       >
         <h2 className="text-center text-3xl mb-3 font-semibold">Log In</h2>
         <input
           type="email"
           placeholder="Email"
-          className="w-full p-2 mb-3 border rounded"
+          className="w-full p-2 mb-3 border rounded outline-blue-600"
           value={data.email}
           onChange={(e) => setData({ ...data, email: e.target.value })}
           autoFocus
@@ -30,7 +30,7 @@ export default function AdminLogin() {
             type={type}
             placeholder="Password"
             id="registerPassword"
-            className="w-full p-2 mb-3 border rounded"
+            className="w-full p-2 mb-3 border rounded outline-blue-600"
             value={data.password}
             onChange={(e) => setData({ ...data, password: e.target.value })}
           />
