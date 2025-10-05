@@ -29,7 +29,12 @@ export const verifyToken = async (req, res, next) => {
     console.log(req.user);
     next();
   } catch (error) {
-    console.error(error);
+    if (error.name === "TokenExpiredError") {
+      return res
+        .status(401)
+        .json({ error: "Session has expired. Please log in again." });
+    }
+    return res.status(401).json({ error: "Invalid token." });
   }
 };
 

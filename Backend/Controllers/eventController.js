@@ -1,24 +1,11 @@
 import Event from "../Models/Event.js";
+import cloudinary from "../Middleware/cloudinary.js";
 
 export const createEvent = (req, res) => {
-  const {
-    eventTitle,
-    eventSubtitle,
-    eventDescription,
-    // image,
-    price,
-    category,
-  } = req.body;
+  const eventData = req.body; // const {price, eventTitle, eventSubtitle, category...} = req.body
 
   try {
-    const newEvent = new Event({
-      eventTitle,
-      eventDescription,
-      eventSubtitle,
-      category,
-      // image,
-      price,
-    });
+    const newEvent = new Event(eventData);
 
     newEvent.save();
 

@@ -111,9 +111,14 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         });
 
         if (!response.ok) {
+          const error = await response.json();
+
+          if (error.error === "Session has expired. Please log in again.") {
+            alert("Your session has expired. Please log in again.");
+          }
+
           localStorage.removeItem("token");
           setCurrentUser(null);
-          console.warn("Session has expired. Please log in again.");
           navigate("/admin/login");
           return;
         }
@@ -127,6 +132,14 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     };
     getCurrentUser();
   }, [url]);
+
+  const handleLogout = () => {
+    const userName = currentUser?.name || "User"; //if currentUser exists, display the name otherswise just "User"
+    if (confirm(`${userName}, are you sure you want to log out?`)) {
+      localStorage.removeItem("token");
+      navigate("/admin/login");
+    }
+  };
 
   return (
     <AdminContext.Provider
@@ -144,6 +157,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         formData,
         currentUser,
         setCurrentUser,
+        handleLogout,
       }}
     >
       {children}

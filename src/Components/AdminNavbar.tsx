@@ -1,23 +1,10 @@
-import { useContext} from "react";
-import { useNavigate } from "react-router";
-import { Menu, Bell, LogOut, X } from "lucide-react";
+import { useContext } from "react";
+import { Menu, X } from "lucide-react";
 import AdminContext from "@/context/AdminContext";
 
 const AdminNavbar = () => {
-  const navigate = useNavigate();
-  const { sidebarOpen, setSidebarOpen, currentUser } =
-    useContext(AdminContext);
+  const { sidebarOpen, setSidebarOpen, currentUser } = useContext(AdminContext);
   // console.log(currentUser);
-
-  const handleLogout = () => {
-    if (confirm(`are you sure you want to be logged out?`)) {
-      localStorage.removeItem("token");
-
-      navigate("/admin/login");
-    }
-  };
-
-
 
   return (
     <header>
@@ -37,17 +24,6 @@ const AdminNavbar = () => {
         />
 
         <div className="flex items-center gap-4">
-          <button className="relative p-2">
-            <Bell className="w-6 h-6 text-gray-600" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
-          </button>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 bg-indigo-600 text-white px-3 py-2 rounded-lg"
-          >
-            <LogOut className="w-4 h-4" /> Logout
-          </button>
-
           {currentUser && <span>Hola, {currentUser.name.split(" ")[0]}</span>}
         </div>
       </nav>

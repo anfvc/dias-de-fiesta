@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import wwhatsappRouter from "./Routes/whatsppRouter.js";
 import contactRouter from "./Routes/contactRouter.js";
 import userRouter from "./Routes/userRouter.js";
+import eventRouter from "./Routes/eventRouter.js";
 import connection from "./Database/database.js";
 
 await connection();
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 app.use("/", wwhatsappRouter);
 app.use("/api", contactRouter);
 app.use("/api/admin", userRouter);
+app.use("/api/admin/events", eventRouter);
 
 const port = process.env.PORT || 5100;
 

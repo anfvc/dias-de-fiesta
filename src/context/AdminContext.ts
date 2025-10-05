@@ -32,6 +32,7 @@ export type AdminContextType = {
   setFormData: React.Dispatch<React.SetStateAction<RegisterFormData>>;
   currentUser: User | null;
   setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
+  handleLogout: () => void;
 };
 
 const AdminContext = createContext<AdminContextType>({} as AdminContextType);
