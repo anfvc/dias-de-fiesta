@@ -134,7 +134,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   }, [url]);
 
   const handleLogout = () => {
-    const userName = currentUser?.name || "User"; //if currentUser exists, display the name otherswise just "User"
+    const userName = currentUser?.name.split(" ")[0] || "User"; //if currentUser exists, display the name otherswise just "User"
     if (confirm(`${userName}, are you sure you want to log out?`)) {
       localStorage.removeItem("token");
       navigate("/admin/login");
