@@ -5,6 +5,10 @@ export const createEvent = async (req, res) => {
   try {
     const { price, title, subtitle, category, description } = req.body;
 
+    if (!price || !title || !subtitle || !category || !description) {
+      return res.status(400).json({error: "All fields are required."})
+    }
+
     const result = cloudinary.uploader.upload_stream(
       { folder: "dias-de-fiesta" },
       async (error, uploadResult) => {

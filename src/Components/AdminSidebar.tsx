@@ -40,13 +40,13 @@ const AdminSidebar = () => {
                 Dashboard
               </Link>
               <Link to={"/admin/events"} onClick={() => setSidebarOpen(false)}>
-                Events
+                Create Event
               </Link>
               <Link to={"/admin/uploads"} onClick={() => setSidebarOpen(false)}>
-                Photos
+                Photos Upload
               </Link>
               <Link to={"/admin/users"} onClick={() => setSidebarOpen(false)}>
-                Users
+                User Management
               </Link>
               <Link
                 to={"/admin/settings"}

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import AdminContext, { RegisterFormData } from "./AdminContext";
 import { User, LoginFormData, EventFormData } from "./AdminContext";
+import toast from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 interface AdminContextProviderProps {
   children: React.ReactNode;
@@ -91,7 +93,13 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
   const handleCreateEvent = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+
+    const { title, price, description, category, subtitle } = EventformData;
+
+    if (!title || !price || !description || !category || !subtitle) {
+      toast.error("All fields are required.");
+      return;
+    }
 
     const data = new FormData();
     data.append("title", EventformData.title);
@@ -100,9 +108,13 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     data.append("price", EventformData.price.toString());
     data.append("category", EventformData.category);
 
-    if (image) {
+    if (!image) {
+      toast.error("Please upload an image!!");
+      return;
+    } else {
       data.append("image", image);
     }
+    setLoading(true);
 
     try {
       const settings = {
@@ -126,7 +138,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         setImage(null);
         setLoading(false);
         const { message } = await response.json();
-        console.log(message);
+        toast.success(message);
       } else {
         const errorData = await response.json();
         console.log(errorData);
@@ -227,6 +239,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       }}
     >
       {children}
+      <Toaster />
     </AdminContext.Provider>
   );
 };

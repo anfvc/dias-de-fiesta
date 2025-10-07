@@ -33,8 +33,8 @@ const AdminEvents = () => {
             value={EventformData.title}
             id="title"
             onChange={handleChange}
-            className="w-full border border-gray-500 px-3 py-2 rounded-lg"
-            required
+            className="w-full border border-gray-500 px-3 py-2 rounded-lg outline-blue-600"
+            // required
           />
         </div>
         <div className="flex flex-col gap-4">
@@ -47,8 +47,8 @@ const AdminEvents = () => {
             id="subtitle"
             value={EventformData.subtitle}
             onChange={handleChange}
-            className="w-full border border-gray-500 px-3 py-2 rounded-lg"
-            required
+            className="w-full border border-gray-500 px-3 py-2 rounded-lg outline-blue-600"
+            // required
           />
         </div>
 
@@ -62,8 +62,8 @@ const AdminEvents = () => {
             id="category"
             value={EventformData.category}
             onChange={handleChange}
-            className="w-full border border-gray-500 px-3 py-2 rounded-lg"
-            required
+            className="w-full border border-gray-500 px-3 py-2 rounded-lg outline-blue-600"
+            // required
           />
         </div>
 
@@ -76,9 +76,9 @@ const AdminEvents = () => {
             value={EventformData.description}
             id="description"
             onChange={handleChange}
-            className="w-full border border-gray-500 px-3 py-2 rounded-lg"
+            className="w-full border border-gray-500 px-3 py-2 rounded-lg outline-blue-600"
             rows={3}
-            required
+            // required
           />
         </div>
 
@@ -92,8 +92,8 @@ const AdminEvents = () => {
             id="price"
             value={EventformData.price}
             onChange={handleChange}
-            className="w-full border border-gray-500 px-3 py-2 rounded-lg"
-            required
+            className="w-full border border-gray-500 px-3 py-2 rounded-lg outline-blue-600"
+            // required
             placeholder="0.00"
           />
         </div>
@@ -118,7 +118,7 @@ const AdminEvents = () => {
             type="file"
             id="image"
             hidden
-            required
+            // required
           />
         </div>
 
