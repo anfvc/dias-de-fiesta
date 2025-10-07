@@ -17,6 +17,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "@/styles/index.css";
+import { Toaster } from "react-hot-toast";
 import AdminEvents from "@/pages/AdminEvents";
 import AdminSettings from "@/pages/AdminSettings";
 import AdminUsers from "@/pages/AdminUsers";
@@ -36,6 +37,7 @@ function App() {
 
   return (
     <>
+      <Toaster />
       {!isAdminRoute && <Navbar />}
       <main className="w-full min-h-screen">
         <AnimatePresence mode="wait">

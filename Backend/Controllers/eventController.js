@@ -37,13 +37,13 @@ export const createEvent = async (req, res) => {
     if (req.file) {
       result.end(req.file.buffer);
     } else {
-      res.status(400).json({ message: "No image file provided." });
+      res.status(400).json({ error: "No image file provided." });
     }
   } catch (error) {
     console.error(error);
     res
       .status(500)
-      .json({ message: "Something went wrong, please try again." });
+      .json({ errorData: "Something went wrong, please try again." });
   }
 };
 

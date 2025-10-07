@@ -3,7 +3,6 @@ import { useNavigate } from "react-router";
 import AdminContext, { RegisterFormData } from "./AdminContext";
 import { User, LoginFormData, EventFormData } from "./AdminContext";
 import toast from "react-hot-toast";
-import { Toaster } from "react-hot-toast";
 
 interface AdminContextProviderProps {
   children: React.ReactNode;
@@ -140,11 +139,14 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         const { message } = await response.json();
         toast.success(message);
       } else {
-        const errorData = await response.json();
-        console.log(errorData);
+        const { errorData } = await response.json();
+        toast.error(errorData);
+        // console.log(errorData);
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -185,7 +187,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
           const error = await response.json();
 
           if (error.error === "Session has expired. Please log in again.") {
-            alert("Your session has expired. Please log in again.");
+            toast.error("Your session has expired. Please log in again.");
           }
 
           localStorage.removeItem("token");
@@ -239,7 +241,6 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       }}
     >
       {children}
-      <Toaster />
     </AdminContext.Provider>
   );
 };
