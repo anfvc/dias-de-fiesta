@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import AdminContext, { RegisterFormData } from "./AdminContext";
-import { User, FormData } from "./AdminContext";
+import { User, LoginFormData, EventFormData } from "./AdminContext";
 
 interface AdminContextProviderProps {
   children: React.ReactNode;
@@ -12,7 +12,9 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const [users, setUsers] = useState<User[]>([]);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
-  const [data, setData] = useState<FormData>({
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const [data, setData] = useState<LoginFormData>({
     email: "",
     password: "",
   });
@@ -21,6 +23,16 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     name: "",
     email: "",
     password: "",
+  });
+
+  const [image, setImage] = useState<File | null>(null);
+
+  const [EventformData, setEventFormData] = useState<EventFormData>({
+    title: "",
+    subtitle: "",
+    description: "",
+    price: "",
+    category: "",
   });
 
   const navigate = useNavigate();
@@ -77,6 +89,53 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     }
   }
 
+  const handleCreateEvent = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const data = new FormData();
+    data.append("title", EventformData.title);
+    data.append("subtitle", EventformData.subtitle);
+    data.append("description", EventformData.description);
+    data.append("price", EventformData.price.toString());
+    data.append("category", EventformData.category);
+
+    if (image) {
+      data.append("image", image);
+    }
+
+    try {
+      const settings = {
+        method: "POST",
+        body: data,
+      };
+
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER}/api/admin/events/create`,
+        settings
+      );
+
+      if (response.ok) {
+        setEventFormData({
+          title: "",
+          description: "",
+          price: "",
+          category: "",
+          subtitle: "",
+        });
+        setImage(null);
+        setLoading(false);
+        const { message } = await response.json();
+        console.log(message);
+      } else {
+        const errorData = await response.json();
+        console.log(errorData);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -131,7 +190,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       }
     };
     getCurrentUser();
-  }, [url]);
+  }, [url, navigate]);
 
   const handleLogout = () => {
     const userName = currentUser?.name.split(" ")[0] || "User"; //if currentUser exists, display the name otherswise just "User"
@@ -158,6 +217,13 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         currentUser,
         setCurrentUser,
         handleLogout,
+        EventformData,
+        setEventFormData,
+        handleCreateEvent,
+        image,
+        setImage,
+        loading,
+        setLoading,
       }}
     >
       {children}

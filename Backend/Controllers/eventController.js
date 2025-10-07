@@ -1,18 +1,42 @@
 import Event from "../Models/Event.js";
 import cloudinary from "../Middleware/cloudinary.js";
 
-export const createEvent = (req, res) => {
-  const eventData = req.body; // const {price, eventTitle, eventSubtitle, category...} = req.body
-
+export const createEvent = async (req, res) => {
   try {
-    const newEvent = new Event(eventData);
+    const { price, title, subtitle, category, description } = req.body;
 
-    newEvent.save();
+    const result = cloudinary.uploader.upload_stream(
+      { folder: "dias-de-fiesta" },
+      async (error, uploadResult) => {
+        if (error) {
+          console.error("Cloudinary upload error:", error);
+          return res.status(500).json({ message: "Image upload failed." });
+        }
 
-    res
-      .status(201)
-      .json({ message: `${eventTitle} has been created successfully.` });
+        const newEvent = new Event({
+          price,
+          title,
+          subtitle,
+          category,
+          description,
+          image: uploadResult.secure_url,
+        });
+
+        await newEvent.save();
+
+        res
+          .status(201)
+          .json({ message: `${title} has been created successfully.` });
+      }
+    );
+
+    if (req.file) {
+      result.end(req.file.buffer);
+    } else {
+      res.status(400).json({ message: "No image file provided." });
+    }
   } catch (error) {
+    console.error(error);
     res
       .status(500)
       .json({ message: "Something went wrong, please try again." });

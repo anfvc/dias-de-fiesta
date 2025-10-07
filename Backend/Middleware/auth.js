@@ -13,8 +13,6 @@ export const verifyToken = async (req, res, next) => {
 
     const token = auth.split(" ")[1]; // -> ["Bearer", "token"]
 
-    // console.log(req.headers.authorization);
-
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const currentUser = await User.findById(decoded.id).select(
       "id name email role"

@@ -1,71 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import add from "../assets/add-image.png";
-
-interface EventFormData {
-  title: string;
-  description: string;
-  subTitle: string;
-  price: string;
-  category: string;
-}
+import AdminContext from "@/context/AdminContext";
 
 const AdminEvents = () => {
-  const [formData, setFormData] = useState<EventFormData>({
-    title: "",
-    subTitle: "",
-    description: "",
-    price: "",
-    category: "",
-  });
-  const [image, setImage] = useState<File | null>(null);
+  const {
+    EventformData,
+    setEventFormData,
+    handleCreateEvent,
+    image,
+    setImage,
+    loading,
+  } = useContext(AdminContext);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setEventFormData({ ...EventformData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const data = new FormData();
-    data.append("eventTitle", formData.title);
-    data.append("eventSubtitle", formData.subTitle);
-    data.append("description", formData.description);
-    data.append("price", formData.price.toString());
-    data.append("category", formData.category);
-
-    try {
-      const settings = {
-        method: "POST",
-        body: data,
-      };
-      // const token = localStorage.getItem("token"); // assuming auth is needed
-      const response = await fetch(
-        `${import.meta.env.VITE_SERVER}/api/admin/events/create`,
-        settings
-      );
-
-      if (response.ok) {
-        setFormData({
-          title: "",
-          description: "",
-          price: "",
-          category: "",
-          subTitle: "",
-        });
-      } else {
-        // const errorData = await response.json();
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
   return (
     <div className="max-w-2xl mx-auto bg-white shadow-xl rounded-lg p-6 mt-6">
       <h2 className="text-2xl font-semibold mb-4">Create Event</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleCreateEvent} className="space-y-4">
         <div className="flex flex-col gap-4">
           <label htmlFor="title" className="block font-medium">
             Title
@@ -73,7 +30,7 @@ const AdminEvents = () => {
           <input
             type="text"
             name="title"
-            value={formData.title}
+            value={EventformData.title}
             id="title"
             onChange={handleChange}
             className="w-full border border-gray-500 px-3 py-2 rounded-lg"
@@ -86,9 +43,24 @@ const AdminEvents = () => {
           </label>
           <input
             type="text"
-            name="subTitle"
+            name="subtitle"
             id="subtitle"
-            value={formData.subTitle}
+            value={EventformData.subtitle}
+            onChange={handleChange}
+            className="w-full border border-gray-500 px-3 py-2 rounded-lg"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <label htmlFor="category" className="block font-medium">
+            Category
+          </label>
+          <input
+            type="text"
+            name="category"
+            id="category"
+            value={EventformData.category}
             onChange={handleChange}
             className="w-full border border-gray-500 px-3 py-2 rounded-lg"
             required
@@ -101,7 +73,7 @@ const AdminEvents = () => {
           </label>
           <textarea
             name="description"
-            value={formData.description}
+            value={EventformData.description}
             id="description"
             onChange={handleChange}
             className="w-full border border-gray-500 px-3 py-2 rounded-lg"
@@ -118,7 +90,7 @@ const AdminEvents = () => {
             type="text"
             name="price"
             id="price"
-            value={formData.price}
+            value={EventformData.price}
             onChange={handleChange}
             className="w-full border border-gray-500 px-3 py-2 rounded-lg"
             required
@@ -133,7 +105,7 @@ const AdminEvents = () => {
               This is just a preview of the image you're uploading.
             </span>
           </p>
-          <label htmlFor="image">
+          <label htmlFor="image" className="w-50 h-50">
             <img
               src={image ? URL.createObjectURL(image) : add}
               alt="preview of the image to be uploaded."
@@ -152,12 +124,11 @@ const AdminEvents = () => {
 
         <button
           type="submit"
-          // disabled={loading}
+          disabled={loading}
           className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition"
         >
           {" "}
-          Create Event
-          {/* {loading ? "Creating..." : "Create Event"} */}
+          {loading ? "Creating..." : "Create Event"}
         </button>
       </form>
     </div>

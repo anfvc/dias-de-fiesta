@@ -2,15 +2,15 @@ import { Schema, model } from "mongoose";
 
 const eventSchema = new Schema(
   {
-    eventTitle: {
+    title: {
       type: String,
       required: true,
     },
-    eventSubtitle: {
+    subtitle: {
       type: String,
       required: true,
     },
-    eventDescription: {
+    description: {
       type: String,
       required: true,
     },
