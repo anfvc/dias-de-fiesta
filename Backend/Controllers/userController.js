@@ -57,7 +57,7 @@ export const loginUser = async (req, res) => {
     if (!user) {
       return res
         .status(400)
-        .json({ message: "This user does not exist. Please register." });
+        .json({ error: "This user does not exist. Please register." });
     }
 
     const isMatch = await compare(password, user.password);
@@ -78,7 +78,7 @@ export const loginUser = async (req, res) => {
     console.log(token);
 
     res.status(200).json({
-      message: `${user.name} has sucessfully logged in!`,
+      message: `You have sucessfully logged in!`,
       token,
       user: {
         id: user._id,
@@ -112,11 +112,9 @@ export const fetchCurrentUser = async (req, res) => {
     const currentUser = req.user;
 
     if (!currentUser) {
-      return res
-        .status(404)
-        .json({
-          error: "We could not find this user. Are you sure it exists?",
-        });
+      return res.status(404).json({
+        error: "We could not find this user. Are you sure it exists?",
+      });
     }
     console.log(currentUser);
     res.status(200).json(currentUser);

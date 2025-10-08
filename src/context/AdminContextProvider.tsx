@@ -41,29 +41,35 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
 
-    if (!data.email || !data.password) {
-      alert("Please provide credentials!!!");
-      return;
-    }
+    try {
+      if (!data.email || !data.password) {
+        alert("Please provide credentials!!!");
+        return;
+      }
 
-    const response = await fetch(`${url}/api/admin/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+      const response = await fetch(`${url}/api/admin/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
 
-    if (response.ok) {
-      const data = await response.json();
-      // console.log(data);
-      localStorage.setItem("token", data.token); // store JWT
-      setCurrentUser(data.user); //? storing the logged in user info coming from the login route into the state variable "loggedinUser"
-      // console.log("Logged in and current user:", data.user);
-      // console.log(data.message);
-      navigate("/admin/dashboard"); // redirect to dashboard
-    } else {
-      const { error } = await response.json();
+      if (response.ok) {
+        const data = await response.json();
+        // console.log(data);
+        localStorage.setItem("token", data.token); // store JWT
+        setCurrentUser(data.user); //? storing the logged in user info coming from the login route into the state variable "loggedinUser"
+        // console.log("Logged in and current user:", data.user);
+        // console.log(data.message);
+        toast.success(data.message);
+        console.log(data);
+        navigate("/admin/dashboard"); // redirect to dashboard
+      } else {
+        const { error } = await response.json();
+        toast.error(error);
+        // console.error(error);
+      }
+    } catch (error) {
       console.error(error);
-      alert(error);
     }
   }
 

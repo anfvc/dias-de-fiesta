@@ -6,7 +6,7 @@
       rel="icon"
       id="icon"
       type="image/svg+xml"
-      href="./src/assets/svg/iconB.svg"
+      href="/src/assets/svg/iconB.svg"
     />
     <script>
       const updateIconColorBasedOnOs = () => {
@@ -15,10 +15,10 @@
 
         if (darkModeQuery.matches) {
           //If the user prefers dark mode, set white icon
-          iconLink.setAttribute("href", "./src/assets/svg/iconW.svg");
+          iconLink.setAttribute("href", "/src/assets/svg/iconW.svg");
         } else {
           //If the user prefers light mode, set black icon
-          iconLink.setAttribute("href", "./src/assets/svg/iconB.svg");
+          iconLink.setAttribute("href", "/src/assets/svg/iconB.svg");
         }
       };
 
