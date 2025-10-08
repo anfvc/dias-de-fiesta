@@ -145,6 +145,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         setLoading(false);
         const { message } = await response.json();
         toast.success(message);
+        fetchEvents();
       } else {
         const { errorData } = await response.json();
         toast.error(errorData);
@@ -164,6 +165,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       if (!response.ok) {
         const { error } = await response.json();
         toast.error(error);
+        return;
       }
 
       const eventsFetched = await response.json();
