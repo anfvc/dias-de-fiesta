@@ -4,6 +4,7 @@ function AdminDashboard() {
 
   return (
     <div className="flex h-screen bg-gray-50">
+
     </div>
   );
 }

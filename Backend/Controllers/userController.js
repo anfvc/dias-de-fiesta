@@ -26,14 +26,7 @@ export const registerUser = async (req, res) => {
       email: email.toLowerCase(),
       password: hashedPassword,
     });
-
-    /* const token = jwt.sign(
-      { id: newUser._id, email: newUser.email, role: newUser.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "5m" }
-    );
-
-    console.log(token); */
+    console.log(token);
 
     await newUser.save();
     res

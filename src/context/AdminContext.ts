@@ -1,5 +1,15 @@
 import { createContext } from "react";
 
+export type Event = {
+  _id: string;
+  title: string;
+  description: string;
+  subtitle: string;
+  price: string;
+  category: string;
+  image: string;
+};
+
 export interface EventFormData {
   title: string;
   description: string;
@@ -30,6 +40,8 @@ export type AdminContextType = {
   url: string;
   users: User[];
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
+  events: Event[];
+  setEvents: React.Dispatch<React.SetStateAction<Event[]>>;
   sidebarOpen: boolean;
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
   data: LoginFormData;

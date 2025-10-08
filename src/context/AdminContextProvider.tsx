@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import AdminContext, { RegisterFormData } from "./AdminContext";
-import { User, LoginFormData, EventFormData } from "./AdminContext";
+import { User, LoginFormData, EventFormData, Event } from "./AdminContext";
 import toast from "react-hot-toast";
 
 interface AdminContextProviderProps {
@@ -11,6 +11,7 @@ interface AdminContextProviderProps {
 const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const url: string = import.meta.env.VITE_SERVER;
   const [users, setUsers] = useState<User[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -156,6 +157,27 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     }
   };
 
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch(`${url}/api/admin/events/all`);
+
+      if (!response.ok) {
+        const { error } = await response.json();
+        toast.error(error);
+      }
+
+      const eventsFetched = await response.json();
+      console.log(eventsFetched);
+      setEvents(eventsFetched);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchEvents();
+  }, [url]);
+
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -244,6 +266,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         setImage,
         loading,
         setLoading,
+        events,
+        setEvents,
       }}
     >
       {children}
