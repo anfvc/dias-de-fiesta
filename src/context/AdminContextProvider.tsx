@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import AdminContext, { RegisterFormData } from "./AdminContext";
-import { User, LoginFormData, EventFormData, Event } from "./AdminContext";
+import AdminContext from "./AdminContext";
+import { Event, EventFormData } from "@/types/events";
+import { User, RegisterFormData, LoginFormData } from "@/types/users";
 import toast from "react-hot-toast";
 
 interface AdminContextProviderProps {

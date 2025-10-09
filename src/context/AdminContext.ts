@@ -1,40 +1,6 @@
 import { createContext } from "react";
-
-export type Event = {
-  _id: string;
-  title: string;
-  description: string;
-  subtitle: string;
-  price: string;
-  category: string;
-  image: string;
-};
-
-export interface EventFormData {
-  title: string;
-  description: string;
-  subtitle: string;
-  price: string;
-  category: string;
-}
-
-export type User = {
-  _id: string;
-  name: string;
-  email: string;
-  role: string;
-};
-
-export type LoginFormData = {
-  email: string;
-  password: string;
-};
-
-export type RegisterFormData = {
-  name: string;
-  email: string;
-  password: string;
-};
+import { Event, EventFormData } from "@/types/events";
+import { User, LoginFormData, RegisterFormData } from "@/types/users";
 
 export type AdminContextType = {
   url: string;

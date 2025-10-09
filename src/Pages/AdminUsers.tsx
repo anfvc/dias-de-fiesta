@@ -1,7 +1,8 @@
 import AdminUserCard from "@/components/AdminUserCard";
 // import { AdminContext, User } from "@/context/AdminContextProvider";
 import AdminContext from "@/context/AdminContext";
-import { User } from "@/context/AdminContext";
+// import { User } from "@/context/AdminContext";
+import { User } from "@/types/users";
 import { useContext } from "react";
 
 const AdminUsers = () => {

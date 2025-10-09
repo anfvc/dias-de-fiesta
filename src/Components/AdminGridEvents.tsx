@@ -6,12 +6,12 @@ const AdminGridEvents = () => {
   const { events } = useContext(AdminContext);
 
   return (
-    <section className="mt-10">
+    <section className="max-w-7xl mx-auto mt-10">
       <h3 className="text-xl font-semibold mb-4">Live Events</h3>
       {events.length === 0 ? (
         <p className="text-gray-500">No events found.</p>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {events.map((event) => (
             <div
               key={event._id}
@@ -22,7 +22,7 @@ const AdminGridEvents = () => {
                 alt={event.title}
                 className="w-full h-80 object-cover rounded-md mb-3"
               />
-              <h4 className="font-semibold text-lg">{event.title}</h4>
+              <h4 className="font-semibold text-lg">{event.title[0].toUpperCase() + event.title.slice(1)}</h4>
               <p className="text-gray-600 text-sm">{event.category}</p>
               <p className="text-indigo-600 font-semibold mt-2">
                 ${event.price}

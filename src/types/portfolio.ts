@@ -1,6 +1,5 @@
 export interface portfolioPhotos {
   id: string;
-  image: any;
+  image: File | null;
   category: string;
-
 }

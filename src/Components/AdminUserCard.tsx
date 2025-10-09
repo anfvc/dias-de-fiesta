@@ -1,11 +1,12 @@
 import AdminContext from "@/context/AdminContext";
-import { User } from "@/context/AdminContext";
+// import { User } from "@/context/AdminContext";
+import { User } from "@/types/users";
+import toast from "react-hot-toast";
 import { X } from "lucide-react";
 import { useContext } from "react";
 
 type AdminUserCardProps = {
   user: User;
-  // url: string;
   onUserDeleted: (id: string) => void;
 };
 
@@ -19,6 +20,7 @@ const AdminUserCard = ({ user, onUserDeleted }: AdminUserCardProps) => {
 
       if (!response.ok) {
         const { error } = await response.json();
+        toast.error(error);
         console.log(error);
         throw new Error(error);
       }
