@@ -1,7 +1,8 @@
-import AdminUserCard from "@/components/AdminUserCard";
+import AdminUser from "@/components/AdminUser";
 import AdminContext from "@/context/AdminContext";
 import { User } from "@/types/users";
 import { useContext } from "react";
+import { Link } from "react-router";
 
 const AdminUsers = () => {
   const { users } = useContext(AdminContext);
@@ -11,7 +12,11 @@ const AdminUsers = () => {
       {users.length === 0 ? (
         <p>No users found.</p>
       ) : (
-        users.map((user: User) => <AdminUserCard key={user._id} user={user} />)
+        users.map((user: User) => (
+          <Link to={`/admin/users/${user._id}`} key={user._id}>
+            <AdminUser user={user} />
+          </Link>
+        ))
       )}
     </div>
   );
