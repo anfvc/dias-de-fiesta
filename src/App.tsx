@@ -100,6 +100,7 @@ function App() {
               <Route path="events" element={<AdminEvents />} />
               <Route path="settings" element={<AdminSettings />} />
               <Route path="users" element={<AdminUsers />} />
+              {/* <Route path="users/:id" element={<AdminUsers />} /> */}
               <Route path="uploads" element={<AdminPhotoUploads />} />
             </Route>
             <Route

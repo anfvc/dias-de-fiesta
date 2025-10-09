@@ -26,6 +26,7 @@ export type AdminContextType = {
   setImage: React.Dispatch<React.SetStateAction<File | null>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  deleteUser: (userId: string) => Promise<void>;
 };
 
 const AdminContext = createContext<AdminContextType>({} as AdminContextType);

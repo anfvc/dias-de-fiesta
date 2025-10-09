@@ -6,7 +6,7 @@ export const createEvent = async (req, res) => {
     const { price, title, subtitle, category, description } = req.body;
 
     if (!price || !title || !subtitle || !category || !description) {
-      return res.status(400).json({error: "All fields are required."})
+      return res.status(400).json({ error: "All fields are required." });
     }
 
     const result = cloudinary.uploader.upload_stream(
@@ -14,12 +14,14 @@ export const createEvent = async (req, res) => {
       async (error, uploadResult) => {
         if (error) {
           console.error("Cloudinary upload error:", error);
-          return res.status(500).json({ message: "Image upload failed." });
+          return res.status(500).json({ error: "Image upload failed." });
         }
 
         const newEvent = new Event({
           price,
-          title,
+          title: title
+            .split(" ")
+            .map((title) => title[0].toUpperCase() + title.slice(1).join(" ")),
           subtitle,
           category,
           description,
@@ -54,6 +56,6 @@ export const fetchAllEvents = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Server error, we couldn't fetch events." });
+      .json({ error: "Server error, we couldn't fetch events." });
   }
 };

@@ -1,37 +1,16 @@
 import AdminContext from "@/context/AdminContext";
 // import { User } from "@/context/AdminContext";
 import { User } from "@/types/users";
-import toast from "react-hot-toast";
 import { X } from "lucide-react";
 import { useContext } from "react";
 
 type AdminUserCardProps = {
   user: User;
-  onUserDeleted: (id: string) => void;
 };
 
-const AdminUserCard = ({ user, onUserDeleted }: AdminUserCardProps) => {
-  const { url } = useContext(AdminContext);
-  const deleteUser = async (userId: string) => {
-    try {
-      const response = await fetch(`${url}/api/admin/${userId}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) {
-        const { error } = await response.json();
-        toast.error(error);
-        console.log(error);
-        throw new Error(error);
-      }
-
-      onUserDeleted(userId); // --> updating the state of the users array so that it updates immediately after a user gets deleted.
-      // const { message } = await response.json();
-      // console.log(message);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const AdminUserCard = ({ user }: AdminUserCardProps) => {
+  const { users, deleteUser } = useContext(AdminContext);
+  console.log(users);
 
   return (
     <div>

@@ -170,7 +170,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       }
 
       const eventsFetched = await response.json();
-      console.log(eventsFetched);
+      // console.log(eventsFetched);
       setEvents(eventsFetched);
     } catch (error) {
       console.log(error);
@@ -198,6 +198,28 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
     getUsers();
   }, [url]);
+
+  const deleteUser = async (userId: string) => {
+    try {
+      const response = await fetch(`${url}/api/admin/${userId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        const { error } = await response.json();
+        toast.error(error);
+        console.log(error);
+        throw new Error(error);
+      }
+
+      setUsers(users.filter((user) => user._id !== userId));
+      //onUserDeleted(userId); // --> updating the state of the users array so that it updates immediately after a user gets deleted.
+      // const { message } = await response.json();
+      // console.log(message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const getCurrentUser = async () => {
@@ -271,6 +293,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         setLoading,
         events,
         setEvents,
+        deleteUser,
       }}
     >
       {children}

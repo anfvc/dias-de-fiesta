@@ -22,7 +22,15 @@ const AdminGridEvents = () => {
                 alt={event.title}
                 className="w-full h-80 object-cover rounded-md mb-3"
               />
-              <h4 className="font-semibold text-lg">{event.title[0].toUpperCase() + event.title.slice(1)}</h4>
+              <h4 className="font-semibold text-lg">
+                {event.title
+                  .split(" ")
+                  .map(
+                    (titleElement) =>
+                      titleElement[0].toUpperCase() + titleElement.slice(1)
+                  )
+                  .join(" ")}
+              </h4>
               <p className="text-gray-600 text-sm">{event.category}</p>
               <p className="text-indigo-600 font-semibold mt-2">
                 ${event.price}
