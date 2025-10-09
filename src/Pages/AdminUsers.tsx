@@ -8,7 +8,7 @@ const AdminUsers = () => {
   const { users } = useContext(AdminContext);
 
   return (
-    <div className="grid sm:grid-cols-1 gap-2">
+    <div className="grid sm:grid-cols-1 gap-2 bg-red-500">
       {users.length === 0 ? (
         <p>No users found.</p>
       ) : (
