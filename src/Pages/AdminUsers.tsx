@@ -10,7 +10,7 @@ const AdminUsers = () => {
   return (
     <div className="grid sm:grid-cols-1 gap-2 bg-red-500">
       {users.length === 0 ? (
-        <p>No users found.</p>
+        <p>You have no users so far, please create them.</p>
       ) : (
         users.map((user: User) => (
           <Link to={`/admin/users/${user._id}`} key={user._id}>

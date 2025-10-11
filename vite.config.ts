@@ -6,6 +6,7 @@ import path from "path";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  appType: "spa", //ensures all routes fall back to index.html
   resolve: {
     alias: {
       "@/components": path.resolve(__dirname, "src/components"),
