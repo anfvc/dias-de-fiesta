@@ -8,7 +8,7 @@ import AdminNavbar from "@/components/AdminNavbar";
 
 const AdminLayout = () => {
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex w-full bg-gray-50">
       {/* Sidebar */}
       <AdminSidebar />
 

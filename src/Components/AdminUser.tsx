@@ -1,51 +1,45 @@
 import AdminContext from "@/context/AdminContext";
 import { User } from "@/types/users";
-import { X } from "lucide-react";
 import { useContext } from "react";
-import { useParams } from "react-router";
+// import { Link } from "react-router";
 
 type AdminUserCardProps = {
-  user?: User;
+  user: User;
 };
 
 const AdminUser = ({ user }: AdminUserCardProps) => {
-  const { users, deleteUser } = useContext(AdminContext);
-  const { id } = useParams<{ id: string }>();
-
-  const selectedUser = user || users.find((user) => user._id === id);
-
-  if (!selectedUser) {
-    return <p>No user has been found</p>;
-  }
+  const { deleteUser } = useContext(AdminContext);
 
   return (
-    <div>
-      <div
-        key={selectedUser._id}
-        className="p-3 rounded-md shadow-md bg-white w-md relative"
+    <div className="relative bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-all duration-200 cursor-pointer">
+      {/* Delete button */}
+      <button
+        className="absolute right-3 top-3 text-white bg-red-500 transition-colors border p-2 text-lg"
+        onClick={(e) => {
+          e.preventDefault(); // prevent triggering <Link> click
+          e.stopPropagation(); // stop the link navigation
+          deleteUser(user._id);
+        }}
       >
-        <button
-          className="absolute right-2 hover:text-red-500 transition-colors duration-150"
-          onClick={() => deleteUser(selectedUser._id)}
-        >
-          <X />
-        </button>
+        Delete
+      </button>
 
-        <p className="font-semibold">{selectedUser.name}</p>
+      {/* User content */}
+      <div>
+        <p className="font-semibold text-lg">{user.name}</p>
         <p className="text-gray-600">
-          <span className="font-semibold">Email:</span> {selectedUser.email}
+          <span className="font-semibold">Email:</span> {user.email}
         </p>
-        {selectedUser.role && (
-          <p className="text-xl">
-            <span className="font-semibold">Role: </span>
-            {selectedUser.role}
+
+        {user.role && (
+          <p className="text-gray-700">
+            <span className="font-semibold">Role:</span> {user.role}
           </p>
         )}
-        {selectedUser._id && (
-          <p className="text-sm text-gray-600">
-            <span className="font-semibold">id:</span> {selectedUser._id}
-          </p>
-        )}
+
+        <p className="text-sm text-gray-500 mt-1">
+          <span className="font-semibold">ID:</span> {user._id}
+        </p>
       </div>
     </div>
   );

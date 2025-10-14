@@ -3,28 +3,30 @@ import { Link } from "react-router";
 import { X, LogOut } from "lucide-react";
 import AdminContext from "@/context/AdminContext";
 import { useContext } from "react";
+// import D from "../assets/svg/iconW.svg"
+import logo from "../assets/svg/logoWhite.svg"
 
 const AdminSidebar = () => {
   const { setSidebarOpen, sidebarOpen, handleLogout } =
     useContext(AdminContext);
+
   return (
-    <div className="flex h-screen shadow-md flex-col">
+    <div className="flex h-screen shadow-md flex-col text-white">
       <aside
         className={clsx(
-          "bg-gray-50 w-64 p-4 transition-transform duration-300 border-t-0 shadow-lg",
+          "bg-gray-800 w-64 p-4 transition-transform duration-300 border-t-0 shadow-lg",
           sidebarOpen ? "translate-x-0" : "-translate-x-64",
-          "md:translate-x-0 md:static fixed z-40 h-screen flex flex-col justify-between"
+          "md:translate-x-0 md:static fixed z-40 h-screen flex flex-col justify-between border-r border-gray-300"
         )}
       >
         <button
           onClick={() => setSidebarOpen(false)}
           className="absolute top-4 right-4 md:hidden text-gray-700 hover:text-gray-900"
         ></button>
-        <div className="flex flex-col justify-between">
-          <div className="flex items-center ">
-            <h1 className="text-2xl font-bold text-indigo-600 mb-8">
-              Dias de Fiesta Admin Panel
-            </h1>
+        <div className="flex flex-col justify-between gap-10">
+          <div className="flex justify-between">
+            {/* <img src={D} alt="Logo Dias de Fiesta" className="w-20" /> */}
+            <img src={logo} alt="Logo Dias de Fiesta" className="w-40" />
             {sidebarOpen && (
               <button onClick={() => setSidebarOpen(false)}>
                 <X />

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 import AdminContext from "./AdminContext";
 import { Event, EventFormData } from "@/types/events";
 import { User, RegisterFormData, LoginFormData } from "@/types/users";
+// import { Testimonial } from "@/types/testimonials";
+// import { Photo } from "@/types/photos";
 import toast from "react-hot-toast";
 
 interface AdminContextProviderProps {
@@ -13,6 +15,9 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const url: string = import.meta.env.VITE_SERVER;
   const [users, setUsers] = useState<User[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
+  // const [photos, setPhotos] = useState<Photo[]>([])
+  // const [testimonials, setTestimonials] = useState<Testimonial[]>([])
+
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);

@@ -21,7 +21,7 @@ import { Toaster } from "react-hot-toast";
 import AdminEvents from "@/pages/AdminEvents";
 import AdminSettings from "@/pages/AdminSettings";
 import AdminUsers from "@/pages/AdminUsers";
-import AdminUser from "./components/AdminUser";
+// import AdminUser from "./components/AdminUser";
 import AdminPhotoUploads from "@/pages/AdminPhotoUploads";
 import AdminLayout from "@/layouts/AdminLayout";
 
@@ -101,7 +101,7 @@ function App() {
               <Route path="events" element={<AdminEvents />} />
               <Route path="settings" element={<AdminSettings />} />
               <Route path="users" element={<AdminUsers />} />
-              <Route path="users/:id" element={<AdminUser />} />
+              {/* <Route path="users/:id" element={<AdminUser />} /> */}
 
               <Route path="uploads" element={<AdminPhotoUploads />} />
             </Route>

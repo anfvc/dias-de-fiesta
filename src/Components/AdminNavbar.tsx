@@ -9,7 +9,7 @@ const AdminNavbar = () => {
   return (
     <header>
       {/* Top bar */}
-      <nav className="flex items-center justify-between bg-white shadow p-4">
+      <nav className="flex items-center justify-between bg-white shadow p-4 border-b border-gray-300">
         <button
           className="md:hidden p-2"
           onClick={() => setSidebarOpen(!sidebarOpen)}
