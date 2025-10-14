@@ -84,7 +84,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     e.preventDefault();
 
     if (!formData.name || !formData.email || !formData.password) {
-      alert("Please fill in all fields!");
+      toast.error("Please fill in all fields!");
       return;
     }
 
@@ -95,7 +95,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     });
 
     if (response.ok) {
-      alert("Account created successfully. Please log in.");
+      toast.success("Account created successfully. Please log in.");
       navigate("/admin/login");
     } else {
       const err = await response.json();
@@ -205,24 +205,26 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   }, [url]);
 
   const deleteUser = async (userId: string) => {
-    try {
-      const response = await fetch(`${url}/api/admin/${userId}`, {
-        method: "DELETE",
-      });
+    if (confirm("Are you sure you want to delete this user?")) {
+      try {
+        const response = await fetch(`${url}/api/admin/${userId}`, {
+          method: "DELETE",
+        });
 
-      if (!response.ok) {
-        const { error } = await response.json();
-        toast.error(error);
+        if (!response.ok) {
+          const { error } = await response.json();
+          toast.error(error);
+          console.log(error);
+          throw new Error(error);
+        }
+
+        setUsers(users.filter((user) => user._id !== userId));
+        //onUserDeleted(userId); // --> updating the state of the users array so that it updates immediately after a user gets deleted.
+        // const { message } = await response.json();
+        // console.log(message);
+      } catch (error) {
         console.log(error);
-        throw new Error(error);
       }
-
-      setUsers(users.filter((user) => user._id !== userId));
-      //onUserDeleted(userId); // --> updating the state of the users array so that it updates immediately after a user gets deleted.
-      // const { message } = await response.json();
-      // console.log(message);
-    } catch (error) {
-      console.log(error);
     }
   };
 

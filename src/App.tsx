@@ -24,6 +24,7 @@ import AdminUsers from "@/pages/AdminUsers";
 // import AdminUser from "./components/AdminUser";
 import AdminPhotoUploads from "@/pages/AdminPhotoUploads";
 import AdminLayout from "@/layouts/AdminLayout";
+import AdminTestimonials from "./pages/AdminTestimonials";
 
 function App() {
   const location = useLocation();
@@ -101,6 +102,7 @@ function App() {
               <Route path="events" element={<AdminEvents />} />
               <Route path="settings" element={<AdminSettings />} />
               <Route path="users" element={<AdminUsers />} />
+              <Route path="testimonials" element={<AdminTestimonials />} />
               {/* <Route path="users/:id" element={<AdminUser />} /> */}
 
               <Route path="uploads" element={<AdminPhotoUploads />} />

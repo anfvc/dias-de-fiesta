@@ -2,6 +2,7 @@ import AdminUser from "@/components/AdminUser";
 import AdminContext from "@/context/AdminContext";
 import { User } from "@/types/users";
 import { useContext, useState } from "react";
+import { X } from "lucide-react";
 
 const AdminUsers = () => {
   const { users } = useContext(AdminContext);
@@ -17,7 +18,7 @@ const AdminUsers = () => {
             <div
               key={user._id}
               onClick={() => setSelectedUser(user)}
-              className="cursor-pointer"
+              className="cursor-pointer border border-gray-200"
             >
               <AdminUser user={user} />
             </div>
@@ -33,10 +34,10 @@ const AdminUsers = () => {
               onClick={() => setSelectedUser(null)}
               className="absolute right-3 top-3 text-gray-500 hover:text-black"
             >
-              ✕
+              <X />
             </button>
 
-            <h2 className="text-2xl font-bold mb-4">{selectedUser.name}</h2>
+            <h2 className="text-4xl font-bold mb-4">{selectedUser.name}</h2>
 
             <p>
               <span className="font-semibold">Email:</span> {selectedUser.email}

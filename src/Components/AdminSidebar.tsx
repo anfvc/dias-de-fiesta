@@ -4,14 +4,47 @@ import { X, LogOut } from "lucide-react";
 import AdminContext from "@/context/AdminContext";
 import { useContext } from "react";
 // import D from "../assets/svg/iconW.svg"
-import logo from "../assets/svg/logoWhite.svg"
+import logo from "../assets/svg/logoWhite.svg";
 
 const AdminSidebar = () => {
   const { setSidebarOpen, sidebarOpen, handleLogout } =
     useContext(AdminContext);
 
+  const navItems = [
+    {
+      to: "/admin/dashboard",
+      name: "Dashboard",
+      action: () => setSidebarOpen(false),
+    },
+    {
+      to: "/admin/events",
+      name: "Create Event",
+      action: () => setSidebarOpen(false),
+    },
+    {
+      to: "/admin/uploads",
+      name: "Photo Uploads",
+      action: () => setSidebarOpen(false),
+    },
+    {
+      to: "/admin/users",
+      name: "User Management",
+      action: () => setSidebarOpen(false),
+    },
+    {
+      to: "/admin/testimonials",
+      name: "Testimonials",
+      action: () => setSidebarOpen(false),
+    },
+    {
+      to: "/admin/settings",
+      name: "Settings",
+      action: () => setSidebarOpen(false),
+    },
+  ];
+
   return (
-    <div className="flex h-screen shadow-md flex-col text-white">
+    <div className="flex shadow-md flex-col text-white">
       <aside
         className={clsx(
           "bg-gray-800 w-64 p-4 transition-transform duration-300 border-t-0 shadow-lg",
@@ -35,34 +68,18 @@ const AdminSidebar = () => {
           </div>
           <div className="w-full">
             <nav className="flex flex-col gap-4 justify-between mb-10">
-              <Link
-                to={"/admin/dashboard"}
-                onClick={() => setSidebarOpen(false)}
-              >
-                Dashboard
-              </Link>
-              <Link to={"/admin/events"} onClick={() => setSidebarOpen(false)}>
-                Create Event
-              </Link>
-              <Link to={"/admin/uploads"} onClick={() => setSidebarOpen(false)}>
-                Photos Upload
-              </Link>
-              <Link to={"/admin/users"} onClick={() => setSidebarOpen(false)}>
-                User Management
-              </Link>
-              <Link
-                to={"/admin/settings"}
-                onClick={() => setSidebarOpen(false)}
-              >
-                Settings
-              </Link>
+              {navItems.map((navItem, index) => (
+                <Link to={navItem.to} onClick={navItem.action} key={index}>
+                  {navItem.name}
+                </Link>
+              ))}
             </nav>
           </div>
         </div>
         <div>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 bg-indigo-600 text-white px-3 py-2 rounded-lg"
+            className="flex navItems-center gap-2 bg-indigo-600 text-white px-3 py-2 rounded-lg"
           >
             <LogOut className="w-4 h-4" /> Logout
           </button>
