@@ -7,7 +7,10 @@ import AdminContext from "@/context/AdminContext";
 
 export default function AdminLogin() {
   const { data, setData, handleLogin } = useContext(AdminContext);
-  const { type, visible, toggle } = useTogglePassword();
+
+  const { type, visible, toggle, disabled } = useTogglePassword(
+    data.password || ""
+  );
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
@@ -36,12 +39,16 @@ export default function AdminLogin() {
           />
           {!visible ? (
             <BsEye
-              className="cursor-pointer absolute right-3 top-4"
+              className={`absolute right-3 top-4 ${
+                disabled ? "text-gray-400 cursor-not-allowed" : "cursor-pointer"
+              }`}
               onClick={toggle}
             />
           ) : (
             <BsEyeSlash
-              className="cursor-pointer absolute right-3 top-4"
+              className={`absolute right-3 top-4 ${
+                disabled ? "text-gray-400 cursor-not-allowed" : "cursor-pointer"
+              }`}
               onClick={toggle}
             />
           )}
