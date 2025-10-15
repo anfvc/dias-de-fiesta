@@ -1,5 +1,7 @@
 import { createContext } from "react";
 import { Event, EventFormData } from "@/types/events";
+import { Photo } from "@/types/photos";
+import { Testimonial } from "@/types/testimonials";
 import { User, LoginFormData, RegisterFormData } from "@/types/users";
 
 export type AdminContextType = {
@@ -8,6 +10,10 @@ export type AdminContextType = {
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
   events: Event[];
   setEvents: React.Dispatch<React.SetStateAction<Event[]>>;
+  photos: Photo[];
+  setPhotos: React.Dispatch<React.SetStateAction<Photo[]>>;
+  testimonials: Testimonial[];
+  setTestimonial: React.Dispatch<React.SetStateAction<Testimonial[]>>;
   sidebarOpen: boolean;
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
   data: LoginFormData;

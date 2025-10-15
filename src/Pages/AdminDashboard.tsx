@@ -1,14 +1,16 @@
 import AdminContext from "@/context/AdminContext";
 import { useContext } from "react";
-import { Users, Calendar } from "lucide-react";
+import { Users, Calendar, Camera, Text } from "lucide-react";
 import { Link } from "react-router";
 
 function AdminDashboard() {
-  const { users, events } = useContext(AdminContext);
+  const { users, events, photos, testimonials } = useContext(AdminContext);
 
   // Just in case some values are undefined:
   const usersCount = users?.length || 0;
   const eventsCount = events?.length || 0;
+  const photosCount = photos?.length || 0;
+  const testimonialsCount = testimonials?.length || 0;
 
   const kpis = [
     {
@@ -18,11 +20,23 @@ function AdminDashboard() {
       to: "/admin/users",
     },
     {
-      label: eventsCount > 1 ? "Live Events" : "Live Events",
+      label: eventsCount > 1 ? "Live Events" : "Live Event",
       value: eventsCount,
       icon: <Calendar className="text-green-500 w-8 h-8" />,
       to: "/admin/events",
     },
+    {
+      label: photosCount > 1 ? "Live Photos" : "Live Photos",
+      value: photosCount,
+      icon: <Camera className="text-purple-500 w-8 h-8" />,
+      to: "/admin/uploads",
+    },
+    {
+      label: testimonialsCount > 1 ? "Live Testimonials" : "Live Testimonial",
+      value: testimonialsCount,
+      icon: <Text className="text-orange-500 w-8 h-8" />,
+      to: "/admin/testimonials",
+    }
   ];
 
   // console.log(url);
