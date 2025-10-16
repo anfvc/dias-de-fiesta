@@ -132,7 +132,7 @@ export const deleteUser = async (req, res) => {
 
     res.status(200).json({ message: "User has been deleted successfully." });
   } catch (error) {
-    res.status(500).json({ message: "Server Error." });
+    res.status(500).json({ error: "Server Error." });
   }
 };
 
@@ -153,7 +153,7 @@ export const updateUserRole = async (req, res) => {
 
     if (foundUser.role === "admin" || foundUser.role === "owner") {
       return res.status(409).json({
-        message: `${foundUser.name} has already ${foundUser.role} rights.`,
+        error: `${foundUser.name} has already ${foundUser.role} rights.`,
       });
     }
 
@@ -169,6 +169,6 @@ export const updateUserRole = async (req, res) => {
       message: `${udpatedUser.name} has now ${udpatedUser.role} rights.`,
     });
   } catch (error) {
-    res.status(500).json({ message: "Server Error." });
+    res.status(500).json({ error: "Server Error." });
   }
 };

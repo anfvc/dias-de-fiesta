@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 import { X, LogOut } from "lucide-react";
 import AdminContext from "@/context/AdminContext";
 import { useContext } from "react";
@@ -69,9 +69,21 @@ const AdminSidebar = () => {
           <div className="w-full">
             <nav className="flex flex-col gap-4 justify-between mb-10">
               {navItems.map((navItem, index) => (
-                <Link to={navItem.to} onClick={navItem.action} key={index}>
+                <NavLink
+                  to={navItem.to}
+                  onClick={navItem.action}
+                  key={index}
+                  className={({ isActive }) =>
+                    clsx(
+                      "block px-3 py-2 rounded-md transition-colors duration-200",
+                      isActive
+                        ? "bg-white text-gray-900 font-semibold"
+                        : "text-gray-200 hover:bg-gray-700 hover:text-white"
+                    )
+                  }
+                >
                   {navItem.name}
-                </Link>
+                </NavLink>
               ))}
             </nav>
           </div>

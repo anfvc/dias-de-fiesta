@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { Event, EventFormData } from "@/types/events";
 import { Photo } from "@/types/photos";
-import { Testimonial } from "@/types/testimonials";
+import { Testimonial, TestimonialData } from "@/types/testimonials";
 import { User, LoginFormData, RegisterFormData } from "@/types/users";
 
 export type AdminContextType = {
@@ -13,7 +13,7 @@ export type AdminContextType = {
   photos: Photo[];
   setPhotos: React.Dispatch<React.SetStateAction<Photo[]>>;
   testimonials: Testimonial[];
-  setTestimonial: React.Dispatch<React.SetStateAction<Testimonial[]>>;
+  setTestimonials: React.Dispatch<React.SetStateAction<Testimonial[]>>;
   sidebarOpen: boolean;
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
   data: LoginFormData;
@@ -27,6 +27,9 @@ export type AdminContextType = {
   handleLogout: () => void;
   EventformData: EventFormData;
   setEventFormData: React.Dispatch<React.SetStateAction<EventFormData>>;
+  testimonialData: TestimonialData;
+  setTestimonialData: React.Dispatch<React.SetStateAction<TestimonialData>>;
+  createTestimonial: (e: React.FormEvent) => Promise<void>;
   handleCreateEvent: (e: React.FormEvent) => Promise<void>;
   image: File | null;
   setImage: React.Dispatch<React.SetStateAction<File | null>>;
