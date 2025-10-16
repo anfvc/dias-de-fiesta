@@ -39,7 +39,9 @@ function App() {
 
   return (
     <>
-      <Toaster />
+      <Toaster position="top-center"
+        toastOptions={{ style: { background: "#1d2938", color: "#fff", borderRadius: "20px" } }}
+      />
       {!isAdminRoute && <Navbar />}
       <main className="w-full min-h-screen">
         <AnimatePresence mode="wait">

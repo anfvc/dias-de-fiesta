@@ -21,7 +21,7 @@ const AdminEvents = () => {
 
   return (
     <div>
-      <div className="max-w-2xl mx-auto bg-white shadow-xl rounded-lg p-6 mt-6">
+      <div className="bg-white shadow-xl rounded-lg p-6 mt-6 max-w-5xl">
         <h2 className="text-2xl font-semibold mb-4">Create Event</h2>
 
         <form onSubmit={handleCreateEvent} className="space-y-4">

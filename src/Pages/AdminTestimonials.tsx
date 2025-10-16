@@ -3,14 +3,8 @@ import AdminContext from "@/context/AdminContext";
 import { useContext } from "react";
 
 const AdminTestimonials = () => {
-  const {
-    testimonials,
-    testimonialData,
-    createTestimonial,
-    setTestimonialData,
-  } = useContext(AdminContext);
-
-  console.log(testimonials);
+  const { testimonialData, createTestimonial, setTestimonialData } =
+    useContext(AdminContext);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -29,10 +23,13 @@ const AdminTestimonials = () => {
         className="bg-white shadow rounded-lg p-6 flex flex-col gap-4 max-w-xl"
       >
         <div className="flex flex-col gap-2">
-          <label className="font-medium">Name</label>
+          <label htmlFor="name" className="font-medium">
+            Name
+          </label>
           <input
             type="text"
             name="name"
+            id="name"
             value={testimonialData.name}
             onChange={handleChange}
             className="border rounded-lg px-3 py-2"
@@ -41,9 +38,12 @@ const AdminTestimonials = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="font-medium">Message</label>
+          <label htmlFor="message" className="font-medium">
+            Message
+          </label>
           <textarea
             name="message"
+            id="message"
             value={testimonialData.message}
             onChange={handleChange}
             className="border rounded-lg px-3 py-2"
@@ -53,10 +53,13 @@ const AdminTestimonials = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="font-medium">Rating</label>
+          <label htmlFor="rating" className="font-medium">
+            Rating
+          </label>
           <input
             type="number"
             name="rating"
+            id="rating"
             value={testimonialData.rating}
             onChange={handleChange}
             min="1"
@@ -67,10 +70,13 @@ const AdminTestimonials = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="font-medium">Date</label>
+          <label htmlFor="date" className="font-medium">
+            Date
+          </label>
           <input
             type="date"
             name="date"
+            id="date"
             value={testimonialData.date}
             onChange={handleChange}
             className="border rounded-lg px-3 py-2"
