@@ -46,7 +46,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const [testimonialData, setTestimonialData] = useState<TestimonialData>({
     name: "",
     message: "",
-    rating: 0,
+    rating: 1,
     date: "",
   });
 
@@ -221,7 +221,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       const data = await response.json();
       console.log(data);
       toast.success(data.message || "Testimonial Created!");
-      setTestimonialData({ name: "", message: "", rating: 0, date: "" });
+      setTestimonialData({ name: "", message: "", rating: 1, date: "" });
       fetchTestimonials();
     } catch (error) {
       console.error(error);
