@@ -5,6 +5,7 @@ import { useContext } from "react";
 const AdminTestimonials = () => {
   const { testimonialData, createTestimonial, setTestimonialData } =
     useContext(AdminContext);
+  const today = new Date().toISOString().split("T")[0];
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -77,6 +78,7 @@ const AdminTestimonials = () => {
             type="date"
             name="date"
             id="date"
+            max={today}
             value={testimonialData.date}
             onChange={handleChange}
             className="border rounded-lg px-3 py-2"

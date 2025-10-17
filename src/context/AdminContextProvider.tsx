@@ -17,7 +17,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const [events, setEvents] = useState<Event[]>([]);
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-
+  const [image, setImage] = useState<File | null>(null);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -32,8 +32,6 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     email: "",
     password: "",
   });
-
-  const [image, setImage] = useState<File | null>(null);
 
   const [EventformData, setEventFormData] = useState<EventFormData>({
     title: "",
@@ -57,7 +55,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
     try {
       if (!data.email || !data.password) {
-        alert("Please provide credentials!!!");
+        toast.error("Please provide credentials!!!");
         return;
       }
 
@@ -128,7 +126,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     data.append("category", EventformData.category);
 
     if (!image) {
-      toast.error("Please upload an image!!");
+      toast("Please upload an image!!", { icon: "🏞️" });
       return;
     } else {
       data.append("image", image);
@@ -157,7 +155,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         setImage(null);
         setLoading(false);
         const { message } = await response.json();
-        toast.success(message);
+        toast(message, { icon: "👏" });
         fetchEvents();
       } else {
         const { errorData } = await response.json();
@@ -192,6 +190,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   useEffect(() => {
     fetchEvents();
     fetchTestimonials();
+    getUsers();
+    getCurrentUser();
   }, [url]);
 
   const createTestimonial = async (e: React.FormEvent) => {
@@ -200,9 +200,10 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     const { name, message, rating, date } = testimonialData;
 
     if (!name || !message || !rating || !date) {
-      toast.error("You must provide all the fields.");
+      toast("You must provide all the fields.", { icon: "⚠️" });
       return;
     }
+
     try {
       const response = await fetch(`${url}/api/admin/testimonials/create`, {
         method: "POST",
@@ -220,7 +221,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
       const data = await response.json();
       console.log(data);
-      toast.success(data.message || "Testimonial Created!");
+      toast(data.message, { icon: "👏" });
       setTestimonialData({ name: "", message: "", rating: 1, date: "" });
       fetchTestimonials();
     } catch (error) {
@@ -254,23 +255,19 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     }
   };
 
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const response = await fetch(`${url}/api/admin/users`);
+  const getUsers = async () => {
+    try {
+      const response = await fetch(`${url}/api/admin/users`);
 
-        if (response.ok) {
-          const result: User[] = await response.json();
-          // console.log(result);
-          setUsers(result);
-        }
-      } catch (error) {
-        console.error(error);
+      if (response.ok) {
+        const result: User[] = await response.json();
+        // console.log(result);
+        setUsers(result);
       }
-    };
-
-    getUsers();
-  }, [url]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const deleteUser = async (userId: string) => {
     if (confirm("Are you sure you want to delete this user?")) {
@@ -296,43 +293,40 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     }
   };
 
-  useEffect(() => {
-    const getCurrentUser = async () => {
-      try {
-        const token = localStorage.getItem("token");
+  const getCurrentUser = async () => {
+    try {
+      const token = localStorage.getItem("token");
 
-        if (!token) {
-          return;
-        }
-
-        const response = await fetch(`${url}/api/admin/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          const error = await response.json();
-
-          if (error.error === "Session has expired. Please log in again.") {
-            toast.error("Your session has expired. Please log in again.");
-          }
-
-          localStorage.removeItem("token");
-          setCurrentUser(null);
-          navigate("/admin/login");
-          return;
-        }
-
-        const me = await response.json();
-        setCurrentUser(me);
-        // console.log(me);
-      } catch (error) {
-        console.error(error);
+      if (!token) {
+        return;
       }
-    };
-    getCurrentUser();
-  }, [url, navigate]);
+
+      const response = await fetch(`${url}/api/admin/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+
+        if (error.error === "Session has expired. Please log in again.") {
+          toast.error("Your session has expired. Please log in again.");
+        }
+
+        localStorage.removeItem("token");
+        setCurrentUser(null);
+        navigate("/admin/login");
+        return;
+      }
+
+      const me = await response.json();
+      setCurrentUser(me);
+      // console.log(me);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleLogout = () => {
     const userName = currentUser?.name.split(" ")[0] || "User"; //if currentUser exists, display the name otherswise just "User"
