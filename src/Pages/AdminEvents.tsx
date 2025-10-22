@@ -127,7 +127,7 @@ const AdminEvents = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition"
+            className="w-full bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition"
           >
             {" "}
             {loading ? "Creating..." : "Create Event"}

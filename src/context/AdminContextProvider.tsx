@@ -21,6 +21,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [editId, setEditId] = useState<string | null>(null);
 
   const [data, setData] = useState<LoginFormData>({
     email: "",
@@ -194,7 +196,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     getCurrentUser();
   }, [url]);
 
-  const createTestimonial = async (e: React.FormEvent) => {
+  const createOrUpdateTestimonial = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const { name, message, rating, date } = testimonialData;
@@ -205,8 +207,14 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     }
 
     try {
-      const response = await fetch(`${url}/api/admin/testimonials/create`, {
-        method: "POST",
+      const endpoint = editMode
+        ? `${url}/api/admin/testimonials/update/${editId}`
+        : `${url}/api/admin/testimonials/create`;
+
+      const method = editMode ? "PUT" : "POST";
+
+      const response = await fetch(endpoint, {
+        method,
         headers: {
           "Content-Type": "Application/JSON",
         },
@@ -221,8 +229,14 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
       const data = await response.json();
       console.log(data);
-      toast(data.message, { icon: "👏" });
-      setTestimonialData({ name: "", message: "", rating: 1, date: "" });
+      toast(
+        editMode
+          ? "✅ Testimonial updated successfully!"
+          : "👏 Testimonial created successfully!"
+      );
+      setTestimonialData({ name: "", message: "", rating: 1, date: "" }); //resting fields
+      setEditMode(false); //reseting editMode
+      setEditId(null); //reseting editId
       fetchTestimonials();
     } catch (error) {
       console.error(error);
@@ -369,7 +383,12 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         setTestimonials,
         testimonialData,
         setTestimonialData,
-        createTestimonial,
+        createOrUpdateTestimonial,
+        editMode,
+        setEditMode,
+        editId,
+        setEditId,
+        fetchTestimonials
       }}
     >
       {children}

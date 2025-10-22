@@ -29,13 +29,18 @@ export type AdminContextType = {
   setEventFormData: React.Dispatch<React.SetStateAction<EventFormData>>;
   testimonialData: TestimonialData;
   setTestimonialData: React.Dispatch<React.SetStateAction<TestimonialData>>;
-  createTestimonial: (e: React.FormEvent) => Promise<void>;
+  createOrUpdateTestimonial: (e: React.FormEvent) => Promise<void>;
   handleCreateEvent: (e: React.FormEvent) => Promise<void>;
   image: File | null;
   setImage: React.Dispatch<React.SetStateAction<File | null>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   deleteUser: (userId: string) => Promise<void>;
+  editMode: boolean;
+  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+  editId: string | null;
+  setEditId: React.Dispatch<React.SetStateAction<string | null>>;
+  fetchTestimonials: () => void;
 };
 
 const AdminContext = createContext<AdminContextType>({} as AdminContextType);

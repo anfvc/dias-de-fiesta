@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { NavLink } from "react-router";
-import { X, LogOut } from "lucide-react";
+import { X } from "lucide-react";
 import AdminContext from "@/context/AdminContext";
 import { useContext } from "react";
 // import D from "../assets/svg/iconW.svg"
@@ -28,7 +28,7 @@ const AdminSidebar = () => {
     },
     {
       to: "/admin/users",
-      name: "User Management",
+      name: "Users",
       action: () => setSidebarOpen(false),
     },
     {
@@ -47,8 +47,8 @@ const AdminSidebar = () => {
     <div className="flex shadow-md flex-col text-white">
       <aside
         className={clsx(
-          "bg-gray-800 w-64 p-4 transition-transform duration-300 border-t-0 shadow-lg",
-          sidebarOpen ? "translate-x-0" : "-translate-x-64",
+          "bg-gray-800 w-80 p-4 transition-transform duration-300 border-t-0 shadow-lg",
+          sidebarOpen ? "translate-x-0" : "-translate-x-80",
           "md:translate-x-0 md:static fixed z-40 h-screen flex flex-col justify-between border-r border-gray-300"
         )}
       >
@@ -75,7 +75,7 @@ const AdminSidebar = () => {
                   key={index}
                   className={({ isActive }) =>
                     clsx(
-                      "block px-3 py-2 rounded-md transition-colors duration-200",
+                      "block px-6 py-3 rounded-full transition-colors duration-200",
                       isActive
                         ? "bg-white text-gray-900 font-semibold"
                         : "text-gray-200 hover:bg-gray-700 hover:text-white"
@@ -88,12 +88,12 @@ const AdminSidebar = () => {
             </nav>
           </div>
         </div>
-        <div>
+        <div className="w-full flex">
           <button
             onClick={handleLogout}
-            className="flex navItems-center gap-2 bg-indigo-600 text-white px-3 py-2 rounded-lg"
+            className="bg-red-500 text-gray-200 font-semibold px-5 py-2 rounded-full cursor-pointer"
           >
-            <LogOut className="w-4 h-4" /> Logout
+            Logout
           </button>
         </div>
       </aside>

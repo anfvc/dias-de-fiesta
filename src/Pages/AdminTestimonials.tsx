@@ -3,8 +3,12 @@ import AdminContext from "@/context/AdminContext";
 import { useContext } from "react";
 
 const AdminTestimonials = () => {
-  const { testimonialData, createTestimonial, setTestimonialData } =
-    useContext(AdminContext);
+  const {
+    testimonialData,
+    createOrUpdateTestimonial,
+    setTestimonialData,
+    editMode,
+  } = useContext(AdminContext);
   const today = new Date().toISOString().split("T")[0];
 
   const handleChange = (
@@ -20,7 +24,7 @@ const AdminTestimonials = () => {
 
       {/* Create Testimonial Form */}
       <form
-        onSubmit={createTestimonial}
+        onSubmit={createOrUpdateTestimonial}
         className="bg-white shadow rounded-lg p-6 flex flex-col gap-4 max-w-xl"
       >
         <div className="flex flex-col gap-2">
@@ -33,7 +37,7 @@ const AdminTestimonials = () => {
             id="name"
             value={testimonialData.name}
             onChange={handleChange}
-            className="border rounded-lg px-3 py-2"
+            className="border border-gray-500 rounded-lg px-3 py-2"
             placeholder="Enter name"
           />
         </div>
@@ -47,7 +51,7 @@ const AdminTestimonials = () => {
             id="message"
             value={testimonialData.message}
             onChange={handleChange}
-            className="border rounded-lg px-3 py-2"
+            className="border border-gray-500 rounded-lg px-3 py-2"
             rows={3}
             placeholder="Enter testimonial message"
           />
@@ -65,7 +69,7 @@ const AdminTestimonials = () => {
             onChange={handleChange}
             min="1"
             max="5"
-            className="border rounded-lg px-3 py-2"
+            className="border border-gray-500 rounded-lg px-3 py-2"
             placeholder="1 to 5"
           />
         </div>
@@ -81,15 +85,19 @@ const AdminTestimonials = () => {
             max={today}
             value={testimonialData.date}
             onChange={handleChange}
-            className="border rounded-lg px-3 py-2"
+            className="border border-gray-500 rounded-lg px-3 py-2"
           />
         </div>
 
         <button
           type="submit"
-          className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition"
+          className={`${
+            editMode
+              ? ` bg-sky-800 hover:bg-sky-900`
+              : `bg-green-800 hover:bg-green-900`
+          } text-white font-semibold px-4 py-2 rounded-lg transition`}
         >
-          Create Testimonial
+          {editMode ? "Update Testimonial" : "Create Testimonial"}
         </button>
       </form>
 

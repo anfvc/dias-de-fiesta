@@ -61,3 +61,49 @@ export const deleteTestimonial = async (req, res) => {
     res.status(500).json({ error: "Server Error." });
   }
 };
+
+export const updateTestimonial = async (req, res) => {
+  const { id } = req.params;
+  const { name, message, rating, date } = req.body;
+
+  try {
+    const testimonial = await Testimonial.findById(id);
+
+    if (!testimonial) {
+      res
+        .status(404)
+        .json({ error: "We couldn't find that testimonial. Does it exist?" });
+    }
+
+    if (name) {
+      testimonial.name = name
+        .split(" ")
+        .map((item) => item[0].toUpperCase() + item.slice(1))
+        .join(" ");
+    }
+
+    if (message) {
+      const formattedMessage = message.trim().endsWith(".")
+        ? message[0].toUpperCase() + message.slice(1)
+        : message[0].toUpperCase() + message.slice(1) + ".";
+
+      testimonial.message = formattedMessage;
+    }
+
+    if (rating) {
+      testimonial.rating = rating;
+    }
+
+    if (date) {
+      testimonial.date = date;
+    }
+
+    await testimonial.save();
+
+    res
+      .status(200)
+      .json({ message: "Testimonial updated successfully!", testimonial });
+  } catch (error) {
+    res.status(500).json({ error: "Error updating testimonial." });
+  }
+};
