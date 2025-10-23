@@ -1,9 +1,65 @@
 import AdminContext from "@/context/AdminContext";
 import { useContext } from "react";
 import add from "../assets/add-image.png";
+import toast from "react-hot-toast";
 
 const AdminGridEvents = () => {
-  const { events } = useContext(AdminContext);
+  const {
+    events,
+    setEditId,
+    url,
+    fetchEvents,
+    setEventFormData,
+    setEditMode,
+    setPreviewImage,
+  } = useContext(AdminContext);
+
+  const handleEdit = (id: string) => {
+    const eventToEdit = events.find((event) => event._id === id);
+    if (!eventToEdit) return;
+
+    setEditId(id);
+    setEditMode(true);
+    setEventFormData({
+      title: eventToEdit.title || "",
+      subtitle: eventToEdit.subtitle || "",
+      category: eventToEdit.category || "",
+      description: eventToEdit.description || "",
+      price: eventToEdit.price || "",
+    });
+
+    setPreviewImage(eventToEdit.image || null); //This line will bring back the file from the URL from cloudinary when the user clicks on edit
+
+
+    toast("✏️ Edit Mode enable. Please make sure you're editing the correct event.", {
+      icon: "🛠️",
+    });
+
+    // Smooth scroll to form for better UX
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this event?")) return;
+
+    try {
+      const response = await fetch(`${url}/api/admin/events/delete/${id}`, {
+        method: "DELETE",
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error(data.error || "Failed to delete event.");
+        return;
+      }
+
+      toast.success("🗑️ Event deleted successfully!");
+      fetchEvents();
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong while deleting event.");
+    }
+  };
 
   return (
     <section className="w-4/5 mt-10">
@@ -15,26 +71,39 @@ const AdminGridEvents = () => {
           {events.map((event) => (
             <div
               key={event._id}
-              className="w-full border border-gray-400 rounded-lg p-3 shadow-lg hover:shadow-2xl transition"
+              className="w-full border border-gray-300 rounded-lg p-3 shadow hover:shadow-lg transition relative group"
             >
               <img
                 src={event.image || add}
                 alt={event.title}
-                className="w-full h-80 object-cover rounded-md mb-3"
+                className="w-full h-72 object-cover rounded-md mb-3"
               />
               <h4 className="font-semibold text-lg">
                 {event.title
                   .split(" ")
-                  .map(
-                    (titleElement) =>
-                      titleElement[0].toUpperCase() + titleElement.slice(1)
-                  )
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
                   .join(" ")}
               </h4>
               <p className="text-gray-600 text-sm">{event.category}</p>
               <p className="text-indigo-600 font-semibold mt-2">
-                ${event.price}
+                {event.price} COP
               </p>
+
+              {/* Buttons */}
+              <div className="flex justify-between mt-4">
+                <button
+                  onClick={() => handleEdit(event._id)}
+                  className="px-3 py-1 text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(event._id)}
+                  className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>

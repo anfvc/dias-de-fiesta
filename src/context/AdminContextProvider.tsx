@@ -23,6 +23,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [editId, setEditId] = useState<string | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const [data, setData] = useState<LoginFormData>({
     email: "",
@@ -110,65 +111,76 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     }
   }
 
-  const handleCreateEvent = async (e: React.FormEvent) => {
+  const createOrUpdateEvent = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const { title, price, description, category, subtitle } = EventformData;
 
     if (!title || !price || !description || !category || !subtitle) {
-      toast.error("All fields are required.");
+      toast("Make sure all fields are provided.", { icon: "⚠️" });
       return;
     }
-
-    const data = new FormData();
-    data.append("title", EventformData.title);
-    data.append("subtitle", EventformData.subtitle);
-    data.append("description", EventformData.description);
-    data.append("price", EventformData.price.toString());
-    data.append("category", EventformData.category);
-
-    if (!image) {
-      toast("Please upload an image!!", { icon: "🏞️" });
-      return;
-    } else {
-      data.append("image", image);
-    }
-    setLoading(true);
 
     try {
-      const settings = {
-        method: "POST",
-        body: data,
-      };
+      const endpoint = editMode
+        ? `${url}/api/admin/events/update/${editId}`
+        : `${url}/api/admin/events/create`;
 
-      const response = await fetch(
-        `${import.meta.env.VITE_SERVER}/api/admin/events/create`,
-        settings
-      );
+      const method = editMode ? "PUT" : "POST";
 
-      if (response.ok) {
-        setEventFormData({
-          title: "",
-          description: "",
-          price: "",
-          category: "",
-          subtitle: "",
-        });
-        setImage(null);
-        setLoading(false);
-        const { message } = await response.json();
-        toast(message, { icon: "👏" });
-        fetchEvents();
+      const data = new FormData();
+      data.append("title", EventformData.title);
+      data.append("subtitle", EventformData.subtitle);
+      data.append("description", EventformData.description);
+      data.append("price", EventformData.price.toString());
+      data.append("category", EventformData.category);
+
+      if (!image) {
+        toast("Please upload an image!!", { icon: "🏞️" });
+        return;
       } else {
-        const { errorData } = await response.json();
-        toast.error(errorData);
-        // console.log(errorData);
+        data.append("image", image);
       }
+
+      setLoading(true);
+
+      const response = await fetch(endpoint, {
+        method,
+        body: data,
+      });
+
+      if (!response.ok) {
+        const { error } = await response.json();
+        toast.error(error);
+        return;
+      }
+
+      toast.success(
+        editMode
+          ? "🎉 Event updated successfully!"
+          : "👏 Event created successfully!"
+      );
+      setEventFormData({
+        //reseting form state
+        title: "",
+        description: "",
+        price: "",
+        category: "",
+        subtitle: "",
+      });
+      setImage(null);
+      setPreviewImage(null);
+      setLoading(false);
+      setEditMode(false);
+      setEditId(null);
+      fetchEvents()
     } catch (error) {
-      console.error(error);
+      console.log(error);
     } finally {
       setLoading(false);
     }
+
+    // setLoading(true);
   };
 
   const fetchEvents = async () => {
@@ -369,7 +381,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         handleLogout,
         EventformData,
         setEventFormData,
-        handleCreateEvent,
+        createOrUpdateEvent,
         image,
         setImage,
         loading,
@@ -388,7 +400,10 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         setEditMode,
         editId,
         setEditId,
-        fetchTestimonials
+        fetchTestimonials,
+        fetchEvents,
+        previewImage,
+        setPreviewImage,
       }}
     >
       {children}

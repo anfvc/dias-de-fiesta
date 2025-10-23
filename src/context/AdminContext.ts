@@ -30,7 +30,7 @@ export type AdminContextType = {
   testimonialData: TestimonialData;
   setTestimonialData: React.Dispatch<React.SetStateAction<TestimonialData>>;
   createOrUpdateTestimonial: (e: React.FormEvent) => Promise<void>;
-  handleCreateEvent: (e: React.FormEvent) => Promise<void>;
+  createOrUpdateEvent: (e: React.FormEvent) => Promise<void>;
   image: File | null;
   setImage: React.Dispatch<React.SetStateAction<File | null>>;
   loading: boolean;
@@ -41,6 +41,9 @@ export type AdminContextType = {
   editId: string | null;
   setEditId: React.Dispatch<React.SetStateAction<string | null>>;
   fetchTestimonials: () => void;
+  fetchEvents: () => void;
+  previewImage: string | null;
+  setPreviewImage: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 const AdminContext = createContext<AdminContextType>({} as AdminContextType);

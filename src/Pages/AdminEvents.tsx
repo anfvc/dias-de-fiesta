@@ -7,14 +7,19 @@ const AdminEvents = () => {
   const {
     EventformData,
     setEventFormData,
-    handleCreateEvent,
+    createOrUpdateEvent,
     image,
     setImage,
     loading,
+    editMode,
+    previewImage,
+    setPreviewImage,
   } = useContext(AdminContext);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setEventFormData({ ...EventformData, [e.target.name]: e.target.value });
   };
@@ -22,9 +27,11 @@ const AdminEvents = () => {
   return (
     <div>
       <div className="bg-white shadow-xl rounded-lg p-6 mt-6 max-w-5xl">
-        <h2 className="text-2xl font-semibold mb-4">Create Event</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          {editMode ? "Edit Event" : "Create Event"}
+        </h2>
 
-        <form onSubmit={handleCreateEvent} className="space-y-4">
+        <form onSubmit={createOrUpdateEvent} className="space-y-4">
           <div className="flex flex-col gap-4">
             <label htmlFor="title" className="block font-medium">
               Title
@@ -55,18 +62,23 @@ const AdminEvents = () => {
           </div>
 
           <div className="flex flex-col gap-4">
-            <label htmlFor="category" className="block font-medium">
-              Category
-            </label>
-            <input
-              type="text"
+            <label htmlFor="category">Category</label>
+            <select
               name="category"
               id="category"
               value={EventformData.category}
-              onChange={handleChange}
               className="w-full border border-gray-500 px-3 py-2 rounded-lg outline-blue-600"
-              // required
-            />
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                --Select an option--
+              </option>
+              <option value="Weddings">Weddings</option>
+              <option value="Birthdays">Birthdays</option>
+              <option value="Conferences">Conferences</option>
+              <option value="Baptisms">Baptisms</option>
+              <option value="Children's Parties">Children's Parties</option>
+            </select>
           </div>
 
           <div className="flex flex-col gap-4">
@@ -109,13 +121,19 @@ const AdminEvents = () => {
             </p>
             <label htmlFor="image" className="w-50 h-50">
               <img
-                src={image ? URL.createObjectURL(image) : add}
+                src={image ? URL.createObjectURL(image) : previewImage || add}
                 alt="preview of the image to be uploaded."
                 className="w-50 h-50 cursor-pointer border border-gray-500 object-cover rounded-lg"
               />
             </label>
             <input
-              onChange={(e) => setImage(e.target.files?.[0] || null)}
+              onChange={(e) => {
+                const file = e.target.files?.[0] || null;
+                setImage(file);
+                setPreviewImage(
+                  file ? URL.createObjectURL(file) : previewImage
+                );
+              }}
               name="image"
               type="file"
               id="image"
