@@ -83,9 +83,10 @@ export const updateTestimonial = async (req, res) => {
     }
 
     if (message) {
-      const formattedMessage = message.trim().endsWith(".")
-        ? message[0].toUpperCase() + message.slice(1)
-        : message[0].toUpperCase() + message.slice(1) + ".";
+      const formattedMessage =
+        message.trim().endsWith(".") || message.trim().endsWith("!")
+          ? message[0].toUpperCase() + message.slice(1)
+          : message[0].toUpperCase() + message.slice(1) + ".";
 
       testimonial.message = formattedMessage;
     }

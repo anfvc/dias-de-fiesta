@@ -145,10 +145,20 @@ const AdminEvents = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition"
+            className={`${
+              editMode
+                ? `bg-sky-800 hover:bg-sky-900`
+                : `bg-green-800 hover:bg-green-900`
+            } w-full text-white font-semibold py-2 px-4 rounded-lg  transition`}
           >
             {" "}
-            {loading ? "Creating..." : "Create Event"}
+            {loading
+              ? editMode
+                ? "Updating...⏳"
+                : "Creating...⏳"
+              : editMode
+              ? "Edit Event"
+              : "Create Event"}
           </button>
         </form>
       </div>

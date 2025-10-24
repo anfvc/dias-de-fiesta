@@ -173,7 +173,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       setLoading(false);
       setEditMode(false);
       setEditId(null);
-      fetchEvents()
+      fetchEvents();
     } catch (error) {
       console.log(error);
     } finally {
