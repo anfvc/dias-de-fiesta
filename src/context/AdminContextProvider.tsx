@@ -40,7 +40,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     title: "",
     subtitle: "",
     description: "",
-    price: "",
+    price: 0,
     category: "",
   });
 
@@ -135,10 +135,12 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       data.append("price", EventformData.price.toString());
       data.append("category", EventformData.category);
 
-      if (!image) {
+      if (!image && !editMode) {
         toast("Please upload an image!!", { icon: "🏞️" });
         return;
-      } else {
+      }
+
+      if (image) {
         data.append("image", image);
       }
 
@@ -164,7 +166,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         //reseting form state
         title: "",
         description: "",
-        price: "",
+        price: 0,
         category: "",
         subtitle: "",
       });

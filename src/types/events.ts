@@ -3,7 +3,7 @@ export interface Event {
   title: string;
   description: string;
   subtitle: string;
-  price: string;
+  price: number;
   category: string;
   image: string;
 }
@@ -12,6 +12,6 @@ export interface EventFormData {
   title: string;
   description: string;
   subtitle: string;
-  price: string;
+  price: number;
   category: string;
 }

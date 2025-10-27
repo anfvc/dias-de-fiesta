@@ -25,15 +25,17 @@ const AdminGridEvents = () => {
       subtitle: eventToEdit.subtitle || "",
       category: eventToEdit.category || "",
       description: eventToEdit.description || "",
-      price: eventToEdit.price || "",
+      price: eventToEdit.price || 0,
     });
 
     setPreviewImage(eventToEdit.image || null); //This line will bring back the file from the URL from cloudinary when the user clicks on edit
 
-
-    toast("✏️ Edit Mode enable. Please make sure you're editing the correct event.", {
-      icon: "🛠️",
-    });
+    toast(
+      "Edit mode is now enabled. Please double check everything once updated.",
+      {
+        icon: "🛠️",
+      }
+    );
 
     // Smooth scroll to form for better UX
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -61,9 +63,40 @@ const AdminGridEvents = () => {
     }
   };
 
+  const handleDeleteAllEvents = async () => {
+    if (confirm("Are you sure you want to delete all of your events?")) {
+      try {
+        const response = await fetch(`${url}/api/admin/events/deleteall`, {
+          method: "DELETE",
+        });
+
+        if (!response.ok) {
+          const { error } = await response.json();
+          toast.error(error || "We couldn't delete all events.");
+          return;
+        }
+
+        toast(" All events deleted successfully!", { icon: "🗑️" });
+        fetchEvents();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <section className="w-4/5 mt-10">
-      <h3 className="text-xl font-semibold mb-4">Live Events</h3>
+      <div className="flex items-center gap-8">
+        <h3 className="text-xl font-semibold mb-4">Live Events</h3>
+        {events.length > 0 && (
+          <button
+            onClick={handleDeleteAllEvents}
+            className="text-xl font-semibold mb-4 border px-4 rounded-full bg-red-500 text-white hover:bg-red-600 cursor-pointer transition-all"
+          >
+            Delete All
+          </button>
+        )}
+      </div>
       {events.length === 0 ? (
         <p className="text-gray-500">No events found.</p>
       ) : (
@@ -78,28 +111,27 @@ const AdminGridEvents = () => {
                 alt={event.title}
                 className="w-full h-72 object-cover rounded-md mb-3"
               />
-              <h4 className="font-semibold text-lg">
-                {event.title
-                  .split(" ")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")}
-              </h4>
+              <h4 className="font-semibold text-lg">{event.title}</h4>
               <p className="text-gray-600 text-sm">{event.category}</p>
               <p className="text-indigo-600 font-semibold mt-2">
-                {event.price} COP
+                {event.price.toLocaleString(undefined, {
+                  style: "currency",
+                  currency: "COP",
+                  minimumFractionDigits: 0,
+                })}{" "}
               </p>
 
               {/* Buttons */}
               <div className="flex justify-between mt-4">
                 <button
                   onClick={() => handleEdit(event._id)}
-                  className="px-3 py-1 text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
+                  className="px-3 py-1 text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600 transition cursor-pointer"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(event._id)}
-                  className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition"
+                  className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition cursor-pointer"
                 >
                   Delete
                 </button>

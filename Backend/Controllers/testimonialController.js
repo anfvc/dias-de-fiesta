@@ -108,3 +108,18 @@ export const updateTestimonial = async (req, res) => {
     res.status(500).json({ error: "Error updating testimonial." });
   }
 };
+
+export const deleteAllTestimonials = async (req, res) => {
+  try {
+    const testimonials = await Testimonial.deleteMany();
+
+    if (!testimonials) {
+      res.status(404).json({ error: "You have no testimonials to delete." });
+    }
+    res
+      .status(200)
+      .json({ message: "All testimonials have been deleted successfully!" });
+  } catch (error) {
+    res.stuatus(500).json({ error: "Error deleting all testimonials." });
+  }
+};

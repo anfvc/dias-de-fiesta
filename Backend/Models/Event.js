@@ -18,6 +18,9 @@ const eventSchema = new Schema(
       required: true,
       type: String,
     },
+    imagePublicId: {
+      type: String,
+    },
     price: {
       type: Number,
       required: true,

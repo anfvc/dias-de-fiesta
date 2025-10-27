@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createTestimonial,
+  deleteAllTestimonials,
   deleteTestimonial,
   fetchTestimonials,
   updateTestimonial,
@@ -12,5 +13,6 @@ router.post("/create", createTestimonial);
 router.get("/get", fetchTestimonials);
 router.put("/update/:id", updateTestimonial);
 router.delete("/delete/:id", deleteTestimonial);
+router.delete("/delete/all", deleteAllTestimonials);
 
 export default router;
