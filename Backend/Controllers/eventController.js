@@ -9,39 +9,44 @@ export const createEvent = async (req, res) => {
       return res.status(404).json({ error: "All fields are required." });
     }
 
-    const result = cloudinary.uploader.upload_stream(
-      { folder: "dias-de-fiesta" },
-      async (error, uploadResult) => {
-        if (error) {
-          console.error("Cloudinary upload error:", error);
-          return res.status(500).json({ error: "Image upload failed." });
-        }
-
-        const newEvent = new Event({
-          price,
-          title: title
-            .split(" ")
-            .map((title) => title[0].toUpperCase() + title.slice(1))
-            .join(" "),
-          subtitle,
-          category,
-          description,
-          image: uploadResult.secure_url,
-        });
-
-        await newEvent.save();
-
-        res
-          .status(201)
-          .json({ message: `${title} has been created successfully.` });
-      }
-    );
-
-    if (req.file) {
-      result.end(req.file.buffer);
-    } else {
-      res.status(400).json({ error: "No image file provided." });
+    if (!req.file) {
+      return res.stattus(404).json({ message: "Image file is required." });
     }
+
+    const uploadResult = await new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        {
+          folder: "dias-de-fiesta",
+        },
+        (error, result) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(result);
+          }
+        }
+      );
+      stream.end(req.file.buffer);
+    });
+
+    const newEvent = new Event({
+      price,
+      title: title
+        .split(" ")
+        .map((title) => title[0].toUpperCase() + title.slice(1))
+        .join(" "),
+      subtitle,
+      category,
+      description,
+      image: uploadResult.secure_url,
+      imagePublicId: uploadResult.public_id, //every image will get this public id from cloudinary
+    });
+
+    await newEvent.save();
+
+    res
+      .status(201)
+      .json({ message: `${title} has been created successfully.` });
   } catch (error) {
     console.error(error);
     res
@@ -92,7 +97,7 @@ export const updateEvent = async (req, res) => {
     if (price) {
       const numericPrice = Number(price);
       if (isNaN(numericPrice)) {
-        res.status(400).json({ error: "Price must be a valid number." });
+        return res.status(400).json({ error: "Price must be a valid number." });
       }
       event.price = numericPrice;
     }
@@ -149,7 +154,12 @@ export const deleteEvent = async (req, res) => {
     }
 
     if (event.imagePublicId) {
-      await cloudinary.uploader.destroy(event.imagePublicId);
+      try {
+        await cloudinary.uploader.destroy(event.imagePublicId);
+        console.log(`Deleted image from cloudinary: ${event.imagePublicId}`);
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     await Event.findByIdAndDelete(id);
@@ -171,23 +181,27 @@ export const deleteAllEvents = async (req, res) => {
 
     //? Deleting all images from cloudinary when the users want to delete all the existing events:
 
-    for (const event of events) {
-      //? Iterating through all of the events to get the public ids of each img:
+    const deletionPromises = events.map(async (event) => { //? iterating through all events
       if (event.imagePublicId) {
         try {
-          await cloudinary.uploader.destroy(event.imagePublicId);
-          console.log("All events were successfully deleted!");
+          await cloudinary.uploader.destroy(event.imagePublicId); //deleting the images with imagePublicIds in bulk
+          console.log(`Deleted Cloudinary image: ${event.imagePublicId}`);
         } catch (error) {
-          console.error(error);
+          console.error(
+            `Error deleting image ${event.imagePublicId}:`,
+            error.message
+          );
         }
-      } else await cloudinary.uploader.destroy(event.image);
-    }
+      }
+    });
+
+    await Promise.all(deletionPromises);
 
     await Event.deleteMany();
     res
       .status(200)
       .json({ message: "All events have been deleted successfully!" });
   } catch (error) {
-    res.stuatus(500).json({ error: "Error deleting all events." });
+    res.status(500).json({ error: "Error deleting all events." });
   }
 };
