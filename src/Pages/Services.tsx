@@ -1,10 +1,14 @@
-import { SERVICES } from "@/consts/services";
+// import { SERVICES } from "@/consts/services";
 import { motion, easeInOut } from "framer-motion";
 import serviceHeadingImg from "@/assets/services/serviceHeadImg.webp";
 import { Link } from "react-router";
 import FAQ from "@/components/FAQ";
+import AdminContext from "@/context/AdminContext";
+import { useContext } from "react";
 
 const Services = () => {
+  const { events } = useContext(AdminContext);
+
   return (
     <section
       className="w-full pt-[84.16px] md:pt-[92.19px] max-w-[1500px] mx-auto"
@@ -48,8 +52,8 @@ const Services = () => {
       </div>
       <div className="mt-40 px-4 lg:px-0">
         <div className="grid grid-cols-2 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 lg:gap-10  lg:grid-cols-3">
-          {SERVICES.map((service, id) => (
-            <Link to={`/services/${service.id}`} key={id}>
+          {events.map((service, id) => (
+            <Link to={`/services/${service._id}`} key={service._id}>
               <motion.div
                 initial={{ y: 25, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -66,7 +70,7 @@ const Services = () => {
                     className="w-full aspect-square object-cover md:min-w-xs transform duration-600 ease hover:scale-105 "
                   />
                   <h3 className="text-2xl sm:text-3xl md:text-4xl text-white font-bold absolute bottom-4 left-4 text-pretty z-20">
-                    {service.name}
+                    {service.title}
                   </h3>
                   <div className="w-full absolute flex justify-end items-center top-2 right-2 md:top-4 md:right-4">
                     <h2 className="text-xl p-1 sm:text-2xl sm:p-2 md:text-3xl bg-gold-section text-black font-bold text-pretty z-20 ">
