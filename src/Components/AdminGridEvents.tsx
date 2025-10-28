@@ -93,7 +93,7 @@ const AdminGridEvents = () => {
             onClick={handleDeleteAllEvents}
             className="text-xl font-semibold mb-4 border px-4 rounded-full bg-red-500 text-white hover:bg-red-600 cursor-pointer transition-all"
           >
-            Delete All
+            ⚠️ Delete All
           </button>
         )}
       </div>
@@ -125,7 +125,7 @@ const AdminGridEvents = () => {
               <div className="flex justify-between mt-4">
                 <button
                   onClick={() => handleEdit(event._id)}
-                  className="px-3 py-1 text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600 transition cursor-pointer"
+                  className="px-3 py-1 text-sm bg-sky-800 hover:bg-sky-900 text-white rounded  transition cursor-pointer"
                 >
                   Edit
                 </button>
