@@ -25,6 +25,7 @@ import AdminUsers from "@/pages/AdminUsers";
 import AdminPhotoUploads from "@/pages/AdminPhotoUploads";
 import AdminLayout from "@/layouts/AdminLayout";
 import AdminTestimonials from "./pages/AdminTestimonials";
+import AdminFaqs from "./pages/AdminFaqs";
 
 function App() {
   const location = useLocation();
@@ -39,8 +40,11 @@ function App() {
 
   return (
     <>
-      <Toaster position="top-center"
-        toastOptions={{ style: { background: "#1d2938", color: "#fff", borderRadius: "20px" } }}
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          style: { background: "#1d2938", color: "#fff", borderRadius: "20px" },
+        }}
       />
       {!isAdminRoute && <Navbar />}
       <main className="w-full min-h-screen">
@@ -105,7 +109,7 @@ function App() {
               <Route path="settings" element={<AdminSettings />} />
               <Route path="users" element={<AdminUsers />} />
               <Route path="testimonials" element={<AdminTestimonials />} />
-              {/* <Route path="users/:id" element={<AdminUser />} /> */}
+              <Route path="faqs" element={<AdminFaqs />} />
 
               <Route path="uploads" element={<AdminPhotoUploads />} />
             </Route>

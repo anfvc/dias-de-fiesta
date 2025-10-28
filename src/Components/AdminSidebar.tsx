@@ -3,45 +3,12 @@ import { NavLink } from "react-router";
 import { X } from "lucide-react";
 import AdminContext from "@/context/AdminContext";
 import { useContext } from "react";
-// import D from "../assets/svg/iconW.svg"
 import logo from "../assets/svg/logoWhite.svg";
+import { adminSidebarNavItems } from "@/data/AdminSidebarNavItems";
 
 const AdminSidebar = () => {
   const { setSidebarOpen, sidebarOpen, handleLogout } =
     useContext(AdminContext);
-
-  const navItems = [
-    {
-      to: "/admin/dashboard",
-      name: "Dashboard",
-      action: () => setSidebarOpen(false),
-    },
-    {
-      to: "/admin/events",
-      name: "Create Event",
-      action: () => setSidebarOpen(false),
-    },
-    {
-      to: "/admin/uploads",
-      name: "Photo Uploads",
-      action: () => setSidebarOpen(false),
-    },
-    {
-      to: "/admin/users",
-      name: "Users",
-      action: () => setSidebarOpen(false),
-    },
-    {
-      to: "/admin/testimonials",
-      name: "Testimonials",
-      action: () => setSidebarOpen(false),
-    },
-    {
-      to: "/admin/settings",
-      name: "Settings",
-      action: () => setSidebarOpen(false),
-    },
-  ];
 
   return (
     <div className="flex shadow-md flex-col text-white">
@@ -68,10 +35,10 @@ const AdminSidebar = () => {
           </div>
           <div className="w-full">
             <nav className="flex flex-col gap-4 justify-between mb-10">
-              {navItems.map((navItem, index) => (
+              {adminSidebarNavItems.map((navItem, index) => (
                 <NavLink
                   to={navItem.to}
-                  onClick={navItem.action}
+                  onClick={() => setSidebarOpen(false)}
                   key={index}
                   className={({ isActive }) =>
                     clsx(

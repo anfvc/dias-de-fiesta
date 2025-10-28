@@ -1,24 +1,20 @@
 import AdminContext from "@/context/AdminContext";
 import { useContext } from "react";
-import { Users, Calendar, Camera, Text } from "lucide-react";
+import { Users, Calendar, Camera, Text, FileQuestionMark } from "lucide-react";
 import { Link } from "react-router";
 
 function AdminDashboard() {
-  const { users, events, photos, testimonials } = useContext(AdminContext);
+  const { users, events, photos, testimonials, faqs } =
+    useContext(AdminContext);
 
   // Just in case some values are undefined:
   const usersCount = users?.length || 0;
   const eventsCount = events?.length || 0;
   const photosCount = photos?.length || 0;
+  const faqsCount = faqs?.length || 0;
   const testimonialsCount = testimonials?.length || 0;
 
   const kpis = [
-    {
-      label: usersCount > 1 ? "Admins" : "Admin",
-      value: usersCount,
-      icon: <Users className="text-blue-500 w-8 h-8" />,
-      to: "/admin/users",
-    },
     {
       label: eventsCount > 1 ? "Live Events" : "Live Event",
       value: eventsCount,
@@ -32,17 +28,29 @@ function AdminDashboard() {
       to: "/admin/uploads",
     },
     {
+      label: usersCount > 1 ? "Admins" : "Admin",
+      value: usersCount,
+      icon: <Users className="text-blue-500 w-8 h-8" />,
+      to: "/admin/users",
+    },
+    {
       label: testimonialsCount > 1 ? "Live Testimonials" : "Live Testimonial",
       value: testimonialsCount,
       icon: <Text className="text-orange-500 w-8 h-8" />,
       to: "/admin/testimonials",
-    }
+    },
+    {
+      label: faqsCount > 1 ? "Live FAQs" : "Live FAQ",
+      value: faqsCount,
+      icon: <FileQuestionMark className="text-indigo-800 w-8 h-8" />,
+      to: "/admin/faqs",
+    },
   ];
 
   // console.log(url);
 
   return (
-    <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 p-6">
+    <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 p-6">
       {kpis.map((kpi, index) => (
         <Link to={kpi.to} key={index}>
           <div

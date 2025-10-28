@@ -6,6 +6,7 @@ import { User, RegisterFormData, LoginFormData } from "@/types/users";
 import { Testimonial, TestimonialData } from "@/types/testimonials";
 import { Photo } from "@/types/photos";
 import toast from "react-hot-toast";
+import { FAQ } from "@/types/faqs";
 
 interface AdminContextProviderProps {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const [users, setUsers] = useState<User[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
   const [photos, setPhotos] = useState<Photo[]>([]);
+  const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [image, setImage] = useState<File | null>(null);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -406,6 +408,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         fetchEvents,
         previewImage,
         setPreviewImage,
+        faqs,
+        setFaqs,
       }}
     >
       {children}

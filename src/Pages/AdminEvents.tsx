@@ -77,6 +77,7 @@ const AdminEvents = () => {
               <option value="Birthdays">Birthdays</option>
               <option value="Conferences">Conferences</option>
               <option value="Baptisms">Baptisms</option>
+              <option value="Graduations">Graduations</option>
               <option value="Children's Parties">Children's Parties</option>
             </select>
           </div>

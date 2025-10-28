@@ -3,6 +3,7 @@ import { Event, EventFormData } from "@/types/events";
 import { Photo } from "@/types/photos";
 import { Testimonial, TestimonialData } from "@/types/testimonials";
 import { User, LoginFormData, RegisterFormData } from "@/types/users";
+import { FAQ } from "@/types/faqs";
 
 export type AdminContextType = {
   url: string;
@@ -44,6 +45,8 @@ export type AdminContextType = {
   fetchEvents: () => void;
   previewImage: string | null;
   setPreviewImage: React.Dispatch<React.SetStateAction<string | null>>;
+  faqs: FAQ[];
+  setFaqs: React.Dispatch<React.SetStateAction<FAQ[]>>;
 };
 
 const AdminContext = createContext<AdminContextType>({} as AdminContextType);

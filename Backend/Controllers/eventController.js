@@ -35,9 +35,16 @@ export const createEvent = async (req, res) => {
         .split(" ")
         .map((title) => title[0].toUpperCase() + title.slice(1))
         .join(" "),
-      subtitle,
+      subtitle:
+        subtitle[0].toUpperCase() + subtitle.slice(1) && !subtitle.endsWith(".")
+          ? subtitle + "."
+          : subtitle,
       category,
-      description,
+      description:
+        description[0].toUpperCase() + description.slice(1) &&
+        !description.endsWith(".")
+          ? description + "."
+          : description,
       image: uploadResult.secure_url,
       imagePublicId: uploadResult.public_id, //every image will get this public id from cloudinary
     });
@@ -181,7 +188,8 @@ export const deleteAllEvents = async (req, res) => {
 
     //? Deleting all images from cloudinary when the users want to delete all the existing events:
 
-    const deletionPromises = events.map(async (event) => { //? iterating through all events
+    const deletionPromises = events.map(async (event) => {
+      //? iterating through all events
       if (event.imagePublicId) {
         try {
           await cloudinary.uploader.destroy(event.imagePublicId); //deleting the images with imagePublicIds in bulk
