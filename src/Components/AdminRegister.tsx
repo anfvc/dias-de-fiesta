@@ -8,14 +8,16 @@ import AdminContext from "@/context/AdminContext";
 export default function AdminRegister() {
   const { handleRegister, formData, setFormData } = useContext(AdminContext);
 
-  const { type, visible, toggle } = useTogglePassword();
+  const { type, visible, toggle, disabled } = useTogglePassword(
+    formData.password || ""
+  );
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <h1 className="text-3xl font-semibold mb-8">Backoffice</h1>
       <form
         onSubmit={handleRegister}
-        className="bg-white p-10 rounded-lg shadow-md w-xl border flex flex-col gap-4 items-center"
+        className="bg-white p-10 rounded-lg shadow-xl w-xl flex flex-col gap-4 items-center"
       >
         <h2 className="text-center text-3xl mb-3 font-semibold">Register</h2>
         <input
@@ -44,12 +46,16 @@ export default function AdminRegister() {
           />
           {!visible ? (
             <BsEye
-              className="cursor-pointer absolute right-3 top-4"
+              className={`absolute right-3 top-4 ${
+                disabled ? "text-gray-400 cursor-not-allowed" : "cursor-pointer"
+              }`}
               onClick={toggle}
             />
           ) : (
             <BsEyeSlash
-              className="cursor-pointer absolute right-3 top-4"
+              className={`absolute right-3 top-4 ${
+                disabled ? "text-gray-400 cursor-not-allowed" : "cursor-pointer"
+              }`}
               onClick={toggle}
             />
           )}

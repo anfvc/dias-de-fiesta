@@ -75,10 +75,9 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         // console.log(data);
         localStorage.setItem("token", data.token); // store JWT
         setCurrentUser(data.user); //? storing the logged in user info coming from the login route into the state variable "loggedinUser"
-        // console.log("Logged in and current user:", data.user);
-        // console.log(data.message);
         toast.success(data.message);
         console.log(data);
+        setData({ email: "", password: "" }); // reseting login form
         navigate("/admin/dashboard"); // redirect to dashboard
       } else {
         const { error } = await response.json();

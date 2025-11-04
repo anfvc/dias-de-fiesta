@@ -1,6 +1,7 @@
 import AdminGridTestim from "@/components/AdminGridTestim";
 import AdminContext from "@/context/AdminContext";
-import { useContext } from "react";
+import { useContext, useCallback } from "react";
+import { useResetFormOnNavigate } from "@/hooks/useResetFormOnNavigate";
 
 const AdminTestimonials = () => {
   const {
@@ -8,6 +9,7 @@ const AdminTestimonials = () => {
     createOrUpdateTestimonial,
     setTestimonialData,
     editMode,
+    setEditMode,
   } = useContext(AdminContext);
   const today = new Date().toISOString().split("T")[0];
 
@@ -17,6 +19,13 @@ const AdminTestimonials = () => {
     e.preventDefault();
     setTestimonialData({ ...testimonialData, [e.target.name]: e.target.value });
   };
+
+  const resetForm = useCallback(() => {
+    setTestimonialData({ name: "", message: "", rating: 1, date: "" });
+    setEditMode(false);
+  }, [setEditMode, setTestimonialData]);
+
+  useResetFormOnNavigate(resetForm);
 
   return (
     <div className="p-6">

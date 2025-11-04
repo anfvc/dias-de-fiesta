@@ -11,41 +11,6 @@ import conferences1 from "@/assets/conferences1.jpg";
 export const PHOTOS: portfolioPhotos[] = [
   {
     id: uuidv4(),
-    image: "",
-    category: "children's parties",
-  },
-  {
-    image: "",
-    id: uuidv4(),
-    category: "children's parties",
-  },
-  {
-    image: "",
-    id: uuidv4(),
-    category: "children's parties",
-  },
-  {
-    image: "",
-    id: uuidv4(),
-    category: "children's parties",
-  },
-  {
-    image: "",
-    id: uuidv4(),
-    category: "children's parties",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-    category: "children's parties",
-  },
-  {
-    image: "",
-    id: uuidv4(),
-    category: "birthdays",
-  },
-  {
-    id: uuidv4(),
     image: birthday1,
     category: "birthdays",
   },
@@ -56,151 +21,13 @@ export const PHOTOS: portfolioPhotos[] = [
   },
   {
     id: uuidv4(),
-    image: "",
-    category: "birthdays",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "birthdays",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "birthdays",
-  },
-  {
-    id: uuidv4(),
-
-    image: "",
-    category: "weddings",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "conferences",
-  },
-  {
-    id: uuidv4(),
     image: conferences1,
-
     category: "conferences",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "conferences",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "conferences",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "conferences",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "graduations",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "graduations",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "graduations",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "graduations",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "graduations",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "graduations",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "baptisms",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "conferences",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "baptisms",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "baptisms",
   },
   {
     id: uuidv4(),
 
     image: weddings3,
-    category: "weddings",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "baptisms",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "baptisms",
-  },
-  {
-    id: uuidv4(),
-    image: "",
-
-    category: "baptisms",
-  },
-  {
-    id: uuidv4(),
-
-    image: "",
-    category: "weddings",
-  },
-  {
-    id: uuidv4(),
-
-    image: "",
     category: "weddings",
   },
   {

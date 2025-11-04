@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import { useContext, useCallback } from "react";
 import add from "../assets/add-image.png";
 import AdminContext from "@/context/AdminContext";
 import AdminGridEvents from "@/components/AdminGridEvents";
+import { useResetFormOnNavigate } from "@/hooks/useResetFormOnNavigate";
 
 const AdminEvents = () => {
   const {
@@ -12,9 +13,24 @@ const AdminEvents = () => {
     setImage,
     loading,
     editMode,
+    setEditMode,
     previewImage,
     setPreviewImage,
   } = useContext(AdminContext);
+
+  const resetForm = useCallback(() => {
+    setEventFormData({
+      title: "",
+      subtitle: "",
+      category: "",
+      description: "",
+      price: 0,
+    });
+    setPreviewImage(null);
+    setEditMode(false);
+  }, [setEditMode, setEventFormData, setPreviewImage]);
+
+  useResetFormOnNavigate(resetForm);
 
   const handleChange = (
     e: React.ChangeEvent<

@@ -131,7 +131,7 @@ const AdminGridEvents = () => {
                 </button>
                 <button
                   onClick={() => handleDelete(event._id)}
-                  className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition cursor-pointer"
+                  className="px-3 py-1 text-sm bg-red-700 text-white rounded hover:bg-red-800 transition cursor-pointer"
                 >
                   Delete
                 </button>
