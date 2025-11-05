@@ -34,12 +34,14 @@ const AdminGridTestim = () => {
         `${url}/api/admin/testimonials/delete/${id}`,
         {
           method: "DELETE",
+          credentials: "include",
         }
       );
 
       const data = await response.json();
 
       if (!response.ok) {
+        console.log(data.error);
         toast.error(data.error || "Failed to delete testimonial.");
         return;
       }

@@ -1,4 +1,5 @@
 import express from "express";
+import { verifyRole, verifyToken } from "../Middleware/auth.js";
 import {
   createEvent,
   deleteAllEvents,
@@ -12,8 +13,14 @@ const router = express.Router();
 
 router.post("/create", upload.single("image"), createEvent);
 router.get("/all", fetchAllEvents);
-router.put("/update/:id", upload.single("image"), updateEvent);
-router.delete("/delete/:id", deleteEvent);
-router.delete("/deleteall", deleteAllEvents);
+router.put(
+  "/update/:id",
+  verifyToken,
+  verifyRole,
+  upload.single("image"),
+  updateEvent
+);
+router.delete("/delete/:id", verifyToken, verifyRole, deleteEvent);
+router.delete("/deleteall", verifyToken, verifyRole, deleteAllEvents);
 
 export default router;

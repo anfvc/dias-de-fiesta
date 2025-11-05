@@ -54,7 +54,7 @@ export const deleteTestimonial = async (req, res) => {
     const deletedTestimonial = await Testimonial.findByIdAndDelete(id);
 
     res.status(200).json({
-      message: "User has been deleted successfully.",
+      message: "Testimonial has been deleted successfully.",
       deletedTestimonial,
     });
   } catch (error) {

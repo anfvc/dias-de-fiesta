@@ -47,6 +47,7 @@ const AdminGridEvents = () => {
     try {
       const response = await fetch(`${url}/api/admin/events/delete/${id}`, {
         method: "DELETE",
+        credentials: "include",
       });
       const data = await response.json();
 
@@ -68,6 +69,7 @@ const AdminGridEvents = () => {
       try {
         const response = await fetch(`${url}/api/admin/events/deleteall`, {
           method: "DELETE",
+          credentials: "include",
         });
 
         if (!response.ok) {

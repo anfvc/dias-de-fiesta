@@ -150,6 +150,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       const response = await fetch(endpoint, {
         method,
         body: data,
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -179,8 +180,26 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       fetchEvents();
     } catch (error) {
       console.log(error);
+      setEventFormData({
+        //reseting form state
+        title: "",
+        description: "",
+        price: 0,
+        category: "",
+        subtitle: "",
+      });
+      setPreviewImage(null);
     } finally {
       setLoading(false);
+      setEventFormData({
+        //reseting form state
+        title: "",
+        description: "",
+        price: 0,
+        category: "",
+        subtitle: "",
+      });
+      setPreviewImage(null);
     }
 
     // setLoading(true);
@@ -234,6 +253,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
           "Content-Type": "Application/JSON",
         },
         body: JSON.stringify(testimonialData),
+        credentials: "include",
       });
 
       if (!response.ok) {
