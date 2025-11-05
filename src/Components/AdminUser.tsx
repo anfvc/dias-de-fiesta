@@ -14,7 +14,7 @@ const AdminUser = ({ user }: AdminUserCardProps) => {
     <div className="relative bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-all duration-200 cursor-pointer">
       {/* Delete button */}
       <button
-        className="absolute right-3 top-3 text-white bg-red-500 transition-colors border p-2 text-lg rounded-lg"
+        className="absolute right-3 top-3 text-white bg-red-500 transition-colors border p-2 text-lg rounded-lg cursor-pointer"
         onClick={(e) => {
           e.preventDefault(); // prevent triggering <Link> click
           e.stopPropagation(); // stop the link navigation

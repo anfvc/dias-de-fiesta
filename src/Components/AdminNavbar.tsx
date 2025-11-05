@@ -20,6 +20,8 @@ const AdminNavbar = () => {
         <input
           type="text"
           placeholder="Search..."
+          id="search"
+          name="search"
           className="hidden md:block border rounded-lg px-4 py-2 w-80 focus:outline-indigo-500"
         />
 

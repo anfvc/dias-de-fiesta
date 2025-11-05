@@ -26,7 +26,7 @@ export const registerUser = async (req, res) => {
       email: email.toLowerCase(),
       password: hashedPassword,
     });
-    console.log(token);
+    // console.log(token);
 
     await newUser.save();
     res
@@ -67,6 +67,13 @@ export const loginUser = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "PRODUCTION",
+      sameSite: "strict",
+      maxAge: 60 * 60 * 1000, //1 hour
+    });
 
     console.log(token);
 
@@ -170,5 +177,22 @@ export const updateUserRole = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error: "Server Error." });
+  }
+};
+
+export const logoutUser = async (req, res) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+    });
+
+    return res
+      .status(200)
+      .json({ message: "You have been logged out successfully." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error. Please try again later." });
   }
 };

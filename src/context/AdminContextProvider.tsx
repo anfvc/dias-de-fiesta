@@ -22,6 +22,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const [image, setImage] = useState<File | null>(null);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [loading, setLoading] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [editId, setEditId] = useState<string | null>(null);
@@ -68,12 +69,11 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
+        credentials: "include",
       });
 
       if (response.ok) {
         const data = await response.json();
-        // console.log(data);
-        localStorage.setItem("token", data.token); // store JWT
         setCurrentUser(data.user); //? storing the logged in user info coming from the login route into the state variable "loggedinUser"
         toast.success(data.message);
         console.log(data);
@@ -261,7 +261,9 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
   const fetchTestimonials = async () => {
     try {
-      const response = await fetch(`${url}/api/admin/testimonials/get`);
+      const response = await fetch(`${url}/api/admin/testimonials/get`, {
+        credentials: "include",
+      });
 
       if (!response.ok) {
         const { error } = await response.json();
@@ -277,7 +279,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       }
 
       setTestimonials(data);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.log(error);
       toast.error("Failed to fetch testimonials.");
@@ -286,7 +288,9 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
   const getUsers = async () => {
     try {
-      const response = await fetch(`${url}/api/admin/users`);
+      const response = await fetch(`${url}/api/admin/users`, {
+        credentials: "include",
+      });
 
       if (response.ok) {
         const result: User[] = await response.json();
@@ -303,6 +307,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       try {
         const response = await fetch(`${url}/api/admin/${userId}`, {
           method: "DELETE",
+          credentials: "include",
         });
 
         if (!response.ok) {
@@ -324,43 +329,41 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
   const getCurrentUser = async () => {
     try {
-      const token = localStorage.getItem("token");
-
-      if (!token) {
-        return;
-      }
-
+      setIsLoading(true);
       const response = await fetch(`${url}/api/admin/me`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        credentials: "include",
       });
 
-      if (!response.ok) {
+      if (response.status === 401 || !response.ok) {
         const error = await response.json();
 
         if (error.error === "Session has expired. Please log in again.") {
           toast.error("Your session has expired. Please log in again.");
         }
-
-        localStorage.removeItem("token");
         setCurrentUser(null);
         navigate("/admin/login");
-        return;
-      }
 
-      const me = await response.json();
-      setCurrentUser(me);
-      // console.log(me);
+        return;
+      } else {
+        const currentUserData = await response.json();
+        setCurrentUser(currentUserData);
+      }
     } catch (error) {
       console.error(error);
+      setCurrentUser(null);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     const userName = currentUser?.name.split(" ")[0] || "User"; //if currentUser exists, display the name otherswise just "User"
     if (confirm(`${userName}, are you sure you want to log out?`)) {
-      localStorage.removeItem("token");
+      await fetch(`${url}/api/admin/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+      setCurrentUser(null);
       navigate("/admin/login");
     }
   };
@@ -409,6 +412,9 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         setPreviewImage,
         faqs,
         setFaqs,
+        getCurrentUser,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}

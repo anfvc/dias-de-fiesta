@@ -7,6 +7,7 @@ import userRouter from "./Routes/userRouter.js";
 import eventRouter from "./Routes/eventRouter.js";
 import testimonialRouter from "./Routes/testimonialRouter.js";
 import connection from "./Database/database.js";
+import cookieParser from "cookie-parser";
 
 await connection();
 
@@ -14,7 +15,14 @@ const app = express();
 
 app.use(express.json());
 
-app.use(cors());
+app.use(cookieParser());
+
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.FRONTEND_URL,
+  })
+);
 app.use(bodyParser.json());
 
 app.use("/", wwhatsappRouter);

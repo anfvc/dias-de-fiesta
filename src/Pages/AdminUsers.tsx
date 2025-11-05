@@ -50,10 +50,12 @@ const AdminUsers = () => {
             </p>
 
             <div className="mt-6">
-              <label className="block mb-2 font-semibold">Edit Role</label>
+              <label className="block mb-2 font-semibold" htmlFor="userRole">Edit Role</label>
               <select
                 className="border rounded-md p-2 w-full"
                 value={selectedUser.role || ""}
+                name="userRole"
+                id="userRole"
                 onChange={(e) => console.log("Update role to", e.target.value)}
               >
                 <option value="admin">Admin</option>

@@ -3,15 +3,13 @@ import User from "../Models/User.js";
 
 export const verifyToken = async (req, res, next) => {
   try {
-    const auth = req.headers.authorization;
+    const token = req.cookies.token; //get the token from cookies
 
-    if (!auth || !auth.startsWith("Bearer ")) {
+    if (!token) {
       return res
         .status(401)
         .json({ error: "Access denied. No token provided." });
     }
-
-    const token = auth.split(" ")[1]; // -> ["Bearer", "token"]
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const currentUser = await User.findById(decoded.id).select(
@@ -40,13 +38,13 @@ export const verifyRole = async (req, res, next) => {
   try {
     if (!req.user) {
       return res.status(401).json({
-        error: "Unauthorized access. Please speak to your admin.",
+        error: "We could not verify your role. Please log in again.",
       });
     }
     if (req.user.role !== "admin" && req.user.role !== "owner") {
       return res
         .status(403)
-        .json({ error: `Permission denied. You don't have admin rights.` });
+        .json({ error: `Permission denied. You don't have admin/owner rights.` });
     }
 
     next();

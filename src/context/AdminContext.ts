@@ -47,6 +47,9 @@ export type AdminContextType = {
   setPreviewImage: React.Dispatch<React.SetStateAction<string | null>>;
   faqs: FAQ[];
   setFaqs: React.Dispatch<React.SetStateAction<FAQ[]>>;
+  getCurrentUser: () => Promise<void>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const AdminContext = createContext<AdminContextType>({} as AdminContextType);
