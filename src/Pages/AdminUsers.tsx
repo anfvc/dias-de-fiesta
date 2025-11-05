@@ -60,6 +60,8 @@ const AdminUsers = () => {
               >
                 <option value="admin">Admin</option>
                 <option value="user">User</option>
+                <option value="owner">Owner</option>
+
               </select>
             </div>
           </div>
