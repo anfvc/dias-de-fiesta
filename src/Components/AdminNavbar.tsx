@@ -26,7 +26,7 @@ const AdminNavbar = () => {
         />
 
         <div className="flex items-center gap-4">
-          {currentUser && <span>Hola, {currentUser.name.split(" ")[0]}</span>}
+          {currentUser && <span>👋 Hola, {currentUser.name.split(" ")[0]}</span>}
         </div>
       </nav>
     </header>
