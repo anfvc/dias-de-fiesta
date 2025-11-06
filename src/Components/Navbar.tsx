@@ -47,7 +47,7 @@ const Navbar = () => {
         <HamburgerMenu
           toggleMenu={handleMenuOpenOrClose}
           isOpen={isOpen}
-          textColor={textColor}
+          // textColor={textColor}
         />
       </nav>
     </header>

@@ -26,9 +26,12 @@ const AdminSidebar = () => {
         <div className="flex flex-col justify-between gap-10">
           <div className="flex justify-between">
             {/* <img src={D} alt="Logo Dias de Fiesta" className="w-20" /> */}
-            <img src={logo} alt="Logo Dias de Fiesta" className="w-40" />
+            <a href="/"><img src={logo} alt="Logo Dias de Fiesta" className="w-40" /></a>
             {sidebarOpen && (
-              <button onClick={() => setSidebarOpen(false)}>
+              <button
+                onClick={() => setSidebarOpen(false)}
+                className="cursor-pointer"
+              >
                 <X />
               </button>
             )}
@@ -55,7 +58,7 @@ const AdminSidebar = () => {
             </nav>
           </div>
         </div>
-        <div className="w-full flex">
+        <div className="w-full flex flex-col gap-6 mb-4">
           <button
             onClick={handleLogout}
             className="bg-red-500 text-gray-200 font-semibold px-5 py-2 rounded-full cursor-pointer"

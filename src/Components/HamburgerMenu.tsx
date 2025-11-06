@@ -6,11 +6,11 @@ import "@/styles/HamburgerMenu.css";
 type Props = {
   isOpen: boolean;
   toggleMenu: () => void;
-  textColor: string;
+  // textColor: string;
 };
 
-const HamburgerMenu = ({ toggleMenu, isOpen, textColor }: Props) => {
-  const { color, background, dynamicTextColor } = useHamburgerConfig(textColor);
+const HamburgerMenu = ({ toggleMenu, isOpen }: Props) => {
+  const { color, background, dynamicTextColor } = useHamburgerConfig();
 
   const handleClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;

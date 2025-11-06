@@ -11,7 +11,7 @@ const AdminNavbar = () => {
       {/* Top bar */}
       <nav className="flex items-center justify-between bg-white shadow p-4 border-b border-gray-300">
         <button
-          className="md:hidden p-2"
+          className="md:hidden p-2 cursor-pointer"
           onClick={() => setSidebarOpen(!sidebarOpen)}
         >
           {sidebarOpen ? <X /> : <Menu />}

@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router";
 import { useLocation } from "react-router";
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import PageWrapper from "@/components/PageWrapper";
 import Home from "@/pages/Home";
@@ -12,7 +12,7 @@ import Contact from "@/pages/Contact";
 import PageNotFound from "@/pages/PageNotFound";
 import AdminDashboard from "@/pages/AdminDashboard";
 import AdminLogin from "@/pages/AdminLogin";
-import AdminRegister from "./components/AdminRegister";
+import AdminRegister from "@/components/AdminRegister";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -21,22 +21,22 @@ import { Toaster } from "react-hot-toast";
 import AdminEvents from "@/pages/AdminEvents";
 import AdminSettings from "@/pages/AdminSettings";
 import AdminUsers from "@/pages/AdminUsers";
-// import AdminUser from "./components/AdminUser";
 import AdminPhotoUploads from "@/pages/AdminPhotoUploads";
 import AdminLayout from "@/layouts/AdminLayout";
 import AdminTestimonials from "./pages/AdminTestimonials";
-import AdminFaqs from "./pages/AdminFaqs";
+import AdminFaqs from "@/pages/AdminFaqs";
+import AdminContext from "@/context/AdminContext";
 
 function App() {
   const location = useLocation();
-  const url: string = import.meta.env.VITE_SERVER;
+  const { url } = useContext(AdminContext);
 
   // When the location changes, scroll to the top of the page:
   useLayoutEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [location.pathname]);
 
-  const isAdminRoute = location.pathname.startsWith("/admin");
+  const isAdminRoute = location.pathname.split("/")[1] === "admin";
 
   return (
     <>

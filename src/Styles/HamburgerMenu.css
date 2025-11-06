@@ -51,16 +51,9 @@
 }
 
 .bg-home {
-  background: url("/images/home-img.jpg") no-repeat center/cover;
-}
-
-.bg-home::before {
-  backdrop-filter: blur(60px);
-  background-color: rgba(68, 68, 68, 0.647);
-}
-
-.bg-other {
-  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #aa9a45;
+  /* background: url("/images/home-img.jpg") no-repeat center/cover; */
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    var(--color-gold-section);
 }
 
 #sidebar::before {
