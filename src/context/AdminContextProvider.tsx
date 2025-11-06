@@ -17,6 +17,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const [users, setUsers] = useState<User[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
   const [photos, setPhotos] = useState<Photo[]>([]);
+  const [previewPhotos, setPreviewPhotos] = useState<Photo[] | null>([]);
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [image, setImage] = useState<File | null>(null);
@@ -435,6 +436,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         getCurrentUser,
         isLoading,
         setIsLoading,
+        previewPhotos,
+        setPreviewPhotos,
       }}
     >
       {children}

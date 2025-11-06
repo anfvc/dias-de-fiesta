@@ -5,6 +5,13 @@ const photoSchema = new Schema({
     type: String,
     required: true,
   },
+  title: {
+    type: String,
+  },
+  photoPublicId: {
+    type: String,
+    required: true,
+  },
 });
 
 const Photo = model("Photo", photoSchema);

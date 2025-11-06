@@ -5,6 +5,7 @@ import wwhatsappRouter from "./Routes/whatsppRouter.js";
 import contactRouter from "./Routes/contactRouter.js";
 import userRouter from "./Routes/userRouter.js";
 import eventRouter from "./Routes/eventRouter.js";
+import photoRouter from "./Routes/photoRouter.js"
 import testimonialRouter from "./Routes/testimonialRouter.js";
 import connection from "./Database/database.js";
 import cookieParser from "cookie-parser";
@@ -20,7 +21,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONTEND_URL || ["http://localhost:5174/", "http://localhost:5173"],
   })
 );
 app.use(bodyParser.json());
@@ -28,6 +29,7 @@ app.use(bodyParser.json());
 app.use("/", wwhatsappRouter);
 app.use("/api", contactRouter);
 app.use("/api/admin", userRouter);
+app.use("/api/admin", photoRouter);
 app.use("/api/admin/events", eventRouter);
 app.use("/api/admin/testimonials", testimonialRouter);
 

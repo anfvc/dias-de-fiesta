@@ -13,6 +13,8 @@ export type AdminContextType = {
   setEvents: React.Dispatch<React.SetStateAction<Event[]>>;
   photos: Photo[];
   setPhotos: React.Dispatch<React.SetStateAction<Photo[]>>;
+  previewPhotos: Photo[] | null;
+  setPreviewPhotos: React.Dispatch<React.SetStateAction<string | null>>;
   testimonials: Testimonial[];
   setTestimonials: React.Dispatch<React.SetStateAction<Testimonial[]>>;
   sidebarOpen: boolean;
