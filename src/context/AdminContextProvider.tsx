@@ -362,7 +362,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
           toast.error("Your session has expired. Please log in again.");
         }
         setCurrentUser(null);
-        navigate("/admin/login");
+        // !!! FIX: REMOVED UNCONDITIONAL REDIRECT !!!
+        // navigate("/admin/login");
 
         return;
       } else {
