@@ -27,31 +27,65 @@ const AdminGridTestim = () => {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this testimonial?")) return;
+    toast(
+      (t) => (
+        <div className="flex flex-col items-center">
+          <p className="text-white mb-2">
+            Are you sure you want to delete this testimonial?
+          </p>
+          <div className="flex gap-4">
+            <button
+              className="bg-red-500 text-white px-5 py-2 hover:bg-red-600 cursor-pointer rounded-full duration-200 transition-all"
+              onClick={async () => {
+                toast.dismiss(t.id); // Dismiss the confirmation toast
+                try {
+                  const response = await fetch(
+                    `${url}/api/admin/testimonials/delete/${id}`,
+                    {
+                      method: "DELETE",
+                      credentials: "include",
+                    }
+                  );
 
-    try {
-      const response = await fetch(
-        `${url}/api/admin/testimonials/delete/${id}`,
-        {
-          method: "DELETE",
-          credentials: "include",
-        }
-      );
+                  const data = await response.json();
 
-      const data = await response.json();
+                  if (!response.ok) {
+                    console.log(data.error);
+                    toast.error(data.error || "Failed to delete testimonial.");
+                    return;
+                  }
 
-      if (!response.ok) {
-        console.log(data.error);
-        toast.error(data.error || "Failed to delete testimonial.");
-        return;
+                  toast.success("🗑️ Testimonial deleted successfully!");
+                  // Assuming fetchTestimonials is a function available in scope to refresh the list
+                  fetchTestimonials();
+                } catch (error) {
+                  console.error(error);
+                  toast.error(
+                    "Something went wrong while deleting testimonial."
+                  );
+                }
+              }}
+            >
+              Delete
+            </button>
+            <button
+              className="bg-gray-500 text-white px-5 py-2 hover:bg-gray-600 cursor-pointer rounded-full duration-200 transition-all"
+              onClick={() => toast.dismiss(t.id)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        duration: Infinity, // Keep the toast open until dismissed by action
+        style: {
+          background: "#1d2938",
+          color: "#fff",
+          borderRadius: "10px",
+        },
       }
-
-      toast.success("🗑️ Testimonial deleted successfully!");
-      fetchTestimonials();
-    } catch (error) {
-      console.error(error);
-      toast.error("Something went wrong while deleting testimonial.");
-    }
+    );
   };
 
   return (

@@ -122,6 +122,7 @@ const AdminGridEvents = () => {
                   minimumFractionDigits: 0,
                 })}{" "}
               </p>
+              <article className="text-lg">{event.description}</article>
 
               {/* Buttons */}
               <div className="flex justify-between mt-4">

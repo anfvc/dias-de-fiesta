@@ -7,7 +7,7 @@ function AdminDashboard() {
   const { users, events, photos, testimonials, faqs } =
     useContext(AdminContext);
 
-  // Just in case some values are undefined:
+  //* Just in case some values are undefined:
   const usersCount = users?.length || 0;
   const eventsCount = events?.length || 0;
   const photosCount = photos?.length || 0;
@@ -28,7 +28,7 @@ function AdminDashboard() {
       to: "/admin/uploads",
     },
     {
-      label: usersCount > 1 ? "Admins" : "Admin",
+      label: usersCount > 1 ? "Users" : "User",
       value: usersCount,
       icon: <Users className="text-blue-500 w-8 h-8" />,
       to: "/admin/users",

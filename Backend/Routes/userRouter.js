@@ -17,7 +17,7 @@ router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 router.get("/users", fetchAllUsers);
 router.get("/me", verifyToken, fetchCurrentUser);
-router.delete("/:id", verifyToken, verifyRole, deleteUser);
-router.patch("/:id", verifyRole, updateUserRole);
+router.delete("/:id", verifyToken, verifyRole("admin", "owner"), deleteUser);
+router.patch("/:id", verifyRole("admin", "owner", "editor"), updateUserRole);
 
 export default router;

@@ -77,7 +77,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         const data = await response.json();
         setCurrentUser(data.user); //? storing the logged in user info coming from the login route into the state variable "loggedinUser"
         toast.success(data.message);
-        console.log(data);
+        // console.log(data);
         setData({ email: "", password: "" }); // reseting login form
         navigate("/admin/dashboard"); // redirect to dashboard
       } else {
@@ -224,12 +224,6 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     }
   };
 
-  useEffect(() => {
-    fetchEvents();
-    fetchTestimonials();
-    getUsers();
-    getCurrentUser();
-  }, [url]);
 
   const createOrUpdateTestimonial = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -243,8 +237,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
     try {
       const endpoint = editMode
-        ? `${url}/api/admin/testimonials/update/${editId}`
-        : `${url}/api/admin/testimonials/create`;
+      ? `${url}/api/admin/testimonials/update/${editId}`
+      : `${url}/api/admin/testimonials/create`;
 
       const method = editMode ? "PUT" : "POST";
 
@@ -267,8 +261,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       console.log(data);
       toast(
         editMode
-          ? "✅ Testimonial updated successfully!"
-          : "👏 Testimonial created successfully!"
+        ? "✅ Testimonial updated successfully!"
+        : "👏 Testimonial created successfully!"
       );
       setTestimonialData({ name: "", message: "", rating: 1, date: "" }); //resting fields
       setEditMode(false); //reseting editMode
@@ -324,28 +318,59 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   };
 
   const deleteUser = async (userId: string) => {
-    if (confirm("Are you sure you want to delete this user?")) {
-      try {
-        const response = await fetch(`${url}/api/admin/${userId}`, {
-          method: "DELETE",
-          credentials: "include",
-        });
+    toast(
+      (t) => (
+        <div className="flex flex-col items-center">
+          <p className="text-white mb-2">
+            Are you sure you want to delete this user?
+          </p>
+          <div className="flex gap-4">
+            <button
+              className="bg-red-500 text-white px-5 py-2 hover:bg-red-600 cursor-pointer rounded-full duration-200 transition-all"
+              onClick={async () => {
+                toast.dismiss(t.id);
+                try {
+                  const response = await fetch(`${url}/api/admin/${userId}`, {
+                    method: "DELETE",
+                    credentials: "include",
+                  });
 
-        if (!response.ok) {
-          const { error } = await response.json();
-          toast.error(error);
-          console.log(error);
-          throw new Error(error);
-        }
+                  if (!response.ok) {
+                    const { error } = await response.json();
+                    console.log(error);
+                    toast.error(error);
+                    console.log(error);
+                    throw new Error(error);
+                  }
 
-        setUsers(users.filter((user) => user._id !== userId));
-        //onUserDeleted(userId); // --> updating the state of the users array so that it updates immediately after a user gets deleted.
-        // const { message } = await response.json();
-        // console.log(message);
-      } catch (error) {
-        console.log(error);
+                  setUsers(users.filter((user) => user._id !== userId));
+                  toast.success("User deleted successfully.");
+                } catch (error) {
+                  console.log(error);
+                  // toast.error("Failed to delete user.");
+                }
+              }}
+              >
+              Delete
+            </button>
+            <button
+              className="bg-gray-500 text-white px-5 py-2 hover:bg-gray-600 cursor-pointer rounded-full duration-200 transition-all"
+              onClick={() => toast.dismiss(t.id)}
+              >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        duration: Infinity,
+        style: {
+          background: "#1d2938",
+          color: "#fff",
+          borderRadius: "10px",
+        },
       }
-    }
+    );
   };
 
   const getCurrentUser = async () => {
@@ -379,16 +404,49 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   };
 
   const handleLogout = async () => {
-    const userName = currentUser?.name.split(" ")[0] || "User"; //if currentUser exists, display the name otherswise just "User"
-    if (confirm(`${userName}, are you sure you want to log out?`)) {
-      await fetch(`${url}/api/admin/logout`, {
-        method: "POST",
-        credentials: "include",
-      });
-      setCurrentUser(null);
-      navigate("/admin/login");
-    }
+    const userName = currentUser?.name.split(" ")[0] || "User";
+    toast(
+      (t) => (
+        <div className="flex flex-col items-center">
+          <p className="text-white mb-2">{`${userName}, are you sure you want to log out?`}</p>
+          <div className="flex gap-4">
+            <button
+              className="bg-red-500 text-white px-5 py-2 hover:bg-red-600 cursor-pointer rounded-full duration-200 transition-all"
+              onClick={async () => {
+                toast.dismiss(t.id);
+                await fetch(`${url}/api/admin/logout`, {
+                  method: "POST",
+                  credentials: "include",
+                });
+                setCurrentUser(null);
+                navigate("/admin/login");
+              }}
+              >
+              Logout
+            </button>
+            <button
+              className="bg-gray-500 text-white px-5 py-2 hover:bg-gray-600 cursor-pointer rounded-full duration-200 transition-all"
+              onClick={() => toast.dismiss(t.id)}
+              >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        duration: Infinity,
+        style: {
+          background: "#1d2938",
+          color: "#fff",
+          borderRadius: "10px",
+        },
+      }
+    );
   };
+  useEffect(() => {
+    fetchEvents();
+    fetchTestimonials();
+  }, [url]);
 
   return (
     <AdminContext.Provider

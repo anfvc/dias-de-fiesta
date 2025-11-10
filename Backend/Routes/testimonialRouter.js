@@ -12,8 +12,18 @@ const router = express.Router();
 
 router.post("/create", createTestimonial);
 router.get("/get", fetchTestimonials);
-router.put("/update/:id", verifyToken, verifyRole, updateTestimonial);
-router.delete("/delete/:id", verifyToken, verifyRole, deleteTestimonial);
+router.put(
+  "/update/:id",
+  verifyToken,
+  verifyRole("admin", "owner", "editor"),
+  updateTestimonial
+);
+router.delete(
+  "/delete/:id",
+  verifyToken,
+  verifyRole("admin", "owner"),
+  deleteTestimonial
+);
 router.delete("/delete/all", deleteAllTestimonials);
 
 export default router;

@@ -34,23 +34,27 @@ export const verifyToken = async (req, res, next) => {
   }
 };
 
-export const verifyRole = async (req, res, next) => {
-  try {
-    if (!req.user) {
-      return res.status(401).json({
-        error: "We could not verify your role. Please log in again.",
-      });
-    }
-    if (req.user.role !== "admin" && req.user.role !== "owner") {
-      return res
-        .status(403)
-        .json({ error: `Permission denied. You don't have admin/owner rights.` });
-    }
+export const verifyRole = (...allowedRoles) => {
+  return async (req, res, next) => {
+    try {
+      if (!req.user) {
+        return res.status(401).json({
+          error: "We could not verify your role. Please log in again.",
+        });
+      }
+      if (!allowedRoles.includes(req.user.role)) {
+        return res.status(403).json({
+          error: `Permission denied. You need ${allowedRoles.join(
+            " or "
+          )} rights to perform this action.`,
+        });
+      }
 
-    next();
-  } catch (error) {
-    res
-      .status(401)
-      .json({ error: `Unauthorized access. Please speak to your admin.` });
-  }
+      next();
+    } catch (error) {
+      res
+        .status(401)
+        .json({ error: `Unauthorized access. Please speak to your admin.` });
+    }
+  };
 };

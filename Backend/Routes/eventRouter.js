@@ -16,11 +16,21 @@ router.get("/all", fetchAllEvents);
 router.put(
   "/update/:id",
   verifyToken,
-  verifyRole,
+  verifyRole("admin", "owner", "editor"),
   upload.single("image"),
   updateEvent
 );
-router.delete("/delete/:id", verifyToken, verifyRole, deleteEvent);
-router.delete("/deleteall", verifyToken, verifyRole, deleteAllEvents);
+router.delete(
+  "/delete/:id",
+  verifyToken,
+  verifyRole("admin", "owner"),
+  deleteEvent
+);
+router.delete(
+  "/deleteall",
+  verifyToken,
+  verifyRole("admin", "owner"),
+  deleteAllEvents
+);
 
 export default router;
