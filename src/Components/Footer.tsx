@@ -72,7 +72,7 @@ const Footer = ({ url }: urlProps) => {
         <div className="flex flex-col items-center md:flex-row md:justify-between pt-8 text-white">
           <p>&copy; {new Date().getFullYear()} Días de Fiesta</p>
           <p className="text-lg md:text-2xl">
-            Diseñado y desarrollado con ❤️ por{" "}
+            Diseñado y desarrollado con 🩶 por{" "}
             <span className="underline">
               <a href={devLinkedin} target="_blank">
                 Andrés Villay
