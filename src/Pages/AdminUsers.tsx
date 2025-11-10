@@ -1,12 +1,17 @@
 import AdminUser from "@/components/AdminUser";
 import AdminContext from "@/context/AdminContext";
 import { User } from "@/types/users";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { X } from "lucide-react";
 
 const AdminUsers = () => {
-  const { users } = useContext(AdminContext);
+  const { users, getUsers } = useContext(AdminContext);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
+  useEffect(() => {
+   getUsers()
+  }, [])
+
 
   return (
     <div className="relative">

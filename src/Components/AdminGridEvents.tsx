@@ -42,48 +42,117 @@ const AdminGridEvents = () => {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this event?")) return;
+    toast(
+      (t) => (
+        <div className="flex flex-col items-center">
+          <p className="text-white mb-2">
+            Are you sure you want to delete this user?
+          </p>
+          <div className="flex gap-4">
+            <button
+              className="bg-red-500 text-white px-5 py-2 hover:bg-red-600 cursor-pointer rounded-full duration-200 transition-all"
+              onClick={async () => {
+                toast.dismiss(t.id);
+                try {
+                  const response = await fetch(
+                    `${url}/api/admin/events/delete/${id}`,
+                    {
+                      method: "DELETE",
+                      credentials: "include",
+                    }
+                  );
 
-    try {
-      const response = await fetch(`${url}/api/admin/events/delete/${id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-      const data = await response.json();
+                  const data = await response.json();
 
-      if (!response.ok) {
-        toast.error(data.error || "Failed to delete event.");
-        return;
+                  if (!response.ok) {
+                    toast.error(data.error || "Failed to delete event.");
+                    return;
+                  }
+
+                  toast.success("🗑️ Event deleted successfully!");
+                  fetchEvents();
+                } catch (error) {
+                  console.error(error);
+                  toast.error("Something went wrong while deleting event.");
+                }
+              }}
+            >
+              Delete
+            </button>
+            <button
+              className="bg-gray-500 text-white px-5 py-2 hover:bg-gray-600 cursor-pointer rounded-full duration-200 transition-all"
+              onClick={() => toast.dismiss(t.id)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        duration: Infinity,
+        style: {
+          background: "#1d2938",
+          color: "#fff",
+          borderRadius: "10px",
+        },
       }
-
-      toast.success("🗑️ Event deleted successfully!");
-      fetchEvents();
-    } catch (error) {
-      console.error(error);
-      toast.error("Something went wrong while deleting event.");
-    }
+    );
   };
 
   const handleDeleteAllEvents = async () => {
-    if (confirm("Are you sure you want to delete all of your events?")) {
-      try {
-        const response = await fetch(`${url}/api/admin/events/deleteall`, {
-          method: "DELETE",
-          credentials: "include",
-        });
+    toast(
+      (t) => (
+        <div className="flex flex-col items-center">
+          <p className="text-white mb-2">
+            Are you sure you want to delete all the users?
+          </p>
+          <div className="flex gap-4">
+            <button
+              className="bg-red-500 text-white px-5 py-2 hover:bg-red-600 cursor-pointer rounded-full duration-200 transition-all"
+              onClick={async () => {
+                toast.dismiss(t.id);
+                try {
+                  const response = await fetch(
+                    `${url}/api/admin/events/deleteall`,
+                    {
+                      method: "DELETE",
+                      credentials: "include",
+                    }
+                  );
 
-        if (!response.ok) {
-          const { error } = await response.json();
-          toast.error(error || "We couldn't delete all events.");
-          return;
-        }
+                  if (!response.ok) {
+                    const { error } = await response.json();
+                    toast.error(error || "We couldn't delete all events.");
+                    return;
+                  }
 
-        toast(" All events deleted successfully!", { icon: "🗑️" });
-        fetchEvents();
-      } catch (error) {
-        console.log(error);
+                  toast(" All events deleted successfully!", { icon: "🗑️" });
+                  fetchEvents();
+                } catch (error) {
+                  console.log(error);
+                }
+              }}
+            >
+              Delete
+            </button>
+            <button
+              className="bg-gray-500 text-white px-5 py-2 hover:bg-gray-600 cursor-pointer rounded-full duration-200 transition-all"
+              onClick={() => toast.dismiss(t.id)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        duration: Infinity,
+        style: {
+          background: "#1d2938",
+          color: "#fff",
+          borderRadius: "10px",
+        },
       }
-    }
+    );
   };
 
   return (

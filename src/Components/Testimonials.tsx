@@ -1,11 +1,15 @@
-import { TESTIMONIALS } from "@/consts/testimonials.ts";
 import Testimony from "@/components/Testimony";
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import SwiperButtons from "@/components/SwiperButtons";
 import { motion, easeInOut } from "framer-motion";
+import { useContext } from "react";
+import AdminContext from "@/context/AdminContext";
 
 const Testimonials = () => {
+
+  const {testimonials} = useContext(AdminContext)
+
   return (
     <div className="w-full px-6">
       <div className="my-30">
@@ -33,14 +37,15 @@ const Testimonials = () => {
             },
           }}
         >
-          {TESTIMONIALS.map((testimonial, id) => (
-            <SwiperSlide key={id} className="p-2">
+          {testimonials.map((testimonial, id) => (
+            <SwiperSlide key={id} className="p-2 items-stretch">
               <motion.div
                 initial={{ y: 25, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, ease: easeInOut, delay: id * 0.2 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, amount: 0.5 }}
+                className="flex-1"
               >
                 <Testimony
                   name={testimonial.name}

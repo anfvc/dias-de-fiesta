@@ -6,7 +6,7 @@ export const uploadPhotos = async (req, res) => {
     const files = Array.isArray(req.files) ? req.files : [req.file];
 
     if (!files || files.length === 0) {
-      return res.status(404).json({ error: "Photo files are required." });
+      return res.status(400).json({ error: "Photo files are required." });
     }
 
     const uploadResults = await Promise.all(
@@ -39,7 +39,7 @@ export const uploadPhotos = async (req, res) => {
 
     console.log(newPhotos);
 
-    res.stauts(201).json({
+    res.status(201).json({
       message: "Photos successfully uploaded.",
     });
   } catch (error) {

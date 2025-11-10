@@ -16,8 +16,9 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const url: string = import.meta.env.VITE_SERVER;
   const [users, setUsers] = useState<User[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
-  const [photos, setPhotos] = useState<Photo[]>([]);
-  const [previewPhotos, setPreviewPhotos] = useState<Photo[] | null>([]);
+  const [uploadedPhotos, setUploadedPhotos] = useState<Photo[]>([]);
+  const [selectedPhotos, setSelectedPhotos] = useState<File[]>([])
+  const [previewPhotos, setPreviewPhotos] = useState<string[]>([]);
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [image, setImage] = useState<File | null>(null);
@@ -443,9 +444,12 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       }
     );
   };
+
+
   useEffect(() => {
     fetchEvents();
     fetchTestimonials();
+    // getUsers()
   }, [url]);
 
   return (
@@ -475,8 +479,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         events,
         setEvents,
         deleteUser,
-        photos,
-        setPhotos,
+        uploadedPhotos,
+        setUploadedPhotos,
         testimonials,
         setTestimonials,
         testimonialData,
@@ -497,6 +501,9 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         setIsLoading,
         previewPhotos,
         setPreviewPhotos,
+        getUsers,
+        selectedPhotos,
+        setSelectedPhotos
       }}
     >
       {children}

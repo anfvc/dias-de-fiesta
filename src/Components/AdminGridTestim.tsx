@@ -105,7 +105,7 @@ const AdminGridTestim = () => {
             >
               <div>
                 <h3 className="font-semibold text-2xl">{t.name}</h3>
-                <p className="text-gray-700 mt-1 text-lg">{t.message}</p>
+                <p className="text-gray-700 mt-1 text-lg break-words">{t.message}</p>
                 <div className="flex items-center my-2">
                   {Array.from({ length: 5 }, (_, i) => (
                     <Star

@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import add from "../assets/add-image.png";
 import AdminContext from "@/context/AdminContext";
 
 const AdminPhotoUploads = () => {
-  const { photos, setPhotos, previewPhotos, setPreviewPhotos } =
+  const { uploadedPhotos, setUploadedPhotos, selectedPhotos, setSelectedPhotos, previewPhotos, setPreviewPhotos } =
     useContext(AdminContext);
 
   return (

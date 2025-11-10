@@ -1,16 +1,20 @@
 import AdminContext from "@/context/AdminContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Users, Calendar, Camera, Text, FileQuestionMark } from "lucide-react";
 import { Link } from "react-router";
 
 function AdminDashboard() {
-  const { users, events, photos, testimonials, faqs } =
+  const { users, events, uploadedPhotos, testimonials, faqs, getUsers } =
     useContext(AdminContext);
+
+    useEffect(() => {
+       getUsers()
+      }, [])
 
   //* Just in case some values are undefined:
   const usersCount = users?.length || 0;
   const eventsCount = events?.length || 0;
-  const photosCount = photos?.length || 0;
+  const photosCount = uploadedPhotos?.length || 0;
   const faqsCount = faqs?.length || 0;
   const testimonialsCount = testimonials?.length || 0;
 

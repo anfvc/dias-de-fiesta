@@ -11,10 +11,12 @@ export type AdminContextType = {
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
   events: Event[];
   setEvents: React.Dispatch<React.SetStateAction<Event[]>>;
-  photos: Photo[];
-  setPhotos: React.Dispatch<React.SetStateAction<Photo[]>>;
-  previewPhotos: Photo[] | null;
-  setPreviewPhotos: React.Dispatch<React.SetStateAction<string | null>>;
+  uploadedPhotos: Photo[];
+  setUploadedPhotos: React.Dispatch<React.SetStateAction<Photo[]>>;
+  selectedPhotos: File[];
+  setSelectedPhotos: React.Dispatch<React.SetStateAction<File[]>>;
+  previewPhotos: string[];
+  setPreviewPhotos: React.Dispatch<React.SetStateAction<string[]>>;
   testimonials: Testimonial[];
   setTestimonials: React.Dispatch<React.SetStateAction<Testimonial[]>>;
   sidebarOpen: boolean;
@@ -52,6 +54,7 @@ export type AdminContextType = {
   getCurrentUser: () => Promise<void>;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  getUsers: () => Promise<void>;
 };
 
 const AdminContext = createContext<AdminContextType>({} as AdminContextType);

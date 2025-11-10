@@ -1,4 +1,4 @@
-import star from "@/assets/svg/star.svg";
+import { Star } from "lucide-react";
 
 interface TestimonialProps {
   name: string;
@@ -8,28 +8,30 @@ interface TestimonialProps {
 }
 
 const Testimony = ({ name, message, rating, date }: TestimonialProps) => {
-  const generateStartsForRating = (rating: number) => {
-    const totalStars = Math.round(rating);
-    return (
-      <div className="flex">
-        {Array(totalStars)
-          .fill(star)
-          .map((star, index) => (
-            <span key={index}>
-              <img src={star} alt="image of reviews star" className="w-10" />
-            </span>
-          ))}
-      </div>
-    );
-  };
-
   return (
-    <div className="flex flex-col gap-5 justify-between card-shadow px-8 py-10 min-h-[350px]">
-      {generateStartsForRating(rating)}
-      <div className="flex flex-col gap-4">
-        <h2 className="text-4xl font-semibold">{name}</h2>
-        <p className="text-3xl line-clamp-3">{message}</p>
-        <p className="text-2xl text-gray-400">{date}</p>
+    <div className="flex flex-col justify-between h-full w-full min-h-[350px] card-shadow px-8 py-10 rounded-xl bg-white">
+      <div className="flex gap-2 mb-4">
+        {Array.from({ length: 5 }, (_, index) => (
+          <Star
+            key={index}
+            className={` ${
+              index < Math.round(rating)
+                ? "text-gold-section fill-gold-section"
+                : "text-gray-400 fill-gray-400"
+            }`}
+          />
+        ))}
+      </div>
+
+      <div className="flex flex-col flex-grow justify-between">
+        <div className="flex flex-col gap-3">
+          <h2 className="text-3xl font-semibold">{name}</h2>
+          <p className=" text-2xl text-gray-700 break-words">{message}</p>
+        </div>
+        <p className="text-xl text-gray-400 mt-6">
+          {" "}
+          {new Date(date).toDateString()}
+        </p>
       </div>
     </div>
   );
