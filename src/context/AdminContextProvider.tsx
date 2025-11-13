@@ -19,6 +19,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const [uploadedPhotos, setUploadedPhotos] = useState<Photo[]>([]);
   const [selectedPhotos, setSelectedPhotos] = useState<File[]>([]);
   const [previewPhotos, setPreviewPhotos] = useState<string[]>([]);
+  const [isGalleryLoading, setIsGalleryLoading] = useState<boolean>(false);
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [image, setImage] = useState<File | null>(null);
@@ -60,11 +61,12 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
   const fetchPhotos = async () => {
     try {
+      setIsGalleryLoading(true);
       const response = await fetch(`${url}/api/admin/photos/all`);
 
       if (!response.ok) {
         const { error } = await response.json();
-        console.error(`Failed to fetch the photos:`, error);
+        console.log(`Failed to fetch the photos:`, error);
         return;
       }
 
@@ -73,6 +75,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       setUploadedPhotos(data.photos);
     } catch (error) {
       console.error("Error fetching photos:", error);
+    } finally {
+      setIsGalleryLoading(false);
     }
   };
 
@@ -114,7 +118,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       setSelectedPhotos([]);
       setPreviewPhotos([]);
 
-      // await fetchPhotos();
+      await fetchPhotos();
     } catch (error) {
       toast.error(`An unexpected error occurred during upload.`, {
         id: toastId,
@@ -122,6 +126,41 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       console.error(error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDeletePhoto = async (photoId: string, photoPublicId: string) => {
+    const toastId = toast.loading(`Deleting photo...`);
+    setIsGalleryLoading(true);
+
+    try {
+      const response = await fetch(
+        `${url}/api/admin/photos/delete/${photoId}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+          body: JSON.stringify({ photoPublicId }),
+          headers: {
+            "Content-Type": "Application/JSON",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const { error } = await response.json();
+        toast.error(error || `We couldn't complete this request.`, {
+          id: toastId,
+        });
+        return;
+      }
+
+      toast.success("🗑️ Photo deleted successfully!", { id: toastId });
+      await fetchPhotos();
+      setIsGalleryLoading(false);
+    } catch (error) {
+      console.error("Delete Error:", error);
+    } finally {
+      setIsGalleryLoading(false);
     }
   };
 
@@ -571,6 +610,9 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         setSelectedPhotos,
         uploadPhotos,
         fetchPhotos,
+        handleDeletePhoto,
+        isGalleryLoading,
+        setIsGalleryLoading,
       }}
     >
       {children}

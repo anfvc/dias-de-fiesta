@@ -53,9 +53,10 @@ export const fetchPhotos = async (req, res) => {
     const photos = await Photo.find().sort({ createdAt: -1 });
 
     if (!photos || photos.length === 0) {
+      // Return 200 with an empty array if no photos are found, for better frontend handling
       return res
-        .status(400)
-        .json({ error: `There are no photos at the moment.` });
+        .status(200)
+        .json({ message: `No photos to show at the moment.`, photos: [] });
     }
 
     res
@@ -72,21 +73,21 @@ export const fetchPhotos = async (req, res) => {
 export const deletePhoto = async (req, res) => {
   try {
     const { id } = req.params;
-    const { publicId } = req.body;
+    const { photoPublicId } = req.body;
 
-    if (!id || !publicId) {
+    if (!id || !photoPublicId) {
       return res
         .status(400)
         .json({ error: "Missing Photo ID or Public ID for deletion." });
     }
 
-    const cloudinaryResult = await cloudinary.uploader.destroy(publicId);
+    const cloudinaryResult = await cloudinary.uploader.destroy(photoPublicId);
 
     console.log(cloudinaryResult);
 
-   if (!["ok", "not found", "not_found"].includes(cloudinaryResult.result)) {
+    if (!["ok", "not found", "not_found"].includes(cloudinaryResult.result)) {
       console.warn(
-        `Cloudinary deletion warning for ID ${publicId}: ${cloudinaryResult.result}`
+        `Cloudinary deletion warning for ID ${photoPublicId}: ${cloudinaryResult.result}`
       );
     }
 

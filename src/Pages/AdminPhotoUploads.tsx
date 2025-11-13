@@ -1,34 +1,15 @@
 import { useContext, useEffect } from "react";
 import AdminContext from "@/context/AdminContext";
 import AdminGridPhotos from "@/components/AdminGridPhotos";
-
-const AddIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={2}
-    stroke="currentColor"
-    className="w-10 h-10 text-gray-400 group-hover:text-blue-600 transition"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M12 4.5v15m7.5-7.5h-15"
-    />
-  </svg>
-);
+import AddIcon from "@/components/AddIcon";
 
 const AdminPhotoUploads = () => {
   const {
-    uploadedPhotos,
-    setUploadedPhotos,
     selectedPhotos,
     setSelectedPhotos,
     previewPhotos,
     setPreviewPhotos,
     uploadPhotos,
-    fetchPhotos,
     loading,
   } = useContext(AdminContext);
 
@@ -147,9 +128,8 @@ const AdminPhotoUploads = () => {
                 selectedPhotos.length > 0 ? `(${selectedPhotos.length})` : ""
               } Photos`}
         </button>
-
       </form>
-        <AdminGridPhotos />
+      <AdminGridPhotos />
     </div>
   );
 };

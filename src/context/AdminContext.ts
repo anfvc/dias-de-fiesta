@@ -57,6 +57,9 @@ export type AdminContextType = {
   getUsers: () => Promise<void>;
   uploadPhotos: () => Promise<void>;
   fetchPhotos: () => Promise<void>;
+  handleDeletePhoto: (photoId: string, photoPublicId: string) => Promise<void>;
+  isGalleryLoading: boolean;
+  setIsGalleryLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const AdminContext = createContext<AdminContextType>({} as AdminContextType);

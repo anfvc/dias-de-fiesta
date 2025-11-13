@@ -29,8 +29,8 @@ app.use(bodyParser.json());
 app.use("/", wwhatsappRouter);
 app.use("/api", contactRouter);
 app.use("/api/admin", userRouter);
-app.use("/api/admin", photoRouter);
-app.use("/api/admin", eventRouter);
+app.use("/api/admin/photos", photoRouter);
+app.use("/api/admin/events", eventRouter);
 app.use("/api/admin/testimonials", testimonialRouter);
 
 const port = process.env.PORT || 5100;

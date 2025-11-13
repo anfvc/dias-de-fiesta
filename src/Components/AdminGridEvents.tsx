@@ -113,7 +113,7 @@ const AdminGridEvents = () => {
                 toast.dismiss(t.id);
                 try {
                   const response = await fetch(
-                    `${url}/api/admin/events/deleteall`,
+                    `${url}/api/admin/events/delete/all`,
                     {
                       method: "DELETE",
                       credentials: "include",
