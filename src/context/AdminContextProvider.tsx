@@ -489,12 +489,16 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       if (response.status === 401 || !response.ok) {
         const error = await response.json();
 
-        if (error.error === "Session has expired. Please log in again.") {
-          toast.error("Your session has expired. Please log in again.");
-        }
+        const errorMessage = error.error
+          ? error.error
+          : "Authentication failed. Please log in again.";
+
+        toast.error(errorMessage);
+
         setCurrentUser(null);
         // !!! FIX: REMOVED UNCONDITIONAL REDIRECT !!!
         // navigate("/admin/login");
+        //* Redirection happens in ProtectedRoute.tsx
 
         return;
       } else {

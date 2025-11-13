@@ -19,6 +19,7 @@ export const verifyToken = async (req, res, next) => {
     console.log("currentUser:", currentUser);
 
     if (!currentUser) {
+      res.clearCookie("token");
       return res.status(401).json({ error: `This user does not exist.` });
     }
     req.user = currentUser; //If all the checks are correct, we attach the user to the request object and call
@@ -26,10 +27,15 @@ export const verifyToken = async (req, res, next) => {
     next();
   } catch (error) {
     if (error.name === "TokenExpiredError") {
+      //* 1. Clear expired token:
+      res.clearCookie("token");
+
+      //* 2. Sending specific error to the frontend:
       return res
         .status(401)
         .json({ error: "Session has expired. Please log in again." });
     }
+    res.clearCookie("token");
     return res.status(401).json({ error: "Invalid token." });
   }
 };
