@@ -3,4 +3,5 @@ export interface Photo {
   photo: string;
   photoPublicId: string;
   title?: string;
+  category?: string
 }
