@@ -1,6 +1,6 @@
 export interface Photo {
-  id: string;
-  image: File | null;
+  _id: string;
+  photo: string;
   photoPublicId: string;
   title?: string;
 }

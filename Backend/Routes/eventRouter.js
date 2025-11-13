@@ -11,8 +11,8 @@ import upload from "../Middleware/multer.js";
 
 const router = express.Router();
 
-router.post("/create", upload.single("image"), createEvent);
-router.get("/all", fetchAllEvents);
+router.post("/events/create", upload.single("image"), createEvent);
+router.get("/events/all", fetchAllEvents);
 router.put(
   "/update/:id",
   verifyToken,
@@ -21,13 +21,13 @@ router.put(
   updateEvent
 );
 router.delete(
-  "/delete/:id",
+  "/events/delete/:id",
   verifyToken,
   verifyRole("admin", "owner"),
   deleteEvent
 );
 router.delete(
-  "/deleteall",
+  "/events/deleteall",
   verifyToken,
   verifyRole("admin", "owner"),
   deleteAllEvents

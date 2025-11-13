@@ -17,7 +17,7 @@ export const uploadPhotos = async (req, res) => {
               { folder: "dias-de-feista/photos" },
               (error, result) => {
                 if (error) {
-                  console.error(error);
+                  console.error(`line 20:`, error);
                   reject(error);
                 } else {
                   resolve(result);
@@ -32,8 +32,8 @@ export const uploadPhotos = async (req, res) => {
 
     const newPhotos = await Photo.insertMany(
       uploadResults.map((uploadResult) => ({
-        photo: uploadResult.secure_url,
-        photoPulbicId: uploadResult.public_id,
+        photo: uploadResult.secure_url, //needs to be exactly the same as the mongoose field "photo"
+        photoPublicId: uploadResult.public_id,
       }))
     );
 
@@ -45,5 +45,64 @@ export const uploadPhotos = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server Error. Please try again later." });
+  }
+};
+
+export const fetchPhotos = async (req, res) => {
+  try {
+    const photos = await Photo.find().sort({ createdAt: -1 });
+
+    if (!photos || photos.length === 0) {
+      return res
+        .status(400)
+        .json({ error: `There are no photos at the moment.` });
+    }
+
+    res
+      .status(200)
+      .json({ message: `All photos fetched successfully!`, photos });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: `Server Error, please try again later.`,
+    });
+  }
+};
+
+export const deletePhoto = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { publicId } = req.body;
+
+    if (!id || !publicId) {
+      return res
+        .status(400)
+        .json({ error: "Missing Photo ID or Public ID for deletion." });
+    }
+
+    const cloudinaryResult = await cloudinary.uploader.destroy(publicId);
+
+    console.log(cloudinaryResult);
+
+   if (!["ok", "not found", "not_found"].includes(cloudinaryResult.result)) {
+      console.warn(
+        `Cloudinary deletion warning for ID ${publicId}: ${cloudinaryResult.result}`
+      );
+    }
+
+    const deletedPhoto = await Photo.findByIdAndDelete(id);
+
+    if (!deletedPhoto) {
+      return res
+        .status(404)
+        .json({ error: `We couldn't delete this photo. Does it exist?` });
+    }
+
+    res.status(200).json({ message: `Photo deleted successfully!` });
+  } catch (error) {
+    console.error("Error deleting photo:", error);
+    res.status(500).json({
+      error: `Server Error: Failed to delete photo.`,
+    });
   }
 };

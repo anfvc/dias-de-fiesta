@@ -55,6 +55,8 @@ export type AdminContextType = {
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   getUsers: () => Promise<void>;
+  uploadPhotos: () => Promise<void>;
+  fetchPhotos: () => Promise<void>;
 };
 
 const AdminContext = createContext<AdminContextType>({} as AdminContextType);

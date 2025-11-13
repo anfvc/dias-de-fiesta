@@ -1,18 +1,21 @@
 import { Schema, model } from "mongoose";
 
-const photoSchema = new Schema({
-  image: {
-    type: String,
-    required: true,
+const photoSchema = new Schema(
+  {
+    photo: { //change to photo from image as the promise was failing
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+    },
+    photoPublicId: {
+      type: String,
+      required: true,
+    },
   },
-  title: {
-    type: String,
-  },
-  photoPublicId: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true, versionKey: false }
+);
 
 const Photo = model("Photo", photoSchema);
 

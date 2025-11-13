@@ -17,7 +17,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const [users, setUsers] = useState<User[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
   const [uploadedPhotos, setUploadedPhotos] = useState<Photo[]>([]);
-  const [selectedPhotos, setSelectedPhotos] = useState<File[]>([])
+  const [selectedPhotos, setSelectedPhotos] = useState<File[]>([]);
   const [previewPhotos, setPreviewPhotos] = useState<string[]>([]);
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
@@ -58,7 +58,74 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
   const navigate = useNavigate();
 
-  async function handleLogin(e: React.FormEvent) {
+  const fetchPhotos = async () => {
+    try {
+      const response = await fetch(`${url}/api/admin/photos/all`);
+
+      if (!response.ok) {
+        const { error } = await response.json();
+        console.error(`Failed to fetch the photos:`, error);
+        return;
+      }
+
+      const data = await response.json();
+      console.log(data);
+      setUploadedPhotos(data.photos);
+    } catch (error) {
+      console.error("Error fetching photos:", error);
+    }
+  };
+
+  const uploadPhotos = async () => {
+    if (selectedPhotos.length === 0) {
+      toast("Please select photos to upload", { icon: "⚠️" });
+      return;
+    }
+
+    const toastId = toast.loading(
+      `Uploading ${selectedPhotos.length} photo(s)...`
+    );
+    setLoading(true);
+
+    try {
+      const photoData = new FormData();
+      //appending all selected files to the FormData object:
+      selectedPhotos.forEach((file) => {
+        photoData.append(`photos`, file);
+      });
+
+      const response = await fetch(`${url}/api/admin/photos/upload`, {
+        method: "POST",
+        body: photoData,
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        const { error } = await response.json();
+        toast.error(error || `Photo Upload failed.`, { id: toastId });
+        return;
+      }
+
+      //*Cleaning up temporary resources:
+      previewPhotos.forEach((url) => URL.revokeObjectURL(url));
+      toast.success(`Photos uploaded successfully!`, { id: toastId });
+
+      //*Clearing states after the upload is complete:
+      setSelectedPhotos([]);
+      setPreviewPhotos([]);
+
+      // await fetchPhotos();
+    } catch (error) {
+      toast.error(`An unexpected error occurred during upload.`, {
+        id: toastId,
+      });
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
@@ -89,7 +156,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
@@ -225,7 +292,6 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     }
   };
 
-
   const createOrUpdateTestimonial = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -238,8 +304,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
     try {
       const endpoint = editMode
-      ? `${url}/api/admin/testimonials/update/${editId}`
-      : `${url}/api/admin/testimonials/create`;
+        ? `${url}/api/admin/testimonials/update/${editId}`
+        : `${url}/api/admin/testimonials/create`;
 
       const method = editMode ? "PUT" : "POST";
 
@@ -262,8 +328,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       console.log(data);
       toast(
         editMode
-        ? "✅ Testimonial updated successfully!"
-        : "👏 Testimonial created successfully!"
+          ? "✅ Testimonial updated successfully!"
+          : "👏 Testimonial created successfully!"
       );
       setTestimonialData({ name: "", message: "", rating: 1, date: "" }); //resting fields
       setEditMode(false); //reseting editMode
@@ -351,13 +417,13 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
                   // toast.error("Failed to delete user.");
                 }
               }}
-              >
+            >
               Delete
             </button>
             <button
               className="bg-gray-500 text-white px-5 py-2 hover:bg-gray-600 cursor-pointer rounded-full duration-200 transition-all"
               onClick={() => toast.dismiss(t.id)}
-              >
+            >
               Cancel
             </button>
           </div>
@@ -422,13 +488,13 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
                 setCurrentUser(null);
                 navigate("/admin/login");
               }}
-              >
+            >
               Logout
             </button>
             <button
               className="bg-gray-500 text-white px-5 py-2 hover:bg-gray-600 cursor-pointer rounded-full duration-200 transition-all"
               onClick={() => toast.dismiss(t.id)}
-              >
+            >
               Cancel
             </button>
           </div>
@@ -445,11 +511,10 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     );
   };
 
-
   useEffect(() => {
     fetchEvents();
     fetchTestimonials();
-    // getUsers()
+    fetchPhotos();
   }, [url]);
 
   return (
@@ -503,7 +568,9 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         setPreviewPhotos,
         getUsers,
         selectedPhotos,
-        setSelectedPhotos
+        setSelectedPhotos,
+        uploadPhotos,
+        fetchPhotos,
       }}
     >
       {children}
