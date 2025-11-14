@@ -8,22 +8,22 @@ export const verifyToken = async (req, res, next) => {
     if (!token) {
       return res
         .status(401)
-        .json({ error: "Access denied. No token provided." });
+        .json({ error: "Access denied. No token provided. Please log in." });
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const currentUser = await User.findById(decoded.id).select(
       "id name email role"
     ); //? telling DB to only return these fields
-    console.log("decoded:", decoded);
-    console.log("currentUser:", currentUser);
+    // console.log("decoded:", decoded);
+    // console.log("currentUser:", currentUser);
 
     if (!currentUser) {
       res.clearCookie("token");
       return res.status(401).json({ error: `This user does not exist.` });
     }
     req.user = currentUser; //If all the checks are correct, we attach the user to the request object and call
-    console.log(req.user);
+    // console.log(req.user);
     next();
   } catch (error) {
     if (error.name === "TokenExpiredError") {
