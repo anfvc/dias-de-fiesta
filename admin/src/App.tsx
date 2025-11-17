@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import AdminLogin from "@/pages/AdminLogin";
 import AdminRegister from "@/components/AdminRegister";
-import AdminDashboard from "./pages/AdminDashboard";
+import AdminDashboard from "@/pages/AdminDashboard";
 import AdminEvents from "@/pages/AdminEvents";
 import AdminSettings from "@/pages/AdminSettings";
 import AdminTestimonials from "@/pages/AdminTestimonials";
@@ -10,10 +10,18 @@ import AdminPhotoUploads from "@/pages/AdminPhotoUploads";
 import AdminUsers from "@/pages/AdminUsers";
 import AdminLayout from "@/layout/AdminLayout";
 import AdminFaqs from "@/pages/AdminFaqs";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <>
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          style: { background: "#1d2938", color: "#fff", borderRadius: "20px" },
+        }}
+      />
+
       <Routes>
         {/* ADMIN ROUTES */}
         <Route index path="/admin/login" element={<AdminLogin />} />

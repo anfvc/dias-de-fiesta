@@ -1,12 +1,13 @@
 import { useParams } from "react-router";
 import FAQ from "@/components/FAQ";
 import { useContext } from "react";
-import AdminContext from "@/context/AdminContext";
+import PublicContext from "@/context/PublicContext";
 
 const ServiceDetails = () => {
-  const { events } = useContext(AdminContext);
+  const { events } = useContext(PublicContext);
+
   const { id } = useParams<{ id: string }>();
-  const service = events.find((service) => service._id === id);
+  const service = events.find((event) => event._id === id);
 
   if (!service) {
     return <div>Service not found</div>;

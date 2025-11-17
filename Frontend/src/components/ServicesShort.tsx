@@ -1,10 +1,10 @@
 import { Link } from "react-router";
 import { motion, easeInOut } from "framer-motion";
+import PublicContext from "@/context/PublicContext";
 import { useContext } from "react";
-import AdminContext from "@/context/AdminContext";
 
 const ServicesShort = () => {
-  const { events } = useContext(AdminContext);
+  const { events } = useContext(PublicContext);
   //Showing only the three first services for this page:
   const firstThree = events.slice(0, 3);
 

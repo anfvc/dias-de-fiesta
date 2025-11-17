@@ -3,11 +3,16 @@ import { motion, easeInOut } from "framer-motion";
 import serviceHeadingImg from "@/assets/services/serviceHeadImg.webp";
 import { Link } from "react-router";
 import FAQ from "@/components/FAQ";
-import AdminContext from "@/context/AdminContext";
 import { useContext } from "react";
+import PublicContext from "@/context/PublicContext";
+
+
 
 const Services = () => {
-  const { events } = useContext(AdminContext);
+  const { events } = useContext(PublicContext);
+
+
+
 
   return (
     <section
@@ -52,8 +57,8 @@ const Services = () => {
       </div>
       <div className="mt-40 px-4 lg:px-0">
         <div className="grid grid-cols-2 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 lg:gap-10  lg:grid-cols-3">
-          {events.map((service, id) => (
-            <Link to={`/services/${service._id}`} key={service._id}>
+          {events.map((event, id) => (
+            <Link to={`/services/${event._id}`} key={event._id}>
               <motion.div
                 initial={{ y: 25, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -65,16 +70,16 @@ const Services = () => {
                 <div className="flex justify-center items-center relative overflow-hidden ">
                   <div className="absolute w-full h-full inset-0 bg-black/25 pointer-events-none transform duration-600 ease-in-out hover:scale-110 z-10"></div>
                   <img
-                    src={service.image}
-                    alt={service.description}
+                    src={event.image}
+                    alt={event.description}
                     className="w-full aspect-square object-cover md:min-w-xs transform duration-600 ease hover:scale-105 "
                   />
                   <h3 className="text-2xl sm:text-3xl md:text-4xl text-white font-bold absolute bottom-4 left-4 text-pretty z-20">
-                    {service.title}
+                    {event.title}
                   </h3>
                   <div className="w-full absolute flex justify-end items-center top-2 right-2 md:top-4 md:right-4">
                     <h2 className="text-xl p-1 sm:text-2xl sm:p-2 md:text-3xl bg-gold-section text-black font-bold text-pretty z-20 ">
-                      {service.price.toLocaleString("co-CO", {
+                      {event.price.toLocaleString("co-CO", {
                         style: "currency",
                         currency: "COP",
                         minimumFractionDigits: 0,
@@ -85,7 +90,7 @@ const Services = () => {
                 </div>
                 <div className="mt-3 p-1 sm:p-2">
                   <p className="text-xl md:text-2xl text-gray-500 text-clip">
-                    {service.description}.
+                    {event.description}.
                   </p>
                 </div>
               </motion.div>

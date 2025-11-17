@@ -4,11 +4,10 @@ import "swiper/swiper-bundle.css";
 import SwiperButtons from "@/components/SwiperButtons";
 import { motion, easeInOut } from "framer-motion";
 import { useContext } from "react";
-import AdminContext from "@/context/AdminContext";
+import PublicContext from "@/context/PublicContext";
 
 const Testimonials = () => {
-
-  const {testimonials} = useContext(AdminContext)
+  const { testimonials } = useContext(PublicContext);
 
   return (
     <div className="w-full px-6">

@@ -1,18 +1,21 @@
 // import FilterButtons from "@/components/FilterButtons";
-import AdminContext from "@/context/AdminContext";
 import { useContext } from "react";
+// import { useState } from "react";
+
+import PublicContext from "@/context/PublicContext";
 
 const Portfolio = () => {
-  const { uploadedPhotos } = useContext(AdminContext);
-  // const [filteredPhotos, setFilteredPhotos] = useState(uploadedPhotos);
+  const { photos } = useContext(PublicContext);
+  // const [filteredPhotos, setFilteredPhotos] = useState(photos);
 
   // const filterDisplayedCategory = (targetCategory: string) => {
-  //   const filtered = uploadedPhotos.filter(
+  //   const filtered = photos.filter(
   //     (photo) => photo.category === targetCategory
   //   );
   //   setFilteredPhotos(filtered);
   // };
 
+  // console.log(filteredPhotos);
   // const resetFilter = () => {
   //   setFilteredPhotos([]);
   // };
@@ -27,7 +30,7 @@ const Portfolio = () => {
       </div>
       <div className="min-h-screen w-full border-2 my-20">
         <div className="columns-1 sm:columns-2 md:py-20 lg:columns-3 py-10 gap-4">
-          {uploadedPhotos.map((photo, _id) => (
+          {photos.map((photo, _id) => (
             <div className={`rounded-4xl mb-4 break-inside-avoid`} key={_id}>
               <img
                 src={photo.photo}
