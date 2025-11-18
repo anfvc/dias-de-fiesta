@@ -5,6 +5,7 @@ import type { Event, EventFormData } from "@/types/events";
 import type { User, RegisterFormData, LoginFormData } from "@/types/users";
 import type { Testimonial, TestimonialData } from "@/types/testimonials";
 import type { Photo } from "@/types/photos";
+import type { PhotoUploadData } from "@/types/photos";
 import toast from "react-hot-toast";
 import type { FAQ } from "@/types/faqs";
 
@@ -17,8 +18,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const [users, setUsers] = useState<User[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
   const [uploadedPhotos, setUploadedPhotos] = useState<Photo[]>([]);
-  const [selectedPhotos, setSelectedPhotos] = useState<File[]>([]);
-  const [previewPhotos, setPreviewPhotos] = useState<string[]>([]);
+  const [selectedPhotos, setSelectedPhotos] = useState<PhotoUploadData[]>([]);
+  // const [previewPhotos, setPreviewPhotos] = useState<string[]>([]);
   const [isGalleryLoading, setIsGalleryLoading] = useState<boolean>(false);
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
@@ -59,6 +60,20 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
   const navigate = useNavigate();
 
+  const updatePhotoMetadata = (
+    index: number,
+    key: "category" | "title",
+    value: string
+  ) => {
+    setSelectedPhotos((prev) => {
+      const newState = [...prev];
+      if (newState[index]) {
+        newState[index] = { ...newState[index], [key]: value };
+      }
+      return newState;
+    });
+  };
+
   const fetchPhotos = async () => {
     try {
       setIsGalleryLoading(true);
@@ -86,6 +101,16 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       return;
     }
 
+    const isMissingMetaData = selectedPhotos.some(
+      (p) => !p.title.trim() || !p.category.trim()
+    );
+    if (isMissingMetaData) {
+      toast.error(
+        `Please provide a title and a category for all selected photos.`
+      );
+      return;
+    }
+
     const toastId = toast.loading(
       `Uploading ${selectedPhotos.length} photo(s)...`
     );
@@ -94,8 +119,10 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     try {
       const photoData = new FormData();
       //appending all selected files to the FormData object:
-      selectedPhotos.forEach((file) => {
-        photoData.append(`photos`, file);
+      selectedPhotos.forEach((item, index) => {
+        photoData.append(`photos`, item.file);
+        photoData.append(`categories[${index}]`, item.category);
+        photoData.append(`titles[${index}]`, item.title);
       });
 
       const response = await fetch(`${url}/api/admin/photos/upload`, {
@@ -111,12 +138,12 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       }
 
       //*Cleaning up temporary resources:
-      previewPhotos.forEach((url) => URL.revokeObjectURL(url));
+      selectedPhotos.forEach((item) => URL.revokeObjectURL(item.previewUrl));
       toast.success(`Photos uploaded successfully!`, { id: toastId });
 
       //*Clearing states after the upload is complete:
       setSelectedPhotos([]);
-      setPreviewPhotos([]);
+      // setPreviewPhotos([]);
 
       await fetchPhotos();
     } catch (error) {
@@ -558,6 +585,10 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     fetchEvents();
     fetchTestimonials();
     fetchPhotos();
+
+    return () => {
+      selectedPhotos.forEach((item) => URL.revokeObjectURL(item.previewUrl));
+    };
   }, [url]);
 
   return (
@@ -607,8 +638,6 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         getCurrentUser,
         isLoading,
         setIsLoading,
-        previewPhotos,
-        setPreviewPhotos,
         getUsers,
         selectedPhotos,
         setSelectedPhotos,
@@ -617,6 +646,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         handleDeletePhoto,
         isGalleryLoading,
         setIsGalleryLoading,
+        updatePhotoMetadata,
       }}
     >
       {children}

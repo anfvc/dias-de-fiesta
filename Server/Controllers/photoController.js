@@ -9,6 +9,26 @@ export const uploadPhotos = async (req, res) => {
       return res.status(400).json({ error: "Photo files are required." });
     }
 
+    const { titles, categories } = req.body;
+
+    if (
+      !titles ||
+      !categories ||
+      titles.length !== files.length ||
+      categories.length !== files.length
+    ) {
+      // Log an error and respond if the data is mismatched
+      console.error(
+        "Mismatched data: Files, titles, or categories count do not match."
+      );
+      return res
+        .status(400)
+        .json({
+          error:
+            "Metadata (title and category) must be provided for every photo.",
+        });
+    }
+
     const uploadResults = await Promise.all(
       files.map(
         (file) =>
@@ -30,12 +50,15 @@ export const uploadPhotos = async (req, res) => {
       )
     );
 
-    const newPhotos = await Photo.insertMany(
-      uploadResults.map((uploadResult) => ({
-        photo: uploadResult.secure_url, //needs to be exactly the same as the mongoose field "photo"
-        photoPublicId: uploadResult.public_id,
-      }))
-    );
+    // 4. Combine Cloudinary results with the metadata and insert into MongoDB
+    const photosToInsert = uploadResults.map((uploadResult, index) => ({
+      photo: uploadResult.secure_url,
+      photoPublicId: uploadResult.public_id,
+      title: titles[index],
+      category: categories[index],
+    }));
+
+    const newPhotos = await Photo.insertMany(photosToInsert);
 
     console.log(newPhotos);
 

@@ -3,16 +3,15 @@ import { motion, easeInOut } from "framer-motion";
 import serviceHeadingImg from "@/assets/services/serviceHeadImg.webp";
 import { Link } from "react-router";
 import FAQ from "@/components/FAQ";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import PublicContext from "@/context/PublicContext";
 
-
-
 const Services = () => {
-  const { events } = useContext(PublicContext);
+  const { events, fetchEvents } = useContext(PublicContext);
 
-
-
+  useEffect(() => {
+    fetchEvents();
+  }, []);
 
   return (
     <section

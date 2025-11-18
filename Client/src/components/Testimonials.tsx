@@ -3,11 +3,15 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import SwiperButtons from "@/components/SwiperButtons";
 import { motion, easeInOut } from "framer-motion";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import PublicContext from "@/context/PublicContext";
 
 const Testimonials = () => {
-  const { testimonials } = useContext(PublicContext);
+  const { testimonials, fetchTestimonials } = useContext(PublicContext);
+
+  useEffect(() => {
+    fetchTestimonials();
+  }, []);
 
   return (
     <div className="w-full px-6">

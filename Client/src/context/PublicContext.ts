@@ -7,9 +7,9 @@ export type PublicContextType = {
   events: Event[];
   testimonials: Testimonial[];
   photos: Photo[];
-  fetchEvents: () => void;
-  fetchTestimonials: () => void;
-  fetchPhotos: () => void;
+  fetchEvents: () => Promise<void>;
+  fetchTestimonials: () => Promise<void>;
+  fetchPhotos: () => Promise<void>;
 
 };
 

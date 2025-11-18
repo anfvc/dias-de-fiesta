@@ -5,3 +5,10 @@ export interface Photo {
   title?: string;
   category?: string
 }
+
+export interface PhotoUploadData {
+  file: File;
+  previewUrl: string;
+  category: string;
+  title: string;
+}

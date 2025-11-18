@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import type { Event, EventFormData } from "@/types/events";
-import type { Photo } from "@/types/photos";
+import type { Photo, PhotoUploadData } from "@/types/photos";
 import type { Testimonial, TestimonialData } from "@/types/testimonials";
 import type { User, LoginFormData, RegisterFormData } from "@/types/users";
 import type { FAQ } from "@/types/faqs";
@@ -13,10 +13,15 @@ export type AdminContextType = {
   setEvents: React.Dispatch<React.SetStateAction<Event[]>>;
   uploadedPhotos: Photo[];
   setUploadedPhotos: React.Dispatch<React.SetStateAction<Photo[]>>;
-  selectedPhotos: File[];
-  setSelectedPhotos: React.Dispatch<React.SetStateAction<File[]>>;
-  previewPhotos: string[];
-  setPreviewPhotos: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedPhotos: PhotoUploadData[];
+  setSelectedPhotos: React.Dispatch<React.SetStateAction<PhotoUploadData[]>>;
+  updatePhotoMetadata: (
+    index: number,
+    key: "category" | "title",
+    value: string
+  ) => void;
+  // previewPhotos: string[];
+  // setPreviewPhotos: React.Dispatch<React.SetStateAction<string[]>>;
   testimonials: Testimonial[];
   setTestimonials: React.Dispatch<React.SetStateAction<Testimonial[]>>;
   sidebarOpen: boolean;

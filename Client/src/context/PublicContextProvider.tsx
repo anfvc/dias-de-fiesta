@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PublicContext from "./PublicContext";
 import { Event } from "@/types/events";
 import { Testimonial } from "@/types/testimonials";
@@ -9,10 +9,10 @@ interface PublicContextProps {
 }
 
 const PublicContextProvider = ({ children }: PublicContextProps) => {
+  const url = import.meta.env.VITE_SERVER;
   const [events, setEvents] = useState<Event[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [photos, setPhotos] = useState<Photo[]>([])
-  const url = import.meta.env.VITE_SERVER;
+  const [photos, setPhotos] = useState<Photo[]>([]);
 
   const fetchEvents = async () => {
     try {
@@ -24,9 +24,9 @@ const PublicContextProvider = ({ children }: PublicContextProps) => {
         return;
       }
 
-      const data = await response.json();
-      console.log(data);
-      setEvents(data);
+     const eventsFetched = await response.json();
+      // console.log(eventsFetched);
+      setEvents(eventsFetched);
     } catch (error) {
       console.log(error);
     }
@@ -43,7 +43,7 @@ const PublicContextProvider = ({ children }: PublicContextProps) => {
       }
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       setTestimonials(data);
     } catch (error) {
       console.log(error);
@@ -68,14 +68,17 @@ const PublicContextProvider = ({ children }: PublicContextProps) => {
     }
   };
 
-  useEffect(() => {
-    fetchEvents();
-    fetchTestimonials();
-    fetchPhotos()
-  }, []);
-
   return (
-    <PublicContext.Provider value={{ events, fetchEvents, fetchTestimonials, testimonials, photos, fetchPhotos }}>
+    <PublicContext.Provider
+      value={{
+        events,
+        fetchEvents,
+        fetchTestimonials,
+        testimonials,
+        photos,
+        fetchPhotos,
+      }}
+    >
       {children}
     </PublicContext.Provider>
   );

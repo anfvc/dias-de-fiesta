@@ -1,11 +1,16 @@
 // import FilterButtons from "@/components/FilterButtons";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 // import { useState } from "react";
 
 import PublicContext from "@/context/PublicContext";
 
 const Portfolio = () => {
-  const { photos } = useContext(PublicContext);
+  const { photos, fetchPhotos } = useContext(PublicContext);
+
+  useEffect(() => {
+    fetchPhotos()
+  }, [])
+
   // const [filteredPhotos, setFilteredPhotos] = useState(photos);
 
   // const filterDisplayedCategory = (targetCategory: string) => {

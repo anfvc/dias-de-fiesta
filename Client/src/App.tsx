@@ -16,19 +16,16 @@ import "@/styles/index.css";
 
 function App() {
   const location = useLocation();
-  const url = import.meta.env.VITE_SERVER
+  const url = import.meta.env.VITE_SERVER;
 
   // When the location changes, scroll to the top of the page:
   useLayoutEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [location.pathname]);
 
-  const isAdminRoute = location.pathname.split("/")[1] === "admin";
-
   return (
     <>
-
-      {!isAdminRoute && <Navbar />}
+      <Navbar />
       <main className="w-full min-h-screen">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
@@ -85,7 +82,7 @@ function App() {
           </Routes>
         </AnimatePresence>
       </main>
-      {!isAdminRoute && location.pathname !== "/" && <Footer url={url} />}
+      {location.pathname !== "/" && <Footer url={url} />}
     </>
   );
 }
