@@ -46,7 +46,7 @@ const AdminGridEvents = () => {
       (t) => (
         <div className="flex flex-col items-center">
           <p className="text-white mb-2">
-            Are you sure you want to delete this user?
+            Are you sure you want to delete this event?
           </p>
           <div className="flex gap-4">
             <button
@@ -104,7 +104,7 @@ const AdminGridEvents = () => {
       (t) => (
         <div className="flex flex-col items-center">
           <p className="text-white mb-2">
-            Are you sure you want to delete all the users?
+            Are you sure you want to delete all the events?
           </p>
           <div className="flex gap-4">
             <button
@@ -156,7 +156,7 @@ const AdminGridEvents = () => {
   };
 
   return (
-    <section className="w-4/5 mt-10">
+    <section className="w-full mt-10">
       <div className="flex items-center gap-8">
         <h3 className="text-xl font-semibold mb-4">Live Events</h3>
         {events.length > 0 && (
@@ -171,7 +171,7 @@ const AdminGridEvents = () => {
       {events.length === 0 ? (
         <p className="text-gray-500">No events found.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {events.map((event) => (
             <div
               key={event._id}

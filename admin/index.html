@@ -1,10 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" id="icon" type="image/svg+xml" href="/src/assets/svg/iconB.svg" />
+    <script>
+      const updateIconColorBasedOnOs = () => {
+        const iconLink = document.getElementById("icon");
+        const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+        if (darkModeQuery.matches) {
+          //If the user prefers dark mode, set white icon
+          iconLink.setAttribute("href", "/src/assets/svg/iconW.svg");
+        } else {
+          //If the user prefers light mode, set black icon
+          iconLink.setAttribute("href", "/src/assets/svg/iconB.svg");
+        }
+      };
+
+      //Calling the function when the page loads:
+      updateIconColorBasedOnOs();
+
+      //When there are changes in the user's color scheme, update the icon accordingly:
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", updateIconColorBasedOnOs);
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>admin</title>
+    <title>Admin Días de Fiesta</title>
   </head>
   <body>
     <div id="root"></div>

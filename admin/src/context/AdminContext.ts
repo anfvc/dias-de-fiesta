@@ -20,8 +20,6 @@ export type AdminContextType = {
     key: "category" | "title",
     value: string
   ) => void;
-  // previewPhotos: string[];
-  // setPreviewPhotos: React.Dispatch<React.SetStateAction<string[]>>;
   testimonials: Testimonial[];
   setTestimonials: React.Dispatch<React.SetStateAction<Testimonial[]>>;
   sidebarOpen: boolean;

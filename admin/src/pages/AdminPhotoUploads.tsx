@@ -8,16 +8,10 @@ const AdminPhotoUploads = () => {
   const {
     selectedPhotos,
     setSelectedPhotos,
-    // previewPhotos,
-    // setPreviewPhotos,
     uploadPhotos,
     loading,
     updatePhotoMetadata,
   } = useContext(AdminContext);
-
-  // useEffect(() => {
-  //   previewPhotos.forEach((url) => URL.revokeObjectURL(url));
-  // }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -162,17 +156,28 @@ const AdminPhotoUploads = () => {
                   >
                     Category
                   </label>
-                  <input
+                  <select
+                    name="category"
                     id={`category-${index}`}
-                    type="text"
-                    placeholder="e.g., Nature, Wedding"
                     value={item.category}
+                    className="w-full text-sm text-gray-700 p-2 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
                     onChange={(e) =>
                       updatePhotoMetadata(index, "category", e.target.value)
                     }
-                    className="w-full text-sm p-2 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
                     required
-                  />
+                  >
+                    <option value="" disabled>
+                      --Select an option--
+                    </option>
+                    <option value="Weddings">Weddings</option>
+                    <option value="Birthdays">Birthdays</option>
+                    <option value="Conferences">Conferences</option>
+                    <option value="Baptisms">Baptisms</option>
+                    <option value="Graduations">Graduations</option>
+                    <option value="Children's Parties">
+                      Children's Parties
+                    </option>
+                  </select>
                 </div>
               </div>
             </div>
