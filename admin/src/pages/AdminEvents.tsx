@@ -67,7 +67,8 @@ const AdminEvents = () => {
     <div className="p-6">
       <div className="bg-white shadow-xl rounded-2xl p-6 mt-6 max-w-5xl border border-gray-100">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-8">
-          {editMode ? "Edit Event Details" : "Create New Event"}
+          {editMode ? "Edit Event Details" : "Create New Event"}{" "}
+          <span className="text-md text-gray-700 font-normal text-base">(All fields are required)</span>
         </h2>
 
         <form onSubmit={createOrUpdateEvent} className="space-y-8">

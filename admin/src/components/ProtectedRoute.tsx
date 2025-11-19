@@ -9,21 +9,26 @@ type ProtectedRouteProps = {
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { getCurrentUser, currentUser, isLoading } = useContext(AdminContext);
+
   useEffect(() => {
-    if (!currentUser && isLoading) {
+    if (isLoading && !currentUser) {
       getCurrentUser();
     }
-  }, [isLoading, currentUser, getCurrentUser]);
+  }, [getCurrentUser, currentUser]);
 
-  if (isLoading) {
-    return <h1>Loading...</h1>;
+  if (currentUser) {
+    return <>{children}</>;
   }
 
-  return currentUser ? (
-    <>{children}</>
-  ) : (
-    <Navigate to={"/admin/login"} replace />
-  );
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <h1 className="text-2xl font-semibold text-indigo-600">Loading...</h1>
+      </div>
+    );
+  }
+
+  return <Navigate to={"/admin/login"} replace />;
 };
 
 export default ProtectedRoute;

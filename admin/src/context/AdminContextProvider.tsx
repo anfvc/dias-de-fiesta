@@ -195,8 +195,18 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     e.preventDefault();
 
     try {
-      if (!data.email || !data.password) {
-        toast.error("Please provide credentials!!!");
+      if (!data.email && !data.password) {
+        toast("Please provide your credentials", { icon: "⚠️" });
+        return;
+      }
+
+      if (!data.email) {
+        toast.error("Please provide your email");
+        return;
+      }
+
+      if (!data.password) {
+        toast.error("Please provide your password");
         return;
       }
 
@@ -227,23 +237,41 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.password) {
-      toast.error("Please fill in all fields!");
-      return;
-    }
+    try {
+      if (!formData.name && !formData.email && !formData.password) {
+        toast("Please provide all your credentials", { icon: "⚠️" });
+        return;
+      }
 
-    const response = await fetch(`${url}/api/admin/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+      if (!formData.name) {
+        toast.error("Your name is still missing.");
+        return;
+      }
+      if (!formData.email) {
+        toast.error("Your email is still missing.");
+        return;
+      }
+      if (!formData.password) {
+        toast.error("Your password is still missing.");
+        return;
+      }
 
-    if (response.ok) {
+      const response = await fetch(`${url}/api/admin/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        alert(err.message || "Failed to register");
+        return;
+      }
+
       toast.success("Account created successfully. Please log in.");
       navigate("/admin/login");
-    } else {
-      const err = await response.json();
-      alert(err.message || "Failed to register");
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -531,6 +559,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       } else {
         const currentUserData = await response.json();
         setCurrentUser(currentUserData);
+        setIsLoading(false);
       }
     } catch (error) {
       console.error(error);
@@ -551,12 +580,27 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
               className="bg-red-500 text-white px-5 py-2 hover:bg-red-600 cursor-pointer rounded-full duration-200 transition-all"
               onClick={async () => {
                 toast.dismiss(t.id);
-                await fetch(`${url}/api/admin/logout`, {
-                  method: "POST",
-                  credentials: "include",
-                });
-                setCurrentUser(null);
-                navigate("/admin/login");
+
+                try {
+                  const response = await fetch(`${url}/api/admin/logout`, {
+                    method: "POST",
+                    credentials: "include",
+                  });
+
+                  if (!response.ok) {
+                    const error = await response.json();
+                    console.log(error);
+                    return;
+                  }
+
+                  const result = await response.json();
+                  toast.success(result.message);
+                } catch (error) {
+                  console.error("Network error during logout request:", error);
+                } finally {
+                  setCurrentUser(null);
+                  navigate("/admin/login");
+                }
               }}
             >
               Logout

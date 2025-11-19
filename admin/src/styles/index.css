@@ -1,1 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 @import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+  --gold: #aa9a45
+}
+
+body {
+  font-family: "Manrope";
+  font-size: 1.6rem;
+  scroll-behavior: smooth;
+}

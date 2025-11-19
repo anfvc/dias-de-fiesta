@@ -11,6 +11,7 @@ import AdminUsers from "@/pages/AdminUsers";
 import AdminLayout from "@/layout/AdminLayout";
 import AdminFaqs from "@/pages/AdminFaqs";
 import { Toaster } from "react-hot-toast";
+import { Navigate } from "react-router";
 
 function App() {
   return (
@@ -22,8 +23,9 @@ function App() {
         }}
       />
 
-      <Routes>
         {/* ADMIN ROUTES */}
+      <Routes>
+        <Route path="/" element={<Navigate to="/admin/login" replace />} />
         <Route index path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/register" element={<AdminRegister />} />
 
