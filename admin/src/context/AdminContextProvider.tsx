@@ -15,6 +15,7 @@ interface AdminContextProviderProps {
 
 const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const url: string = import.meta.env.VITE_SERVER;
+
   const [users, setUsers] = useState<User[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
   const [uploadedPhotos, setUploadedPhotos] = useState<Photo[]>([]);

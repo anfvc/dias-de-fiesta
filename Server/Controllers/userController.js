@@ -56,23 +56,24 @@ export const loginUser = async (req, res) => {
     const isMatch = await compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(400).json({ error: "Email or password are invalid." });
+      return res.status(400).json({ error: "Invalid Credentials" });
     }
 
     const token = jwt.sign(
       {
         // user,
         id: user._id,
+        role: user.role,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: process.env.JWT_EXPIRES_IN }
     );
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "PRODUCTION",
+      secure: process.env.NODE_ENV === "production" || process.env.NODE_ENV === "staging",
       sameSite: "strict",
-      maxAge: 60 * 60 * 1000, //1 hour
+      maxAge: process.env.JWT_MAX_AGE,
     });
 
     // console.log(token);

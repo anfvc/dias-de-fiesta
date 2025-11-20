@@ -12,7 +12,13 @@ const AdminGridTestim = () => {
     fetchTestimonials,
     setTestimonialData,
     url,
+    currentUser,
   } = useContext(AdminContext);
+
+  const currentUserRole =
+    currentUser?.role === "admin" || currentUser?.role === "owner";
+
+  const canDelete = currentUserRole;
 
   const handleEdit = (t: Testimonial) => {
     setTestimonialData({
@@ -27,6 +33,10 @@ const AdminGridTestim = () => {
   };
 
   const handleDelete = async (id: string) => {
+    if (!canDelete) {
+      toast.error(`You are not authorized to delete testimonials.`);
+      return;
+    }
     toast(
       (t) => (
         <div className="flex flex-col items-center">
@@ -105,7 +115,9 @@ const AdminGridTestim = () => {
             >
               <div>
                 <h3 className="font-semibold text-2xl">{t.name}</h3>
-                <p className="text-gray-700 mt-1 text-lg break-words">{t.message}</p>
+                <p className="text-gray-700 mt-1 text-lg break-words">
+                  {t.message}
+                </p>
                 <div className="flex items-center my-2">
                   {Array.from({ length: 5 }, (_, i) => (
                     <Star
@@ -129,12 +141,14 @@ const AdminGridTestim = () => {
                   Edit
                 </button>
 
-                <button
-                  onClick={() => handleDelete(t._id)}
-                  className="font-semibold text-xl bg-red-700 rounded-lg px-4 py-1 text-white hover:bg-red-800 transition cursor-pointer"
-                >
-                  Delete
-                </button>
+                {canDelete && (
+                  <button
+                    onClick={() => handleDelete(t._id)}
+                    className="font-semibold text-xl bg-red-700 rounded-lg px-4 py-1 text-white hover:bg-red-800 transition cursor-pointer"
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             </div>
           ))}

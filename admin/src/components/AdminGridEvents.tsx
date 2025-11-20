@@ -12,7 +12,13 @@ const AdminGridEvents = () => {
     setEventFormData,
     setEditMode,
     setPreviewImage,
+    currentUser,
   } = useContext(AdminContext);
+
+  const currentUserRole =
+    currentUser?.role === "admin" || currentUser?.role === "owner";
+
+  const canDelete = currentUserRole;
 
   const handleEdit = (id: string) => {
     const eventToEdit = events.find((event) => event._id === id);
@@ -42,6 +48,11 @@ const AdminGridEvents = () => {
   };
 
   const handleDelete = async (id: string) => {
+    if (!canDelete) {
+      toast.error(`You are not authorized to delete events.`);
+      return;
+    }
+
     toast(
       (t) => (
         <div className="flex flex-col items-center">
@@ -100,6 +111,10 @@ const AdminGridEvents = () => {
   };
 
   const handleDeleteAllEvents = async () => {
+    if (!canDelete) {
+      toast.error("You are not authorized to delete all events.");
+      return;
+    }
     toast(
       (t) => (
         <div className="flex flex-col items-center">
@@ -159,7 +174,7 @@ const AdminGridEvents = () => {
     <section className="w-full mt-10">
       <div className="flex items-center gap-8">
         <h3 className="text-xl font-semibold mb-4">Live Events</h3>
-        {events.length > 0 && (
+        {canDelete && events.length > 0 && (
           <button
             onClick={handleDeleteAllEvents}
             className="text-xl font-semibold mb-4 border px-4 rounded-full bg-red-500 text-white hover:bg-red-600 cursor-pointer transition-all"
@@ -201,12 +216,14 @@ const AdminGridEvents = () => {
                 >
                   Edit
                 </button>
-                <button
-                  onClick={() => handleDelete(event._id)}
-                  className="px-3 py-1 text-sm bg-red-700 text-white rounded hover:bg-red-800 transition cursor-pointer"
-                >
-                  Delete
-                </button>
+                {canDelete && (
+                  <button
+                    onClick={() => handleDelete(event._id)}
+                    className="px-3 py-1 text-sm bg-red-700 text-white rounded hover:bg-red-800 transition cursor-pointer"
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             </div>
           ))}

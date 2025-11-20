@@ -25,8 +25,7 @@ const AdminSidebar = () => {
         ></button>
         <div className="flex flex-col justify-between gap-10">
           <div className="flex justify-between">
-            {/* <img src={D} alt="Logo Dias de Fiesta" className="w-20" /> */}
-            <a href="/"><img src={logo} alt="Logo Dias de Fiesta" className="w-40" /></a>
+            <a href="/admin/dashboard"><img src={logo} alt="Logo Dias de Fiesta" className="w-40" /></a>
             {sidebarOpen && (
               <button
                 onClick={() => setSidebarOpen(false)}
