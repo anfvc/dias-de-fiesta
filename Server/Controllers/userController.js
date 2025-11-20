@@ -69,12 +69,19 @@ export const loginUser = async (req, res) => {
       { expiresIn: process.env.JWT_EXPIRES_IN }
     );
 
+    const cookieMaxAge = Number(process.env.JWT_MAX_AGE);
+
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production" || process.env.NODE_ENV === "staging",
+      secure:
+        process.env.NODE_ENV === "production" ||
+        process.env.NODE_ENV === "staging",
       sameSite: "strict",
-      maxAge: process.env.JWT_MAX_AGE,
+      maxAge: cookieMaxAge,
     });
+
+    console.log(process.env.JWT_EXPIRES_IN);
+    console.log(process.env.JWT_MAX_AGE);
 
     // console.log(token);
 

@@ -87,7 +87,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       }
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       setUploadedPhotos(data.photos);
     } catch (error) {
       console.error("Error fetching photos:", error);
@@ -270,6 +270,11 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       }
 
       toast.success("Account created successfully. Please log in.");
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+      });
       navigate("/admin/login");
     } catch (error) {
       console.log(error);
@@ -543,13 +548,45 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       });
 
       if (response.status === 401 || !response.ok) {
-        const error = await response.json();
+        // 'errorData' is the parsed JSON object: { name: '...', error: '...' }
+        const errorData = await response.json();
 
-        const errorMessage = error.error
-          ? error.error
-          : "Authentication failed. Please log in again.";
+        let errorMessage;
+        let showToast = true; // Control variable for showing the toast
 
-        toast.error(errorMessage);
+        // Check for the specific error name first
+        if (errorData.name === "TokenExpiredError") {
+          // --- 1. Token Expired Error (Show toast) ---
+          errorMessage = "Session has expired. Please log in again.";
+        } else if (
+          errorData.error &&
+          errorData.error.includes("No token provided")
+        ) {
+          // --- 2. Access Denied / No Token (Suppress toast, only log) ---
+          errorMessage = errorData.error;
+          showToast = false; // Prevents the toast from showing up
+        } else if (errorData.error) {
+          // --- 3. Fallback to generic server error (Show toast) ---
+          errorMessage = errorData.error;
+        } else {
+          // --- 4. Last fallback (Show toast) ---
+          errorMessage = "Authentication failed. Please log in again.";
+        }
+
+        // Always log the error details to the console
+        console.error("Authentication check failed:", errorMessage);
+        console.log("Server error name:", errorData.name);
+
+        // Only show the toast if showToast is true
+        if (showToast && typeof errorMessage === "string") {
+          toast(errorMessage, { icon: "⚠️" });
+        } else if (typeof errorMessage !== "string") {
+          // Handle case where error message is unexpected, log and show generic toast
+          console.error(
+            "Error message is not a string. Showing fallback toast."
+          );
+          toast.error("An unexpected error occurred. Please log in.");
+        }
 
         setCurrentUser(null);
         // !!! FIX: REMOVED UNCONDITIONAL REDIRECT !!!

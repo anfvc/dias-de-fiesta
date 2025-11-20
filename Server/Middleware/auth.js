@@ -8,7 +8,10 @@ export const verifyToken = async (req, res, next) => {
     if (!token) {
       return res
         .status(401)
-        .json({ error: "Access denied. No token provided. Please log in." });
+        .json({
+          error: "Access denied. No token provided. Please log in.",
+          name: "NoToken",
+        });
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -26,16 +29,19 @@ export const verifyToken = async (req, res, next) => {
     // console.log(req.user);
     next();
   } catch (error) {
+    // console.log(error);
+    res.clearCookie("token");
+
     if (error.name === "TokenExpiredError") {
       //* 1. Clear expired token:
       res.clearCookie("token");
 
       //* 2. Sending specific error to the frontend:
-      return res
-        .status(401)
-        .json({ error: "Session has expired. Please log in again." });
+      return res.status(401).json({
+        name: "TokenExpiredError",
+        error: "Session has expired. Please log in again.",
+      });
     }
-    res.clearCookie("token");
     return res.status(401).json({ error: "Invalid token." });
   }
 };
