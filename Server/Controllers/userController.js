@@ -69,22 +69,17 @@ export const loginUser = async (req, res) => {
       { expiresIn: process.env.JWT_EXPIRES_IN }
     );
 
-    const cookieMaxAge = Number(process.env.JWT_MAX_AGE);
-
     res.cookie("token", token, {
       httpOnly: true,
       secure:
         process.env.NODE_ENV === "production" ||
         process.env.NODE_ENV === "staging",
       sameSite: "strict",
-      maxAge: cookieMaxAge,
+      // Using 'expires' property for the Date object (Date objects are not valid for maxAge)
+      maxAge: process.env.JWT_MAX_AGE,
     });
 
-    console.log(process.env.JWT_EXPIRES_IN);
-    console.log(process.env.JWT_MAX_AGE);
-
     // console.log(token);
-
     res.status(200).json({
       message: `You have sucessfully logged in!`,
       token,

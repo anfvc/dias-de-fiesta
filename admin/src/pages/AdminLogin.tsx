@@ -19,7 +19,7 @@ export default function AdminLogin() {
         <img
           src={logo}
           alt="Días de Fiesta - Wedding & Event Planner Logo"
-          className="w-full h-auto"
+          className="w-full h-auto object-cover"
         />
       </div>
 
