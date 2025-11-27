@@ -11,12 +11,13 @@ const AdminUser = ({ user }: AdminUserCardProps) => {
   const { deleteUser, currentUser } = useContext(AdminContext);
 
   const currentUserRole = currentUser?.role;
+  const isCurrentUser = currentUser && currentUser._id === user._id;
   const canDelete = currentUserRole === "admin" || currentUserRole === "owner";
 
   return (
     <div className="relative bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-all duration-200 cursor-pointer">
       {/* Delete button */}
-      {canDelete && (
+      {canDelete && !isCurrentUser && (
         <button
           className="absolute right-3 top-3 text-white bg-red-500 transition-colors border p-2 text-lg rounded-lg cursor-pointer"
           onClick={(e) => {
@@ -31,7 +32,9 @@ const AdminUser = ({ user }: AdminUserCardProps) => {
 
       {/* User content */}
       <div>
-        <p className="font-semibold">{user.name}</p>
+        <p className="font-semibold">
+          {user.name} {isCurrentUser ? `(You)` : ""}
+        </p>
         <p className="text-gray-600">
           <span className="font-semibold">Email:</span> {user.email}
         </p>
