@@ -1,4 +1,24 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+@font-face {
+  font-family: Manrope;
+  src: url("../assets/fonts/Manrope-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Manrope;
+  src: url("../assets/fonts/Manrope-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Manrope;
+  src: url("../assets/fonts/Manrope-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
+}
+
 @import "tailwindcss";
 
 @layer components {
@@ -33,7 +53,7 @@
 
 :root {
   font-size: 62.5%;
-  --gold: #aa9a45
+  --gold: #aa9a45;
 }
 
 body {
