@@ -11,12 +11,12 @@ import upload from "../Middleware/multer.js";
 
 const router = express.Router();
 
-router.post("/create", upload.single("image"), createEvent);
+router.post("/create", verifyToken, verifyRole("admin"), upload.single("image"), createEvent);
 router.get("/all", fetchAllEvents);
 router.put(
   "/update/:id",
   verifyToken,
-  verifyRole("admin", "owner", "editor"),
+  verifyRole("admin", "owner"),
   upload.single("image"),
   updateEvent
 );

@@ -27,9 +27,11 @@ const AdminEvents = () => {
       description: "",
       price: 0,
     });
+    setImage(null)
     setPreviewImage(null);
     setEditMode(false);
-  }, [setEditMode, setEventFormData, setPreviewImage]);
+
+  }, [setEditMode, setEventFormData, setPreviewImage, setImage]);
 
   useResetFormOnNavigate(resetForm);
 
@@ -263,7 +265,7 @@ const AdminEvents = () => {
                 ? "Update Event"
                 : "Create Event"}
             </button>
-            {(editMode || EventformData.title) && (
+            {(editMode || EventformData) && (
               <button
                 type="button"
                 onClick={resetForm}

@@ -9,7 +9,7 @@ import { verifyRole, verifyToken } from "../Middleware/auth.js";
 
 const router = express.Router();
 
-router.post("/upload", upload.any(), uploadPhotos);
+router.post("/upload", verifyToken, verifyRole("admin", "owner"), upload.any(), uploadPhotos);
 router.get("/all", fetchPhotos);
 router.delete(
   "/delete/:id",

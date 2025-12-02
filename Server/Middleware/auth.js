@@ -56,9 +56,7 @@ export const verifyRole = (...allowedRoles) => {
       }
       if (!allowedRoles.includes(req.user.role)) {
         return res.status(403).json({
-          error: `Permission denied. You need ${allowedRoles.join(
-            " or "
-          )} rights to perform this action.`,
+          error: "You are not authorized to perform this action."
         });
       }
 

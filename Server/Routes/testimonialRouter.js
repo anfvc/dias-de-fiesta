@@ -10,12 +10,12 @@ import { verifyRole, verifyToken } from "../Middleware/auth.js";
 
 const router = express.Router();
 
-router.post("/create", createTestimonial);
+router.post("/create", verifyToken, verifyRole("admin", "owner"), createTestimonial);
 router.get("/get", fetchTestimonials);
 router.put(
   "/update/:id",
   verifyToken,
-  verifyRole("admin", "owner", "editor"),
+  verifyRole("admin", "owner"),
   updateTestimonial
 );
 router.delete(
@@ -24,6 +24,6 @@ router.delete(
   verifyRole("admin", "owner"),
   deleteTestimonial
 );
-router.delete("/delete/all", deleteAllTestimonials);
+router.delete("/delete/all", verifyToken, verifyRole("admin", "owner"), deleteAllTestimonials);
 
 export default router;

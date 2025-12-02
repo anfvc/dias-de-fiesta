@@ -1,15 +1,29 @@
 import AdminContext from "@/context/AdminContext";
 import { useContext, useEffect } from "react";
-import { Users, Calendar, Camera, Text, FileQuestionMark } from "lucide-react";
+import {
+  Users,
+  Calendar,
+  Camera,
+  FileQuestion,
+  MessageSquare,
+  ArrowRight,
+} from "lucide-react";
 import { Link } from "react-router";
 
 function AdminDashboard() {
-  const { users, events, uploadedPhotos, testimonials, faqs, getUsers } =
-    useContext(AdminContext);
+  const {
+    users,
+    events,
+    uploadedPhotos,
+    testimonials,
+    faqs,
+    getUsers,
+    isLoading,
+  } = useContext(AdminContext);
 
-    useEffect(() => {
-       getUsers()
-      }, [])
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   //* Just in case some values are undefined:
   const usersCount = users?.length || 0;
@@ -20,53 +34,110 @@ function AdminDashboard() {
 
   const kpis = [
     {
-      label: eventsCount > 1 ? "Live Events" : "Live Event",
+      label: "Live Events",
       value: eventsCount,
-      icon: <Calendar className="text-green-500 w-8 h-8" />,
+      icon: <Calendar className="w-6 h-6" />,
+      color: "text-blue-600",
+      bg: "bg-blue-50",
       to: "/admin/events",
     },
     {
-      label: photosCount > 1 ? "Live Photos" : "Live Photos",
+      label: "Uploaded Photos",
       value: photosCount,
-      icon: <Camera className="text-purple-500 w-8 h-8" />,
+      icon: <Camera className="w-6 h-6" />,
+      color: "text-purple-600",
+      bg: "bg-purple-50",
       to: "/admin/uploads",
     },
     {
-      label: usersCount > 1 ? "Users" : "User",
+      label: "Registered Users",
       value: usersCount,
-      icon: <Users className="text-blue-500 w-8 h-8" />,
+      icon: <Users className="w-6 h-6" />,
+      color: "text-green-600",
+      bg: "bg-green-50",
       to: "/admin/users",
     },
     {
-      label: testimonialsCount > 1 ? "Live Testimonials" : "Live Testimonial",
+      label: "Client Testimonials",
       value: testimonialsCount,
-      icon: <Text className="text-orange-500 w-8 h-8" />,
+      icon: <MessageSquare className="w-6 h-6" />,
+      color: "text-orange-600",
+      bg: "bg-orange-50",
       to: "/admin/testimonials",
     },
     {
-      label: faqsCount > 1 ? "Live FAQs" : "Live FAQ",
+      label: "Published FAQs",
       value: faqsCount,
-      icon: <FileQuestionMark className="text-indigo-800 w-8 h-8" />,
+      icon: <FileQuestion className="w-6 h-6" />,
+      color: "text-indigo-600",
+      bg: "bg-indigo-50",
       to: "/admin/faqs",
     },
   ];
 
+  const SkeletonCard = () => (
+    <div className="bg-white border border-gray-100 rounded-2xl shadow-lg p-6 h-36 animate-pulse">
+      <div className="flex items-center space-x-4 h-full">
+        <div className="w-10 h-10 rounded-full bg-gray-200"></div>
+        <div className="flex-1 space-y-3">
+          <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+          <div className="h-6 bg-gray-300 rounded w-1/2"></div>
+          <div className="h-3 bg-gray-100 rounded w-full"></div>
+        </div>
+      </div>
+    </div>
+  );
+
   // console.log(url);
 
   return (
-    <div className="grid xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-6">
-      {kpis.map((kpi, index) => (
-        <Link to={kpi.to} key={index}>
-          <div
-            key={kpi.label}
-            className="bg-white border border-gray-400 rounded-2xl shadow-sm p-10 flex flex-col items-center justify-center hover:shadow-md transition-shadow"
-          >
-            <div className="mb-2">{kpi.icon}</div>
-            <p className="text-gray-00 text-md">{kpi.label}</p>
-            <p className="text-4xl font-bold text-gray-800">{kpi.value}</p>
-          </div>
-        </Link>
-      ))}
+    <div className="p-6">
+      <h1 className="text-4xl font-extrabold text-gray-900 mb-8">
+        Admin Overview
+      </h1>
+
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        {isLoading
+          ? // Display 5 skeleton cards if loading
+            kpis.map((_, index) => <SkeletonCard key={index} />)
+          : // Display actual KPI cards
+            kpis.map((kpi, index) => (
+              <Link
+                to={kpi.to}
+                key={index}
+                className="block group transition duration-300 transform hover:scale-[1.01] hover:shadow-xl rounded-2xl"
+              >
+                <div className="bg-white border border-gray-100 rounded-2xl shadow-lg p-6 h-full flex flex-col justify-between">
+                  {/* Top section: Icon, Label, and Value */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className={`p-3 rounded-xl ${kpi.bg} ${kpi.color}`}>
+                        {kpi.icon}
+                      </div>
+                      <p className="text-2xl font-semibold text-gray-500">
+                        {/* Improved pluralization logic right here */}
+                        {kpi.label.replace(/s$/, kpi.value === 1 ? "" : "s")}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="pt-4">
+                    <p className="text-6xl font-extrabold text-gray-900">
+                      {kpi.value}
+                    </p>
+                  </div>
+
+                  {/* Bottom section: Action Link */}
+                  <div className="pt-4 border-t border-gray-100 mt-4">
+                    <span className="flex items-center text-sm font-semibold text-blue-600 group-hover:text-blue-700">
+                      View Details
+                      <ArrowRight className="w-5 h-5 ml-1 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+      </div>
     </div>
   );
 }

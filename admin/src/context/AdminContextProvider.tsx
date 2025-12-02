@@ -357,6 +357,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         category: "",
         subtitle: "",
       });
+      setImage(null);
       setPreviewImage(null);
     } finally {
       setLoading(false);
@@ -368,10 +369,9 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         category: "",
         subtitle: "",
       });
+      setImage(null);
       setPreviewImage(null);
     }
-
-    // setLoading(true);
   };
 
   const fetchEvents = async () => {
