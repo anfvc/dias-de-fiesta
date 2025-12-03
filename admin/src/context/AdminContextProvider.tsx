@@ -15,7 +15,7 @@ interface AdminContextProviderProps {
 
 const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const url: string = import.meta.env.VITE_SERVER;
-
+  const prefix: string = import.meta.env.VITE_SECRET_PREFIX;
   const [users, setUsers] = useState<User[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
   const [uploadedPhotos, setUploadedPhotos] = useState<Photo[]>([]);
@@ -224,7 +224,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         toast.success(data.message);
         // console.log(data);
         setData({ email: "", password: "" }); // reseting login form
-        navigate("/admin/dashboard"); // redirect to dashboard
+        navigate(`${prefix}/dashboard`); // redirect to dashboard
       } else {
         const { error } = await response.json();
         toast.error(error);
@@ -265,7 +265,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
 
       if (!response.ok) {
         const err = await response.json();
-        alert(err.message || "Failed to register");
+        toast.error(err.message || "Failed to register");
         return;
       }
 
@@ -275,7 +275,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         email: "",
         password: "",
       });
-      navigate("/admin/login");
+      navigate(`${prefix}/login`);
     } catch (error) {
       console.log(error);
     }
@@ -637,7 +637,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
                   console.error("Network error during logout request:", error);
                 } finally {
                   setCurrentUser(null);
-                  navigate("/admin/login");
+                  navigate(`${prefix}/login`);
                 }
               }}
             >
@@ -729,6 +729,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         isGalleryLoading,
         setIsGalleryLoading,
         updatePhotoMetadata,
+        prefix,
       }}
     >
       {children}

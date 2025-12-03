@@ -20,11 +20,18 @@ function AdminDashboard() {
     faqs,
     getUsers,
     isLoading,
+    prefix,
+    fetchEvents,
+    fetchPhotos,
+    fetchTestimonials,
   } = useContext(AdminContext);
 
   useEffect(() => {
     getUsers();
-  }, []);
+    fetchEvents();
+    fetchPhotos();
+    fetchTestimonials();
+  }, [getUsers, fetchEvents, fetchPhotos, fetchTestimonials]);
 
   //* Just in case some values are undefined:
   const usersCount = users?.length || 0;
@@ -40,7 +47,7 @@ function AdminDashboard() {
       icon: <Calendar className="w-6 h-6" />,
       color: "text-blue-600",
       bg: "bg-blue-50",
-      to: "/admin/events",
+      to: `${prefix}/events`,
     },
     {
       label: "Uploaded Photos",
@@ -48,7 +55,7 @@ function AdminDashboard() {
       icon: <Camera className="w-6 h-6" />,
       color: "text-purple-600",
       bg: "bg-purple-50",
-      to: "/admin/uploads",
+      to: `${prefix}/uploads`,
     },
     {
       label: "Registered Users",
@@ -56,7 +63,7 @@ function AdminDashboard() {
       icon: <Users className="w-6 h-6" />,
       color: "text-green-600",
       bg: "bg-green-50",
-      to: "/admin/users",
+      to: `${prefix}/users`,
     },
     {
       label: "Client Testimonials",
@@ -64,7 +71,7 @@ function AdminDashboard() {
       icon: <MessageSquare className="w-6 h-6" />,
       color: "text-orange-600",
       bg: "bg-orange-50",
-      to: "/admin/testimonials",
+      to: `${prefix}/testimonials`,
     },
     {
       label: "Published FAQs",
@@ -72,11 +79,9 @@ function AdminDashboard() {
       icon: <FileQuestion className="w-6 h-6" />,
       color: "text-indigo-600",
       bg: "bg-indigo-50",
-      to: "/admin/faqs",
+      to: `${prefix}/faqs`,
     },
   ];
-
-  // console.log(url);
 
   return (
     <div className="p-6">

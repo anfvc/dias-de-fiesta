@@ -8,7 +8,8 @@ type ProtectedRouteProps = {
 };
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { getCurrentUser, currentUser, isLoading } = useContext(AdminContext);
+  const { getCurrentUser, currentUser, isLoading, prefix } =
+    useContext(AdminContext);
 
   useEffect(() => {
     if (isLoading && !currentUser) {
@@ -28,7 +29,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     );
   }
 
-  return <Navigate to={"/admin/login"} replace />;
+  return <Navigate to={`${prefix}/login`} replace />;
 };
 
 export default ProtectedRoute;

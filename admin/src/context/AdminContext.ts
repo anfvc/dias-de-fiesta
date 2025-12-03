@@ -7,6 +7,7 @@ import type { FAQ } from "@/types/faqs";
 
 export type AdminContextType = {
   url: string;
+  prefix: string;
   users: User[];
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
   events: Event[];

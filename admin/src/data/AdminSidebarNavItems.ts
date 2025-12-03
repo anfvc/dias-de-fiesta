@@ -1,30 +1,30 @@
 export const adminSidebarNavItems = [
   {
-    to: "/admin/dashboard",
+    to: `${import.meta.env.VITE_SECRET_PREFIX}/dashboard`,
     name: "Dashboard",
   },
   {
-    to: "/admin/events",
+    to: `${import.meta.env.VITE_SECRET_PREFIX}/events`,
     name: "Create Event",
   },
   {
-    to: "/admin/uploads",
+    to: `${import.meta.env.VITE_SECRET_PREFIX}/uploads`,
     name: "Photo Uploads",
   },
   {
-    to: "/admin/users",
+    to: `${import.meta.env.VITE_SECRET_PREFIX}/users`,
     name: "Users",
   },
   {
-    to: "/admin/testimonials",
+    to: `${import.meta.env.VITE_SECRET_PREFIX}/testimonials`,
     name: "Testimonials",
   },
   {
-    to: "/admin/faqs",
+    to: `${import.meta.env.VITE_SECRET_PREFIX}/faqs`,
     name: "FAQs",
   },
   {
-    to: "/admin/settings",
+    to: `${import.meta.env.VITE_SECRET_PREFIX}/settings`,
     name: "Settings",
   },
 ];

@@ -7,7 +7,8 @@ import AdminContext from "@/context/AdminContext";
 import logo from "@/assets/svg/logo2.svg";
 
 export default function AdminRegister() {
-  const { handleRegister, formData, setFormData } = useContext(AdminContext);
+  const { handleRegister, formData, setFormData, prefix } =
+    useContext(AdminContext);
 
   const { type, visible, toggle, disabled } = useTogglePassword(
     formData.password || ""
@@ -35,6 +36,7 @@ export default function AdminRegister() {
             placeholder=" "
             className="w-full h-12 pt-10 pb-5 px-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none peer transition-all duration-150"
             value={formData.name}
+            id="fullName"
             name="fullName"
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
@@ -74,6 +76,7 @@ export default function AdminRegister() {
             type={type}
             placeholder=" "
             name="register-password"
+            id="register-password"
             className="w-full h-12 pt-10 pb-5 px-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none peer transition-all duration-150"
             value={formData.password}
             onChange={(e) =>
@@ -120,7 +123,7 @@ export default function AdminRegister() {
         <p className="text-center text-lg text-gray-600 mt-2">
           Already have an account?{" "}
           <Link
-            to={"/admin/login"}
+            to={`${prefix}/login`}
             className="font-bold text-indigo-600 hover:text-indigo-800 transition-colors duration-150"
           >
             Login

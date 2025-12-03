@@ -7,7 +7,7 @@ import AdminContext from "@/context/AdminContext";
 import logo from "@/assets/svg/logo2.svg";
 
 export default function AdminLogin() {
-  const { data, setData, handleLogin } = useContext(AdminContext);
+  const { data, setData, handleLogin, prefix } = useContext(AdminContext);
 
   const { type, visible, toggle, disabled } = useTogglePassword(
     data.password || ""
@@ -99,7 +99,7 @@ export default function AdminLogin() {
         <p className="text-center text-lg text-gray-600 mt-2">
           Don't have an account?{" "}
           <Link
-            to={"/admin/register"}
+            to={`${prefix}/register`}
             className="font-bold text-indigo-600 hover:text-indigo-800 transition-colors duration-150"
           >
             Register

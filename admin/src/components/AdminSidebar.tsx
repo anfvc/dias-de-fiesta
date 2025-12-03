@@ -7,7 +7,7 @@ import logo from "@/assets/svg/logoWhite.svg";
 import { adminSidebarNavItems } from "@/data/AdminSidebarNavItems";
 
 const AdminSidebar = () => {
-  const { setSidebarOpen, sidebarOpen, handleLogout } =
+  const { setSidebarOpen, sidebarOpen, handleLogout, prefix } =
     useContext(AdminContext);
 
   return (
@@ -25,7 +25,7 @@ const AdminSidebar = () => {
         ></button>
         <div className="flex flex-col justify-between gap-10">
           <div className="flex justify-between">
-            <a href="/admin/dashboard"><img src={logo} alt="Logo Dias de Fiesta" className="w-40" /></a>
+            <a href={`${prefix}/dashboard`}><img src={logo} alt="Logo Dias de Fiesta" className="w-40" /></a>
             {sidebarOpen && (
               <button
                 onClick={() => setSidebarOpen(false)}

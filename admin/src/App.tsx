@@ -12,8 +12,12 @@ import AdminLayout from "@/layout/AdminLayout";
 import AdminFaqs from "@/pages/AdminFaqs";
 import { Toaster } from "react-hot-toast";
 import { Navigate } from "react-router";
+import { useContext } from "react";
+import AdminContext from "@/context/AdminContext";
 
 function App() {
+  const { prefix } = useContext(AdminContext);
+
   return (
     <>
       <Toaster
@@ -23,20 +27,21 @@ function App() {
         }}
       />
 
-        {/* ADMIN ROUTES */}
+      {/* ADMIN ROUTES */}
       <Routes>
-        <Route path="/" element={<Navigate to="/admin/login" replace />} />
-        <Route index path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/register" element={<AdminRegister />} />
+        <Route path="/" element={<Navigate to={`${prefix}/login`} replace />} />
+        <Route index path={`${prefix}/login`} element={<AdminLogin />} />
+        <Route path={`${prefix}/register`} element={<AdminRegister />} />
 
         <Route
-          path="/admin"
+          path={`${prefix}`}
           element={
             <ProtectedRoute>
               <AdminLayout />
             </ProtectedRoute>
           }
         >
+          {/* <Route index element={<Navigate to="dashboard" replace />} /> */}
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="events" element={<AdminEvents />} />
           <Route path="settings" element={<AdminSettings />} />
