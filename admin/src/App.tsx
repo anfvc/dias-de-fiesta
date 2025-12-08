@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import AdminLogin from "@/pages/AdminLogin";
-import AdminRegister from "@/components/AdminRegister";
+import AdminRegister from "@/pages/AdminRegister";
 import AdminDashboard from "@/pages/AdminDashboard";
 import AdminEvents from "@/pages/AdminEvents";
 import AdminSettings from "@/pages/AdminSettings";

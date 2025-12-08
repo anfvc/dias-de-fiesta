@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router";
 import AdminContext from "./AdminContext";
 import type { Event, EventFormData } from "@/types/events";
@@ -75,7 +75,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     });
   };
 
-  const fetchPhotos = async () => {
+  const fetchPhotos = useCallback(async () => {
     try {
       setIsGalleryLoading(true);
       const response = await fetch(`${url}/api/admin/photos/all`);
@@ -94,7 +94,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     } finally {
       setIsGalleryLoading(false);
     }
-  };
+  }, [url]);
 
   const uploadPhotos = async () => {
     if (selectedPhotos.length === 0) {
@@ -235,7 +235,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     }
   };
 
-  async function handleRegister(e: React.FormEvent) {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
@@ -279,7 +279,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const createOrUpdateEvent = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -374,7 +374,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     }
   };
 
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       const response = await fetch(`${url}/api/admin/events/all`);
 
@@ -390,7 +390,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [url]);
 
   const createOrUpdateTestimonial = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -441,7 +441,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     }
   };
 
-  const fetchTestimonials = async () => {
+  const fetchTestimonials = useCallback(async () => {
     try {
       const response = await fetch(`${url}/api/admin/testimonials/get`, {
         credentials: "include",
@@ -466,9 +466,9 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       console.log(error);
       toast.error("Failed to fetch testimonials.");
     }
-  };
+  }, [url]);
 
-  const getUsers = async () => {
+  const getUsers = useCallback(async () => {
     try {
       const response = await fetch(`${url}/api/admin/users`, {
         credentials: "include",
@@ -482,7 +482,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [url]);
 
   const deleteUser = async (userId: string) => {
     toast(
@@ -540,7 +540,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     );
   };
 
-  const getCurrentUser = async () => {
+  const getCurrentUser = useCallback(async () => {
     try {
       setIsLoading(true);
       const response = await fetch(`${url}/api/admin/me`, {
@@ -597,7 +597,6 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       } else {
         const currentUserData = await response.json();
         setCurrentUser(currentUserData);
-        setIsLoading(false);
       }
     } catch (error) {
       console.error(error);
@@ -605,7 +604,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [url]);
 
   const handleLogout = async () => {
     const userName = currentUser?.name.split(" ")[0] || "User";
@@ -664,6 +663,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   };
 
   useEffect(() => {
+    getCurrentUser()
     fetchEvents();
     fetchTestimonials();
     fetchPhotos();
@@ -671,7 +671,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     return () => {
       selectedPhotos.forEach((item) => URL.revokeObjectURL(item.previewUrl));
     };
-  }, [url]);
+  }, [getCurrentUser, fetchEvents, fetchTestimonials, fetchPhotos]);
 
   return (
     <AdminContext.Provider

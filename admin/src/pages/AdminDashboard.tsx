@@ -31,7 +31,7 @@ function AdminDashboard() {
     fetchEvents();
     fetchPhotos();
     fetchTestimonials();
-  }, [getUsers, fetchEvents, fetchPhotos, fetchTestimonials]);
+  }, []);
 
   //* Just in case some values are undefined:
   const usersCount = users?.length || 0;

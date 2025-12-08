@@ -1,17 +1,36 @@
 import { useContext } from "react";
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
 import { BsEye } from "react-icons/bs";
 import { BsEyeSlash } from "react-icons/bs";
 import { useTogglePassword } from "@/hooks/useTogglePassword";
+import { useCapsLockOnCheck } from "@/hooks/useCapsLockOnCheck";
 import AdminContext from "@/context/AdminContext";
 import logo from "@/assets/svg/logo2.svg";
+import { ArrowBigUpDash } from "lucide-react";
 
 export default function AdminLogin() {
-  const { data, setData, handleLogin, prefix } = useContext(AdminContext);
+  const { data, setData, handleLogin, prefix, currentUser, isLoading } =
+    useContext(AdminContext);
 
   const { type, visible, toggle, disabled } = useTogglePassword(
     data.password || ""
   );
+
+  const {handleCapsLockCheck, isCapsLockActive} = useCapsLockOnCheck()
+
+  if (currentUser) {
+    return <Navigate to={`${prefix}/dashboard`} replace />;
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-lg font-semibold text-indigo-600">
+          Checking Session...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-200">
@@ -53,6 +72,8 @@ export default function AdminLogin() {
             type={type}
             id="login-password"
             name="password"
+            onKeyUp={handleCapsLockCheck}
+            onKeyDown={handleCapsLockCheck}
             placeholder=" " // Important for the floating label effect
             className="w-full h-12 pt-10 pb-5 px-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none peer transition-all duration-150"
             value={data.password}
@@ -86,6 +107,14 @@ export default function AdminLogin() {
             )}
           </button>
         </div>
+        {isCapsLockActive && (
+            <div className="mt-2 p-3 bg-red-50 border border-red-300 rounded-lg flex justify-between items-center shadow-md animate-pulse transition-opacity">
+              <ArrowBigUpDash className="w-8 h-8 text-red-600 shrink-0 mr-2" />
+              <p className="text-lg font-semibold text-red-700">
+                Caps Lock is ON. This may cause login failure.
+              </p>
+            </div>
+          )}
         <button
           type="submit"
           className="w-full py-3 mt-2 font-semibold text-white rounded-lg shadow-lg

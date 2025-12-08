@@ -15,7 +15,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     if (isLoading && !currentUser) {
       getCurrentUser();
     }
-  }, [getCurrentUser, currentUser]);
+  }, [getCurrentUser, currentUser, isLoading]);
 
   if (currentUser) {
     return <>{children}</>;

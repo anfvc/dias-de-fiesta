@@ -1,10 +1,15 @@
 import { Link } from "react-router";
 import { motion, easeInOut } from "framer-motion";
 import PublicContext from "@/context/PublicContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const ServicesShort = () => {
-  const { events } = useContext(PublicContext);
+  const { events, fetchEvents } = useContext(PublicContext);
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
   //Showing only the three first services for this page:
   const firstThree = events.slice(0, 3);
 

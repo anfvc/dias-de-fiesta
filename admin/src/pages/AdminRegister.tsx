@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { Link } from "react-router";
 import { useTogglePassword } from "@/hooks/useTogglePassword";
+import { useCapsLockOnCheck } from "@/hooks/useCapsLockOnCheck";
 import { BsEye } from "react-icons/bs";
 import { BsEyeSlash } from "react-icons/bs";
 import AdminContext from "@/context/AdminContext";
 import logo from "@/assets/svg/logo2.svg";
+import { ArrowBigUpDash } from "lucide-react";
 
 export default function AdminRegister() {
   const { handleRegister, formData, setFormData, prefix } =
@@ -13,6 +15,8 @@ export default function AdminRegister() {
   const { type, visible, toggle, disabled } = useTogglePassword(
     formData.password || ""
   );
+
+  const {isCapsLockActive, handleCapsLockCheck} = useCapsLockOnCheck()
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-200">
@@ -77,6 +81,8 @@ export default function AdminRegister() {
             placeholder=" "
             name="register-password"
             id="register-password"
+            onKeyDown={handleCapsLockCheck}
+            onKeyUp={handleCapsLockCheck}
             className="w-full h-12 pt-10 pb-5 px-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none peer transition-all duration-150"
             value={formData.password}
             onChange={(e) =>
@@ -110,6 +116,14 @@ export default function AdminRegister() {
             )}
           </button>
         </div>
+        {isCapsLockActive && (
+            <div className="mt-2 p-3 bg-red-50 border border-red-300 rounded-lg flex justify-between items-center shadow-md animate-pulse">
+              <ArrowBigUpDash className="w-8 h-8 text-red-600 shrink-0 mr-2" />
+              <p className="text-lg font-semibold text-red-700">
+                Caps Lock is ON. This may cause login failure.
+              </p>
+            </div>
+          )}
         <button
           type="submit"
           className="w-full py-3 mt-2 font-semibold text-white rounded-lg shadow-lg
