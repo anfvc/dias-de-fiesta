@@ -1,7 +1,6 @@
 import Realistic from "react-canvas-confetti/dist/presets/realistic";
 
 const Confetti = () => {
-  console.log(Realistic);
   return (
     <>
       <Realistic
