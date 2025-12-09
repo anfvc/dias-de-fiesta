@@ -1,13 +1,9 @@
-import {
-  useState,
-  ChangeEvent,
-  FormEvent,
-  useEffect,
-  useCallback,
-} from "react";
+import { useState, ChangeEvent, FormEvent, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { FormData, FormErrors, FormFieldProps } from "@/types/form";
 import { Send, Loader2 } from "lucide-react";
+import SuccessModal from "./SuccessModal";
+import FailModal from "./FailModal";
 
 type VisibleProps = {
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -52,6 +48,8 @@ const Form = ({ setIsVisible }: VisibleProps) => {
   const [success, setSuccess] = useState<string>("");
   const [warning, setWarning] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(false);
+  const [isFailModalOpen, setIsFailModalOpen] = useState<boolean>(false);
 
   const url: string | undefined = import.meta.env.VITE_SERVER;
 
@@ -102,13 +100,14 @@ const Form = ({ setIsVisible }: VisibleProps) => {
 
   const handleSendEmail = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSuccess("");
-    setWarning("");
+    setIsSuccessModalOpen(false);
+    setIsFailModalOpen(false);
 
     if (!validateForm()) {
       setWarning(
         "El formulario debe completarse en su totalidad antes de ser enviado."
       );
+      setIsFailModalOpen(true);
       return;
     }
 
@@ -116,6 +115,8 @@ const Form = ({ setIsVisible }: VisibleProps) => {
 
     if (!url) {
       console.error("VITE_SERVER is not defined.");
+      setIsFailModalOpen(true);
+      setIsLoading(false);
       return;
     }
 
@@ -137,6 +138,7 @@ const Form = ({ setIsVisible }: VisibleProps) => {
 
       const data = await response.json();
       setSuccess(data.message);
+      setIsSuccessModalOpen(true);
       setIsVisible(true);
       setTimeout(() => {
         setIsVisible(false);
@@ -144,6 +146,7 @@ const Form = ({ setIsVisible }: VisibleProps) => {
     } catch (error) {
       console.error("Error fetching the data.", error);
       console.log(error);
+      setIsFailModalOpen(true);
     }
 
     setIsLoading(false);
@@ -157,169 +160,147 @@ const Form = ({ setIsVisible }: VisibleProps) => {
     setErrors({});
   };
 
-  useEffect(() => {
-    if (success || warning) {
-      const timer = setTimeout(() => {
-        setSuccess("");
-        setWarning("");
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [success, warning]);
+  const closeModal = () => {
+    setIsSuccessModalOpen(false);
+    setIsFailModalOpen(false);
+  };
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4">
-      <form
-        className="w-full flex flex-col gap-10 text-2xl md:text-3xl"
-        onSubmit={handleSendEmail}
-      >
-        <FormField name="fullName" errors={errors}>
-          <input
-            type="text"
-            name="fullName"
-            placeholder="Tu nombre completo"
-            className={`w-full border-b-2 p-4 text-xl md:text-2xl transition-colors duration-300 outline-none ${GOLD_COLOR} ${
-              errors.fullName ? "border-red-500" : "border-gray-300"
-            }`}
-            autoComplete="name"
-            value={formData.fullName}
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField name="email" errors={errors}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Tu email"
-            className={`w-full border-b-2 p-4 text-xl md:text-2xl transition-colors duration-300 outline-none ${GOLD_COLOR} ${
-              errors.email ? "border-red-500" : "border-gray-300"
-            }`}
-            autoComplete="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField name="phone" errors={errors}>
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Tu teléfono"
-            className={`w-full border-b-2 p-4 text-xl md:text-2xl transition-colors duration-300 outline-none ${GOLD_COLOR} ${
-              errors.phone ? "border-red-500" : "border-gray-300"
-            }`}
-            autoComplete="tel"
-            value={formData.phone}
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField name="subject" errors={errors}>
-          <div className="relative">
-            <select
-              name="subject"
-              id="subject"
-              className={`w-full border-b-2 p-4 text-xl md:text-2xl bg-white appearance-none transition-colors duration-300 outline-none ${GOLD_COLOR} ${
-                errors.subject ? "border-red-500" : "border-gray-300"
-              } ${formData.subject ? "text-gray-800" : "text-gray-500"}`}
-              onChange={handleSelectChange}
-              value={formData.subject}
-            >
-              <option value="" disabled className="text-gray-200">
-                --Selecciona una opción--
-              </option>
-              <option value="Bodas">Bodas</option>
-              <option value="Graduaciones">Graduaciones</option>
-              <option value="Cumpleaños">Cumpleaños</option>
-              <option value="Fiestas Infantiles">Fiestas Infantiles</option>
-              <option value="Baby Showers">Baby Showers</option>
-              <option value="Conferencias">Conferencias</option>
-              <option value="Bautizos">Bautizos</option>
-            </select>
-            {/* Custom arrow for the select input */}
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 top-0 h-full">
-              <svg
-                className="fill-current h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
+    <>
+      <div className="w-full max-w-5xl mx-auto p-4">
+        <form
+          className="w-full flex flex-col gap-10 text-2xl md:text-3xl"
+          onSubmit={handleSendEmail}
+        >
+          <FormField name="fullName" errors={errors}>
+            <input
+              type="text"
+              name="fullName"
+              placeholder="Tu nombre completo"
+              className={`w-full border-b-2 p-4 text-xl md:text-2xl transition-colors duration-300 outline-none ${GOLD_COLOR} ${
+                errors.fullName ? "border-red-500" : "border-gray-300"
+              }`}
+              autoComplete="name"
+              value={formData.fullName}
+              onChange={handleChange}
+            />
+          </FormField>
+          <FormField name="email" errors={errors}>
+            <input
+              type="text"
+              name="email"
+              placeholder="Tu email"
+              className={`w-full border-b-2 p-4 text-xl md:text-2xl transition-colors duration-300 outline-none ${GOLD_COLOR} ${
+                errors.email ? "border-red-500" : "border-gray-300"
+              }`}
+              autoComplete="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </FormField>
+          <FormField name="phone" errors={errors}>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Tu teléfono"
+              className={`w-full border-b-2 p-4 text-xl md:text-2xl transition-colors duration-300 outline-none ${GOLD_COLOR} ${
+                errors.phone ? "border-red-500" : "border-gray-300"
+              }`}
+              autoComplete="tel"
+              value={formData.phone}
+              onChange={handleChange}
+            />
+          </FormField>
+          <FormField name="subject" errors={errors}>
+            <div className="relative">
+              <select
+                name="subject"
+                id="subject"
+                className={`w-full border-b-2 p-4 text-xl md:text-2xl bg-white appearance-none transition-colors duration-300 outline-none ${GOLD_COLOR} ${
+                  errors.subject ? "border-red-500" : "border-gray-300"
+                } ${formData.subject ? "text-gray-800" : "text-gray-500"}`}
+                onChange={handleSelectChange}
+                value={formData.subject}
               >
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-              </svg>
+                <option value="" disabled className="text-gray-200">
+                  --Selecciona una opción--
+                </option>
+                <option value="Bodas">Bodas</option>
+                <option value="Graduaciones">Graduaciones</option>
+                <option value="Cumpleaños">Cumpleaños</option>
+                <option value="Fiestas Infantiles">Fiestas Infantiles</option>
+                <option value="Baby Showers">Baby Showers</option>
+                <option value="Conferencias">Conferencias</option>
+                <option value="Bautizos">Bautizos</option>
+              </select>
+              {/* Custom arrow for the select input */}
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 top-0 h-full">
+                <svg
+                  className="fill-current h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </div>
             </div>
+          </FormField>
+          <FormField name="message" errors={errors}>
+            <textarea
+              name="message"
+              id="message"
+              placeholder="Tu mensage"
+              className={`w-full border-b-2 p-4 text-xl md:text-2xl resize-y transition-colors duration-300 outline-none ${GOLD_COLOR} ${
+                errors.message ? "border-red-500" : "border-gray-300"
+              }`}
+              rows={8}
+              value={formData.message}
+              onChange={handleChange}
+            ></textarea>
+          </FormField>
+          <div className="button-container mt-12 flex flex-col items-center">
+            <motion.button
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              className={`w-full max-w-sm flex items-center justify-center px-10 py-4 rounded-full text-4xl font-bold text-white transition-all duration-300 shadow-xl focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-[#B8860B]/50 ${GOLD_BG} ${
+                isLoading ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
+              }`}
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-8 h-8 mr-3 animate-spin" />
+                  Enviando...
+                </>
+              ) : (
+                <>
+                  <Send className="w-8 h-8 mr-3" />
+                  Enviar
+                </>
+              )}
+            </motion.button>
           </div>
-        </FormField>
-        <FormField name="message" errors={errors}>
-          <textarea
-            name="message"
-            id="message"
-            placeholder="Tu mensage"
-            className={`w-full border-b-2 p-4 text-xl md:text-2xl resize-y transition-colors duration-300 outline-none ${GOLD_COLOR} ${
-              errors.message ? "border-red-500" : "border-gray-300"
-            }`}
-            rows={8}
-            value={formData.message}
-            onChange={handleChange}
-          ></textarea>
-        </FormField>
-        <div className="button-container mt-12 flex flex-col items-center">
-          <motion.button
-            whileTap={{ scale: 0.98 }}
-            type="submit"
-            className={`w-full max-w-sm flex items-center justify-center px-10 py-4 rounded-full text-4xl font-bold text-white transition-all duration-300 shadow-xl focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-[#B8860B]/50 ${GOLD_BG} ${
-              isLoading ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
-            }`}
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="w-8 h-8 mr-3 animate-spin" />
-                Enviando...
-              </>
-            ) : (
-              <>
-                <Send className="w-8 h-8 mr-3" />
-                Enviar
-              </>
-            )}
-          </motion.button>
-        </div>
-      </form>
-
-      {/* Global Success Message */}
-      <div className="w-full mt-8 min-h-[100px] flex justify-center items-center">
-        {/* Global Success Message */}
-        <AnimatePresence>
-          {success && (
-            <motion.p
-              key="success"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-              className="text-green-700 text-center p-3 rounded-lg bg-green-50 text-2xl font-semibold w-full"
-            >
-              <strong>{success}</strong>
-            </motion.p>
-          )}
-        </AnimatePresence>
-
-        {/* Global Warning Message */}
-        <AnimatePresence>
-          {warning && (
-            <motion.p
-              key="warning"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-              className="text-red-700 text-center p-3 rounded-lg bg-red-50 text-2xl font-semibold w-full"
-            >
-              <span>⚠️ </span>
-              <strong>{warning}</strong>
-            </motion.p>
-          )}
-        </AnimatePresence>
+        </form>
       </div>
-    </div>
+      <AnimatePresence>
+        {isSuccessModalOpen && (
+          <SuccessModal
+            isOpen={isSuccessModalOpen}
+            onClose={closeModal}
+            message={success}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isFailModalOpen && (
+          <FailModal
+            isOpen={isFailModalOpen}
+            onClose={closeModal}
+            message={warning}
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
