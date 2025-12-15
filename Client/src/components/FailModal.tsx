@@ -28,7 +28,7 @@ const FailModal = ({ isOpen, onClose, message }: FailModalProps) => {
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition-colors"
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition-colors cursor-pointer"
           aria-label="Cerrar"
         >
           <X size={32} />

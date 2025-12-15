@@ -1,5 +1,6 @@
 import { motion, easeInOut } from "framer-motion";
-// import Accordion from "@/components/Accordion";
+import Accordion from "@/components/Accordion";
+import { frequentlyAskedQuestions } from "@/types/faq";
 
 const FAQ = () => {
   return (
@@ -16,15 +17,15 @@ const FAQ = () => {
           <h3 className="mb-5 text-3xl text-gold-section font-bold underline">
             FAQ
           </h3>
-          <h2 className="text-5xl md:text-6xl pt-2 font-bold leading-15 md:leading-20">
-            Las Preguntas más Frecuentes
+          <h2 className="text-5xl md:text-6xl pt-2 font-bold leading-15 md:leading-20 text-gray-800">
+            Las preguntas más Frecuentes
           </h2>
         </div>
 
         <div className="space-y-2">
-          {/* {FAQs.map((faq, id) => (
+          {frequentlyAskedQuestions.map((faq, id) => (
             <Accordion key={id} question={faq.question} answer={faq.answer} />
-          ))} */}
+          ))}
         </div>
       </motion.div>
     </div>

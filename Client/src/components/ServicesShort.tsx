@@ -19,7 +19,7 @@ const ServicesShort = () => {
         <h3 className="text-3xl text-gold-section font-bold underline">
           Servicio de Calidad
         </h3>
-        <h2 className="text-5xl pt-2 font-bold text-pretty">
+        <h2 className="text-5xl pt-2 font-bold text-pretty text-gray-800">
           Nuestros Servicios
         </h2>
         <p className="text-3xl py-6 text-pretty">
@@ -65,7 +65,7 @@ const ServicesShort = () => {
       </div>
       <div className="w-full flex justify-center items-center">
         <Link to="/services" className="inline-flex rounded-full">
-          <button className="cursor-pointer bg-gradient-to-r from-[#b4ad70] to-[#8e8a4d] text-white font-semibold px-8 py-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 active:scale-95">
+          <button className="cursor-pointer bg-gradient-to-r from-[#B8860B] to-[#d3a01e] text-white font-semibold px-8 py-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 active:scale-95">
             Ver Todos
           </button>
         </Link>

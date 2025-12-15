@@ -19,7 +19,7 @@ const Testimonials = () => {
         <h3 className="text-3xl underline text-gold-section font-bold">
           Testimonios
         </h3>
-        <h2 className="text-5xl pt-6 font-bold">
+        <h2 className="text-5xl pt-6 font-bold text-gray-800 text-pretty">
           Lo que nuestros clientes dicen de nosotros
         </h2>
         <Swiper
@@ -41,7 +41,7 @@ const Testimonials = () => {
           }}
         >
           {testimonials.map((testimonial, id) => (
-            <SwiperSlide key={id} className="p-2 items-stretch">
+            <SwiperSlide key={id} className="p-5 items-stretch">
               <motion.div
                 initial={{ y: 25, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}

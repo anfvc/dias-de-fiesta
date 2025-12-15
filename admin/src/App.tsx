@@ -9,7 +9,6 @@ import AdminTestimonials from "@/pages/AdminTestimonials";
 import AdminPhotoUploads from "@/pages/AdminPhotoUploads";
 import AdminUsers from "@/pages/AdminUsers";
 import AdminLayout from "@/layout/AdminLayout";
-import AdminFaqs from "@/pages/AdminFaqs";
 import { Toaster } from "react-hot-toast";
 import { Navigate } from "react-router";
 import { useContext } from "react";
@@ -47,8 +46,6 @@ function App() {
           <Route path="settings" element={<AdminSettings />} />
           <Route path="users" element={<AdminUsers />} />
           <Route path="testimonials" element={<AdminTestimonials />} />
-          <Route path="faqs" element={<AdminFaqs />} />
-
           <Route path="uploads" element={<AdminPhotoUploads />} />
         </Route>
       </Routes>

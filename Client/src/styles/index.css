@@ -19,11 +19,18 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: Manrope;
+  src: url("../assets/fonts/Manrope-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+
 @import "tailwindcss";
 
 @layer components {
   .card-shadow {
-    box-shadow: -6px 0px 10px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: -6px 0px 10px 1px rgba(0, 0, 0, 0.05);
   }
 
   .service-shadow {
@@ -42,9 +49,8 @@
 }
 
 @theme {
-  --color-gold-text: #c6b870;
-  --color-gold-section: #aa9a45;
-  /* --color-secondary: #b38524 */
+  --color-gold-text: #cf9913;
+  --color-gold-section: #B8860B;
 }
 
 * {
@@ -53,7 +59,7 @@
 
 :root {
   font-size: 62.5%;
-  --gold: #aa9a45;
+  --gold: #cf9913;
 }
 
 body {

@@ -22,7 +22,7 @@ const Contact = ({ url }: urlProps) => {
             <h2 className="text-3xl text-gold-section font-bold underline">
               Contáctanos
             </h2>
-            <h3 className="text-5xl md:text-6xl xl:text-8xl pt-2 font-bold text-pretty">
+            <h3 className="text-5xl md:text-6xl xl:text-8xl pt-2 font-bold text-pretty text-gray-800">
               Queremos ser parte de tu celebración!
             </h3>
           </div>

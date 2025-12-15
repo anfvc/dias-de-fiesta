@@ -20,10 +20,6 @@ export const adminSidebarNavItems = [
     name: "Testimonials",
   },
   {
-    to: `${import.meta.env.VITE_SECRET_PREFIX}/faqs`,
-    name: "FAQs",
-  },
-  {
     to: `${import.meta.env.VITE_SECRET_PREFIX}/settings`,
     name: "Settings",
   },

@@ -5,7 +5,6 @@ import {
   Users,
   Calendar,
   Camera,
-  FileQuestion,
   MessageSquare,
   ArrowRight,
 } from "lucide-react";
@@ -17,7 +16,6 @@ function AdminDashboard() {
     events,
     uploadedPhotos,
     testimonials,
-    faqs,
     getUsers,
     isLoading,
     prefix,
@@ -37,7 +35,6 @@ function AdminDashboard() {
   const usersCount = users?.length || 0;
   const eventsCount = events?.length || 0;
   const photosCount = uploadedPhotos?.length || 0;
-  const faqsCount = faqs?.length || 0;
   const testimonialsCount = testimonials?.length || 0;
 
   const kpis = [
@@ -73,14 +70,6 @@ function AdminDashboard() {
       bg: "bg-orange-50",
       to: `${prefix}/testimonials`,
     },
-    {
-      label: "Published FAQs",
-      value: faqsCount,
-      icon: <FileQuestion className="w-6 h-6" />,
-      color: "text-indigo-600",
-      bg: "bg-indigo-50",
-      to: `${prefix}/faqs`,
-    },
   ];
 
   return (
@@ -89,7 +78,7 @@ function AdminDashboard() {
         Admin Overview
       </h1>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {isLoading
           ? // Display 5 skeleton cards if loading
             kpis.map((_, index) => <SkeletonCard key={index} />)

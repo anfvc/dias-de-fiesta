@@ -17,8 +17,8 @@ const About = () => {
           className="w-full h-full flex flex-col gap-6 text-5xl sm:text-6xl absolute justify-center items-center font-extrabold md:text-8xl "
         >
           <div className="flex flex-col items-center gap-4">
-            <h3 className="text-white">BIENVENIDOS A</h3>
-            <h3 className="text-7xl sm:text-8xl md:text-9xl text-gold-text text-pretty text-center">
+            <h3 className="text-white font-bold">BIENVENIDOS A</h3>
+            <h3 className="text-7xl sm:text-8xl md:text-9xl text-gold-text text-pretty text-center font-bold">
               DÍAS DE FIESTA
             </h3>
           </div>
@@ -48,7 +48,7 @@ const About = () => {
             <h3 className="text-3xl text-gold-section font-bold underline">
               Nuestra Misión
             </h3>
-            <h2 className="text-5xl pt-2 font-extrabold text-pretty">
+            <h2 className="text-5xl pt-2 font-bold text-pretty text-gray-800">
               Haz parte de momentos inolvidables
             </h2>
             <p className="text-3xl py-6 text-balance">

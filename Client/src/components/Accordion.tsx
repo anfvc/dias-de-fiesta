@@ -14,7 +14,7 @@ const Accordion = ({ question, answer }: AccordionProps) => {
         className="w-full flex justify-between items-center cursor-pointer"
         onClick={() => setAccordionOpen(!accordionOpen)}
       >
-        <span className="text-4xl lg:text-6xl text-start font-semibold">
+        <span className="text-4xl lg:text-4xl text-start font-semibold text-gray-800">
           {question}
         </span>
         <AccordionButton accordionOpen={accordionOpen} />
@@ -26,7 +26,7 @@ const Accordion = ({ question, answer }: AccordionProps) => {
             : "grid-rows-[0fr] opacity-0"
         }`}
       >
-        <div className="overflow-hidden text-3xl lg:text-4xl py-4 my-5">
+        <div className="overflow-hidden text-3xl lg:text-3xl py-4 my-5">
           {answer}
         </div>
       </div>
