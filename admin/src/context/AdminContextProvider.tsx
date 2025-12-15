@@ -225,6 +225,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         // console.log(data);
         setData({ email: "", password: "" }); // reseting login form
         navigate(`${prefix}/dashboard`); // redirect to dashboard
+        getUsers();
       } else {
         const { error } = await response.json();
         toast.error(error);
@@ -663,7 +664,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   };
 
   useEffect(() => {
-    getCurrentUser()
+    getCurrentUser();
     fetchEvents();
     fetchTestimonials();
     fetchPhotos();
@@ -672,6 +673,12 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       selectedPhotos.forEach((item) => URL.revokeObjectURL(item.previewUrl));
     };
   }, [getCurrentUser, fetchEvents, fetchTestimonials, fetchPhotos]);
+
+  useEffect(() => {
+    if (!isLoading && currentUser) {
+      getUsers();
+    }
+  }, []);
 
   return (
     <AdminContext.Provider

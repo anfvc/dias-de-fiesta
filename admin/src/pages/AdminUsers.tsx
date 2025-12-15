@@ -5,12 +5,12 @@ import { useContext, useState, useEffect } from "react";
 import { X } from "lucide-react";
 
 const AdminUsers = () => {
-  const { users, getUsers, currentUser } = useContext(AdminContext);
+  const { users, getUsers } = useContext(AdminContext);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [getUsers]);
 
   return (
     <div className="relative">
