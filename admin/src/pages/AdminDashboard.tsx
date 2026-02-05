@@ -22,6 +22,7 @@ function AdminDashboard() {
     fetchEvents,
     fetchPhotos,
     fetchTestimonials,
+    currentUser,
   } = useContext(AdminContext);
 
   useEffect(() => {
@@ -54,14 +55,18 @@ function AdminDashboard() {
       bg: "bg-purple-50",
       to: `${prefix}/uploads`,
     },
-    {
-      label: "Registered Users",
-      value: usersCount,
-      icon: <Users className="w-6 h-6" />,
-      color: "text-green-600",
-      bg: "bg-green-50",
-      to: `${prefix}/users`,
-    },
+    ...(currentUser?.role === "admin" || currentUser?.role === "owner"
+      ? [
+          {
+            label: "Registered Users",
+            value: usersCount,
+            icon: <Users className="w-6 h-6" />,
+            color: "text-green-600",
+            bg: "bg-green-50",
+            to: `${prefix}/users`,
+          },
+        ]
+      : []),
     {
       label: "Client Testimonials",
       value: testimonialsCount,

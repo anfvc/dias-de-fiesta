@@ -66,14 +66,12 @@ export const loginUser = async (req, res) => {
         role: user.role,
       },
       process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRES_IN }
+      { expiresIn: process.env.JWT_EXPIRES_IN },
     );
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure:
-        process.env.NODE_ENV === "production" ||
-        process.env.NODE_ENV === "staging",
+      secure: true,
       sameSite: "strict",
       // Using 'expires' property for the Date object (Date objects are not valid for maxAge)
       maxAge: process.env.JWT_MAX_AGE,
@@ -170,7 +168,7 @@ export const updateUserRole = async (req, res) => {
     const udpatedUser = await User.findByIdAndUpdate(
       id,
       { role },
-      { new: true }
+      { new: true },
     );
 
     console.log(`${udpatedUser.name} has now ${udpatedUser.role} rights.`);
