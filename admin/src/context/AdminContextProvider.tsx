@@ -304,8 +304,11 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       });
 
       if (!response.ok) {
-        const err = await response.json();
-        toast.error(err.message || "Failed to register");
+        const errorMessage = await response.json();
+        toast(errorMessage.error || "Failed to register", {
+          icon: "⚠️",
+          style: { width: "fit-content", maxWidth: "80vw" },
+        }); // Adjust toast width for better readability
         return;
       }
 

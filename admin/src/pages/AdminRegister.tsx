@@ -13,10 +13,10 @@ export default function AdminRegister() {
     useContext(AdminContext);
 
   const { type, visible, toggle, disabled } = useTogglePassword(
-    formData.password || ""
+    formData.password || "",
   );
 
-  const {isCapsLockActive, handleCapsLockCheck} = useCapsLockOnCheck()
+  const { isCapsLockActive, handleCapsLockCheck } = useCapsLockOnCheck();
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-200">
@@ -56,7 +56,7 @@ export default function AdminRegister() {
 
         <div className="w-full relative group">
           <input
-            type="email"
+            type="text"
             placeholder=" "
             name="email"
             id="email"
@@ -117,13 +117,13 @@ export default function AdminRegister() {
           </button>
         </div>
         {isCapsLockActive && (
-            <div className="mt-2 p-3 bg-red-50 border border-red-300 rounded-lg flex justify-between items-center shadow-md animate-pulse">
-              <ArrowBigUpDash className="w-8 h-8 text-red-600 shrink-0 mr-2" />
-              <p className="text-lg font-semibold text-red-700">
-                Caps Lock is ON. This may cause login failure.
-              </p>
-            </div>
-          )}
+          <div className="mt-2 p-3 bg-red-50 border border-red-300 rounded-lg flex justify-between items-center shadow-md animate-pulse">
+            <ArrowBigUpDash className="w-8 h-8 text-red-600 shrink-0 mr-2" />
+            <p className="text-lg font-semibold text-red-700">
+              Caps Lock is ON. This may cause login failure.
+            </p>
+          </div>
+        )}
         <button
           type="submit"
           className="w-full py-3 mt-2 font-semibold text-white rounded-lg shadow-lg

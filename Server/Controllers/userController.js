@@ -1,12 +1,42 @@
 import User from "../Models/User.js";
 import { hash, compare } from "bcrypt";
 import jwt from "jsonwebtoken";
+import validator from "validator";
 
 export const registerUser = async (req, res) => {
   const { email, password, name } = req.body;
 
   try {
-    const foundUser = await User.findOne({ email });
+    //? Input validation
+    if (!email || !password || !name) {
+      return res
+        .status(400)
+        .json({ error: "Email, password, and name are required." });
+    }
+
+    //? Validate email format
+    if (!validator.isEmail(email)) {
+      return res
+        .status(400)
+        .json({ error: "Please provide a valid email address." });
+    }
+
+    //? Validate password strength BEFORE hashing
+    if (
+      !validator.isStrongPassword(password, {
+        minLength: 5,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+    ) {
+      return res.status(400).json({
+        error:
+          "Your password must contain at least 5 characters, an uppercase letter, a number, and a special character.",
+      });
+    }
+
+    const foundUser = await User.findOne({ email: email.toLowerCase() });
 
     //? If a user is found, we send a warning message saying it can't be registered.
     if (foundUser) {
@@ -14,7 +44,7 @@ export const registerUser = async (req, res) => {
     }
 
     //? If no user is found, we proceed to create a new user:
-    //? - by hashing their password
+    //? - by hashing their validated password
 
     const hashedPassword = await hash(password, 10);
 
@@ -26,7 +56,6 @@ export const registerUser = async (req, res) => {
       email: email.toLowerCase(),
       password: hashedPassword,
     });
-    // console.log(token);
 
     await newUser.save();
     res
@@ -34,6 +63,11 @@ export const registerUser = async (req, res) => {
       .json({ message: `${newUser.email} has been successfully registered.` });
   } catch (error) {
     console.error(error);
+    //? Check for Mongoose validation errors
+    if (error.name === "ValidationError") {
+      const messages = Object.values(error.errors).map((err) => err.message);
+      return res.status(400).json({ error: messages.join(", ") });
+    }
     res.status(500).json({
       error: "Something went wrong. Please try again later or reach support.",
     });
@@ -44,19 +78,28 @@ export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
+    //? Input validation
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ error: "Email and password are required." });
+    }
+
     //? Finding the user:
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email.toLowerCase() });
 
     if (!user) {
       return res
         .status(400)
-        .json({ error: "This user does not exist. Please register." });
+        .json({ error: "Invalid credentials. Please try again." });
     }
 
     const isMatch = await compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(400).json({ error: "Invalid Credentials" });
+      return res
+        .status(400)
+        .json({ error: "Invalid credentials. Please try again." });
     }
 
     const token = jwt.sign(
