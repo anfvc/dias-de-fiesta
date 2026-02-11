@@ -617,8 +617,8 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         }
 
         // Always log the error details to the console
-        console.error("Authentication check failed:", errorMessage);
-        console.log("Server error name:", errorData.name);
+        // console.error("Authentication check failed:", errorMessage);
+        // console.log("Server error name:", errorData.name);
 
         // Only show the toast if showToast is true
         if (showToast && typeof errorMessage === "string") {
