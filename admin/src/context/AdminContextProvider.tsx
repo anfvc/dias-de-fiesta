@@ -64,7 +64,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   const updatePhotoMetadata = (
     index: number,
     key: "category" | "title",
-    value: string
+    value: string,
   ) => {
     setSelectedPhotos((prev) => {
       const newState = [...prev];
@@ -103,17 +103,17 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
     }
 
     const isMissingMetaData = selectedPhotos.some(
-      (p) => !p.title.trim() || !p.category.trim()
+      (p) => !p.title.trim() || !p.category.trim(),
     );
     if (isMissingMetaData) {
       toast.error(
-        `Please provide a title and a category for all selected photos.`
+        `Please provide a title and a category for all selected photos.`,
       );
       return;
     }
 
     const toastId = toast.loading(
-      `Uploading ${selectedPhotos.length} photo(s)...`
+      `Uploading ${selectedPhotos.length} photo(s)...`,
     );
     setLoading(true);
 
@@ -158,38 +158,77 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
   };
 
   const handleDeletePhoto = async (photoId: string, photoPublicId: string) => {
-    const toastId = toast.loading(`Deleting photo...`);
-    setIsGalleryLoading(true);
+    toast(
+      (t) => (
+        <div className="flex flex-col items-center">
+          <p className="text-white mb-2">
+            Are you sure you want to delete this photo?
+          </p>
+          <div className="flex gap-4">
+            <button
+              className="bg-red-500 text-white px-5 py-2 hover:bg-red-600 cursor-pointer rounded-full duration-200 transition-all"
+              onClick={async () => {
+                toast.dismiss(t.id);
+                const toastId = toast.loading("Deleting photo...");
+                setIsGalleryLoading(true);
 
-    try {
-      const response = await fetch(
-        `${url}/api/admin/photos/delete/${photoId}`,
-        {
-          method: "DELETE",
-          credentials: "include",
-          body: JSON.stringify({ photoPublicId }),
-          headers: {
-            "Content-Type": "Application/JSON",
-          },
-        }
-      );
+                try {
+                  const response = await fetch(
+                    `${url}/api/admin/photos/delete/${photoId}`,
+                    {
+                      method: "DELETE",
+                      credentials: "include",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({ photoPublicId }),
+                    },
+                  );
 
-      if (!response.ok) {
-        const { error } = await response.json();
-        toast.error(error || `We couldn't complete this request.`, {
-          id: toastId,
-        });
-        return;
-      }
+                  if (!response.ok) {
+                    const { error } = await response.json();
+                    toast.error(error || "Failed to delete photo.");
+                    return;
+                  }
 
-      toast.success("🗑️ Photo deleted successfully!", { id: toastId });
-      await fetchPhotos();
-      setIsGalleryLoading(false);
-    } catch (error) {
-      console.error("Delete Error:", error);
-    } finally {
-      setIsGalleryLoading(false);
-    }
+                  // Update local state
+                  setUploadedPhotos((prev) =>
+                    prev.filter((p) => p._id !== photoId),
+                  );
+
+                  toast.success("🗑️ Photo deleted successfully!", {
+                    id: toastId,
+                  });
+
+                  // If you need to refresh the whole list from server:
+                  // await fetchPhotos();
+                } catch (error) {
+                  console.error("Delete Error:", error);
+                } finally {
+                  setIsGalleryLoading(false);
+                }
+              }}
+            >
+              Delete
+            </button>
+            <button
+              className="bg-gray-500 text-white px-5 py-2 hover:bg-gray-600 cursor-pointer rounded-full duration-200 transition-all"
+              onClick={() => toast.dismiss(t.id)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        duration: Infinity,
+        style: {
+          background: "#1d2938",
+          color: "#fff",
+          borderRadius: "10px",
+        },
+      },
+    );
   };
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -332,7 +371,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       toast.success(
         editMode
           ? "🎉 Event updated successfully!"
-          : "👏 Event created successfully!"
+          : "👏 Event created successfully!",
       );
       setEventFormData({
         //reseting form state
@@ -430,7 +469,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
       toast(
         editMode
           ? "✅ Testimonial updated successfully!"
-          : "👏 Testimonial created successfully!"
+          : "👏 Testimonial created successfully!",
       );
       setTestimonialData({ name: "", message: "", rating: 1, date: "" }); //resting fields
       setEditMode(false); //reseting editMode
@@ -537,7 +576,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
           color: "#fff",
           borderRadius: "10px",
         },
-      }
+      },
     );
   };
 
@@ -584,7 +623,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
         } else if (typeof errorMessage !== "string") {
           // Handle case where error message is unexpected, log and show generic toast
           console.error(
-            "Error message is not a string. Showing fallback toast."
+            "Error message is not a string. Showing fallback toast.",
           );
           toast.error("An unexpected error occurred. Please log in.");
         }
@@ -659,7 +698,7 @@ const AdminContextProvider = ({ children }: AdminContextProviderProps) => {
           color: "#fff",
           borderRadius: "10px",
         },
-      }
+      },
     );
   };
 
