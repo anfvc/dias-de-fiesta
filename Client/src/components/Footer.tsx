@@ -21,19 +21,22 @@ const Footer = ({ url }: urlProps) => {
         <img src={logoWhite} alt="Dias de Fiesta logo white" className="w-50" />
       </div>
       <div className="w-full flex flex-col gap-8 md:flex-row md:gap-10 max-w-[1500px] mx-auto relative z-10 text-white">
-        <div className="w-full flex flex-col justify-between gap-8 z-10 relative max-w-[800px]">
+        <div className="w-full flex flex-col justify-center gap-8 z-10 relative max-w-[800px]">
           <h2 className="text-4xl md:text-5xl font-bold text-pretty">
-            Convierte tus celebraciones en experiencias inigualables
+            La diferencia entre celebrar y vivir algo inolvidable
           </h2>
           <p className="text-balance text-2xl lg:text-3xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum
-            dolor sit amet consectetur adipisicing elit. Quos laborum ipsa
-            deserunt impedit ipsam ex molestias exercitationem, cum dolor
-            similique, earum.
+            Más que organizar eventos, creamos atmósferas, emociones y
+            recuerdos. Nos enfocamos en transformar cada celebración en una
+            experiencia que refleje la esencia de quienes la viven, con
+            elegancia, armonía y dedicación en cada detalle.
           </p>
-          <button className="w-xs p-6 bg-white text-black font-semibold rounded-full cursor-pointer">
-            Organiza tu evento
-          </button>
+
+          <Link to="/contact">
+            <button className="w-md p-6 bg-white text-black font-semibold rounded-full cursor-pointer">
+              Tu celebración comienza aquí
+            </button>
+          </Link>
         </div>
         <div className="w-full md:w-1/3 flex flex-col justify-start gap-10 text-2xl md:text-3xl mt-8 md:mt-0">
           <h3 className="font-bold">CONTACTO</h3>

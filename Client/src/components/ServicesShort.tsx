@@ -23,11 +23,9 @@ const ServicesShort = () => {
           Nuestros Servicios
         </h2>
         <p className="text-3xl py-6 text-pretty">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-          rem aliquid incidunt repudiandae animi cumque consectetur recusandae
-          adipisci inventore dolore? Illo laborum, quae quo autem nemo fuga iure
-          iusto nostrum minus est doloribus sit rerum praesentium natus commodi
-          quia accusantium?
+          Ofrecemos: Acompañamiento cercano en todo el proceso, diseño
+          personalizado de cada evento, ejecución organizada y profesional,
+          ambientes visualmente sofisticados, atención cálida y humana.
         </p>
       </div>
       <div className="w-full grid my-15 gap-6 md:gap-8 lg:gap-10 md:grid-cols-3">

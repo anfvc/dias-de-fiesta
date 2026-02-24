@@ -37,9 +37,9 @@ const Services = () => {
               Nuestros Servicios
             </h2>
             <p className="mb-10 md:text-4xl">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-              obcaecati quae voluptatem perferendis corrupti laudantium quod
-              placeat debitis molestias nemo!
+              Diseñamos cada celebración con intención, estética y precisión,
+              para que cada momento se sienta único, especial y verdaderamente
+              inolvidable.
             </p>
             <Link to="/contact" className="w-xs sm:w-sm md:w-md lg:w-lg mb-10">
               <button className="w-xs sm:w-sm md:w-md lg:w-lg border-3 md:border-3 text-3xl border-white rounded-full p-8  md:p-7 md:text-4xl cursor-pointer button-shadow hover:bg-white hover:text-black transition-all duration-200">
@@ -47,9 +47,7 @@ const Services = () => {
               </button>
             </Link>
             <blockquote className="md:text-4xl block border-4 border-t-0 border-b-0 border-r-0 pl-10 py-4">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore
-              perferendis consequuntur quis laborum libero, totam, in vel
-              doloribus.
+              Más que eventos, creamos experiencias memorables.
             </blockquote>
           </motion.div>
         </div>

@@ -21,7 +21,7 @@ const Home = ({ url }: HomeProps) => {
           className="w-full flex flex-col gap-4 sm:gap-6 lg:gap-10 px-6 md:px-14 items-center"
         >
           <h1 className="w-full text-center text-5xl leading-15 sm:leading-15 md:leading-20 font-bold md:text-7xl lg:text-8xl xl:text-9xl xl:leading-35 tracking-normal">
-            Convertimos tus celebraciones en momentos únicos
+            Convertimos tus celebraciones en momentos inolvidables
           </h1>
           <p className="w-full text-center text-2xl font-normal sm:text-3xl lg:text-4xl p-4">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam

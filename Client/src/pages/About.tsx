@@ -24,7 +24,7 @@ const About = () => {
           </div>
           <Link to="/contact" className="inline-flex rounded-full mt-6">
             <button className="flex items-center font-semibold text-white text-3xl md:text-4xl bg-gold-section cursor-pointer active:transform transition-all rounded-full py-6 px-10 md:px-15 md:py-8 hover:scale-105 active:scale-95">
-              Organiza tu Evento
+              Diseñemos juntos tu evento
               <ArrowRight className="w-10 h-10 ml-3" />
             </button>
           </Link>
@@ -35,29 +35,34 @@ const About = () => {
           <span className="underline">Quiénes</span> somos?
         </h2>
         <p className="text-3xl my-10">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quod
-          earum maiores, inventore reprehenderit, molestiae quia odit incidunt,
-          eos enim nostrum iste vero assumenda numquam tempora? Officiis
-          mollitia quisquam quis labore in, saepe voluptate rem quae quam magni
-          doloribus alias veritatis magnam ad? Vel, veniam repudiandae?
-          Assumenda facere voluptate praesentium.
+          Creamos experiencias que celebran los momentos más importantes de la
+          vida, transformándolos en recuerdos memorables, elegantes y
+          emocionalmente significativos.
         </p>
         <div className="w-full my-20 flex flex-col gap-10 items-center md:gap-15 lg:gap-20 md:flex-row-reverse">
           {/* <div className="skewed"></div> */}
-          <div className="w-full md:w-1/2 flex flex-col justify-center gap-5">
+          <div className="w-full md:w-1/2 flex flex-col justify-center gap-3">
             <h3 className="text-3xl text-gold-section font-bold underline">
               Nuestra Misión
             </h3>
-            <h2 className="text-5xl pt-2 font-bold text-pretty text-gray-800">
-              Haz parte de momentos inolvidables
+            <h2 className="text-5xl font-bold text-pretty text-gray-800">
+              Lo que hacemos todos los días
             </h2>
-            <p className="text-3xl py-6 text-balance">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perferendis rem aliquid incidunt repudiandae animi cumque
-              consectetur recusandae adipisci inventore dolore? Illo laborum,
-              quae quo autem nemo fuga iure iusto nostrum minus est doloribus
-              sit rerum praesentium natus commodi quia accusantium?
+            <p className="text-3xl py-3 text-balance">
+              Diseñar, planear y producir celebraciones con un alto estándar
+              estético y humano, cuidando cada detalle para que nuestros
+              clientes vivan su evento con tranquilidad, emoción y orgullo.
             </p>
+            <p className="text-3xl py-3 text-balance">Nos enfocamos en:</p>
+            <ul className="list-disc pl-10">
+              <li className="text-3xl py-2">
+                Escuchar profundamente al cliente
+              </li>
+              <li className="text-3xl py-2">Interpretar su visión</li>
+              <li className="text-3xl py-2">
+                Convertirla en una experiencia impecable
+              </li>
+            </ul>
           </div>
           <div className="w-full md:w-1/2">
             <img
