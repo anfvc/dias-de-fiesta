@@ -40,7 +40,7 @@ const AdminGridEvents = () => {
       "Edit mode is now enabled. Please double check everything once updated.",
       {
         icon: "🛠️",
-      }
+      },
     );
 
     // Smooth scroll to form for better UX
@@ -70,7 +70,7 @@ const AdminGridEvents = () => {
                     {
                       method: "DELETE",
                       credentials: "include",
-                    }
+                    },
                   );
 
                   const data = await response.json();
@@ -106,7 +106,7 @@ const AdminGridEvents = () => {
           color: "#fff",
           borderRadius: "10px",
         },
-      }
+      },
     );
   };
 
@@ -132,7 +132,7 @@ const AdminGridEvents = () => {
                     {
                       method: "DELETE",
                       credentials: "include",
-                    }
+                    },
                   );
 
                   if (!response.ok) {
@@ -166,64 +166,92 @@ const AdminGridEvents = () => {
           color: "#fff",
           borderRadius: "10px",
         },
-      }
+      },
     );
   };
 
   return (
-    <section className="w-full mt-10">
-      <div className="flex items-center gap-8">
-        <h3 className="text-xl font-semibold mb-4">Live Events</h3>
+    <section className="w-full mt-10 px-4">
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h3 className="text-2xl font-bold text-gray-800">Live Events</h3>
+          <p className="text-sm text-gray-500">
+            {events.length} events published
+          </p>
+        </div>
         {canDelete && events.length > 0 && (
           <button
             onClick={handleDeleteAllEvents}
-            className="text-xl font-semibold mb-4 border px-4 rounded-full bg-red-500 text-white hover:bg-red-600 cursor-pointer transition-all"
+            className="flex items-center gap-2 px-4 py-2 text-md font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
           >
-            ⚠️ Delete All
+            <span>Delete All</span>
           </button>
         )}
       </div>
+
       {events.length === 0 ? (
-        <p className="text-gray-500">No events found.</p>
+        <div className="text-center py-20 border-2 border-dashed border-gray-200 rounded-xl">
+          <p className="text-gray-400">
+            No events found. Start by creating one!
+          </p>
+        </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8">
           {events.map((event) => (
             <div
               key={event._id}
-              className="w-full border border-gray-300 rounded-lg p-3 shadow hover:shadow-lg transition relative group"
+              className="group bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
             >
-              <img
-                src={event.image || add}
-                alt={event.title}
-                className="w-full h-72 object-cover rounded-md mb-3"
-              />
-              <h4 className="font-semibold text-lg">{event.title}</h4>
-              <p className="text-gray-600 text-sm">{event.category}</p>
-              <p className="text-indigo-600 font-semibold mt-2">
-                {event.price.toLocaleString(undefined, {
-                  style: "currency",
-                  currency: "COP",
-                  minimumFractionDigits: 0,
-                })}{" "}
-              </p>
-              <article className="text-lg">{event.description}</article>
+              {/* Image Container */}
+              <div className="relative h-120 overflow-hidden">
+                <img
+                  src={event.image || add}
+                  alt={event.title}
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className="px-4 py-2 text-sm font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-indigo-600 rounded-full shadow-sm">
+                    {event.category}
+                  </span>
+                </div>
+              </div>
 
-              {/* Buttons */}
-              <div className="flex justify-between mt-4">
-                <button
-                  onClick={() => handleEdit(event._id)}
-                  className="px-3 py-1 text-sm bg-sky-800 hover:bg-sky-900 text-white rounded  transition cursor-pointer"
-                >
-                  Edit
-                </button>
-                {canDelete && (
+              {/* Content */}
+              <div className="p-5 grow flex flex-col">
+                <div className="flex justify-between items-start mb-2">
+                  <h4 className="font-bold text-lg text-gray-900 line-clamp-1">
+                    {event.title}
+                  </h4>
+                  <span className="text-indigo-600 font-bold">
+                    {event.price.toLocaleString(undefined, {
+                      style: "currency",
+                      currency: "COP",
+                      minimumFractionDigits: 0,
+                    })}
+                  </span>
+                </div>
+
+                <p className="text-gray-600 text-sm line-clamp-2 mb-4 grow">
+                  {event.description}
+                </p>
+
+                {/* Actions */}
+                <div className="grid grid-cols-2 gap-3 pt-4 border-t border-gray-100">
                   <button
-                    onClick={() => handleDelete(event._id)}
-                    className="px-3 py-1 text-sm bg-red-700 text-white rounded hover:bg-red-800 transition cursor-pointer"
+                    onClick={() => handleEdit(event._id)}
+                    className="flex justify-center items-center py-2 px-4 bg-gray-50 hover:bg-indigo-50 text-gray-700 hover:text-indigo-700 font-medium rounded-lg transition-colors border border-gray-200 hover:border-indigo-200 cursor-pointer"
                   >
-                    Delete
+                    Edit
                   </button>
-                )}
+                  {canDelete && (
+                    <button
+                      onClick={() => handleDelete(event._id)}
+                      className="flex justify-center items-center py-2 px-4 bg-white hover:bg-red-50 text-red-500 font-medium rounded-lg transition-colors border border-gray-200 hover:border-red-200 cursor-pointer"
+                    >
+                      Delete
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           ))}

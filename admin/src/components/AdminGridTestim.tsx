@@ -54,7 +54,7 @@ const AdminGridTestim = () => {
                     {
                       method: "DELETE",
                       credentials: "include",
-                    }
+                    },
                   );
 
                   const data = await response.json();
@@ -71,7 +71,7 @@ const AdminGridTestim = () => {
                 } catch (error) {
                   console.error(error);
                   toast.error(
-                    "Something went wrong while deleting testimonial."
+                    "Something went wrong while deleting testimonial.",
                   );
                 }
               }}
@@ -94,67 +94,125 @@ const AdminGridTestim = () => {
           color: "#fff",
           borderRadius: "10px",
         },
-      }
+      },
     );
   };
 
-  return (
-    <div className="mt-10">
-      <h2 className="text-xl font-semibold mb-4">All Testimonials</h2>
+  const getInitials = (name: string) => {
+    const parts = name.trim().split(" ");
+    if (parts.length > 1) {
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+    return name.substring(0, 2).toUpperCase();
+  };
 
+  return (
+    <section className="w-full mt-10 px-2">
+      {/* --- HEADER SECTION --- */}
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h3 className="text-2xl font-bold text-gray-800 tracking-tight">
+            Client Reviews
+          </h3>
+          <p className="text-sm text-gray-500">
+            {testimonials.length} testimonials received
+          </p>
+        </div>
+      </div>
+
+      {/* --- EMPTY STATE --- */}
       {testimonials.length === 0 ? (
-        <p className="text-gray-500 text-center mt-6">
-          No testimonials have been added yet.
-        </p>
+        <div className="flex flex-col items-center justify-center py-20 border-2 border-dashed border-gray-200 rounded-3xl bg-gray-50/50">
+          <p className="text-gray-400 font-medium">
+            No testimonials yet. Feedback will appear here.
+          </p>
+        </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+        /* --- GRID SECTION --- */
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8">
           {testimonials.map((t) => (
             <div
               key={t._id}
-              className="bg-white shadow rounded-lg p-4 flex flex-col justify-between hover:shadow-lg transition border border-gray-400"
+              className="group bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col"
             >
-              <div>
-                <h3 className="font-semibold text-2xl">{t.name}</h3>
-                <p className="text-gray-700 mt-1 text-lg break-words">
-                  {t.message}
-                </p>
-                <div className="flex items-center my-2">
+              {/* --- IMAGE / AVATAR AREA --- */}
+              <div className="relative h-64 overflow-hidden bg-gray-50">
+                {t.image ? (
+                  <img
+                    src={t.image}
+                    alt={t.name}
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-linear-to-br from-indigo-600 to-purple-700 text-white transition-all duration-500 group-hover:from-indigo-500 group-hover:to-purple-600">
+                    <span className="text-7xl font-black tracking-tighter opacity-90 group-hover:scale-110 transition-transform duration-500">
+                      {getInitials(t.name)}
+                    </span>
+                  </div>
+                )}
+
+                {/* DATE BADGE overlay */}
+                <div className="absolute top-4 right-4">
+                  <span className="px-3 py-1 text-[10px] font-black uppercase tracking-widest bg-black/20 backdrop-blur-md text-white rounded-full border border-white/10">
+                    {new Date(t.date).toLocaleDateString(undefined, {
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </span>
+                </div>
+              </div>
+
+              {/* --- CARD CONTENT --- */}
+              <div className="p-6 grow flex flex-col">
+                {/* RATING */}
+                <div className="flex items-center gap-0.5 mb-3">
                   {Array.from({ length: 5 }, (_, i) => (
                     <Star
                       key={i}
-                      className={`h-5 w-5 ${
-                        i < t.rating ? "text-yellow-400" : "text-gray-300"
+                      size={14}
+                      className={`${
+                        i < t.rating
+                          ? "fill-yellow-400 text-yellow-400"
+                          : "text-gray-200"
                       }`}
                     />
                   ))}
                 </div>
-                <p className="text-sm text-gray-400 mt-1">
-                  {new Date(t.date).toLocaleDateString()}
-                </p>
-              </div>
 
-              <div className="flex justify-end gap-3 mt-4">
-                <button
-                  onClick={() => handleEdit(t)}
-                  className="font-semibold text-xl bg-sky-800 rounded-lg px-5 text-white hover:bg-blue-900 transition cursor-pointer"
+                <h4
+                  className="font-bold text-xl text-gray-900 mb-2 truncate"
+                  title={t.name}
                 >
-                  Edit
-                </button>
+                  {t.name}
+                </h4>
 
-                {canDelete && (
+                <p className="text-gray-600 text-sm italic leading-relaxed line-clamp-4 grow">
+                  "{t.message}"
+                </p>
+
+                {/* --- FOOTER ACTIONS --- */}
+                <div className="grid grid-cols-2 gap-3 pt-6 mt-4 border-t border-gray-50">
                   <button
-                    onClick={() => handleDelete(t._id)}
-                    className="font-semibold text-xl bg-red-700 rounded-lg px-4 py-1 text-white hover:bg-red-800 transition cursor-pointer"
+                    onClick={() => handleEdit(t)}
+                    className="py-2.5 px-4 bg-gray-50 hover:bg-indigo-50 text-gray-700 hover:text-indigo-700 font-bold rounded-xl transition-all border border-gray-100 cursor-pointer text-[10px] uppercase tracking-wider"
                   >
-                    Delete
+                    Edit
                   </button>
-                )}
+                  {canDelete && (
+                    <button
+                      onClick={() => handleDelete(t._id)}
+                      className="py-2.5 px-4 bg-white hover:bg-red-50 text-red-500 font-bold rounded-xl transition-all border border-gray-100 hover:border-red-100 cursor-pointer text-[10px] uppercase tracking-wider"
+                    >
+                      Delete
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           ))}
         </div>
       )}
-    </div>
+    </section>
   );
 };
 
